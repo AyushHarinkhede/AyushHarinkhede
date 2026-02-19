@@ -62,6 +62,14 @@
 ---
 
 
+![](https://github-readme-stats.vercel.app/api?username=AyushHarinkhede&theme=dark&hide_border=false&include_all_commits=false&count_private=false)<br/>
+![](https://nirzak-streak-stats.vercel.app/?user=AyushHarinkhede&theme=dark&hide_border=false)<br/>
+![](https://github-readme-stats.vercel.app/api/top-langs/?username=AyushHarinkhede&theme=dark&hide_border=false&include_all_commits=false&count_private=false&layout=compact)
+
+
+---
+
+
 <p align="center">
 <a href="https://github.com/AyushHarinkhede"><img src="https://github-readme-stats-one-bice.vercel.app/api?username=AyushHarinkhede&theme=gotham&show_icons=true&count_private=true&hide_border=true" width="48%" alt="Ayush's stats"/></a>
 
@@ -129,6 +137,7 @@
 </div>
 
 ---
+
 
 
 
