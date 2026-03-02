@@ -127,8 +127,8 @@
 
         /* Glow animation */
         @keyframes glow {
-            0%, 100% { box-shadow: 0 0 5px rgba(255,255,255,0.5); }
-            50% { box-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 30px rgba(255,255,255,0.6); }
+            0%, 100% { box-shadow: 0 0 5px rgba(102, 126, 234, 0.3); }
+            50% { box-shadow: 0 0 15px rgba(102, 126, 234, 0.6), 0 0 25px rgba(102, 126, 234, 0.4); }
         }
 
         .glowing {
@@ -161,23 +161,21 @@
             scroll-behavior: smooth;
         }
 
-        /* Custom scrollbar */
+        /* Hide default scrollbar */
         ::-webkit-scrollbar {
-            width: 12px;
+            display: none;
+        }
+        
+        /* For Firefox */
+        html {
+            scrollbar-width: none;
+        }
+        
+        /* For IE and Edge */
+        body {
+            -ms-overflow-style: none;
         }
 
-        ::-webkit-scrollbar-track {
-            background: rgba(0,0,0,0.1);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 6px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(45deg, #5a67d8, #6b46c1);
-        }
 
      Body {
     /* Text ka halka dark colour */
@@ -487,7 +485,7 @@ color: #4f4f4f;
 .faq-item[open] summary::after {
     content: '−'; /* Ye minus sign hai */
 }
-/* FAQ Item Animation */
+/* FAQ Item Animation - Enhanced */
 .faq-item p {
     font-size: 1.2em;
     color: #c9c3b7;
@@ -495,13 +493,43 @@ color: #4f4f4f;
     margin: 0;
     line-height: 1.6;
     opacity: 0;
-    transform: translateY(-10px);
-    transition: all 0.5s ease;
+    transform: translateY(-20px) scale(0.8);
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
 }
 
 .faq-item[open] p {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55), specialGlow 2s ease-in-out infinite;
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: translateY(-20px) scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(5px) scale(1.05);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes specialGlow {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+    }
+    50% {
+        box-shadow: 0 6px 25px rgba(102, 126, 234, 0.2);
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    }
 }
 
 /* View More Button */
@@ -528,7 +556,6 @@ color: #4f4f4f;
 .view-more-btn:hover {
     transform: translateY(-3px);
     border-color: #a09a8f;
-    box-shadow: 4px 4px 0px rgba(201, 195, 183, 0.4);
 }
 
 .view-more-btn::before {
@@ -710,9 +737,9 @@ color: #4f4f4f;
         .social-card::after {
             content: attr(data-app);
             position: absolute;
-            bottom: 20px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%);
             background: rgba(0, 0, 0, 0.95);
             color: white;
             padding: 8px 16px;
@@ -730,8 +757,7 @@ color: #4f4f4f;
 
         .social-card:hover::after {
             opacity: 1;
-            bottom: 10px;
-            transform: translateX(-50%) translateY(-5px);
+            transform: translate(-50%, -50%) scale(1.1);
         }
 
       .social-icon { 
@@ -744,8 +770,16 @@ color: #4f4f4f;
         }
 
         .social-card:hover .social-icon {
-            transform: scale(1.15) translateY(-3px);
+            transform: scale(1.15) translateY(-8px);
             filter: brightness(1.2) drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+
+        .social-card:not(:hover)::after {
+            transition: opacity 0s 1.8s 0.4s ease;
+        }
+
+        .social-card:not(:hover) {
+            transition: all 0.3s ease;
         }
 
        .social-name { 
@@ -891,9 +925,8 @@ color: #4f4f4f;
 
         .resume-btn:hover {
             transform: translateY(-5px) scale(1.05);
-            border-color: #a09a8f;
-            box-shadow: 6px 6px 0px rgba(201, 195, 183, 0.6);
-            background: transparent;
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
         }
 
         .resume-btn:active {
@@ -1069,16 +1102,103 @@ color: #4f4f4f;
 
         .close-modal {
             position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 1.5em;
-            color: #999;
+            top: 15px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            font-size: 2em;
+            color: #666;
             cursor: pointer;
-            transition: color 0.2s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 3px dashed #c9c3b7;
+            border-radius: 50%;
+            background: rgba(251, 249, 246, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-family: 'Caveat', cursive;
+            box-shadow: 3px 3px 0px rgba(201, 195, 183, 0.4);
+            position: relative;
+            overflow: hidden;
+            line-height: 1;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .close-modal span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: block;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-modal::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border: 2px dotted #667eea;
+            border-radius: 50%;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+        }
+
+        .close-modal::after {
+            content: '✨';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            font-size: 12px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            transform: rotate(15deg) scale(0);
         }
 
         .close-modal:hover {
-            color: #333;
+            color: #ff006e;
+            border-color: #ff006e;
+            background: rgba(255, 0, 110, 0.05);
+            transform: rotate(90deg) scale(1.1);
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="10" fill="%23ff006e" opacity="0.8"/><circle cx="16" cy="16" r="6" fill="%23fff"/></svg>') 16 16, pointer;
+        }
+
+        .close-modal:hover::before {
+            opacity: 1;
+            transform: scale(1);
+            animation: doodleRotate 2s linear infinite;
+        }
+
+        .close-modal:hover::after {
+            opacity: 1;
+            transform: rotate(25deg) scale(1);
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+
+        .close-modal:active {
+            transform: rotate(90deg) scale(0.95);
+        }
+
+        @keyframes doodleRotate {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+            100% { transform: scale(1) rotate(360deg); }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: rotate(25deg) scale(1); }
+            50% { opacity: 0.6; transform: rotate(35deg) scale(1.3); }
         }
 
         .system-status {
@@ -1088,6 +1208,61 @@ color: #4f4f4f;
             padding: 10px;
             background: rgba(201, 195, 183, 0.1);
             border-radius: 8px;
+        }
+
+        /* View More About Button - Doodle Art Style */
+        .view-more-about-btn {
+            display: inline-block;
+            padding: 8px 14px;
+            margin-left: 15px;
+            background: transparent;
+            color: #33322a;
+            border: 2.5px dashed #c9c3b7;
+            border-radius: 20px;
+            font-family: 'Caveat', cursive;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 3px 10px rgba(201, 195, 183, 0.3);
+            vertical-align: middle;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .view-more-about-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.4s ease;
+            z-index: 0;
+        }
+
+        .view-more-about-btn:hover::before {
+            width: 120%;
+            height: 120%;
+        }
+
+        .view-more-about-btn:hover {
+            transform: translateY(-3px) rotate(-1deg);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .view-more-about-btn:active {
+            transform: translateY(-1px) rotate(0deg);
+        }
+
+        .view-more-about-btn span {
+            position: relative;
+            z-index: 1;
         }
 
         /* Footer Links */
@@ -1334,7 +1509,9 @@ color: #4f4f4f;
             <h3 class="font-f2 rotate-in">About Me</h3>
             <p class="font-f3 stagger-item">I am a passionate tech enthusiast and creative individual who believes in continuous learning and growth. Born and raised in Nagpur, I've always been fascinated by technology and its potential to solve real-world problems. My journey in tech started with curiosity and has evolved into a deep commitment to mastering computer applications and programming.</p>
             <p class="font-f3 stagger-item">Beyond technology, I am a multifaceted personality who enjoys creative pursuits like script writing and stand-up comedy. I believe that humor and creativity are essential ingredients for innovation. My practice in martial arts has taught me discipline, focus, and perseverance – qualities that I apply in every aspect of my life.</p>
-            <p class="font-f3 stagger-item">What drives me is the desire to create meaningful solutions and connect with people. Whether it's through code, comedy, or conversation, I strive to make a positive impact in everything I do.</p>
+            <p class="font-f3 stagger-item">What drives me is the desire to create meaningful solutions and connect with people. Whether it's through code, comedy, or conversation, I strive to make a positive impact in everything I do. 
+                <button class="view-more-about-btn" onclick="showMoreAbout()"><span></span>View More</span></button>
+            </p>
          </div><br><br><br><br> 
 
         <div class="resume-section bounce-in">
@@ -1342,7 +1519,7 @@ color: #4f4f4f;
 
             
             <div class="resume-actions">
-                <a class="resume-btn view-btn glowing" href="Ayush_Harinkhede_Resume.pdf" target="_blank" rel="noopener noreferrer">
+                <a class="resume-btn view-btn" href="Ayush_Harinkhede_Resume.pdf" target="_blank" rel="noopener noreferrer">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z" stroke="#667eea" stroke-width="2" stroke-linejoin="round"/>
                         <path d="M14 3v5h5" stroke="#667eea" stroke-width="2" stroke-linejoin="round"/>
@@ -1352,7 +1529,7 @@ color: #4f4f4f;
                     View Resume
                 </a>
 
-                <a class="resume-btn download-btn glowing" id="downloadBtn" href="#" onclick="showDownloadModal(event)">
+                <a class="resume-btn download-btn" id="downloadBtn" href="#" onclick="showDownloadModal(event)">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 3v10" stroke="#25d366" stroke-width="2" stroke-linecap="round"/>
                         <path d="M8 11l4 4 4-4" stroke="#25d366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1486,8 +1663,8 @@ color: #4f4f4f;
 
             </div>
             
-            <button class="view-more-btn bounce-in" onclick="loadMoreQuestions()">
-                <span class="btn-text">View More Questions</span>
+            <button class="view-more-btn bounce-in" id="viewMoreBtn" onclick="toggleQuestions()">
+                <span class="btn-text" id="btnText">View More Questions</span>
                 <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M12 5v14M19 12l-7 7-7-7"/>
                 </svg>
@@ -1634,11 +1811,40 @@ color: #4f4f4f;
 
     <!-- Footer -->
         <footer class="footer">
-            <p class="font-f1"> 2026 Portfolio Spectrum. Made with </p>
+            <p class="font-f1"> 2026 Portfolio Spectrum. Made with ❤︎ </p>
          <p class="font-f3">Creative | Innovative | Passionate</p>
      <a href="#" onclick="showPrivacyModal()" class="footer-link">Privacy Policy</a> | <a href="#" onclick="showTermsModal()" class="footer-link">Terms and Conditions</a>
   <p class="font-f1">All Rights Reserved by <b><i>Ayush Harinkhede</i></b></p>
      </footer>
+    </div>
+
+    <!-- More About Modal -->
+    <div id="moreAboutModal" class="policy-modal">
+        <div class="policy-content">
+            <span class="close-modal" onclick="closeMoreAboutModal()">&times;</span>
+            <h3 class="policy-title">More About Ayush Harinkhede</h3>
+            <div class="policy-text">
+                <h4>🎯 Career Goals</h4>
+                <p>I aspire to become a full-stack developer and eventually lead technical teams. My goal is to build innovative solutions that make a positive impact on people's lives while continuously expanding my technical expertise.</p>
+                
+                <h4>💻 Technical Expertise</h4>
+                <p>Specialized in frontend development with strong foundations in HTML, CSS, JavaScript, and modern frameworks. Experienced in responsive design, Git version control, and agile development methodologies.</p>
+                
+                <h4>🎨 Creative Pursuits</h4>
+                <p>Beyond coding, I'm passionate about creative writing, stand-up comedy, and martial arts. These pursuits help me maintain a balanced perspective and bring creativity to technical problem-solving.</p>
+                
+                <h4>🌟 Personal Philosophy</h4>
+                <p>I believe in the power of continuous learning, perseverance, and connecting with people from diverse backgrounds. Every challenge is an opportunity to grow and every interaction is a chance to learn something new.</p>
+                
+                <h4>🏆 Achievements</h4>
+                <p>Completed various web development projects, participated in hackathons, and consistently maintained academic excellence while pursuing my BCA degree.</p>
+                
+                <h4>📈 Future Plans</h4>
+                <p>Currently focused on mastering advanced web technologies, exploring AI/ML applications, and building a strong portfolio of real-world projects that demonstrate my capabilities.</p>
+                
+                <p><strong>For complete professional details, please refer to my resume.</strong></p>
+            </div>
+        </div>
     </div>
 
     <!-- Privacy Policy Modal -->
@@ -1780,6 +1986,19 @@ color: #4f4f4f;
             }, 1000);
         }
 
+        // More About Modal Functions
+        function showMoreAbout() {
+            const modal = document.getElementById('moreAboutModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMoreAboutModal() {
+            const modal = document.getElementById('moreAboutModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
         // Privacy and Terms Modal Functions
         function showPrivacyModal() {
             const modal = document.getElementById('privacyModal');
@@ -1850,6 +2069,7 @@ color: #4f4f4f;
             window.addEventListener('click', function(e) {
                 const privacyModal = document.getElementById('privacyModal');
                 const termsModal = document.getElementById('termsModal');
+                const moreAboutModal = document.getElementById('moreAboutModal');
                 
                 if (e.target === privacyModal) {
                     closePrivacyModal();
@@ -1857,11 +2077,15 @@ color: #4f4f4f;
                 if (e.target === termsModal) {
                     closeTermsModal();
                 }
+                if (e.target === moreAboutModal) {
+                    closeMoreAboutModal();
+                }
             });
 
             // Close modals with Escape key
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
+                    closeMoreAboutModal();
                     closePrivacyModal();
                     closeTermsModal();
                     closeDownloadModal();
@@ -1869,8 +2093,7 @@ color: #4f4f4f;
             });
         });
 
-        // Scroll animations
-        const observerOptions = {
+                const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
@@ -1887,12 +2110,6 @@ color: #4f4f4f;
         document.addEventListener('DOMContentLoaded', () => {
             const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in, .rotate-in, .bounce-in, .stagger-item');
             animatedElements.forEach(el => observer.observe(el));
-
-            // Add glow animation to resume buttons
-            const resumeBtns = document.querySelectorAll('.resume-btn');
-            resumeBtns.forEach(btn => {
-                btn.classList.add('glowing');
-            });
 
             // Remove animations from social cards (no pulsing)
             const socialCards = document.querySelectorAll('.social-card');
@@ -1921,8 +2138,43 @@ color: #4f4f4f;
             });
         });
 
+        function toggleQuestions() {
+            const faqContainer = document.querySelector('.faq-container');
+            const btnText = document.getElementById('btnText');
+            const btnIcon = document.querySelector('.btn-icon');
+            const viewMoreBtn = document.getElementById('viewMoreBtn');
+            
+            if (viewMoreBtn.classList.contains('questions-loaded')) {
+                // Hide extra questions
+                const extraQuestions = faqContainer.querySelectorAll('.extra-question');
+                extraQuestions.forEach((question, index) => {
+                    setTimeout(() => {
+                        question.style.transition = 'all 0.4s ease';
+                        question.style.opacity = '0';
+                        question.style.transform = 'translateY(-20px) scale(0.8)';
+                    }, index * 100);
+                });
+                
+                setTimeout(() => {
+                    extraQuestions.forEach(q => q.remove());
+                }, extraQuestions.length * 100 + 400);
+                
+                // Update button
+                btnText.textContent = 'View More Questions';
+                btnIcon.innerHTML = '<path d="M12 5v14M19 12l-7 7-7-7"/>';
+                viewMoreBtn.classList.remove('questions-loaded');
+            } else {
+                // Load more questions
+                loadMoreQuestions();
+            }
+        }
+
         function loadMoreQuestions() {
             const faqContainer = document.querySelector('.faq-container');
+            const btnText = document.getElementById('btnText');
+            const btnIcon = document.querySelector('.btn-icon');
+            const viewMoreBtn = document.getElementById('viewMoreBtn');
+            
             const additionalQuestions = [
                 {
                     question: "What's your experience with projects?",
@@ -1942,14 +2194,14 @@ color: #4f4f4f;
                 },
                 {
                     question: "How do you stay updated with technology?",
-                    answer: "I regularly follow tech blogs, participate in online courses, attend workshops, and work on personal projects to stay current with the latest technologies and trends."
+                    answer: "I regularly follow tech blogs, participate in online courses, attend workshops, and work on personal projects to stay current with latest technologies and trends."
                 }
             ];
 
-            // Add new questions with animation
+            // Add new questions with enhanced animation
             additionalQuestions.forEach((item, index) => {
                 const newQuestion = document.createElement('details');
-                newQuestion.className = 'faq-item';
+                newQuestion.className = 'faq-item extra-question slide-in-left';
                 newQuestion.innerHTML = `
                     <summary class="font-f1">${item.question}</summary>
                     <p class="font-f3">${item.answer}</p>
@@ -1959,25 +2211,21 @@ color: #4f4f4f;
                 setTimeout(() => {
                     faqContainer.appendChild(newQuestion);
                     newQuestion.style.opacity = '0';
-                    newQuestion.style.transform = 'translateY(-20px)';
+                    newQuestion.style.transform = 'translateY(-20px) scale(0.8)';
                     
                     setTimeout(() => {
-                        newQuestion.style.transition = 'all 0.5s ease';
+                        newQuestion.style.transition = 'all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
                         newQuestion.style.opacity = '1';
-                        newQuestion.style.transform = 'translateY(0)';
+                        newQuestion.style.transform = 'translateY(0) scale(1)';
                     }, 100);
                 }, index * 200);
             });
 
-            // Hide the button after loading
-            const viewMoreBtn = document.querySelector('.view-more-btn');
+            // Update button to View Less
             setTimeout(() => {
-                viewMoreBtn.style.transition = 'all 0.3s ease';
-                viewMoreBtn.style.opacity = '0';
-                viewMoreBtn.style.transform = 'scale(0.8)';
-                setTimeout(() => {
-                    viewMoreBtn.style.display = 'none';
-                }, 300);
+                btnText.textContent = 'View Less Questions';
+                btnIcon.innerHTML = '<path d="M12 19v-14M5 12l7-7 7-7"/>';
+                viewMoreBtn.classList.add('questions-loaded');
             }, additionalQuestions.length * 200);
         }
 
