@@ -28,36 +28,68 @@
     /* Off-white / Creamy background */
     /* Text ka halka dark colour */
    font-family: Arial, sans-serif; /* Default font */
-margin: 0;
+ margin: 0;
      padding: 0;
-       background-color: #333;
+       background-color: #fbf3e6;
+       min-height: 100vh;
     
     /* FIX 1: Background ko scrollable banane ke liye parent ko relative banana zaroori hai */
     position: relative; 
 
     
-}
-Body::before {
+ }
+ Body::before {
     
     content: ''; 
 
     /* PROBLEM 1 FIX: 'fixed' ki jagah 'absolute' karein */
     position: absolute;
-       top: 10;
+       top: 0;
     left: 0;
+    right: 0;
+    bottom: 0;
       width: 100%;
     
     /* '100vh' (viewport height) ki jagah '100%' (full body height) karein */
-       height: 100%;  
-      background: url('imgbg1.png') center/cover;
-    filter: blur(3px); /* Yahaan hai blur effect ('3px' ko kam jhayada karna hai) */
-}
+       height: 100%;
+    background-color: #fbf3e6;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000"><rect width="1000" height="1000" fill="%23fbf3e6"/><g opacity="0.50"><rect x="60" y="70" width="18" height="18" fill="%23ff4d6d"/><rect x="84" y="94" width="18" height="18" fill="%234cc9f0"/><rect x="108" y="66" width="18" height="18" fill="%23ffd166"/><rect x="190" y="120" width="14" height="14" fill="%2325d366"/><rect x="210" y="140" width="14" height="14" fill="%23ff006e"/><rect x="230" y="120" width="14" height="14" fill="%238335ec"/><rect x="820" y="90" width="20" height="20" fill="%23ffbe0b"/><rect x="848" y="118" width="20" height="20" fill="%23fb5607"/><rect x="876" y="90" width="20" height="20" fill="%233a86ff"/></g><g fill="none" stroke="%2333322a" stroke-opacity="0.22" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M110 250c34-26 68-26 102 0"/><path d="M130 290c26-18 52-18 78 0"/><path d="M150 330c20-12 40-12 60 0"/><path d="M720 250h220"/><path d="M730 285h200"/><path d="M740 320h180"/><path d="M390 650l45-78 45 78"/><path d="M410 620h50"/><path d="M400 685h70"/></g><g font-family="Patrick Hand, Arial" font-size="36" fill="%2333322a" fill-opacity="0.32"><text x="70" y="520" transform="rotate(-10 70 520)">CSS</text><text x="150" y="490" transform="rotate(8 150 490)">HTML</text><text x="250" y="520" transform="rotate(-6 250 520)">JavaScript</text><text x="470" y="510" transform="rotate(10 470 510)">JAVA</text><text x="590" y="540" transform="rotate(-9 590 540)">Python</text><text x="710" y="510" transform="rotate(8 710 510)">SQL</text><text x="810" y="540" transform="rotate(-10 810 540)">Ruby</text><text x="70" y="950" transform="rotate(-8 70 950)">Hello World</text><text x="290" y="970" transform="rotate(10 290 970)">@ayush_harinkhere</text><text x="570" y="950" transform="rotate(-8 570 950)">Code</text><text x="770" y="955" transform="rotate(8 770 955)">Rust</text></g><g stroke-linecap="round" stroke-linejoin="round"><g transform="translate(95 160)"><circle cx="0" cy="0" r="26" fill="%23ffffff" stroke="%23e5e0d8"/><path d="M-10 -2a10 10 0 0 1 0-12" fill="none" stroke="%234285F4" stroke-width="6"/><path d="M-10 2a10 10 0 0 0 0 12" fill="none" stroke="%2334A853" stroke-width="6"/><path d="M-6 -14h12" fill="none" stroke="%23EA4335" stroke-width="6"/><path d="M-6 14h12" fill="none" stroke="%23FBBC05" stroke-width="6"/></g><g transform="translate(220 195)"><path d="M6 -22c6 5 9 12 9 19 0 16-12 29-28 29S-41 13-41-3c0-12 7-22 18-26" fill="%23000000" opacity="0.95"/><path d="M-8 -28c5-6 10-8 16-9" fill="none" stroke="%23000000" stroke-width="6"/></g><g transform="translate(355 150)"><circle cx="0" cy="0" r="26" fill="%23181717"/><path d="M-12 10c0-14 4-20 12-20s12 6 12 20" fill="none" stroke="%23ffffff" stroke-width="4"/><path d="M-12 -6l-8 -8" stroke="%23ffffff" stroke-width="4"/><path d="M12 -6l8 -8" stroke="%23ffffff" stroke-width="4"/></g><g transform="translate(505 170)"><circle cx="0" cy="0" r="26" fill="%231877F2"/><path d="M6 -24h10v8H6v8h9v8H6v20h-9V0h-7v-8h7v-8c0-8 5-12 13-12z" fill="%23ffffff"/></g><g transform="translate(655 175)"><rect x="-26" y="-26" width="52" height="52" rx="14" fill="%23dc2743"/><rect x="-18" y="-18" width="36" height="36" rx="10" fill="none" stroke="%23ffffff" stroke-width="4"/><circle cx="0" cy="0" r="10" fill="none" stroke="%23ffffff" stroke-width="4"/><circle cx="14" cy="-14" r="3" fill="%23ffffff"/></g><g transform="translate(810 175)"><circle cx="0" cy="0" r="26" fill="%2325D366"/><path d="M-11 -10c10-10 26-2 22 12-2 7-10 14-18 16-10 3-18-7-18-16 0-5 2-9 6-12z" fill="%23ffffff" opacity="0.10"/><path d="M-6 -2c2 7 7 12 14 14" fill="none" stroke="%23ffffff" stroke-width="4"/><path d="M-8 4c6 10 14 14 22 16" fill="none" stroke="%23ffffff" stroke-width="4"/></g><g transform="translate(945 175)"><rect x="-28" y="-20" width="56" height="40" rx="12" fill="%23FF0000"/><path d="M-8 -12l22 12-22 12z" fill="%23ffffff"/></g><g transform="translate(935 360)"><rect x="-28" y="-28" width="56" height="56" rx="12" fill="%23ffffff" stroke="%23e5e0d8"/><rect x="-20" y="-20" width="18" height="18" fill="%23F25022"/><rect x="2" y="-20" width="18" height="18" fill="%237FBA00"/><rect x="-20" y="2" width="18" height="18" fill="%2300A4EF"/><rect x="2" y="2" width="18" height="18" fill="%23FFB900"/></g><g transform="translate(815 365)"><circle cx="0" cy="0" r="26" fill="%232b2a2a"/><path d="M0 -16c10 0 18 8 18 18S10 20 0 20-18 12-18 2-10 -16 0 -16z" fill="none" stroke="%2300ff88" stroke-width="4" opacity="0.9"/><path d="M-6 -4l12 16" stroke="%2300ff88" stroke-width="4"/><path d="M6 -4l-12 16" stroke="%2300ff88" stroke-width="4"/></g></g><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" opacity="0.78"><g transform="translate(140 710)"><path d="M-10 -6c0-10 20-10 20 0" stroke="%2325d366"/><path d="M-20 10c10-10 30-10 40 0" stroke="%2325d366"/><path d="M-28 28c14-14 42-14 56 0" stroke="%2325d366"/></g><g transform="translate(285 720)"><path d="M-22 -6l26-26 16 16-26 26-20 4z" stroke="%23ff006e" fill="%23ffd166"/><path d="M6 -30l16 16" stroke="%232b2a2a"/></g><g transform="translate(610 720)"><path d="M0 -28c16 0 28 12 28 28 0 24-28 52-28 52S-28 24-28 0c0-16 12-28 28-28z" stroke="%23ff4d6d" fill="%23ffffff"/><circle cx="0" cy="0" r="8" stroke="%23ff4d6d" fill="%23ffd166"/></g><g transform="translate(780 710)"><rect x="-34" y="-24" width="68" height="48" rx="8" stroke="%233a86ff" fill="%23ffffff"/><path d="M-34 -18l34 26 34-26" stroke="%233a86ff"/></g><g transform="translate(950 720)"><path d="M-22 16h44v28h-44z" stroke="%23fb5607" fill="%23ffd166"/><path d="M-18 16v-10c0-10 36-10 36 0v10" stroke="%23fb5607" fill="none"/></g><g transform="translate(370 860)"><path d="M-24 22l48-48" stroke="%23ff006e"/><path d="M-18 28l48-48" stroke="%234cc9f0"/><path d="M-12 34l48-48" stroke="%23ffd166"/></g></g></svg>');
+    background-repeat: repeat;
+    background-size: 1400px 1400px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.22;
+    filter: blur(0.7px) saturate(0.75) contrast(0.9);
+ }
+ 
+
+ 
  #mukhiya {
             width: 90%;
              max-width: 1000px;
        margin: 20px auto;
             position: relative;
          z-index: 1;
+        }
+
+  .info-grid-container,
+  .about-section,
+  .resume-section,
+  .social-section,
+  .bhaag,
+  .footer {
+            background: transparent;
+            border: none;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+
+  .project-card {
+            background: transparent;
+        }
+
+  .project-content {
+            background: transparent;
         }
 
    .Sarpanch { /* 7error ka code aapke computer screen pe!*/
@@ -274,7 +306,7 @@ color: #4f4f4f;
     border: 2px dotted #c9c3b7; /* Dotted border */
     border-radius: 10px;
     margin-bottom: 15px;
-    background: rgba(255, 255, 255, 0.05); /* Halka sa background */
+    background: transparent;
 }
 .faq-item summary {
     font-size: 1.5em; /* Sawaal ka font size */
@@ -349,6 +381,7 @@ color: #4f4f4f;
          overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         transition: transform 0.3s;
+            background: transparent;
         }  
 
  .project-card:hover {
@@ -582,6 +615,30 @@ color: #4f4f4f;
             <p class="font-f3">Beyond technology, I am a multifaceted personality who enjoys creative pursuits like script writing and stand-up comedy. I believe that humor and creativity are essential ingredients for innovation. My practice in martial arts has taught me discipline, focus, and perseverance – qualities that I apply in every aspect of my life.</p>
             <p class="font-f3">What drives me is the desire to create meaningful solutions and connect with people. Whether it's through code, comedy, or conversation, I strive to make a positive impact in everything I do.</p>
          </div><br><br><br><br> 
+
+        <div class="resume-section">
+            <h3 class="resume-title">📄 Resume</h3>
+            <div class="resume-actions">
+                <a class="resume-btn" href="Ayush_Harinkhede_Resume.pdf" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z" stroke="#33322a" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M14 3v5h5" stroke="#33322a" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M9 14h6" stroke="#33322a" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M9 17h6" stroke="#33322a" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    View Resume
+                </a>
+
+                <a class="resume-btn" href="Ayush_Harinkhede_Resume.pdf" download>
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 3v10" stroke="#33322a" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M8 11l4 4 4-4" stroke="#33322a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M5 21h14" stroke="#33322a" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    Download
+                </a>
+            </div>
+        </div><br><br><br><br>
 
         
         <!-- Meri Gallery Section -->
