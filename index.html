@@ -1017,19 +1017,22 @@ color: #4f4f4f;
 
         /* Doodle decorations around buttons */
         .resume-btn::after {
-            content: '✨';
+            content: '';
             position: absolute;
             top: -8px;
             right: -8px;
-            font-size: 16px;
-            transform: rotate(15deg);
+            width: 16px;
+            height: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            border: 2px dashed #c9c3b7;
             opacity: 0.8;
-            animation: sparkle 2s ease-in-out infinite;
+            animation: doodlePulse 2s ease-in-out infinite;
         }
 
-        @keyframes sparkle {
-            0%, 100% { opacity: 0.8; transform: rotate(15deg) scale(1); }
-            50% { opacity: 1; transform: rotate(25deg) scale(1.2); }
+        @keyframes doodlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
         }
 
         .resume-features {
@@ -1159,86 +1162,64 @@ color: #4f4f4f;
             position: absolute;
             top: 15px;
             right: 20px;
-            width: 45px;
-            height: 45px;
-            font-size: 2em;
-            color: #666;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 3px dashed #c9c3b7;
+            width: 40px;
+            height: 40px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #c9c3b7;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="10" fill="%23ff0000" opacity="0.8"/><circle cx="16" cy="16" r="6" fill="%23fff"/></svg>') 16 16, pointer;
+            border: 2px dotted #ff0000;
             border-radius: 50%;
-            background: rgba(251, 249, 246, 0.9);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-family: 'Caveat', cursive;
-            box-shadow: 3px 3px 0px rgba(201, 195, 183, 0.4);
-            position: relative;
-            overflow: hidden;
-            line-height: 1;
-            text-align: center;
-            padding: 0;
-            margin: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
             box-sizing: border-box;
         }
 
         .close-modal span {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: block;
-            width: 100%;
-            height: 100%;
+            position: relative;
+            top: 0;
+            left: 0;
+            transform: none;
+            font-size: inherit;
+            line-height: 1;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .close-modal::before {
-            content: '';
+            content: '×';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            border: 2px dotted #667eea;
-            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            font-weight: bold;
+            color: #ff0000;
             opacity: 0;
-            transform: scale(0.8);
             transition: all 0.3s ease;
         }
 
         .close-modal::after {
-            content: '✨';
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            font-size: 12px;
-            opacity: 0;
-            transition: all 0.3s ease;
-            transform: rotate(15deg) scale(0);
+            display: none;
         }
 
         .close-modal:hover {
-            color: #ff006e;
-            border-color: #ff006e;
-            background: rgba(255, 0, 110, 0.05);
-            transform: rotate(90deg) scale(1.1);
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="10" fill="%23ff006e" opacity="0.8"/><circle cx="16" cy="16" r="6" fill="%23fff"/></svg>') 16 16, pointer;
+            color: #ff0000;
+            transform: scale(1.1);
         }
 
         .close-modal:hover::before {
-            opacity: 1;
-            transform: scale(1);
-            animation: doodleRotate 2s linear infinite;
+            opacity: 0;
+            transform: scale(0.8);
         }
 
         .close-modal:hover::after {
             opacity: 1;
-            transform: rotate(25deg) scale(1);
-            animation: sparkle 1.5s ease-in-out infinite;
+            transform: translate(-50%, -50%) scale(1.1);
         }
 
         .close-modal:active {
@@ -1532,7 +1513,7 @@ color: #4f4f4f;
         <!-- Personal Information Section --> 
         <div class="info-grid-container fade-in"> 
             <div class="font-showcase-left slide-in-left"> 
-                <h3 class="font-f1"><b><i>👤 Personal Information</i></b></h3>
+                <h3 class="font-f1"><b><i>Personal Information</i></b></h3>
                 <p class="font-f1"><strong>Name:</strong> Ayush Surendra Harinkhede</p>
                 <p class="font-f1"><strong>Father's Name:</strong> Surendra Harinkhede</p>
                 <p class="font-f1"><strong>Date of Birth:</strong> 10th February 2005</p>
@@ -1542,7 +1523,7 @@ color: #4f4f4f;
             </div>
 
             <div class="font-showcase-center scale-in">
-                <h3 class="font-f4"><b><i>📍 Contact Details</i></b></h3>
+                <h3 class="font-f4"><b><i>Contact Details</i></b></h3>
                 <p class="font-f1"><strong>Email:</strong> ayushharinkhere2005@gmail.com</p>
                 <p class="font-f1"><strong>Phone:</strong> 9209514158</p>
                 <p class="font-f1"><strong>Address:</strong> Waghdhara Issasani Hingna Road, Nagpur, Maharashtra - 441110</p>
@@ -1550,7 +1531,7 @@ color: #4f4f4f;
             </div>
 
             <div class="font-showcase-right slide-in-right">
-                <h3 class="font-f4"><b><i>🌐 Languages Known</i></b></h3>
+                <h3 class="font-f4"><b><i>Languages Known</i></b></h3>
                 <p class="font-f4"><strong>Fluent:</strong> English, Hindi, Marathi</p>
                 <p class="font-f4"><strong>Additional:</strong> Gujarati, Bhojpuri, Punjabi, Spanish</p>
                 <p class="font-f4">I believe in the power of communication and connecting with people from diverse backgrounds.</p>
@@ -1727,7 +1708,7 @@ color: #4f4f4f;
 
         <!-- Get in Touch / Social Media -->
         <div class="social-section fade-in">
-            <h2 class="social-title rotate-in">🌐 Get in Touch - Connect With Me</h2>
+            <h2 class="social-title rotate-in">Get in Touch - Connect With Me</h2>
             <div class="social-grid">
                 <a href="https://www.instagram.com/ayush_harinkhere?igsh=ZWUxNXM0MGd3ZmNu" class="social-card instagram" target="_blank" data-app="Instagram">
                     <svg class="social-icon" viewBox="0 0 24 24" fill="white">
@@ -1878,22 +1859,22 @@ color: #4f4f4f;
             <span class="close-modal" onclick="closeMoreAboutModal()">&times;</span>
             <h3 class="policy-title">More About Ayush Harinkhede</h3>
             <div class="policy-text">
-                <h4>🎯 Career Goals</h4>
+                <h4>Career Goals</h4>
                 <p>I aspire to become a full-stack developer and eventually lead technical teams. My goal is to build innovative solutions that make a positive impact on people's lives while continuously expanding my technical expertise.</p>
                 
-                <h4>💻 Technical Expertise</h4>
+                <h4>Technical Expertise</h4>
                 <p>Specialized in frontend development with strong foundations in HTML, CSS, JavaScript, and modern frameworks. Experienced in responsive design, Git version control, and agile development methodologies.</p>
                 
-                <h4>🎨 Creative Pursuits</h4>
+                <h4>Creative Pursuits</h4>
                 <p>Beyond coding, I'm passionate about creative writing, stand-up comedy, and martial arts. These pursuits help me maintain a balanced perspective and bring creativity to technical problem-solving.</p>
                 
-                <h4>🌟 Personal Philosophy</h4>
+                <h4>Personal Philosophy</h4>
                 <p>I believe in the power of continuous learning, perseverance, and connecting with people from diverse backgrounds. Every challenge is an opportunity to grow and every interaction is a chance to learn something new.</p>
                 
-                <h4>🏆 Achievements</h4>
+                <h4>Achievements</h4>
                 <p>Completed various web development projects, participated in hackathons, and consistently maintained academic excellence while pursuing my BCA degree.</p>
                 
-                <h4>📈 Future Plans</h4>
+                <h4>Future Plans</h4>
                 <p>Currently focused on mastering advanced web technologies, exploring AI/ML applications, and building a strong portfolio of real-world projects that demonstrate my capabilities.</p>
                 
                 <p><strong>For complete professional details, please refer to my resume.</strong></p>
