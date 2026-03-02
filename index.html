@@ -20,17 +20,170 @@
             box-sizing: border-box;  
         }
 
-  html {
+        /* Global Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .rotate-in {
+            opacity: 0;
+            transform: rotate(-10deg) scale(0.8);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .rotate-in.visible {
+            opacity: 1;
+            transform: rotate(0) scale(1);
+        }
+
+        .bounce-in {
+            opacity: 0;
+            transform: scale(0.3);
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .bounce-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Staggered animations */
+        .stagger-item {
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .stagger-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-item:nth-child(1) { transform: translateY(30px); transition-delay: 0.1s; }
+        .stagger-item:nth-child(2) { transform: translateY(30px); transition-delay: 0.2s; }
+        .stagger-item:nth-child(3) { transform: translateY(30px); transition-delay: 0.3s; }
+        .stagger-item:nth-child(4) { transform: translateY(30px); transition-delay: 0.4s; }
+        .stagger-item:nth-child(5) { transform: translateY(30px); transition-delay: 0.5s; }
+        .stagger-item:nth-child(6) { transform: translateY(30px); transition-delay: 0.6s; }
+
+        /* Floating animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Pulse animation */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pulsing {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Glow animation */
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 5px rgba(255,255,255,0.5); }
+            50% { box-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 30px rgba(255,255,255,0.6); }
+        }
+
+        .glowing {
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        /* Slide animation */
+        @keyframes slide {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .sliding {
+            background-size: 200% 200%;
+            animation: slide 3s ease infinite;
+        }
+
+        /* Hover effects for all interactive elements */
+        button, a, .project-card, .social-card, .faq-item summary {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        button:hover, a:hover, .project-card:hover, .social-card:hover, .faq-item summary:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Smooth scroll behavior */
+        html {
             scroll-behavior: smooth;
         }
 
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #5a67d8, #6b46c1);
+        }
+
      Body {
-    /* Off-white / Creamy background */
     /* Text ka halka dark colour */
    font-family: Arial, sans-serif; /* Default font */
  margin: 0;
      padding: 0;
-       background-color: #fbf3e6;
        min-height: 100vh;
     
     /* FIX 1: Background ko scrollable banane ke liye parent ko relative banana zaroori hai */
@@ -42,24 +195,24 @@
     
     content: ''; 
 
-    /* Fixed background - properly positioned */
+    /* Full screen background without repeating */
     position: fixed;
        top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-      width: 100%;
-       height: 100%;
+      width: 100vw;
+       height: 100vh;
     background-image: url('imgbg1.png');
-    background-repeat: repeat;
+    background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     pointer-events: none;
     z-index: -1;
-    opacity: 1;
-    filter: none;
- }
+    opacity: 0.8;
+    filter: blur(2px) brightness(0.9);
+    }
  
 
  
@@ -334,13 +487,73 @@ color: #4f4f4f;
 .faq-item[open] summary::after {
     content: '−'; /* Ye minus sign hai */
 }
-/* Jawaab (Answer) ke liye style */
+/* FAQ Item Animation */
 .faq-item p {
     font-size: 1.2em;
     color: #c9c3b7;
     padding: 0 20px 20px 20px;
     margin: 0;
     line-height: 1.6;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.5s ease;
+}
+
+.faq-item[open] p {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* View More Button */
+.view-more-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 30px;
+    margin: 30px auto 0;
+    border: 3px dashed #c9c3b7;
+    border-radius: 25px;
+    background: transparent;
+    color: #333;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.view-more-btn:hover {
+    transform: translateY(-3px);
+    border-color: #a09a8f;
+    box-shadow: 4px 4px 0px rgba(201, 195, 183, 0.4);
+}
+
+.view-more-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(201, 195, 183, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.view-more-btn:hover::before {
+    left: 100%;
+}
+
+.btn-icon {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.view-more-btn:hover .btn-icon {
+    transform: translateY(2px);
 }
 
 
@@ -466,23 +679,82 @@ color: #4f4f4f;
             text-decoration: none;
             transition: all 0.3s;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); 
+            position: relative;
+            overflow: hidden;
         }
 
-      .social-card:hover { 
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        .social-card:hover { 
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .social-card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 0;
+        }
+
+        .social-card:hover::before {
+            width: 120%;
+            height: 120%;
+        }
+
+        .social-card::after {
+            content: attr(data-app);
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.95);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-family: 'Patrick Hand', cursive;
+            font-weight: bold;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .social-card:hover::after {
+            opacity: 1;
+            bottom: 10px;
+            transform: translateX(-50%) translateY(-5px);
         }
 
       .social-icon { 
             width: 50px;
             height: 50px;
             margin-bottom: 10px;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-card:hover .social-icon {
+            transform: scale(1.15) translateY(-3px);
+            filter: brightness(1.2) drop-shadow(0 4px 8px rgba(0,0,0,0.3));
         }
 
        .social-name { 
-             color: white; 
+             color: transparent; 
             font-weight: bold; 
-            font-size: 1em; 
+            font-size: 0; 
+            height: 0;
+            margin: 0;
+            overflow: hidden;
         }
  
         /* Social Media Colors */ 
@@ -818,6 +1090,143 @@ color: #4f4f4f;
             border-radius: 8px;
         }
 
+        /* Footer Links */
+        .footer-link {
+            color: #070158;
+            text-decoration: none; 
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            border-bottom: 2px dotted transparent;
+        }
+
+        .footer-link:hover {
+            color: #667eea;
+            border-bottom: 2px dotted #667eea;
+        }
+
+        /* Text Protection - Prevent Copy */
+        .no-select, .no-select * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Disable text selection on entire body */
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Allow selection only for inputs and textareas */
+        input, textarea {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        /* Disable right click */
+        body {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Disable drag and drop */
+        img, svg, .project-card, .social-card {
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            pointer-events: none;
+        }
+
+        img, svg, .project-card, .social-card {
+            pointer-events: auto;
+        }
+
+        /* Policy Modals */
+        .policy-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+        }
+
+        .policy-modal.active {
+            display: flex;
+        }
+
+        .policy-content {
+            background: #fbf3e6;
+            border: 3px dashed #c9c3b7;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            margin: 20px;
+        }
+
+        .policy-title {
+            font-family: 'Caveat', cursive;
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .policy-text {
+            font-family: 'Patrick Hand', cursive;
+            color: #4f4f4f;
+            line-height: 1.6;
+        }
+
+        .policy-text h4 {
+            font-family: 'Caveat', cursive;
+            font-size: 1.3em;
+            color: #333;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .policy-text ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .policy-text li {
+            margin-bottom: 8px;
+        }
+
+        .policy-text strong {
+            color: #333;
+        }
+
+        /* Disable print */
+        @media print {
+            body {
+                display: none;
+            }
+        }
+
         /* Footer */
         .footer { 
             text-align: center;
@@ -877,8 +1286,8 @@ color: #4f4f4f;
 <body>
     <div id="mukhiya">
         <!-- Header Section with Phone -->
-        <div class="header-grid-container">
-            <div class="font-showcase-left">
+        <div class="header-grid-container fade-in">
+            <div class="font-showcase-left slide-in-left">
                 <h2 class="Sarpanch font-f1"><b><i>Hi, I am Ayush Harinkhede</i></b></h2>
                 <p class="font-f1"><i>Creative | Innovative | Passionate</i></p>
             </div>
@@ -891,8 +1300,8 @@ color: #4f4f4f;
         <br><br> 
 
         <!-- Personal Information Section --> 
-        <div class="info-grid-container"> 
-            <div class="font-showcase-left"> 
+        <div class="info-grid-container fade-in"> 
+            <div class="font-showcase-left slide-in-left"> 
                 <h3 class="font-f1"><b><i>👤 Personal Information</i></b></h3>
                 <p class="font-f1"><strong>Name:</strong> Ayush Surendra Harinkhede</p>
                 <p class="font-f1"><strong>Father's Name:</strong> Surendra Harinkhede</p>
@@ -902,7 +1311,7 @@ color: #4f4f4f;
                 <p class="font-f1"><strong>Category:</strong> OBC</p>
             </div>
 
-            <div class="font-showcase-center">
+            <div class="font-showcase-center scale-in">
                 <h3 class="font-f4"><b><i>📍 Contact Details</i></b></h3>
                 <p class="font-f1"><strong>Email:</strong> ayushharinkhere2005@gmail.com</p>
                 <p class="font-f1"><strong>Phone:</strong> 9209514158</p>
@@ -910,7 +1319,7 @@ color: #4f4f4f;
                 <p class="font-f1"><strong>Nationality:</strong> Indian</p>
             </div>
 
-            <div class="font-showcase-right">
+            <div class="font-showcase-right slide-in-right">
                 <h3 class="font-f4"><b><i>🌐 Languages Known</i></b></h3>
                 <p class="font-f4"><strong>Fluent:</strong> English, Hindi, Marathi</p>
                 <p class="font-f4"><strong>Additional:</strong> Gujarati, Bhojpuri, Punjabi, Spanish</p>
@@ -921,19 +1330,19 @@ color: #4f4f4f;
         <br><br>
 
         <!-- About Me Section --> 
-        <div class="about-section">
-            <h3 class="font-f2">About Me</h3>
-            <p class="font-f3">I am a passionate tech enthusiast and creative individual who believes in continuous learning and growth. Born and raised in Nagpur, I've always been fascinated by technology and its potential to solve real-world problems. My journey in tech started with curiosity and has evolved into a deep commitment to mastering computer applications and programming.</p>
-            <p class="font-f3">Beyond technology, I am a multifaceted personality who enjoys creative pursuits like script writing and stand-up comedy. I believe that humor and creativity are essential ingredients for innovation. My practice in martial arts has taught me discipline, focus, and perseverance – qualities that I apply in every aspect of my life.</p>
-            <p class="font-f3">What drives me is the desire to create meaningful solutions and connect with people. Whether it's through code, comedy, or conversation, I strive to make a positive impact in everything I do.</p>
+        <div class="about-section fade-in">
+            <h3 class="font-f2 rotate-in">About Me</h3>
+            <p class="font-f3 stagger-item">I am a passionate tech enthusiast and creative individual who believes in continuous learning and growth. Born and raised in Nagpur, I've always been fascinated by technology and its potential to solve real-world problems. My journey in tech started with curiosity and has evolved into a deep commitment to mastering computer applications and programming.</p>
+            <p class="font-f3 stagger-item">Beyond technology, I am a multifaceted personality who enjoys creative pursuits like script writing and stand-up comedy. I believe that humor and creativity are essential ingredients for innovation. My practice in martial arts has taught me discipline, focus, and perseverance – qualities that I apply in every aspect of my life.</p>
+            <p class="font-f3 stagger-item">What drives me is the desire to create meaningful solutions and connect with people. Whether it's through code, comedy, or conversation, I strive to make a positive impact in everything I do.</p>
          </div><br><br><br><br> 
 
-        <div class="resume-section">
+        <div class="resume-section bounce-in">
             <h3 class="resume-title"> Get My Resume</h3>
 
             
             <div class="resume-actions">
-                <a class="resume-btn view-btn" href="Ayush_Harinkhede_Resume.pdf" target="_blank" rel="noopener noreferrer">
+                <a class="resume-btn view-btn glowing" href="Ayush_Harinkhede_Resume.pdf" target="_blank" rel="noopener noreferrer">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z" stroke="#667eea" stroke-width="2" stroke-linejoin="round"/>
                         <path d="M14 3v5h5" stroke="#667eea" stroke-width="2" stroke-linejoin="round"/>
@@ -943,7 +1352,7 @@ color: #4f4f4f;
                     View Resume
                 </a>
 
-                <a class="resume-btn download-btn" id="downloadBtn" href="#" onclick="showDownloadModal(event)">
+                <a class="resume-btn download-btn glowing" id="downloadBtn" href="#" onclick="showDownloadModal(event)">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 3v10" stroke="#25d366" stroke-width="2" stroke-linecap="round"/>
                         <path d="M8 11l4 4 4-4" stroke="#25d366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1010,9 +1419,9 @@ color: #4f4f4f;
               </div> 
  
         <!-- My Creations -->
-        <h2 class="Sarpanch font-f2">My Creations</h2>
+        <h2 class="Sarpanch font-f2 fade-in">My Creations</h2>
         <div class="projects-grid">
-            <div class="project-card">
+            <div class="project-card scale-in">
                 <div class="project-image">
                     <img src="Image5.png" alt="Portfolio Spectrum">
                 </div>
@@ -1027,7 +1436,7 @@ color: #4f4f4f;
                     </div>
                 </div> </div> 
 
-            <div class="project-card">
+            <div class="project-card scale-in">
                 <div class="project-image"> 
                     <img src="Image6.png" alt="   HealthNest">
                 </div>
@@ -1042,7 +1451,7 @@ color: #4f4f4f;
          </div>
                 </div>  </div>
 
-            <div class="project-card"> 
+            <div class="project-card scale-in"> 
                 <div class="project-image">
                     <img src="Image7.jpg" alt="Mocha"> 
                 </div>
@@ -1056,82 +1465,89 @@ color: #4f4f4f;
                         <span class="tag">For Practice</span>
                     </div>    </div> </div> </div>
 
-         <div class="bhaag">
-            <h2 class="Sarpanch font-f2">Kuch Sawaal (FAQ)</h2>
+         <div class="bhaag fade-in">
+            <h2 class="Sarpanch font-f2">Interview Questions & Answers</h2>
             <div class="faq-container">
                 
-                <details class="faq-item">
-               <summary class="font-f1">So... what's your whole vibe?</summary>
-                    <p class="font-f3">BCA student by day, code-slinger by night. Low-key obsessed with building fire web experiences. It's giving... digital creator.</p>
+                <details class="faq-item slide-in-left">
+               <summary class="font-f1">Tell me about yourself?</summary>
+                    <p class="font-f3">I'm Ayush Harinkhede, a passionate BCA student who loves creating innovative web experiences. I specialize in frontend development and enjoy solving complex problems with elegant solutions.</p>
                 </details>
                 
-                <details class="faq-item">
-                    <summary class="font-f1">What's in your tech stack?</summary>
-                    <p class="font-f3">My main trio is HTML, CSS, & JS (iykyk). I'm also in my C++ era for the big-brain stuff. Git is my bestie, no cap.</p>
+                <details class="faq-item slide-in-left">
+                    <summary class="font-f1">What are your technical skills?</summary>
+                    <p class="font-f3">I'm proficient in HTML, CSS, JavaScript, C++, and have experience with various frameworks. I'm also familiar with Git, responsive design, and modern web development practices.</p>
                 </details>
 
-                <details class="faq-item">
-              <summary class="font-f1">Are you open to collabs or internships?</summary>
-                    <p class="font-f3">Bet. I'm always looking to vibe with cool teams and build things that slay. If you think I'm a good fit, hit my inbox.</p>
+                <details class="faq-item slide-in-left">
+              <summary class="font-f1">Why should we hire you?</summary>
+                    <p class="font-f3">I bring fresh perspectives, strong problem-solving skills, and a passion for learning. I'm adaptable, detail-oriented, and always eager to take on new challenges.</p>
              </details>
 
             </div>
+            
+            <button class="view-more-btn bounce-in" onclick="loadMoreQuestions()">
+                <span class="btn-text">View More Questions</span>
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M19 12l-7 7-7-7"/>
+                </svg>
+            </button>
         </div><br><br><br><br>
 
         <!-- Get in Touch / Social Media -->
-        <div class="social-section">
-            <h2 class="social-title">🌐 Get in Touch - Connect With Me</h2>
+        <div class="social-section fade-in">
+            <h2 class="social-title rotate-in">🌐 Get in Touch - Connect With Me</h2>
             <div class="social-grid">
-                <a href="https://www.instagram.com/ayush_harinkhere?igsh=ZWUxNXM0MGd3ZmNu" class="social-card instagram" target="_blank">
+                <a href="https://www.instagram.com/ayush_harinkhere?igsh=ZWUxNXM0MGd3ZmNu" class="social-card instagram" target="_blank" data-app="Instagram">
                     <svg class="social-icon" viewBox="0 0 24 24" fill="white">
                    <path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/>
                     </svg>
                     <span class="social-name">Instagram</span>
                 </a>
 
-              <a href="https://www.facebook.com/share/17a26WTexc" class="social-card facebook" target="_blank">
+              <a href="https://www.facebook.com/share/17a26WTexc" class="social-card facebook" target="_blank" data-app="Facebook">
                  <svg class="social-icon" viewBox="0 0 24 24" fill="white">
                          <path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/>
                     </svg>
                  <span class="social-name">Facebook</span>
              </a>
 
-             <a href="https://youtube.com/@ashtag_ayush?feature=shared" class="social-card youtube" target="_blank">
+             <a href="https://youtube.com/@ashtag_ayush?feature=shared" class="social-card youtube" target="_blank" data-app="YouTube">
                     <svg class="social-icon" viewBox="0 0 24 24" fill="white">
                         <path d="M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z"/>
                     </svg>
                     <span class="social-name">YouTube</span>
                 </a>
 
-                <a href="https://linkedin.com" class="social-card linkedin" target="_blank">
+                <a href="https://linkedin.com" class="social-card linkedin" target="_blank" data-app="LinkedIn">
                     <svg class="social-icon" viewBox="0 0 24 24" fill="white">
                           <path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/>
                     </svg>
                     <span class="social-name">LinkedIn</span>
                 </a>
 
-                <a href="https://wa.me/919209514158" class="social-card whatsapp" target="_blank">
+                <a href="https://wa.me/919209514158" class="social-card whatsapp" target="_blank" data-app="WhatsApp">
                     <svg class="social-icon" viewBox="0 0 24 24" fill="white">
                         <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.65 7.89 7 8.5 7 9.71C7 10.93 7.89 12.1 8 12.27C8.14 12.44 9.76 14.94 12.25 16C12.84 16.27 13.3 16.42 13.66 16.53C14.25 16.72 14.79 16.69 15.22 16.63C15.7 16.56 16.68 16.03 16.89 15.45C17.1 14.87 17.1 14.38 17.04 14.27C16.97 14.17 16.81 14.11 16.56 14C16.31 13.86 15.09 13.26 14.87 13.18C14.64 13.1 14.5 13.06 14.31 13.3C14.15 13.55 13.67 14.11 13.53 14.27C13.38 14.44 13.24 14.46 13 14.34C12.74 14.21 11.94 13.95 11 13.11C10.26 12.45 9.77 11.64 9.62 11.39C9.5 11.15 9.61 11 9.73 10.89C9.84 10.78 10 10.6 10.1 10.45C10.23 10.31 10.27 10.2 10.35 10.04C10.43 9.87 10.39 9.73 10.33 9.61C10.27 9.5 9.77 8.26 9.56 7.77C9.36 7.29 9.16 7.35 9 7.34C8.86 7.34 8.7 7.33 8.53 7.33Z"/>
                     </svg>
                     <span class="social-name">WhatsApp</span>
                 </a>
 
-                <a href="mailto:ayushharinkhere2005@gmail.com" class="social-card gmail">
+                <a href="mailto:ayushharinkhere2005@gmail.com" class="social-card gmail" data-app="Gmail">
                     <svg class="social-icon" viewBox="0 0 24 24" fill="white">
                         <path d="M20,18H18V9.25L12,13L6,9.25V18H4V6H5.2L12,10.25L18.8,6H20M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/>
                      </svg>
                     <span class="social-name">Gmail</span>
                 </a>
 
-                <a href="https://github.com/AyushHarinkhede" class="social-card github" target="_blank">
+                <a href="https://github.com/AyushHarinkhede" class="social-card github" target="_blank" data-app="GitHub">
                     <svg class="social-icon" viewBox="0 0 24 24" fill="white">
                         <path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/>
                     </svg>
                     <span class="social-name">GitHub</span>
                 </a>
 
-                <a href="https://signal.me/#eu/d-xnZ14twZOj_8DevTe34UqH0VyfFedVpjKkOI7W-n9a1XHFVdVNiZiPp9lb6Rtg" class="social-card signal" target="_blank">
+                <a href="https://signal.me/#eu/d-xnZ14twZOj_8DevTe34UqH0VyfFedVpjKkOI7W-n9a1XHFVdVNiZiPp9lb6Rtg" class="social-card signal" target="_blank" data-app="Signal">
                     <svg class="social-icon" viewBox="0 0 512 512">
                         <path d="M256 140c-68 0-124 50-124 112 0 25 8 49 22 68l-10 38a6 6 0 0 0 7 7l38-10a124 124 0 0 0 67 20c68 0 124-50 124-112S324 140 256 140z" fill="#FFFFFF"/>
                         <circle cx="256" cy="256" r="165" fill="none" stroke="#FFFFFF" stroke-width="20" stroke-dasharray="30 20" stroke-linecap="round"/>
@@ -1139,14 +1555,14 @@ color: #4f4f4f;
                     <span class="social-name">Signal</span>
                 </a>
 
-                <a href="https://www.snapchat.com/add/ayushharinkhere?share_id=jmrUbhs5QJ4&locale=en-IN-u-mu-celsius" class="social-card snapchat" target="_blank">
+                <a href="https://www.snapchat.com/add/ayushharinkhere?share_id=jmrUbhs5QJ4&locale=en-IN-u-mu-celsius" class="social-card snapchat" target="_blank" data-app="Snapchat">
                     <svg class="social-icon" viewBox="0 0 100 100">
                         <path d="M50 18 C 35 18, 24 29, 24 45 C 24 57, 27 63, 31 70 C 35 77, 43 82, 50 82 C 57 82, 65 77, 69 70 C 73 63, 76 57, 76 45 C 76 29, 65 18, 50 18 Z M 31 63 C 31 63, 33 59, 36 59 C 39 59, 40 63, 40 63 C 40 63, 42 59, 45 59 C 48 59, 49 63, 49 63 C 49 63, 51 59, 54 59 C 57 59, 58 63, 58 63 C 58 63, 60 59, 63 59 C 66 59, 67 63, 67 63 L 69 70 C 65 77, 57 82, 50 82 C 43 82, 35 77, 31 70 Z" fill="#FFFFFF" stroke="#000" stroke-width="5" stroke-linejoin="round"/>
                     </svg>
                     <span class="social-name">Snapchat</span>
                 </a>
 
-                <a href="https://www.duolingo.com/profile/AyushHarinkhere?via=share_profile_linkm" class="social-card duolingo" target="_blank">
+                <a href="https://www.duolingo.com/profile/AyushHarinkhere?via=share_profile_linkm" class="social-card duolingo" target="_blank" data-app="Duolingo">
                     <svg class="social-icon" viewBox="0 0 100 100">
                         <path d="M50,25 C 25,25 10,40 10,60 L 10,75 L 90,75 L 90,60 C 90,40 75,25 50,25 Z" fill="#78D632"/>
                         <circle cx="35" cy="50" r="12" fill="white"/>
@@ -1158,49 +1574,49 @@ color: #4f4f4f;
                     <span class="social-name">Duolingo</span>
                 </a>
 
-                <a href="https://t.me/ayushharinkhere2005" class="social-card telegram" target="_blank">
+                <a href="https://t.me/ayushharinkhere2005" class="social-card telegram" target="_blank" data-app="Telegram">
                     <svg class="social-icon" viewBox="0 0 24 24" fill="white">
                         <path d="M9.78,18.65L10.06,14.42L17.74,7.5C18.08,7.19 17.67,7.04 17.22,7.31L7.74,13.3L3.64,12C2.76,11.75 2.75,11.14 3.84,10.7L19.81,4.54C20.54,4.21 21.24,4.72 20.96,5.84L18.24,18.65C18.05,19.56 17.5,19.78 16.74,19.36L12.6,16.3L10.61,18.23C10.38,18.46 10.19,18.65 9.78,18.65Z"/>
                     </svg>
                     <span class="social-name">Telegram</span>
                 </a>
 
-                <a href="https://x.com/AyushHarinkhere?t=9-6Rz3q9RqSvZK5q4mnvgw&s=09" class="social-card twitter" target="_blank">
+                <a href="https://x.com/AyushHarinkhere?t=9-6Rz3q9RqSvZK5q4mnvgw&s=09" class="social-card twitter" target="_blank" data-app="X">
                     <svg class="social-icon" viewBox="0 0 24 24" fill="white">
                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                     </svg>
                     <span class="social-name">X</span>
                 </a>
 
-                <a href="https://pin.it/2wUjXYwYsm" class="social-card pinterest" target="_blank">
+                <a href="https://pin.it/2wUjXYwYsm" class="social-card pinterest" target="_blank" data-app="Pinterest">
                     <svg class="social-icon" viewBox="0 0 24 24" fill="white">
                         <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/>
                     </svg>
                     <span class="social-name">Pinterest</span>
                 </a>
 
-                <a href="https://www.reddit.com/u/ayush_harinkhere/s/dFu9g0OBwP" class="social-card reddit" target="_blank">
+                <a href="https://www.reddit.com/u/ayush_harinkhere/s/dFu9g0OBwP" class="social-card reddit" target="_blank" data-app="Reddit">
                     <svg class="social-icon" viewBox="0 0 24 24" fill="white">
                         <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/>
                     </svg>
                     <span class="social-name">Reddit</span>
                 </a>
 
-                <a href="sms:+919209514158" class="social-card messege">
+                <a href="sms:+919209514158" class="social-card messege" data-app="Message">
                     <svg class="social-icon" viewBox="0 0 24 24" fill="white">
                         <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
                     </svg>
                     <span class="social-name">Message</span>
                 </a>
 
-                <a href="tel:+919209514158" class="social-card phone">
+                <a href="tel:+919209514158" class="social-card phone" data-app="Phone">
                     <svg class="social-icon" viewBox="0 0 24 24" fill="white">
                         <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                     </svg>
                     <span class="social-name">Phone</span>
              </a>
 
-                <a href="https://www.arattai.com/u/@ayushharinkhere" class="social-card arattai" target="_blank">
+                <a href="https://www.arattai.com/u/@ayushharinkhere" class="social-card arattai" target="_blank" data-app="Arattai">
                     <svg class="social-icon" viewBox="0 -50 220 210">
             <path d="M 30 20 L 30 20 C 30 15 35 10 40 10 L 130 10 C 135 10 140 15 140 20 L 140 90 C 140 95 135 100 130 100 L 80 100 L 60 120 L 60 100 L 40 100 C 35 100 30 95 30 90 Z" fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
              <line x1="50" y1="55" x2="120" y2="55" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round"/>
@@ -1210,7 +1626,7 @@ color: #4f4f4f;
                 </a>
 
                 
-            <a href="#" class="social-card other app" target="_blank">
+            <a href="#" class="social-card other app" target="_blank" data-app="Other">
                      <svg class="social-icon" viewBox="0 0 24 24" fill="off white">
  <path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z" fill="#6B7280"/> </svg>             
  <span class="social-name">Other's</span>
@@ -1218,11 +1634,87 @@ color: #4f4f4f;
 
     <!-- Footer -->
         <footer class="footer">
-            <p class="font-f1"> 2024-2025 Portfolio Spectrum. Made with </p>
+            <p class="font-f1"> 2026 Portfolio Spectrum. Made with </p>
          <p class="font-f3">Creative | Innovative | Passionate</p>
-     <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+     <a href="#" onclick="showPrivacyModal()" class="footer-link">Privacy Policy</a> | <a href="#" onclick="showTermsModal()" class="footer-link">Terms and Conditions</a>
   <p class="font-f1">All Rights Reserved by <b><i>Ayush Harinkhede</i></b></p>
      </footer>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div id="privacyModal" class="policy-modal">
+        <div class="policy-content">
+            <span class="close-modal" onclick="closePrivacyModal()">&times;</span>
+            <h3 class="policy-title">Privacy Policy</h3>
+            <div class="policy-text">
+                <h4>Information We Collect</h4>
+                <p>We may collect personal information that you voluntarily provide to us when you:</p>
+                <ul>
+                    <li>Contact us through our website</li>
+                    <li>Download our resume</li>
+                    <li>Connect with us through social media links</li>
+                </ul>
+                
+                <h4>How We Use Your Information</h4>
+                <p>We use the information we collect to:</p>
+                <ul>
+                    <li>Respond to your inquiries</li>
+                    <li>Provide you with requested information</li>
+                    <li>Improve our website and services</li>
+                </ul>
+                
+                <h4>Data Protection</h4>
+                <p>We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
+                
+                <h4>Your Rights</h4>
+                <p>You have the right to:</p>
+                <ul>
+                    <li>Access your personal information</li>
+                    <li>Correct inaccurate information</li>
+                    <li>Request deletion of your information</li>
+                </ul>
+                
+                <h4>Contact Us</h4>
+                <p>If you have any questions about this Privacy Policy, please contact us at ayushharinkhere2005@gmail.com</p>
+                
+                <p><strong>Last updated:</strong> January 2026</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms and Conditions Modal -->
+    <div id="termsModal" class="policy-modal">
+        <div class="policy-content">
+            <span class="close-modal" onclick="closeTermsModal()">&times;</span>
+            <h3 class="policy-title">Terms and Conditions</h3>
+            <div class="policy-text">
+                <h4>Acceptance of Terms</h4>
+                <p>By accessing and using this portfolio website, you accept and agree to be bound by the terms and provision of this agreement.</p>
+                
+                <h4>Use License</h4>
+                <p>Permission is granted to temporarily download one copy of the materials on Ayush Harinkhede's portfolio for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title.</p>
+                
+                <h4>Disclaimer</h4>
+                <p>The materials on Ayush Harinkhede's portfolio are provided on an 'as is' basis. Ayush Harinkhede makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
+                
+                <h4>Limitations</h4>
+                <p>In no event shall Ayush Harinkhede or his suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Ayush Harinkhede's portfolio.</p>
+                
+                <h4>Accuracy of Materials</h4>
+                <p>The materials appearing on Ayush Harinkhede's portfolio could include technical, typographical, or photographic errors. Ayush Harinkhede does not warrant that any of the materials on its website are accurate, complete, or current.</p>
+                
+                <h4>Links</h4>
+                <p>Ayush Harinkhede has not reviewed all of the sites linked to our portfolio and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by Ayush Harinkhede of the site.</p>
+                
+                <h4>Modifications</h4>
+                <p>Ayush Harinkhede may revise these terms of service for its portfolio at any time without notice. By using this portfolio, you are agreeing to be bound by the then current version of these terms of service.</p>
+                
+                <h4>Governing Law</h4>
+                <p>These terms and conditions are governed by and construed in accordance with the laws of India and you irrevocably submit to the exclusive jurisdiction of the courts in that state or location.</p>
+                
+                <p><strong>Last updated:</strong> January 2026</p>
+            </div>
+        </div>
     </div>
 
     <!-- Download Confirmation Modal -->
@@ -1286,6 +1778,207 @@ color: #4f4f4f;
                     statusElement.style.color = '#ff9800';
                 }
             }, 1000);
+        }
+
+        // Privacy and Terms Modal Functions
+        function showPrivacyModal() {
+            const modal = document.getElementById('privacyModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePrivacyModal() {
+            const modal = document.getElementById('privacyModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function showTermsModal() {
+            const modal = document.getElementById('termsModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeTermsModal() {
+            const modal = document.getElementById('termsModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Security Features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Disable right-click
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // Disable text selection
+            document.addEventListener('selectstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // Disable drag
+            document.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // Disable copy
+            document.addEventListener('copy', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // Disable cut
+            document.addEventListener('cut', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // Disable paste
+            document.addEventListener('paste', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // Add no-select class to body
+            document.body.classList.add('no-select');
+
+            // Close modals when clicking outside
+            window.addEventListener('click', function(e) {
+                const privacyModal = document.getElementById('privacyModal');
+                const termsModal = document.getElementById('termsModal');
+                
+                if (e.target === privacyModal) {
+                    closePrivacyModal();
+                }
+                if (e.target === termsModal) {
+                    closeTermsModal();
+                }
+            });
+
+            // Close modals with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closePrivacyModal();
+                    closeTermsModal();
+                    closeDownloadModal();
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animation elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in, .rotate-in, .bounce-in, .stagger-item');
+            animatedElements.forEach(el => observer.observe(el));
+
+            // Add glow animation to resume buttons
+            const resumeBtns = document.querySelectorAll('.resume-btn');
+            resumeBtns.forEach(btn => {
+                btn.classList.add('glowing');
+            });
+
+            // Remove animations from social cards (no pulsing)
+            const socialCards = document.querySelectorAll('.social-card');
+            // Social cards will have only hover effects, no continuous animations
+
+            // Close modals when clicking outside
+            window.addEventListener('click', function(e) {
+                const privacyModal = document.getElementById('privacyModal');
+                const termsModal = document.getElementById('termsModal');
+                
+                if (e.target === privacyModal) {
+                    closePrivacyModal();
+                }
+                if (e.target === termsModal) {
+                    closeTermsModal();
+                }
+            });
+
+            // Close modals with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closePrivacyModal();
+                    closeTermsModal();
+                    closeDownloadModal();
+                }
+            });
+        });
+
+        function loadMoreQuestions() {
+            const faqContainer = document.querySelector('.faq-container');
+            const additionalQuestions = [
+                {
+                    question: "What's your experience with projects?",
+                    answer: "I've worked on various projects including web applications, health monitoring systems, and test frameworks. Each project has helped me grow technically and creatively."
+                },
+                {
+                    question: "How do you handle pressure?",
+                    answer: "I thrive under pressure by breaking down complex problems into manageable tasks. I stay calm, focused, and maintain quality even with tight deadlines."
+                },
+                {
+                    question: "What are your career goals?",
+                    answer: "I aim to become a full-stack developer and eventually lead technical teams. I want to build products that make a positive impact on people's lives."
+                },
+                {
+                    question: "What makes you different from others?",
+                    answer: "My combination of technical skills, creative thinking, and dedication to continuous learning sets me apart. I bring both technical expertise and innovative problem-solving approaches."
+                },
+                {
+                    question: "How do you stay updated with technology?",
+                    answer: "I regularly follow tech blogs, participate in online courses, attend workshops, and work on personal projects to stay current with the latest technologies and trends."
+                }
+            ];
+
+            // Add new questions with animation
+            additionalQuestions.forEach((item, index) => {
+                const newQuestion = document.createElement('details');
+                newQuestion.className = 'faq-item';
+                newQuestion.innerHTML = `
+                    <summary class="font-f1">${item.question}</summary>
+                    <p class="font-f3">${item.answer}</p>
+                `;
+                
+                // Add with delay for animation effect
+                setTimeout(() => {
+                    faqContainer.appendChild(newQuestion);
+                    newQuestion.style.opacity = '0';
+                    newQuestion.style.transform = 'translateY(-20px)';
+                    
+                    setTimeout(() => {
+                        newQuestion.style.transition = 'all 0.5s ease';
+                        newQuestion.style.opacity = '1';
+                        newQuestion.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 200);
+            });
+
+            // Hide the button after loading
+            const viewMoreBtn = document.querySelector('.view-more-btn');
+            setTimeout(() => {
+                viewMoreBtn.style.transition = 'all 0.3s ease';
+                viewMoreBtn.style.opacity = '0';
+                viewMoreBtn.style.transform = 'scale(0.8)';
+                setTimeout(() => {
+                    viewMoreBtn.style.display = 'none';
+                }, 300);
+            }, additionalQuestions.length * 200);
         }
 
         function confirmDownload() {
