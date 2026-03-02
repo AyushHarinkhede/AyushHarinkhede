@@ -367,7 +367,7 @@ color: #4f4f4f;
     flex-shrink: 0; /* Circle ka size fixed rahega */
     width: 160px;
     height: 160px;
-    border: 4px dotted #c9c3b7;
+    border: 4px dotted #888888;
     border-radius: 50%;
     padding: 6px;
     box-sizing: border-box;
@@ -460,9 +460,12 @@ color: #4f4f4f;
 }
 .faq-item summary {
     font-size: 1.5em; /* Sawaal ka font size */
-    color: #a09a8f;
+    color: #2c2c2c;
     padding: 15px 20px;
     cursor: pointer;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: all 0.3s ease;
     list-style: none; /* Default arrow hatane ke liye */
     position: relative;
 }
@@ -488,22 +491,21 @@ color: #4f4f4f;
 /* FAQ Item Animation - Enhanced */
 .faq-item p {
     font-size: 1.2em;
-    color: #c9c3b7;
+    color: #333333;
     padding: 0 20px 20px 20px;
     margin: 0;
     line-height: 1.6;
     opacity: 0;
-    transform: translateY(-20px) scale(0.8);
-    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
+    transform: translateY(-10px) scale(0.95);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
 }
 
 .faq-item[open] p {
     opacity: 1;
     transform: translateY(0) scale(1);
-    animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55), specialGlow 2s ease-in-out infinite;
+    animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 @keyframes bounceIn {
@@ -1698,9 +1700,9 @@ color: #4f4f4f;
          <div class="bhaag fade-in">
             <h2 class="Sarpanch font-f2">Interview Questions & Answers</h2>
             <div class="faq-container">
-                
+                <!-- Top 3 HR Questions - Always Visible -->
                 <details class="faq-item slide-in-left">
-               <summary class="font-f1">Tell me about yourself?</summary>
+                    <summary class="font-f1">Tell me about yourself?</summary>
                     <p class="font-f3">I'm Ayush Harinkhede, a passionate BCA student who loves creating innovative web experiences. I specialize in frontend development and enjoy solving complex problems with elegant solutions.</p>
                 </details>
                 
@@ -1710,10 +1712,9 @@ color: #4f4f4f;
                 </details>
 
                 <details class="faq-item slide-in-left">
-              <summary class="font-f1">Why should we hire you?</summary>
+                    <summary class="font-f1">Why should we hire you?</summary>
                     <p class="font-f3">I bring fresh perspectives, strong problem-solving skills, and a passion for learning. I'm adaptable, detail-oriented, and always eager to take on new challenges.</p>
-             </details>
-
+                </details>
             </div>
             
             <button class="view-more-btn bounce-in" id="viewMoreBtn" onclick="toggleQuestions()">
@@ -2155,6 +2156,9 @@ color: #4f4f4f;
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+                } else {
+                    // Remove visible class when scrolling out of view to re-trigger animation
+                    entry.target.classList.remove('visible');
                 }
             });
         }, observerOptions);
@@ -2260,19 +2264,20 @@ color: #4f4f4f;
                     <p class="font-f3">${item.answer}</p>
                 `;
                 
-                // Add with delay for animation effect
+                // Initially hidden
+                newQuestion.style.opacity = '0';
+                newQuestion.style.transform = 'translateY(-20px) scale(0.8)';
+                
+                // Add to container
+                faqContainer.appendChild(newQuestion);
+                
+                // Animate in with delay
                 setTimeout(() => {
-                    faqContainer.appendChild(newQuestion);
-                    newQuestion.style.opacity = '0';
-                    newQuestion.style.transform = 'translateY(-20px) scale(0.8)';
-                    
-                    setTimeout(() => {
-                        newQuestion.style.transition = 'all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-                        newQuestion.style.opacity = '1';
-                        newQuestion.style.transform = 'translateY(0) scale(1)';
-                    }, 100);
-                }, index * 200);
-            });
+                    newQuestion.style.transition = 'all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+                    newQuestion.style.opacity = '1';
+                    newQuestion.style.transform = 'translateY(0) scale(1)';
+                }, 100);
+            }, index * 200);
 
             // Update button to View Less
             setTimeout(() => {
