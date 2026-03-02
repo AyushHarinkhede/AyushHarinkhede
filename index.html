@@ -42,24 +42,23 @@
     
     content: ''; 
 
-    /* PROBLEM 1 FIX: 'fixed' ki jagah 'absolute' karein */
-    position: absolute;
+    /* Fixed background - properly positioned */
+    position: fixed;
        top: 0;
     left: 0;
     right: 0;
     bottom: 0;
       width: 100%;
-    
-    /* '100vh' (viewport height) ki jagah '100%' (full body height) karein */
        height: 100%;
-    background-image: url('imgbg.png');
+    background-image: url('imgbg1.png');
     background-repeat: repeat;
     background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     pointer-events: none;
-    z-index: 0;
+    z-index: -1;
     opacity: 1;
     filter: none;
-    filter: blur(0.7px) saturate(0.75) contrast(0.9);
  }
  
 
