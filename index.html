@@ -701,32 +701,24 @@ color: #4f4f4f;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            border-radius: 15px; 
+            padding: 12px;
+            border-radius: 25px; 
             text-decoration: none;
             transition: all 0.3s;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); 
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); 
             position: relative;
             overflow: hidden;
+            border: none;
         }
 
         .social-card:hover { 
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            border-radius: 25px;
         }
 
         .social-card::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
-            transform: translate(-50%, -50%);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 0;
+            display: none;
         }
 
         .social-card:hover::before {
@@ -734,44 +726,26 @@ color: #4f4f4f;
             height: 120%;
         }
 
-        .social-card::after {
-            content: attr(data-app);
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.95);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-family: 'Patrick Hand', cursive;
-            font-weight: bold;
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            pointer-events: none;
-            z-index: 10;
-            white-space: nowrap;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-
-        .social-card:hover::after {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1.1);
-        }
-
+        
       .social-icon { 
-            width: 50px;
-            height: 50px;
-            margin-bottom: 10px;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 65px;
+            height: 65px;
+            margin: 0;
+            transition: all 0.3s ease;
             position: relative;
             z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .signal .social-icon { 
+            width: 75px;
+            height: 75px;
         }
 
         .social-card:hover .social-icon {
-            transform: scale(1.15) translateY(-8px);
-            filter: brightness(1.2) drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+            transform: scale(1.05);
         }
 
         .social-card:not(:hover)::after {
@@ -783,33 +757,112 @@ color: #4f4f4f;
         }
 
        .social-name { 
-             color: transparent; 
-            font-weight: bold; 
-            font-size: 0; 
-            height: 0;
-            margin: 0;
-            overflow: hidden;
+            color: #f5f5f5; 
+            font-weight: normal; 
+            font-size: 1em; 
+            height: auto;
+            margin: 10px 0 0 0;
+            overflow: visible;
+            font-family: 'Patrick Hand', cursive;
+            text-align: center;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            padding: 8px 12px;
+            box-shadow: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 2;
+            letter-spacing: 0.5px;
+        }
+
+        .arattai .social-name,
+        .snapchat .social-name {
+            color: #000000;
+        }
+
+        .social-card:hover .social-name {
+            transform: translateY(-2px) scale(1.05);
         }
  
         /* Social Media Colors */ 
-        .instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
-        .facebook { background: linear-gradient(135deg, #4267B2, #5890FF); }
-        .youtube { background: linear-gradient(135deg, #FF0000, #CC0000); }
-        .linkedin { background: linear-gradient(135deg, #0077B5, #00A0DC); }
-        .signal { background: linear-gradient(135deg, #3A76F0, #2E5FCC); }
-        .whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); }
-        .gmail { background: linear-gradient(135deg, #EA4335, #FBBC05, #34A853, #4285F4); }
-        .github { background: linear-gradient(135deg, #333, #666); }
-        .snapchat { background: linear-gradient(135deg, #FFFC00, #FFF700); }
-        .duolingo { background: linear-gradient(135deg, #58CC02, #4CAF50); }
-        .telegram { background: linear-gradient(135deg, #0088cc, #00A0DC); }
-        .twitter {  background: linear-gradient(135deg, #2b2a2a, #545454); }
-        .pinterest {  background: linear-gradient(135deg, #fd0328, #FF3B30); }
-        .reddit {  background: linear-gradient(135deg, #FF4500, #FF5700); }
-          .arattai { background: #f5f134; }
-        .phone {  background: linear-gradient(135deg, #34C759, #30B158); }
-        .messege {  background: linear-gradient(135deg, #0026ff, #006AFF); }
-        .other  {  background: linear-gradient(135deg, #888888, #BBBBBB); }
+        .instagram { 
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+            border-color: #e4405f;
+        }
+        .facebook { 
+            background: linear-gradient(135deg, #4267B2, #5890FF); 
+            border-color: #4267B2;
+        }
+        .youtube { 
+            background: linear-gradient(135deg, #FF0000, #CC0000); 
+            border-color: #FF0000;
+        }
+        .linkedin { 
+            background: linear-gradient(135deg, #0077B5, #00A0DC); 
+            border-color: #0077B5;
+        }
+        .signal { 
+            background: linear-gradient(135deg, #3A76F0, #2E5FCC); 
+            border-color: #3A76F0;
+        }
+        .whatsapp { 
+            background: linear-gradient(135deg, #25D366, #128C7E); 
+            border-color: #25D366;
+        }
+        .gmail { 
+            background: conic-gradient(from 45deg, #EA4335 0deg 90deg, #FBBC05 90deg 180deg, #34A853 180deg 270deg, #4285F4 270deg 360deg);
+        }
+        .github { 
+            background: linear-gradient(135deg, #333, #666); 
+            border-color: #333;
+        }
+        .snapchat { 
+            background: linear-gradient(135deg, #FFFC00, #FFF700); 
+            border-color: #FFFC00;
+        }
+        .duolingo { 
+            background: linear-gradient(135deg, #58CC02, #4CAF50); 
+            border-color: #58CC02;
+        }
+        .telegram { 
+            background: linear-gradient(135deg, #0088cc, #00A0DC); 
+            border-color: #0088cc;
+        }
+        .twitter {  
+            background: linear-gradient(135deg, #2b2a2a, #545454); 
+            border-color: #2b2a2a;
+        }
+        .pinterest {  
+            background: linear-gradient(135deg, #fd0328, #FF3B30); 
+            border-color: #fd0328;
+        }
+        .reddit {  
+            background: linear-gradient(135deg, #FF4500, #FF5700); 
+            border-color: #FF4500;
+        }
+        .arattai { 
+            background: #f5f134; 
+            border-color: #f5f134;
+        }
+
+        .arattai-logo svg path,
+        .arattai-logo svg rect {
+            fill: #000000;
+            stroke: #000000;
+        }
+        .phone {  
+            background: linear-gradient(135deg, #34C759, #30B158); 
+            border-color: #34C759;
+        }
+        .messege {  
+            background: linear-gradient(135deg, #0026ff, #006AFF); 
+            border-color: #0026ff;
+        }
+        .other {  
+            background: linear-gradient(135deg, #888888, #BBBBBB); 
+            border-color: #888888;
+        }
 
         /* Resume Section - Glorified Version */
         .resume-section {
@@ -2224,7 +2277,7 @@ color: #4f4f4f;
             // Update button to View Less
             setTimeout(() => {
                 btnText.textContent = 'View Less Questions';
-                btnIcon.innerHTML = '<path d="M12 19v-14M5 12l7-7 7-7"/>';
+                btnIcon.innerHTML = '<path d="M12 19v-14M5 12l7-7 7 7"/>';
                 viewMoreBtn.classList.add('questions-loaded');
             }, additionalQuestions.length * 200);
         }
