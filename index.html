@@ -181,7 +181,7 @@
     /* Text ka halka dark colour */
    font-family: Arial, sans-serif; /* Default font */
  margin: 0;
-     padding: 0;
+     padding: 40px 0 0 0;
        min-height: 100vh;
     
     /* FIX 1: Background ko scrollable banane ke liye parent ko relative banana zaroori hai */
@@ -269,26 +269,95 @@
         }
 
  #phone-container {
-            width: 285px;
-              height: 555px;
-border: 12px solid #333;
-         border-radius: 40px;
-               margin: 0;
-            padding: 0px;
-               box-shadow: 0 10px 25px rgba(0, 0, 0, 0.656);
-              display: flex;
-            justify-content: center;
-      align-items: center;
-     box-sizing: border-box;
+            width: 320px;
+              height: 400px;
+            background: linear-gradient(135deg, #fff9c4 0%, #fff3e0 100%);
+            border-radius: 2px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+              margin: 0 auto;
+            padding: 20px;
+               position: relative;
+              transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+        }
+
+        #phone-container::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 30px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            border-radius: 50% 50% 0 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        #phone-container::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            background: #333;
+            border-radius: 50%;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
         }
 
  #phone-screen {
                width: 100%;
                height: 100%;
-              border-radius: 25px;
+              border-radius: 2px;
             background-image: url('Image1.jpg');
-background-size: cover;
-         background-position: center;
+            background-size: cover;
+            background-position: center;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .sticky-tape {
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-5deg);
+            width: 80px;
+            height: 25px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%);
+            border: 1px solid rgba(200, 200, 200, 0.3);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .sticky-pin {
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            border-radius: 50% 50% 0 0;
+            transform: translateX(-50%) rotate(45deg);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .sticky-pin::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 8px;
+            background: #333;
+            border-radius: 1px;
+        }
+
+        .typing-animation {
+            overflow: hidden;
+            white-space: pre-wrap;
+            animation: none;
         }
 
         /* Info Grid - 3 Columns */
@@ -1352,7 +1421,7 @@ color: #4f4f4f;
         }
 
         /* Disable drag and drop */
-        img, svg, .project-card, .social-card {
+        img, svg, .project-card {
             -webkit-user-drag: none;
             -khtml-user-drag: none;
             -moz-user-drag: none;
@@ -1360,8 +1429,14 @@ color: #4f4f4f;
             pointer-events: none;
         }
 
-        img, svg, .project-card, .social-card {
-            pointer-events: auto;
+        .social-card {
+            pointer-events: auto !important;
+            z-index: 1000 !important;
+        }
+
+        .view-more-btn {
+            pointer-events: auto !important;
+            z-index: 1000 !important;
         }
 
         /* Policy Modals */
@@ -1505,6 +1580,8 @@ color: #4f4f4f;
             
             <div id="phone-container">
                 <div id="phone-screen"></div>
+                <div class="sticky-tape"></div>
+                <div class="sticky-pin"></div>
             </div>
         </div>
  
@@ -1531,10 +1608,11 @@ color: #4f4f4f;
             </div>
 
             <div class="font-showcase-right slide-in-right">
-                <h3 class="font-f4"><b><i>Languages Known</i></b></h3>
-                <p class="font-f4"><strong>Fluent:</strong> English, Hindi, Marathi</p>
-                <p class="font-f4"><strong>Additional:</strong> Gujarati, Bhojpuri, Punjabi, Spanish</p>
-                <p class="font-f4">I believe in the power of communication and connecting with people from diverse backgrounds.</p>
+                <h3 class="font-f4"><b><i>Technical Skills</i></b></h3>
+                <p class="font-f4"><strong>Programming:</strong> C, C++, Java, JavaScript (ES6+)</p>
+                <p class="font-f4"><strong>Web Development:</strong> MERN Stack, HTML5, CSS3, REST APIs, Responsive Design</p>
+                <p class="font-f4"><strong>Tools:</strong> Git, GitHub, VS Code, Netlify, Chrome DevTools, Figma (UI Planning), Node.js, MongoDB, NPM</p>
+                <p class="font-f4"><strong>IT Support:</strong> System troubleshooting, network configuration, technical documentation</p>
             </div>
         </div>
 
@@ -1543,11 +1621,11 @@ color: #4f4f4f;
         <!-- About Me Section --> 
         <div class="about-section fade-in">
             <h3 class="font-f2 rotate-in">About Me</h3>
-            <p class="font-f3 stagger-item">I am a passionate tech enthusiast and creative individual who believes in continuous learning and growth. Born and raised in Nagpur, I've always been fascinated by technology and its potential to solve real-world problems. My journey in tech started with curiosity and has evolved into a deep commitment to mastering computer applications and programming.</p>
-            <p class="font-f3 stagger-item">Beyond technology, I am a multifaceted personality who enjoys creative pursuits like script writing and stand-up comedy. I believe that humor and creativity are essential ingredients for innovation. My practice in martial arts has taught me discipline, focus, and perseverance – qualities that I apply in every aspect of my life.</p>
-            <p class="font-f3 stagger-item">What drives me is the desire to create meaningful solutions and connect with people. Whether it's through code, comedy, or conversation, I strive to make a positive impact in everything I do. 
-                <button class="view-more-about-btn" onclick="showMoreAbout()"><span></span>View More</span></button>
-            </p>
+            <p class="font-f3 stagger-item">Motivated BCA student specializing in full-stack web development with hands-on experience in building scalable and user-focused applications. Skilled in developing responsive UI, authentication systems, and performance-oriented browser applications using MERN stack and modern JavaScript frameworks. Strong interest in AI-driven solutions and real-world problem solving through technology. <button class="view-more-about-btn" onclick="toggleAboutContent()" style="margin-left: 10px;"><span id="aboutBtnText">View More</span></button></p>
+            <div id="additionalAboutContent" style="display: none; margin-top: 20px;">
+                <p class="font-f3 typing-animation"></p>
+                <button class="view-more-about-btn" onclick="toggleAboutContent()" style="margin-top: 15px; margin-left: 10px;"><span id="aboutBtnTextLess" style="display: none;">View Less</span></button>
+            </div>
          </div><br><br><br><br> 
 
         <div class="resume-section bounce-in">
@@ -1602,32 +1680,24 @@ color: #4f4f4f;
                     <div class="dotted-circle">
                         <div class="circle-image"></div>
                   </div>
-                    <h3 class="font-f1">2020 - Completed Secondary School Education</h3>
-                <p class="font-f4">Graduated from secondary school with a focus on science and technology.</p>
+                    <h3 class="font-f1">2021 - SSC 10th | Priyadarshini Indira Gandhi School, Nagpur</h3>
+                <p class="font-f4">Completed secondary education from Priyadarshini Indira Gandhi School, Nagpur with 61.80% marks.</p>
                 </div>
                 
                 <div class="chhota-container">
                     <div class="dotted-circle">
                         <div class="circle-image"></div>
                     </div>
-                  <h3 class="font-f1">2022 - Completed Higher Secondary Education</h3>
-             <p class="font-f4">Graduated from higher secondary school with a focus on science and technology.</p>
+                  <h3 class="font-f1">2023 - HSC 12th | Vaidik Convent School, Balaghat</h3>
+             <p class="font-f4">Completed higher secondary education from Vaidik Convent School, Balaghat with 61.80% marks.</p>
                 </div>
 
                  <div class="chhota-container">
                     <div class="dotted-circle">
                         <div class="circle-image"></div>
                     </div>
-                  <h3 class="font-f1">2023 - Enrolled in BCA at GHRUA</h3>
-                <p class="font-f4">Started my Bachelor of Computer Applications degree to deepen my knowledge in computer science.</p>
-                </div>
-
-                 <div class="chhota-container">
-                    <div class="dotted-circle">
-                        <div class="circle-image"></div>
-                    </div>
-                  <h3 class="font-f1">2024 - Exploring New Technologies</h3>
-                <p class="font-f4">Diving into web development, programming, and creative projects to build a strong foundation for my future career.</p>
+                  <h3 class="font-f1">2023 – 2026 - Undergraduate (UG) | GH Raisoni University, Amravati</h3>
+                <p class="font-f4">Pursuing Bachelor of Computer Applications (BCA) degree from GH Raisoni University, Amravati to build strong foundation in computer science and applications.</p>
                 </div><br><br><br><br>
               </div> 
  
@@ -2021,11 +2091,44 @@ color: #4f4f4f;
             }, 1000);
         }
 
-        // More About Modal Functions
-        function showMoreAbout() {
-            const modal = document.getElementById('moreAboutModal');
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
+        // About Content Toggle Function
+        function toggleAboutContent() {
+            const additionalContent = document.getElementById('additionalAboutContent');
+            const btnText = document.getElementById('aboutBtnText');
+            const btnTextLess = document.getElementById('aboutBtnTextLess');
+            const typingElement = additionalContent.querySelector('.typing-animation');
+            
+            if (additionalContent.style.display === 'none') {
+                // Show content with typing animation
+                additionalContent.style.display = 'block';
+                btnText.style.display = 'none';
+                btnTextLess.style.display = 'inline';
+                
+                // Content to type
+                const content = `\n <b><i>Education Details :</i></b> My educational journey began at Priyadarshini Indira Gandhi School in Nagpur where I completed my SSC in 2021 with 61.80%. I then pursued HSC at Vaidik Convent School in Balaghat, achieving 61.80% in 2023. Currently, I'm pursuing my BCA degree at GH Raisoni University, Amravati (2023-2026).\n\n<b><i>Technical Skills :</i></b>  I've developed strong technical skills in programming languages like C, C++, Java, and JavaScript (ES6+). I've mastered web development technologies including MERN stack, HTML5, CSS3, REST APIs, and responsive design. My expertise extends to tools like Git, GitHub, VS Code, Netlify, Chrome DevTools, Figma, Node.js, MongoDB, and NPM. Additionally, I have strong IT support skills including system troubleshooting, network configuration, and technical documentation.\n\n <b><i>Professional Development :</i></b> During my BCA studies, I've acquired comprehensive skills in software development, database management, and web application architecture. I've learned to build scalable applications, implement authentication systems, and create performance-oriented browser applications.\n\n <b><i>Projects :</i></b> I've worked on various projects including Portfolio Spectrum - my main portfolio website, and continue to explore new technologies to enhance my development skills. Each project has helped me strengthen my understanding of modern web development practices and user experience design.\n\n <b><i>Career Focus :</i></b> I'm passionate about creating innovative solutions and am particularly interested in AI-driven applications that solve real-world problems. My goal is to become a full-stack developer and eventually lead technical teams while continuously expanding my technical expertise.`;
+                
+                // Typing animation <b><i>  :</i></b> 
+                let index = 0;
+                typingElement.textContent = '';
+                typingElement.style.whiteSpace = 'pre-wrap';
+                typingElement.style.width = 'auto';
+                
+                function typeText() {
+                    if (index < content.length) {
+                        typingElement.innerHTML = content.substring(0, index);
+                        index++;
+                        setTimeout(typeText, 8);
+                    }
+                }
+                
+                setTimeout(typeText, 100);
+            } else {
+                // Hide content
+                additionalContent.style.display = 'none';
+                btnText.style.display = 'inline';
+                btnTextLess.style.display = 'none';
+                typingElement.textContent = '';
+            }
         }
 
         function closeMoreAboutModal() {
