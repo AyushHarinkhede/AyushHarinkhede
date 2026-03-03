@@ -227,17 +227,51 @@
     bottom: 0;
       width: 100vw;
        height: 100vh;
-    background-image: url('imgbg1.png');
+    background-image: url('Background Image/imgbg1.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    background-attachment: scroll;
     pointer-events: none;
     z-index: -1;
     opacity: 0.8;
     filter: blur(2px) brightness(0.9);
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
     }
- 
+
+/* Mobile responsive background fix */
+@media (max-width: 768px) {
+    Body::before {
+        background-attachment: scroll !important;
+        background-size: cover !important;
+        background-position: center !important;
+        width: 100vw !important;
+        height: 100vh !important;
+    }
+}
+
+@media (max-width: 480px) {
+    Body::before {
+        background-attachment: scroll !important;
+        background-size: cover !important;
+        background-position: center !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        transform: scale(1.1);
+    }
+}
+
+@media (min-width: 1920px) {
+    Body::before {
+        background-attachment: scroll !important;
+        background-size: cover !important;
+        background-position: center !important;
+        width: 100vw !important;
+        height: 100vh !important;
+    }
+}
 
  
  #mukhiya {
@@ -426,7 +460,7 @@
                width: 100%;
                height: 100%;
               border-radius: 2px;
-            background-image: url('Image1.jpg');
+            background-image: url('My Images/main image.jpg');
             background-size: cover;
             background-position: center;
             box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -574,7 +608,7 @@ color: #4f4f4f;
   color: #b0a99c;
     font-size: 1.2em;
      font-family: 'Patrick Hand';
-    background-image: url('image2.jpg');
+    background-image: url('My Images/Firefly 20250310005804.png');
     background-size: cover;
     background-position: center;
 } 
@@ -802,7 +836,8 @@ color: #4f4f4f;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
-            margin: 40px 0;
+            margin: 40px auto;
+            max-width: 1000px;
         } 
 
   .project-card {
@@ -1845,49 +1880,59 @@ color: #4f4f4f;
         <!-- My Creations -->
         <h2 class="Sarpanch font-f2 fade-in">My Creations</h2>
         <div class="projects-grid">
-            <div class="project-card scale-in">
+            <div class="project-card scale-in" style="background: linear-gradient(135deg, #fff9c4 0%, #fff3e0 100%); position: relative; transform: rotate(-2deg);">
+                <div class="sticky-tape"></div>
+                <div class="sticky-pin"></div>
                 <div class="project-image">
-                    <img src="Image5.png" alt="Portfolio Spectrum">
+                    <img src="Projects/HealthNest.png" alt="HealthNest">
                 </div>
                 <div class="project-content">
-                    <h3>Portfolio Spectrum</h3>
-                    <p class="project-tech">HTML | CSS</p>
-         <p>A personal portfolio website built to showcase my skills, projects, and journey. Designed with a focus on user experience and modern web design principles.</p>
-                  <div class="project-tags">
-                      <span class="tag">Personal Portfolio</span>
-                    <span class="tag">Frontend</span>
-                 <span class="tag">Resume</span>
-                    </div>
-                </div> </div> 
-
-            <div class="project-card scale-in">
-                <div class="project-image"> 
-                    <img src="Image6.png" alt="   HealthNest">
-                </div>
-             <div class="project-content">
-                    <h3>   HealthNest</h3>
-                    <p class="project-tech">C | C++ | JavaScript</p>
+                    <h3>HealthNest</h3>
+                    <p class="project-tech">AI Health Platform</p>
                     <p>HealthNest is AI Health Platform that runs in integrated server of NPU that monitoring user's real time health data and explaining by VANIE AI Health assist that user easily chat with VANIE and clear their doubt.</p>
                     <div class="project-tags">
-                        <span class="tag">Algorithms</span>
-                    <span class="tag">Data Structures</span>
-                        <span class="tag">Problem Solving</span>
-         </div>
-                </div>  </div>
+                        <span class="tag">AI</span>
+                        <span class="tag">Healthcare</span>
+                        <span class="tag">Real-time Monitoring</span>
+                    </div>
+                </div>
+            </div>
 
-            <div class="project-card scale-in"> 
+            <div class="project-card scale-in" style="background: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%); position: relative; transform: rotate(1deg);">
+                <div class="sticky-tape"></div>
+                <div class="sticky-pin"></div>
                 <div class="project-image">
-                    <img src="Image7.jpg" alt="Mocha"> 
+                    <img src="Projects/Cacun.png" alt="Cacun">
                 </div>
                 <div class="project-content">
-                    <h3>Mocha</h3>
-                    <p class="project-tech">Fully Written in JavaScript</p>
-                    <p>Mocha is a JavaScript test framework for Node.js and browsers, making asynchronous testing simple and fun.</p>
+                    <h3>Cacun</h3>
+                    <p class="project-tech">Web Application</p>
+                    <p>Description will be set later.</p>
                     <div class="project-tags">
-                        <span class="tag">Writing</span>
-                        <span class="tag">JS Codes</span>
-                        <span class="tag">For Practice</span>
-                    </div>    </div> </div> </div>
+                        <span class="tag">Web Dev</span>
+                        <span class="tag">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card scale-in" style="background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%); position: relative; transform: rotate(-1deg);">
+                <div class="sticky-tape"></div>
+                <div class="sticky-pin"></div>
+                <div class="project-image">
+                    <img src="Projects/Tooler.png" alt="Tooler">
+                </div>
+                <div class="project-content">
+                    <h3>Tooler</h3>
+                    <p class="project-tech">Productivity Tool</p>
+                    <p>A comprehensive productivity tool designed to streamline daily tasks and enhance workflow efficiency.</p>
+                    <div class="project-tags">
+                        <span class="tag">Productivity</span>
+                        <span class="tag">Tool</span>
+                        <span class="tag">Workflow</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
          <div class="bhaag fade-in">
             <h2 class="Sarpanch font-f2">Interview Questions & Answers</h2>
@@ -1907,7 +1952,6 @@ color: #4f4f4f;
                     <summary class="font-f1">Why should we hire you?</summary>
                     <p class="font-f3">I bring fresh perspectives, strong problem-solving skills, and a passion for learning. I'm adaptable, detail-oriented, and always eager to take on new challenges.</p>
                 </details>
-            </div>
             
             <button class="view-more-btn bounce-in" id="viewMoreBtn" onclick="toggleQuestions()">
                 <span class="btn-text" id="btnText">View More Questions</span>
@@ -1915,6 +1959,7 @@ color: #4f4f4f;
                     <path d="M12 5v14M19 12l-7 7-7-7"/>
                 </svg>
             </button>
+            </div>
         </div><br><br><br><br>
 
         <!-- Get in Touch / Social Media -->
@@ -2466,9 +2511,11 @@ color: #4f4f4f;
                 }, extraQuestions.length * 100 + 400);
                 
                 // Update button
-                btnText.textContent = 'View More Questions';
-                btnIcon.innerHTML = '<path d="M12 5v14M19 12l-7 7-7-7"/>';
-                viewMoreBtn.classList.remove('questions-loaded');
+                setTimeout(() => {
+                    btnText.textContent = 'View More Questions';
+                    btnIcon.innerHTML = '<path d="M12 5v14M19 12l-7 7-7-7"/>';
+                    viewMoreBtn.classList.remove('questions-loaded');
+                }, 200);
             } else {
                 // Load more questions
                 console.log('Loading more questions'); // Debug log
@@ -2526,19 +2573,36 @@ color: #4f4f4f;
                 // Add to container
                 faqContainer.appendChild(newQuestion);
                 
-                // Animate in with delay
+                // Animate in with delay and bounce effect
                 setTimeout(() => {
                     newQuestion.style.opacity = '1';
                     newQuestion.style.transform = 'translateY(0) scale(1)';
                     console.log(`Question ${index + 1} animated in`); // Debug log
+                    
+                    // Add bounce animation class
+                    newQuestion.classList.add('bounce-in');
+                    
+                    // Move button below the new question
+                    if (index === additionalQuestions.length - 1) {
+                        viewMoreBtn.classList.add('slide-in-left');
+                        faqContainer.appendChild(viewMoreBtn);
+                    }
                 }, index * 200);
             });
 
             // Update button to View Less
             setTimeout(() => {
-                btnText.textContent = 'View Less Questions';
-                btnIcon.innerHTML = '<path d="M12 19v-14M5 12l7-7 7 7"/>';
-                viewMoreBtn.classList.add('questions-loaded');
+                // Add animation class
+                viewMoreBtn.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                viewMoreBtn.style.transform = 'scale(0.95)';
+                
+                setTimeout(() => {
+                    btnText.textContent = 'View Less Questions';
+                    btnIcon.innerHTML = '<path d="M12 19v-14M5 12l7-7 7 7"/>';
+                    viewMoreBtn.classList.add('questions-loaded');
+                    viewMoreBtn.style.transform = 'scale(1)';
+                }, 200);
+                
                 console.log('Button updated to View Less'); // Debug log
             }, additionalQuestions.length * 200);
         }
