@@ -295,8 +295,8 @@
         }
 
  #phone-container {
-            width: 320px;
-              height: 400px;
+            width: 380px;
+              height: 480px;
             background: linear-gradient(135deg, #fff9c4 0%, #fff3e0 100%);
             border-radius: 2px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -305,6 +305,95 @@
                position: relative;
               transform: rotate(-2deg);
             transition: transform 0.3s ease;
+            animation: hangingAnimation 3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-origin: top center;
+        }
+
+        @keyframes hangingAnimation {
+            0% {
+                transform: rotate(-2deg) translateY(-150px) scale(0.6);
+                opacity: 0;
+            }
+            10% {
+                transform: rotate(8deg) translateY(-120px) scale(0.7);
+                opacity: 0.2;
+            }
+            20% {
+                transform: rotate(-6deg) translateY(-90px) scale(0.8);
+                opacity: 0.4;
+            }
+            30% {
+                transform: rotate(4deg) translateY(-60px) scale(0.85);
+                opacity: 0.6;
+            }
+            40% {
+                transform: rotate(-3deg) translateY(-35px) scale(0.9);
+                opacity: 0.7;
+            }
+            50% {
+                transform: rotate(2deg) translateY(-15px) scale(0.95);
+                opacity: 0.8;
+            }
+            60% {
+                transform: rotate(-1deg) translateY(-5px) scale(1.02);
+                opacity: 0.9;
+            }
+            70% {
+                transform: rotate(1deg) translateY(0px) scale(1.05);
+                opacity: 0.95;
+            }
+            80% {
+                transform: rotate(-0.5deg) translateY(0px) scale(1.02);
+                opacity: 1;
+            }
+            90% {
+                transform: rotate(0.2deg) translateY(0px) scale(1.01);
+                opacity: 1;
+            }
+            100% {
+                transform: rotate(-2deg) translateY(0px) scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Scroll-triggered animation */
+        .scroll-hanging {
+            animation: scrollHangingAnimation 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        @keyframes scrollHangingAnimation {
+            0% {
+                transform: rotate(-2deg) translateY(-100px) scale(0.8) rotate(0deg);
+                opacity: 0;
+            }
+            15% {
+                transform: rotate(6deg) translateY(-80px) scale(0.85) rotate(5deg);
+                opacity: 0.3;
+            }
+            30% {
+                transform: rotate(-4deg) translateY(-60px) scale(0.9) rotate(-3deg);
+                opacity: 0.5;
+            }
+            45% {
+                transform: rotate(3deg) translateY(-40px) scale(0.93) rotate(2deg);
+                opacity: 0.7;
+            }
+            60% {
+                transform: rotate(-2deg) translateY(-20px) scale(0.96) rotate(-1deg);
+                opacity: 0.85;
+            }
+            75% {
+                transform: rotate(1deg) translateY(-5px) scale(1.03) rotate(0.5deg);
+                opacity: 0.95;
+            }
+            85% {
+                transform: rotate(-0.5deg) translateY(0px) scale(1.01) rotate(-0.2deg);
+                opacity: 1;
+            }
+            100% {
+                transform: rotate(-2deg) translateY(0px) scale(1);
+                opacity: 1;
+            }
         }
 
         #phone-container::before {
@@ -345,27 +434,28 @@
 
         .sticky-tape {
             position: absolute;
-            top: -5px;
+            top: -8px;
             left: 50%;
-            transform: translateX(-50%) rotate(-5deg);
-            width: 80px;
-            height: 25px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%);
-            border: 1px solid rgba(200, 200, 200, 0.3);
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            transform: translateX(-50%) rotate(-3deg);
+            width: 100px;
+            height: 30px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+            border: 1px solid rgba(200, 200, 200, 0.4);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            z-index: 10;
         }
 
         .sticky-pin {
             position: absolute;
-            top: -8px;
+            top: -12px;
             left: 50%;
-            transform: translateX(-50%);
-            width: 12px;
-            height: 12px;
+            transform: translateX(-50%) rotate(45deg);
+            width: 16px;
+            height: 16px;
             background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
             border-radius: 50% 50% 0 0;
-            transform: translateX(-50%) rotate(45deg);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+            z-index: 11;
         }
 
         .sticky-pin::before {
@@ -963,11 +1053,12 @@ color: #4f4f4f;
 
         /* Resume Section - Glorified Version */
         .resume-section {
-            padding: 50px;
+            padding: 30px;
             border-radius: 25px;
-            margin: 60px 0;
+            margin: 40px auto;
+            max-width: 600px;
             position: relative;
-            border: 4px dashed #c9c3b7;
+            border: 2px dashed #c9c3b7;
             overflow: hidden;
         }
 
@@ -1597,11 +1688,13 @@ color: #4f4f4f;
     </style>
 </head>
 <body>
-    <div id="mukhiya">
+    <div id="mukhiya"><br><br><br><br><br>
+    
         <!-- Header Section with Phone -->
         <div class="header-grid-container fade-in">
             <div class="font-showcase-left slide-in-left">
-                <h2 class="Sarpanch font-f1"><b><i>Hi, I am Ayush Harinkhede</i></b></h2>
+                <h2 class="Sarpanch font-f1" style="font-size: 3.5rem; margin-bottom: 15px;"><b><i>Hi, I am Ayush Harinkhede</i></b></h2>
+                <p class="font-f1" style="font-size: 1.5rem; margin-bottom: 15px;"><i>Web Developer & IT Support Engineer</i></p>
                 <p class="font-f1"><i>Creative | Innovative | Passionate</i></p>
             </div>
             
@@ -1612,37 +1705,6 @@ color: #4f4f4f;
             </div>
         </div>
  
-        <br><br> 
-
-        <!-- Personal Information Section --> 
-        <div class="info-grid-container fade-in"> 
-            <div class="font-showcase-left slide-in-left"> 
-                <h3 class="font-f1"><b><i>Personal Information</i></b></h3>
-                <p class="font-f1"><strong>Name:</strong> Ayush Surendra Harinkhede</p>
-                <p class="font-f1"><strong>Father's Name:</strong> Surendra Harinkhede</p>
-                <p class="font-f1"><strong>Date of Birth:</strong> 10th February 2005</p>
-                <p class="font-f1"><strong>Gender:</strong> Male</p>
-                <p class="font-f1"><strong>Marital Status:</strong> Unmarried</p>
-                <p class="font-f1"><strong>Category:</strong> OBC</p>
-            </div>
-
-            <div class="font-showcase-center scale-in">
-                <h3 class="font-f4"><b><i>Contact Details</i></b></h3>
-                <p class="font-f1"><strong>Email:</strong> ayushharinkhere2005@gmail.com</p>
-                <p class="font-f1"><strong>Phone:</strong> 9209514158</p>
-                <p class="font-f1"><strong>Address:</strong> Waghdhara Issasani Hingna Road, Nagpur, Maharashtra - 441110</p>
-                <p class="font-f1"><strong>Nationality:</strong> Indian</p>
-            </div>
-
-            <div class="font-showcase-right slide-in-right">
-                <h3 class="font-f4"><b><i>Technical Skills</i></b></h3>
-                <p class="font-f4"><strong>Programming:</strong> C, C++, Java, JavaScript (ES6+)</p>
-                <p class="font-f4"><strong>Web Development:</strong> MERN Stack, HTML5, CSS3, REST APIs, Responsive Design</p>
-                <p class="font-f4"><strong>Tools:</strong> Git, GitHub, VS Code, Netlify, Chrome DevTools, Figma (UI Planning), Node.js, MongoDB, NPM</p>
-                <p class="font-f4"><strong>IT Support:</strong> System troubleshooting, network configuration, technical documentation</p>
-            </div>
-        </div>
-
         <br><br>
 
         <!-- About Me Section --> 
@@ -1653,7 +1715,54 @@ color: #4f4f4f;
                 <p class="font-f3 typing-animation"></p>
                 <button class="view-more-about-btn" onclick="toggleAboutContent()" style="margin-top: 15px; margin-left: 10px;"><span id="aboutBtnTextLess" style="display: none;">View Less</span></button>
             </div>
-         </div><br><br><br><br> 
+         </div><br><br><br><br>
+
+        <!-- Personal Information Section --> 
+        <div class="info-grid-container fade-in"> 
+            <div class="font-showcase-left slide-in-left"> 
+                <h3 class="font-f1"><b><i>Personal Information</i></b></h3>
+                <p class="font-f1"><strong>Name:</strong> Ayush Surendra Harinkhede</p>
+                <p class="font-f1"><strong>Father's Name:</strong> Surendra Harinkhede</p>
+                <p class="font-f1"><strong>Date of Birth:</strong> 10th February 2005</p>
+                <p class="font-f1"><strong>Gender:</strong> Male, <strong> Category:</strong> OBC </p>
+                <p class="font-f1"><strong>Marital Status:</strong> Unmarried</p>
+            </div>
+
+            <div class="font-showcase-center scale-in">
+                <h3 class="font-f4"><b><i>Contact Details</i></b></h3>
+                <p class="font-f1"><strong>Email:</strong> ayushharinkhere2005@gmail.com</p>
+                <p class="font-f1"><strong>Phone:</strong> 9209514158</p>
+                <p class="font-f1"><strong>Address:</strong> Waghdhara Issasani Hingna Road, Nagpur, Maharashtra - 441110</p>
+                <p class="font-f1"><strong>Nationality:</strong> Indian</p>
+            </div>
+
+            </div>
+        </div>
+
+        <br><br>
+
+        <div class="info-grid-container">
+            <div class="font-showcase-left slide-in-left">
+                <h3 class="font-f4"><b><i>Soft Skills</i></b></h3>
+                <p class="font-f4">Quick Learner | Adaptability | Team Collaboration | Problem Solving | Creative Thinking</p>
+            </div>
+
+
+
+            <div class="font-showcase-right slide-in-right">
+                <h3 class="font-f4"><b><i>IT Support</i></b></h3>
+                <p class="font-f4"><strong>System troubleshooting:</strong> Hardware and software diagnostics</p>
+                <p class="font-f4"><strong>Network configuration:</strong> LAN/WAN setup, TCP/IP, DNS configuration</p>
+                <p class="font-f4"><strong>Technical documentation:</strong> User manuals, troubleshooting guides</p>
+            </div>
+
+                        <div class="font-showcase-center scale-in">
+                <h3 class="font-f4"><b><i>Soft Skills</i></b></h3>
+                <p class="font-f4">Quick Learner | Adaptability | Team Collaboration | Problem Solving | Creative Thinking</p>
+            </div>
+        </div>
+
+        <br><br>
 
         <div class="resume-section bounce-in">
             <h3 class="resume-title"> Get My Resume</h3>
@@ -1680,6 +1789,7 @@ color: #4f4f4f;
                 </a>
             </div>
         </div><br><br><br><br>
+
 
         
         <!-- Meri Gallery Section -->
@@ -1723,7 +1833,7 @@ color: #4f4f4f;
                     <div class="dotted-circle">
                         <div class="circle-image"></div>
                     </div>
-                  <h3 class="font-f1">2023 – 2026 - Undergraduate (UG) | GH Raisoni University, Amravati</h3>
+                  <h3 class="font-f1">2026 - Undergraduate (UG) | GH Raisoni University, Amravati</h3>
                 <p class="font-f4">Pursuing Bachelor of Computer Applications (BCA) degree from GH Raisoni University, Amravati to build strong foundation in computer science and applications.</p>
                 </div><br><br><br><br>
               </div> 
@@ -2132,7 +2242,7 @@ color: #4f4f4f;
                 btnTextLess.style.display = 'inline';
                 
                 // Content to type
-                const content = `\n <b><i>Education Details :</i></b> My educational journey began at Priyadarshini Indira Gandhi School in Nagpur where I completed my SSC in 2021 with 61.80%. I then pursued HSC at Vaidik Convent School in Balaghat, achieving 61.80% in 2023. Currently, I'm pursuing my BCA degree at GH Raisoni University, Amravati (2023-2026).\n\n<b><i>Technical Skills :</i></b>  I've developed strong technical skills in programming languages like C, C++, Java, and JavaScript (ES6+). I've mastered web development technologies including MERN stack, HTML5, CSS3, REST APIs, and responsive design. My expertise extends to tools like Git, GitHub, VS Code, Netlify, Chrome DevTools, Figma, Node.js, MongoDB, and NPM. Additionally, I have strong IT support skills including system troubleshooting, network configuration, and technical documentation.\n\n <b><i>Professional Development :</i></b> During my BCA studies, I've acquired comprehensive skills in software development, database management, and web application architecture. I've learned to build scalable applications, implement authentication systems, and create performance-oriented browser applications.\n\n <b><i>Projects :</i></b> I've worked on various projects including Portfolio Spectrum - my main portfolio website, and continue to explore new technologies to enhance my development skills. Each project has helped me strengthen my understanding of modern web development practices and user experience design.\n\n <b><i>Career Focus :</i></b> I'm passionate about creating innovative solutions and am particularly interested in AI-driven applications that solve real-world problems. My goal is to become a full-stack developer and eventually lead technical teams while continuously expanding my technical expertise.`;
+                const content = `\n <b><i>Education Details :</i></b> My educational journey began at Priyadarshini Indira Gandhi School in Nagpur where I completed my SSC in 2021 with 61.80%. I then pursued HSC at Vaidik Convent School in Balaghat, achieving 61.80% in 2023. Currently, I'm pursuing my BCA degree at GH Raisoni University, Amravati (2026).\n\n<b><i>Technical Skills :</i></b>  I've developed strong technical skills in programming languages like C, C++, Java, and JavaScript (ES6+). I've mastered web development technologies including MERN stack, HTML5, CSS3, REST APIs, and responsive design. My expertise extends to tools like Git, GitHub, VS Code, Netlify, Chrome DevTools, Figma, Node.js, MongoDB, and NPM. Additionally, I have strong IT support skills including system troubleshooting, network configuration, and technical documentation.\n\n <b><i>Professional Development :</i></b> During my BCA studies, I've acquired comprehensive skills in software development, database management, and web application architecture. I've learned to build scalable applications, implement authentication systems, and create performance-oriented browser applications.\n\n <b><i>Projects :</i></b> I've worked on various projects including Portfolio Spectrum - my main portfolio website, and continue to explore new technologies to enhance my development skills. Each project has helped me strengthen my understanding of modern web development practices and user experience design.\n\n <b><i>Career Focus :</i></b> I'm passionate about creating innovative solutions and am particularly interested in AI-driven applications that solve real-world problems. My goal is to become a full-stack developer and eventually lead technical teams while continuously expanding my technical expertise.`;
                 
                 // Typing animation <b><i>  :</i></b> 
                 let index = 0;
@@ -2191,6 +2301,27 @@ color: #4f4f4f;
 
         // Security Features
         document.addEventListener('DOMContentLoaded', function() {
+            // Scroll-triggered hanging animation
+            let hasScrolled = false;
+            const phoneContainer = document.getElementById('phone-container');
+            
+            function triggerScrollHanging() {
+                if (!hasScrolled && phoneContainer) {
+                    phoneContainer.classList.remove('scroll-hanging');
+                    void phoneContainer.offsetWidth; // Force reflow
+                    phoneContainer.classList.add('scroll-hanging');
+                    hasScrolled = true;
+                }
+            }
+            
+            // Trigger on scroll
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.scrollY;
+                if (scrollPosition > 50) { // Trigger after scrolling 50px
+                    triggerScrollHanging();
+                }
+            });
+            
             // Disable right-click
             document.addEventListener('contextmenu', function(e) {
                 e.preventDefault();
