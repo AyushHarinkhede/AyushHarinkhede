@@ -20,6 +20,32 @@
             box-sizing: border-box;  
         }
 
+        /* Custom Doodle Art Arrow Cursor */
+        * {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path d="M16 4 L6 14 L10 14 L10 28 L22 28 L22 14 L26 14 Z" fill="%23ff6b35" stroke="%23000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="rotate(15 16 16)"/></svg>') 16 4, auto !important;
+        }
+
+        /* Animated doodle arrow cursor for interactive elements */
+        a, button, .social-card, .view-more-about-btn, .resume-btn, .modal-btn,
+        a *, button *, .social-card *, .view-more-about-btn *, .resume-btn *, .modal-btn *,
+        a span, button span, .social-card span, .view-more-about-btn span, .resume-btn span, .modal-btn span,
+        a svg, button svg, .social-card svg, .view-more-about-btn svg, .resume-btn svg, .modal-btn svg,
+        .btn-text, .btn-icon, .social-name {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><path d="M20 4 L8 16 L12 16 L12 36 L28 36 L28 16 L32 16 Z" fill="%232196f3" stroke="%23000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" transform="rotate(15 20 20)"><animate attributeName="transform" values="rotate(15 20 20);rotate(18 20 20);rotate(15 20 20)" dur="1.2s" repeatCount="indefinite"/></path></svg>') 20 4, pointer !important;
+        }
+
+        /* Dark red cursor for close buttons specifically */
+        .close-modal, .modal-close, button[onclick*="close"], button[aria-label*="close"],
+        .close-modal *, .modal-close *, button[onclick*="close"] *, button[aria-label*="close"] *,
+        .close-modal span, .modal-close span, button[onclick*="close"] span, button[aria-label*="close"] span {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36"><path d="M18 4 L8 14 L12 14 L12 32 L24 32 L24 14 L28 14 Z" fill="%23dc2626" stroke="%23000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" transform="rotate(15 18 18)"><animate attributeName="transform" values="rotate(15 18 18);rotate(18 18 18);rotate(15 18 18)" dur="1.2s" repeatCount="indefinite"/></path></svg>') 18 4, pointer !important;
+        }
+
+        /* Text cursor for text inputs and text areas */
+        input[type="text"], input[type="email"], textarea {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28"><path d="M14 4 L6 12 L9 12 L9 24 L19 24 L19 12 L22 12 Z" fill="%23333" stroke="%23000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="rotate(15 14 14)"><animate attributeName="opacity" values="1;0.5;1" dur="0.8s" repeatCount="indefinite"/></path></svg>') 14 4, text !important;
+        }
+
         /* Global Animation Classes */
         .fade-in {
             opacity: 0;
@@ -1437,6 +1463,7 @@ color: #4f4f4f;
         .view-more-btn {
             pointer-events: auto !important;
             z-index: 1000 !important;
+            position: relative !important;
         }
 
         /* Policy Modals */
@@ -2280,10 +2307,13 @@ color: #4f4f4f;
         });
 
         function toggleQuestions() {
+            console.log('toggleQuestions called'); // Debug log
             const faqContainer = document.querySelector('.faq-container');
             const btnText = document.getElementById('btnText');
             const btnIcon = document.querySelector('.btn-icon');
             const viewMoreBtn = document.getElementById('viewMoreBtn');
+            
+            console.log('Elements found:', {faqContainer, btnText, btnIcon, viewMoreBtn}); // Debug log
             
             if (viewMoreBtn.classList.contains('questions-loaded')) {
                 // Hide extra questions
@@ -2306,6 +2336,7 @@ color: #4f4f4f;
                 viewMoreBtn.classList.remove('questions-loaded');
             } else {
                 // Load more questions
+                console.log('Loading more questions'); // Debug log
                 loadMoreQuestions();
             }
         }
@@ -2315,6 +2346,8 @@ color: #4f4f4f;
             const btnText = document.getElementById('btnText');
             const btnIcon = document.querySelector('.btn-icon');
             const viewMoreBtn = document.getElementById('viewMoreBtn');
+            
+            console.log('loadMoreQuestions called'); // Debug log
             
             const additionalQuestions = [
                 {
@@ -2341,6 +2374,8 @@ color: #4f4f4f;
 
             // Add new questions with enhanced animation
             additionalQuestions.forEach((item, index) => {
+                console.log(`Adding question ${index + 1}: ${item.question}`); // Debug log
+                
                 const newQuestion = document.createElement('details');
                 newQuestion.className = 'faq-item extra-question slide-in-left';
                 newQuestion.innerHTML = `
@@ -2351,23 +2386,25 @@ color: #4f4f4f;
                 // Initially hidden
                 newQuestion.style.opacity = '0';
                 newQuestion.style.transform = 'translateY(-20px) scale(0.8)';
+                newQuestion.style.transition = 'all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
                 
                 // Add to container
                 faqContainer.appendChild(newQuestion);
                 
                 // Animate in with delay
                 setTimeout(() => {
-                    newQuestion.style.transition = 'all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
                     newQuestion.style.opacity = '1';
                     newQuestion.style.transform = 'translateY(0) scale(1)';
-                }, 100);
-            }, index * 200);
+                    console.log(`Question ${index + 1} animated in`); // Debug log
+                }, index * 200);
+            });
 
             // Update button to View Less
             setTimeout(() => {
                 btnText.textContent = 'View Less Questions';
                 btnIcon.innerHTML = '<path d="M12 19v-14M5 12l7-7 7 7"/>';
                 viewMoreBtn.classList.add('questions-loaded');
+                console.log('Button updated to View Less'); // Debug log
             }, additionalQuestions.length * 200);
         }
 
