@@ -274,12 +274,31 @@
 }
 
  
+        /* Main Container - Responsive */
  #mukhiya {
-            width: 90%;
+            width: 95%;
              max-width: 1000px;
-       margin: 20px auto;
+       margin: 15px auto;
             position: relative;
          z-index: 1;
+            padding: 0 10px;
+        }
+
+        /* Mobile specific adjustments */
+        @media (max-width: 768px) {
+            #mukhiya {
+                width: 98%;
+                margin: 10px auto;
+                padding: 0 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #mukhiya {
+                width: 100%;
+                margin: 5px auto;
+                padding: 0 5px;
+            }
         }
 
   .info-grid-container,
@@ -302,21 +321,44 @@
             background: transparent;
         }
 
-   .Sarpanch { /* 7error ka code aapke computer screen pe!*/
+   .Sarpanch {
     text-align: center;
-     font-size: 2.5em;
-                margin-bottom: 10px;
+     font-size: 2.2em;
+                margin-bottom: 8px;
      font-family: 'Caveat';
          color: #333;
         }
 
-        /* Header with Phone */
+        /* Mobile specific title adjustments */
+        @media (max-width: 768px) {
+            .Sarpanch {
+                font-size: 2em;
+                margin-bottom: 6px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .Sarpanch {
+                font-size: 1.8em;
+                margin-bottom: 5px;
+            }
+        }
+
+        /* Header with Phone - Responsive Design */
  .header-grid-container {
       display: grid;
-       grid-template-columns: 5fr 285px;
-         gap: 50px;
+       grid-template-columns: 1fr;
+         gap: 30px;
             align-items: center;
          padding: 20px 0;
+        }
+
+        /* Tablet and Desktop Layout */
+        @media (min-width: 769px) {
+            .header-grid-container {
+                grid-template-columns: 5fr 285px;
+                gap: 50px;
+            }
         }
 
 .header-grid-container .font-showcase-left {
@@ -329,18 +371,42 @@
         }
 
  #phone-container {
-            width: 380px;
-              height: 480px;
+            width: 100%;
+              max-width: 380px;
+              height: auto;
+              min-height: 400px;
+              aspect-ratio: 380/480;
             background: linear-gradient(135deg, #fff9c4 0%, #fff3e0 100%);
             border-radius: 2px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
               margin: 0 auto;
-            padding: 20px;
+            padding: 15px;
                position: relative;
               transform: rotate(-2deg);
             transition: transform 0.3s ease;
             animation: hangingAnimation 3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             transform-origin: top center;
+        }
+
+        /* Mobile specific phone container */
+        @media (max-width: 768px) {
+            #phone-container {
+                width: 85%;
+                max-width: 320px;
+                min-height: 350px;
+                padding: 12px;
+                transform: rotate(-1deg);
+            }
+        }
+
+        @media (max-width: 480px) {
+            #phone-container {
+                width: 90%;
+                max-width: 280px;
+                min-height: 320px;
+                padding: 10px;
+                transform: rotate(0deg);
+            }
         }
 
         @keyframes hangingAnimation {
@@ -510,11 +576,11 @@
             animation: none;
         }
 
-        /* Info Grid - 3 Columns */
+        /* Info Grid - Responsive Layout */
      .info-grid-container {
          display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-           gap: 0;
+            grid-template-columns: 1fr;
+           gap: 20px;
               width: 100%;
             max-width: 1000px;
           margin: 20px auto;
@@ -523,27 +589,80 @@
             padding: 20px 0;
         }
 
+        /* Tablet and Desktop Layout */
+        @media (min-width: 769px) {
+            .info-grid-container {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 0;
+            }
+        }
+
+        /* Tablet Layout */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .info-grid-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+            }
+        }
+
         .info-grid-container .font-showcase-left {
             text-align: left;
      font-size: 1em;
              padding: 0 20px;
-         border-right: 4px dotted #aaaaaa;
-            min-height: 200px;
+         border-right: none;
+         border-bottom: 4px dotted #aaaaaa;
+            min-height: auto;
+            padding-bottom: 20px;
         }
 
         .info-grid-container .font-showcase-center {
             text-align: left;
  font-size: 1em;
             padding: 0 20px;
-            border-right: 4px dotted #aaaaaa;
-            min-height: 200px;
+            border-right: none;
+         border-bottom: 4px dotted #aaaaaa;
+            min-height: auto;
+            padding-bottom: 20px;
         }
 
         .info-grid-container .font-showcase-right {
             text-align: left;
             font-size: 1em;
             padding: 0 20px;
-            min-height: 200px;
+            min-height: auto;
+        }
+
+        /* Desktop Info Grid Borders */
+        @media (min-width: 769px) {
+            .info-grid-container .font-showcase-left {
+                border-right: 4px dotted #aaaaaa;
+                border-bottom: none;
+                min-height: 200px;
+                padding-bottom: 0;
+            }
+
+            .info-grid-container .font-showcase-center {
+                border-right: 4px dotted #aaaaaa;
+                border-bottom: none;
+                min-height: 200px;
+                padding-bottom: 0;
+            }
+        }
+
+        /* Tablet Info Grid Borders */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .info-grid-container .font-showcase-left {
+                border-right: 4px dotted #aaaaaa;
+                border-bottom: none;
+                min-height: 150px;
+                padding-bottom: 0;
+            }
+
+            .info-grid-container .font-showcase-center {
+                border-bottom: none;
+                min-height: 150px;
+                padding-bottom: 0;
+            }
         }
 
         .info-grid-container h3 {
@@ -563,38 +682,85 @@ color: #4f4f4f;
  
    
 
-/* Circle gallery ka container */
+/* Circle gallery ka container - Responsive Design */
   .circle-gallery {
     display: flex;
-    flex-direction: column; /* Vertical layout - ek ke neeche ek */
-    align-items: flex-start; /* Left align */
+    flex-direction: column;
+    align-items: flex-start;
     margin-top: 30px;
-    gap: 40px; /* Circles ke beech vertical gap */
+    gap: 30px;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
-    padding: 0 20px;
+    padding: 0 15px;
 }
 
-/* Ek single circle item - ab horizontal layout */
+/* Mobile specific adjustments */
+@media (max-width: 768px) {
+    .circle-gallery {
+        gap: 25px;
+        padding: 0 10px;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .circle-gallery {
+        gap: 20px;
+        padding: 0 8px;
+        margin-top: 15px;
+    }
+}
+
+/* Ek single circle item - Responsive Layout */
  .chhota-container {
     display: flex;
-    align-items: center; /* Vertical center alignment */
-    gap: 30px; /* Circle aur text ke beech gap */
+    align-items: center;
+    gap: 25px;
     width: 100%;
 }
 
-/* Dotted circle (outer) */
+/* Mobile specific adjustments */
+@media (max-width: 768px) {
+    .chhota-container {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .chhota-container {
+        gap: 15px;
+    }
+}
+
+/* Dotted circle (outer) - Responsive */
 .dotted-circle {
-    flex-shrink: 0; /* Circle ka size fixed rahega */
-    width: 160px;
-    height: 160px;
+    flex-shrink: 0;
+    width: 140px;
+    height: 140px;
     border: 4px dotted #888888;
     border-radius: 50%;
-    padding: 6px;
+    padding: 5px;
     box-sizing: border-box;
     transition: transform 0.1s ease-out;
     cursor: pointer;
+}
+
+/* Mobile specific circle sizes */
+@media (max-width: 768px) {
+    .dotted-circle {
+        width: 120px;
+        height: 120px;
+        padding: 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dotted-circle {
+        width: 100px;
+        height: 100px;
+        padding: 3px;
+    }
 }
 
 /* Image placeholder (inner circle) */
@@ -613,18 +779,33 @@ color: #4f4f4f;
     background-position: center;
 } 
 
-/* Circle ke side ka text - ab margin-top nahi chahiye */
+/* Circle ke side ka text - Responsive */
 .chhota-text {
- flex: 1; /* Bacha hua space le lega */
+flex: 1;
   color: #a09a8f;
-    font-size: 1.8em;
+    font-size: 1.6em;
  line-height: 1.4;
 }
 
-/* Mobile responsiveness */
+/* Mobile specific text adjustments */
+@media (max-width: 768px) {
+    .chhota-text {
+        font-size: 1.4em;
+        line-height: 1.3;
+    }
+}
+
+@media (max-width: 480px) {
+    .chhota-text {
+        font-size: 1.2em;
+        line-height: 1.3;
+    }
+}
+
+/* Mobile responsiveness - Enhanced */
 @media (max-width: 768px) {
     .chhota-container {
-     flex-direction: column; /* Mobile par circle upar, text neeche */
+     flex-direction: column;
       align-items: center;
          text-align: center;
       gap: 15px;
@@ -632,6 +813,18 @@ color: #4f4f4f;
     
     .chhota-text {
         font-size: 1.4em;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .chhota-container {
+        gap: 12px;
+    }
+    
+    .chhota-text {
+        font-size: 1.2em;
+        text-align: center;
     }
 }
 
@@ -669,28 +862,90 @@ color: #4f4f4f;
     transform: scale(0.96);
 }
 
-/* FIX 3: Naya FAQ Section (Que) ke liye Styles */
-.faq-container {
-    max-width: 800px; /* Section ki max chaudai */
-    margin: 0 auto; /* Center mein laane ke liye */
-}
-.faq-item {
-    border: 2px dotted #c9c3b7; /* Dotted border */
-    border-radius: 10px;
-    margin-bottom: 15px;
-    background: transparent;
-}
-.faq-item summary {
-    font-size: 1.5em; /* Sawaal ka font size */
-    color: #2c2c2c;
-    padding: 15px 20px;
-    cursor: pointer;
-    font-weight: bold;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    list-style: none; /* Default arrow hatane ke liye */
-    position: relative;
-}
+        /* FAQ Section - Responsive */
+        .faq-container {
+            max-width: 95%;
+            margin: 0 auto;
+            padding: 0 10px;
+        }
+
+        @media (max-width: 768px) {
+            .faq-container {
+                max-width: 98%;
+                padding: 0 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .faq-container {
+                max-width: 100%;
+                padding: 0 5px;
+            }
+        }
+
+        .faq-item {
+            border: 2px dotted #c9c3b7;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            background: transparent;
+        }
+
+        .faq-item summary {
+            font-size: 1.3em;
+            color: #2c2c2c;
+            padding: 12px 15px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            list-style: none;
+            position: relative;
+        }
+
+        /* Mobile specific FAQ adjustments */
+        @media (max-width: 768px) {
+            .faq-item summary {
+                font-size: 1.2em;
+                padding: 10px 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .faq-item summary {
+                font-size: 1.1em;
+                padding: 8px 10px;
+            }
+        }
+
+        .faq-item p {
+            font-size: 1.1em;
+            color: #333333;
+            padding: 0 15px 15px 15px;
+            margin: 0;
+            line-height: 1.5;
+            opacity: 0;
+            transform: translateY(-10px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+
+        /* Mobile specific FAQ text */
+        @media (max-width: 768px) {
+            .faq-item p {
+                font-size: 1em;
+                padding: 0 12px 12px 12px;
+                line-height: 1.4;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .faq-item p {
+                font-size: 0.95em;
+                padding: 0 10px 10px 10px;
+                line-height: 1.3;
+            }
+        }
 .faq-item summary::-webkit-details-marker {
     display: none; /* Default arrow (Chrome) */
 }
@@ -756,26 +1011,44 @@ color: #4f4f4f;
     }
 }
 
-/* View More Button */
-.view-more-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 15px 30px;
-    margin: 30px auto 0;
-    border: 3px dashed #c9c3b7;
-    border-radius: 25px;
-    background: transparent;
-    color: #333;
-    font-family: 'Patrick Hand', cursive;
-    font-size: 1.1em;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
+        /* View More Button - Responsive */
+        .view-more-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 25px;
+            margin: 25px auto 0;
+            border: 3px dashed #c9c3b7;
+            border-radius: 25px;
+            background: transparent;
+            color: #333;
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Mobile specific button adjustments */
+        @media (max-width: 768px) {
+            .view-more-btn {
+                padding: 10px 20px;
+                font-size: 0.95em;
+                margin: 20px auto 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .view-more-btn {
+                padding: 8px 18px;
+                font-size: 0.9em;
+                margin: 15px auto 0;
+                gap: 6px;
+            }
+        }
 
 .view-more-btn:hover {
     transform: translateY(-3px);
@@ -808,36 +1081,90 @@ color: #4f4f4f;
 }
 
 
-        /* About Me Section */
+        /* About Me Section - Responsive */
         .about-section {
-               padding: 30px;
+               padding: 25px 20px;
             border-radius: 15px;
-            margin: 40px 0;
+            margin: 30px 0;
         }
 
         .about-section h3 {
-            font-size: 2em;
+            font-size: 1.8em;
             color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             font-family: 'Caveat';
         }
 
         .about-section p {
-            font-size: 1.1em;
+            font-size: 1em;
             color: #4f4f4f;
-            line-height: 1.8;
-            margin-bottom: 15px;
-         } 
+            line-height: 1.7;
+            margin-bottom: 12px;
+         }
+
+        /* Mobile specific adjustments */
+        @media (max-width: 768px) {
+            .about-section {
+                padding: 20px 15px;
+                margin: 25px 0;
+            }
+
+            .about-section h3 {
+                font-size: 1.6em;
+                margin-bottom: 15px;
+            }
+
+            .about-section p {
+                font-size: 0.95em;
+                line-height: 1.6;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-section {
+                padding: 15px 12px;
+                margin: 20px 0;
+            }
+
+            .about-section h3 {
+                font-size: 1.4em;
+                margin-bottom: 12px;
+            }
+
+            .about-section p {
+                font-size: 0.9em;
+                line-height: 1.5;
+            }
+        } 
 
        
        
-        /* Projects/Creations */
+        /* Projects/Creations - Responsive Grid */
  .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 40px auto;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin: 30px auto;
             max-width: 1000px;
+            padding: 0 15px;
+        }
+
+        /* Tablet Layout */
+        @media (min-width: 768px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+                padding: 0 20px;
+            }
+        }
+
+        /* Desktop Layout */
+        @media (min-width: 1024px) {
+            .projects-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                padding: 0 20px;
+            }
         } 
 
   .project-card {
@@ -901,24 +1228,53 @@ color: #4f4f4f;
             font-size: 0.9em;
         }
 
-        /* Social Media Section */
+        /* Social Media Section - Responsive Grid */
    .social-section {
-                          padding: 40px; 
+                          padding: 30px 20px; 
              border-radius: 15px;
-            margin: 40px 0;
+            margin: 30px 0;
         }
  
         .social-title {
-            font-size: 2.5em;
+            font-size: 2.2em;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             font-family: 'Caveat';
             color: #333;
         }
+
+        /* Mobile specific title */
+        @media (max-width: 480px) {
+            .social-title {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+            }
+        }
+
    .social-grid { 
              display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
-            gap: 20px; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Tablet Layout */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .social-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 18px;
+                max-width: 600px;
+            }
+        }
+
+        /* Desktop Layout */
+        @media (min-width: 769px) {
+            .social-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 20px;
+                max-width: none;
+            }
         }
 
      .social-card { 
