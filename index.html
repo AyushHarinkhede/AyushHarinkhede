@@ -1139,31 +1139,115 @@ flex: 1;
 
        
        
-        /* Projects/Creations - Responsive Grid */
+        /* Projects/Creations - Horizontal Scroll Grid with Smooth Animations */
  .projects-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
+            display: flex;
+            gap: 20px;
             margin: 30px auto;
-            max-width: 1000px;
+            max-width: 100%;
             padding: 0 15px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            scroll-behavior: smooth;
+            transition: all 0.3s ease;
+        }
+
+        .projects-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .project-card {
+            flex: 0 0 300px;
+            scroll-snap-align: start;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateX(30px) scale(0.9);
+            animation: slideInFromRight 0.6s ease-out forwards;
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+        .project-card:nth-child(4) { animation-delay: 0.4s; }
+        .project-card:nth-child(5) { animation-delay: 0.5s; }
+        .project-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes slideInFromRight {
+            0% {
+                opacity: 0;
+                transform: translateX(50px) scale(0.8) rotate(5deg);
+            }
+            50% {
+                opacity: 0.7;
+                transform: translateX(10px) scale(0.95) rotate(-2deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0) scale(1) rotate(0deg);
+            }
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02) rotate(0deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+
+        .project-card:hover .sticky-tape {
+            transform: translateX(-50%) rotate(-5deg);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 100%);
+        }
+
+        .project-card:hover .sticky-pin {
+            transform: translateX(-50%) rotate(50deg);
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        }
+
+        /* Scroll indicator */
+        .projects-grid::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: pulse 2s infinite;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.7; }
+            50% { transform: translateY(-50%) scale(1.1); opacity: 0.9; }
         }
 
         /* Tablet Layout */
         @media (min-width: 768px) {
             .projects-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 30px;
+                gap: 25px;
                 padding: 0 20px;
+            }
+            .project-card {
+                flex: 0 0 350px;
             }
         }
 
         /* Desktop Layout */
         @media (min-width: 1024px) {
             .projects-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
                 gap: 30px;
                 padding: 0 20px;
+            }
+            .project-card {
+                flex: 0 0 400px;
             }
         } 
 
@@ -2236,6 +2320,61 @@ flex: 1;
         <!-- My Creations -->
         <h2 class="Sarpanch font-f2 fade-in">My Creations</h2>
         <div class="projects-grid">
+            <div class="project-card scale-in" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); position: relative; transform: rotate(-2deg);">
+                <div class="sticky-tape"></div>
+                <div class="sticky-pin"></div>
+                <div class="project-image">
+                    <img src="https://via.placeholder.com/400x300/667eea/ffffff?text=AyushHarinkhede" alt="AyushHarinkhede">
+                </div>
+                <div class="project-content">
+                    <h3>AyushHarinkhede</h3>
+                    <p class="project-tech">Portfolio Platform</p>
+                    <p>Hey! Iam Ayush-Harinkhede and its my "Portfolio Spectrum" — This isn't show my portfolio; it's just show my creative wavelength.</p>
+                    <div class="project-tags">
+                        <span class="tag">Portfolio</span>
+                        <span class="tag">Creative</span>
+                        <span class="tag">Web Design</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card scale-in" style="background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%); position: relative; transform: rotate(1deg);">
+                <div class="sticky-tape"></div>
+                <div class="sticky-pin"></div>
+                <div class="project-image">
+                    <img src="https://via.placeholder.com/400x300/8B4513/ffffff?text=Mocha" alt="Mocha">
+                </div>
+                <div class="project-content">
+                    <h3>Mocha</h3>
+                    <p class="project-tech">JavaScript Framework</p>
+                    <p>We serve hot JavaScript notes & brewed short☕ of Creativity that actually slay. No cap. So Its a Simple Repository that`s Written in JavaScript project to Demonstrating a Mocha Framework.☄️</p>
+                    <div class="project-tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Mocha</span>
+                        <span class="tag">Testing</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card scale-in" style="background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%); position: relative; transform: rotate(-1deg);">
+                <div class="sticky-tape"></div>
+                <div class="sticky-pin"></div>
+                <div class="project-image">
+                    <img src="https://via.placeholder.com/400x300/00d4ff/ffffff?text=VANIE" alt="VANIE">
+                </div>
+                <div class="project-content">
+                    <h3>VANIE</h3>
+                    <p class="project-tech">AI Assistant</p>
+                    <p>Virtual Assistant of Neural Integrated Engine — A fully offline AI assistant that operates directly through the system's NPU (Neural Processing Unit) for real-time, private, and efficient execution. No cloud servers. No external dependencies. Just pure, local intelligence that listens, learns, and reacts.</p>
+                    <div class="project-tags">
+                        <span class="tag">AI</span>
+                        <span class="tag">NPU</span>
+                        <span class="tag">Offline</span>
+                        <span class="tag">Neural</span>
+                    </div>
+                </div>
+            </div>
+
             <div class="project-card scale-in" style="background: linear-gradient(135deg, #fff9c4 0%, #fff3e0 100%); position: relative; transform: rotate(-2deg);">
                 <div class="sticky-tape"></div>
                 <div class="sticky-pin"></div>
@@ -3010,6 +3149,142 @@ flex: 1;
                 closeDownloadModal();
             }
         }
+
+        // === PROJECTS SMOOTH SCROLL & ANIMATIONS ===
+        
+        // Initialize smooth scrolling for projects
+        document.addEventListener('DOMContentLoaded', function() {
+            const projectsGrid = document.querySelector('.projects-grid');
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            // Smooth scroll functionality
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+            let isScrolling = false;
+
+            projectsGrid.addEventListener('mousedown', (e) => {
+                if (e.target.closest('.project-card')) return;
+                isDown = true;
+                projectsGrid.style.cursor = 'grabbing';
+                startX = e.pageX - projectsGrid.offsetLeft;
+                scrollLeft = projectsGrid.scrollLeft;
+            });
+
+            projectsGrid.addEventListener('mouseleave', () => {
+                isDown = false;
+                projectsGrid.style.cursor = 'grab';
+            });
+
+            projectsGrid.addEventListener('mouseup', () => {
+                isDown = false;
+                projectsGrid.style.cursor = 'grab';
+            });
+
+            projectsGrid.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - projectsGrid.offsetLeft;
+                const walk = (x - startX) * 1.5;
+                projectsGrid.scrollLeft = scrollLeft - walk;
+            });
+
+            // Touch scroll for mobile
+            let touchStartX = 0;
+            let touchScrollLeft = 0;
+
+            projectsGrid.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+                touchScrollLeft = projectsGrid.scrollLeft;
+            });
+
+            projectsGrid.addEventListener('touchmove', (e) => {
+                const touchX = e.touches[0].clientX;
+                const walk = (touchStartX - touchX) * 2;
+                projectsGrid.scrollLeft = touchScrollLeft + walk;
+            });
+
+            // Enhanced hover animations
+            projectCards.forEach((card, index) => {
+                card.addEventListener('mouseenter', function() {
+                    // Add glow effect
+                    this.style.boxShadow = '0 20px 40px rgba(102, 126, 234, 0.3), 0 10px 20px rgba(0, 0, 0, 0.2)';
+                    
+                    // Animate sticky elements
+                    const tape = this.querySelector('.sticky-tape');
+                    const pin = this.querySelector('.sticky-pin');
+                    if (tape) {
+                        tape.style.transition = 'all 0.3s ease';
+                        tape.style.transform = 'translateX(-50%) rotate(-8deg) scale(1.1)';
+                    }
+                    if (pin) {
+                        pin.style.transition = 'all 0.3s ease';
+                        pin.style.transform = 'translateX(-50%) rotate(60deg) scale(1.2)';
+                    }
+                });
+
+                card.addEventListener('mouseleave', function() {
+                    // Remove glow effect
+                    this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
+                    
+                    // Reset sticky elements
+                    const tape = this.querySelector('.sticky-tape');
+                    const pin = this.querySelector('.sticky-pin');
+                    if (tape) {
+                        tape.style.transform = 'translateX(-50%) rotate(-3deg) scale(1)';
+                    }
+                    if (pin) {
+                        pin.style.transform = 'translateX(-50%) rotate(45deg) scale(1)';
+                    }
+                });
+
+                // Click animation
+                card.addEventListener('click', function() {
+                    this.style.transform = 'translateY(-8px) scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-8px) scale(1.02)';
+                    }, 150);
+                });
+            });
+
+            // Intersection Observer for scroll animations
+            const observerOptions = {
+                threshold: 0.3,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0) scale(1) rotate(0deg)';
+                    }
+                });
+            }, observerOptions);
+
+            projectCards.forEach(card => {
+                observer.observe(card);
+            });
+
+            // Auto-scroll hint animation
+            setTimeout(() => {
+                if (projectsGrid.scrollWidth > projectsGrid.clientWidth) {
+                    projectsGrid.scrollTo({
+                        left: 100,
+                        behavior: 'smooth'
+                    });
+                    
+                    setTimeout(() => {
+                        projectsGrid.scrollTo({
+                            left: 0,
+                            behavior: 'smooth'
+                        });
+                    }, 1000);
+                }
+            }, 2000);
+
+            console.log('Projects smooth scrolling and animations activated');
+        });
     </script>
 </body>
 </html>     
