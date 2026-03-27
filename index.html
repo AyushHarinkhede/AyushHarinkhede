@@ -1166,7 +1166,10 @@ flex: 1;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             opacity: 0;
             transform: translateX(30px) scale(0.9);
-            animation: slideInFromRight 0.6s ease-out forwards;
+            animation: slideInFromRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+            perspective: 1000px;
         }
 
         .project-card:nth-child(1) { animation-delay: 0.1s; }
@@ -1179,11 +1182,7 @@ flex: 1;
         @keyframes slideInFromRight {
             0% {
                 opacity: 0;
-                transform: translateX(50px) scale(0.8) rotate(5deg);
-            }
-            50% {
-                opacity: 0.7;
-                transform: translateX(10px) scale(0.95) rotate(-2deg);
+                transform: translateX(50px) scale(0.8) rotate(2deg);
             }
             100% {
                 opacity: 1;
@@ -1193,40 +1192,43 @@ flex: 1;
 
         .project-card:hover {
             transform: translateY(-8px) scale(1.02) rotate(0deg);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.25), 0 10px 20px rgba(0, 0, 0, 0.15);
             z-index: 10;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .project-card:hover .sticky-tape {
             transform: translateX(-50%) rotate(-5deg);
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .project-card:hover .sticky-pin {
             transform: translateX(-50%) rotate(50deg);
             background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Scroll indicator */
+        /* Scroll indicator - more subtle */
         .projects-grid::before {
             content: '';
             position: absolute;
             top: 50%;
-            right: 10px;
+            right: 15px;
             transform: translateY(-50%);
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            width: 25px;
+            height: 25px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.6), rgba(118, 75, 162, 0.6));
             border-radius: 50%;
-            opacity: 0.7;
-            animation: pulse 2s infinite;
+            opacity: 0;
+            animation: subtlePulse 3s infinite 2s;
             pointer-events: none;
             z-index: 100;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.7; }
-            50% { transform: translateY(-50%) scale(1.1); opacity: 0.9; }
+        @keyframes subtlePulse {
+            0%, 100% { transform: translateY(-50%) scale(0.8); opacity: 0; }
+            50% { transform: translateY(-50%) scale(1); opacity: 0.6; }
         }
 
         /* Tablet Layout */
@@ -2320,11 +2322,11 @@ flex: 1;
         <!-- My Creations -->
         <h2 class="Sarpanch font-f2 fade-in">My Creations</h2>
         <div class="projects-grid">
-            <div class="project-card scale-in" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); position: relative; transform: rotate(-2deg);">
+            <div class="project-card scale-in" style="background: linear-gradient(135deg, #ffe4e1 0%, #ffd4cc 100%); position: relative; transform: rotate(-2deg);">
                 <div class="sticky-tape"></div>
                 <div class="sticky-pin"></div>
                 <div class="project-image">
-                    <img src="https://via.placeholder.com/400x300/667eea/ffffff?text=AyushHarinkhede" alt="AyushHarinkhede">
+                    <img src="https://via.placeholder.com/400x300/ffe4e1/333333?text=AyushHarinkhede" alt="AyushHarinkhede">
                 </div>
                 <div class="project-content">
                     <h3>AyushHarinkhede</h3>
@@ -2338,11 +2340,11 @@ flex: 1;
                 </div>
             </div>
 
-            <div class="project-card scale-in" style="background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%); position: relative; transform: rotate(1deg);">
+            <div class="project-card scale-in" style="background: linear-gradient(135deg, #f5e6d3 0%, #e8d4b0 100%); position: relative; transform: rotate(1deg);">
                 <div class="sticky-tape"></div>
                 <div class="sticky-pin"></div>
                 <div class="project-image">
-                    <img src="https://via.placeholder.com/400x300/8B4513/ffffff?text=Mocha" alt="Mocha">
+                    <img src="https://via.placeholder.com/400x300/f5e6d3/333333?text=Mocha" alt="Mocha">
                 </div>
                 <div class="project-content">
                     <h3>Mocha</h3>
@@ -2356,11 +2358,11 @@ flex: 1;
                 </div>
             </div>
 
-            <div class="project-card scale-in" style="background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%); position: relative; transform: rotate(-1deg);">
+            <div class="project-card scale-in" style="background: linear-gradient(135deg, #e6f3ff 0%, #d4e8ff 100%); position: relative; transform: rotate(-1deg);">
                 <div class="sticky-tape"></div>
                 <div class="sticky-pin"></div>
                 <div class="project-image">
-                    <img src="https://via.placeholder.com/400x300/00d4ff/ffffff?text=VANIE" alt="VANIE">
+                    <img src="https://via.placeholder.com/400x300/e6f3ff/333333?text=VANIE" alt="VANIE">
                 </div>
                 <div class="project-content">
                     <h3>VANIE</h3>
@@ -3157,75 +3159,168 @@ flex: 1;
             const projectsGrid = document.querySelector('.projects-grid');
             const projectCards = document.querySelectorAll('.project-card');
             
-            // Smooth scroll functionality
+            if (!projectsGrid) return;
+            
+            // Optimized smooth scroll functionality
             let isDown = false;
             let startX;
             let scrollLeft;
-            let isScrolling = false;
+            let animationFrame;
+            let velocity = 0;
+            let lastX = 0;
+            let momentum = 0;
 
+            // Mouse events with momentum
             projectsGrid.addEventListener('mousedown', (e) => {
                 if (e.target.closest('.project-card')) return;
+                
                 isDown = true;
                 projectsGrid.style.cursor = 'grabbing';
+                projectsGrid.style.scrollBehavior = 'auto';
                 startX = e.pageX - projectsGrid.offsetLeft;
                 scrollLeft = projectsGrid.scrollLeft;
+                lastX = e.pageX;
+                velocity = 0;
+                momentum = 0;
+                
+                if (animationFrame) {
+                    cancelAnimationFrame(animationFrame);
+                }
             });
 
             projectsGrid.addEventListener('mouseleave', () => {
-                isDown = false;
-                projectsGrid.style.cursor = 'grab';
+                if (isDown) {
+                    isDown = false;
+                    projectsGrid.style.cursor = 'grab';
+                    applyMomentum();
+                }
             });
 
             projectsGrid.addEventListener('mouseup', () => {
-                isDown = false;
-                projectsGrid.style.cursor = 'grab';
+                if (isDown) {
+                    isDown = false;
+                    projectsGrid.style.cursor = 'grab';
+                    applyMomentum();
+                }
             });
 
             projectsGrid.addEventListener('mousemove', (e) => {
                 if (!isDown) return;
+                
                 e.preventDefault();
-                const x = e.pageX - projectsGrid.offsetLeft;
-                const walk = (x - startX) * 1.5;
+                const currentX = e.pageX;
+                const deltaX = currentX - lastX;
+                velocity = deltaX;
+                
+                const x = currentX - projectsGrid.offsetLeft;
+                const walk = (x - startX) * 1.2; // Reduced multiplier for smoother scroll
+                
                 projectsGrid.scrollLeft = scrollLeft - walk;
+                lastX = currentX;
             });
 
-            // Touch scroll for mobile
+            // Momentum scrolling
+            function applyMomentum() {
+                if (Math.abs(velocity) < 0.5) return;
+                
+                momentum = velocity * 15; // Momentum factor
+                velocity *= 0.9; // Friction
+                
+                function animateMomentum() {
+                    if (Math.abs(momentum) > 0.5) {
+                        projectsGrid.scrollLeft += momentum;
+                        momentum *= 0.92; // Smooth deceleration
+                        animationFrame = requestAnimationFrame(animateMomentum);
+                    } else {
+                        projectsGrid.style.scrollBehavior = 'smooth';
+                    }
+                }
+                
+                animateMomentum();
+            }
+
+            // Optimized touch scroll for mobile
             let touchStartX = 0;
             let touchScrollLeft = 0;
+            let touchVelocity = 0;
+            let touchLastX = 0;
+            let touchMomentum = 0;
 
             projectsGrid.addEventListener('touchstart', (e) => {
                 touchStartX = e.touches[0].clientX;
                 touchScrollLeft = projectsGrid.scrollLeft;
+                touchLastX = touchStartX;
+                touchVelocity = 0;
+                touchMomentum = 0;
+                projectsGrid.style.scrollBehavior = 'auto';
+                
+                if (animationFrame) {
+                    cancelAnimationFrame(animationFrame);
+                }
             });
 
             projectsGrid.addEventListener('touchmove', (e) => {
                 const touchX = e.touches[0].clientX;
-                const walk = (touchStartX - touchX) * 2;
+                const deltaX = touchX - touchLastX;
+                touchVelocity = deltaX;
+                
+                const walk = (touchStartX - touchX) * 1.5;
                 projectsGrid.scrollLeft = touchScrollLeft + walk;
+                touchLastX = touchX;
             });
 
-            // Enhanced hover animations
+            projectsGrid.addEventListener('touchend', () => {
+                applyTouchMomentum();
+            });
+
+            function applyTouchMomentum() {
+                if (Math.abs(touchVelocity) < 0.5) {
+                    projectsGrid.style.scrollBehavior = 'smooth';
+                    return;
+                }
+                
+                touchMomentum = touchVelocity * 20;
+                touchVelocity *= 0.85;
+                
+                function animateTouchMomentum() {
+                    if (Math.abs(touchMomentum) > 0.5) {
+                        projectsGrid.scrollLeft += touchMomentum;
+                        touchMomentum *= 0.9;
+                        animationFrame = requestAnimationFrame(animateTouchMomentum);
+                    } else {
+                        projectsGrid.style.scrollBehavior = 'smooth';
+                    }
+                }
+                
+                animateTouchMomentum();
+            }
+
+            // Enhanced hover animations with GPU acceleration
             projectCards.forEach((card, index) => {
+                card.style.willChange = 'transform, box-shadow';
+                
                 card.addEventListener('mouseenter', function() {
-                    // Add glow effect
+                    this.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
                     this.style.boxShadow = '0 20px 40px rgba(102, 126, 234, 0.3), 0 10px 20px rgba(0, 0, 0, 0.2)';
+                    this.style.transform = 'translateY(-8px) scale(1.02) rotate(0deg)';
                     
                     // Animate sticky elements
                     const tape = this.querySelector('.sticky-tape');
                     const pin = this.querySelector('.sticky-pin');
                     if (tape) {
-                        tape.style.transition = 'all 0.3s ease';
+                        tape.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
                         tape.style.transform = 'translateX(-50%) rotate(-8deg) scale(1.1)';
                     }
                     if (pin) {
-                        pin.style.transition = 'all 0.3s ease';
+                        pin.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
                         pin.style.transform = 'translateX(-50%) rotate(60deg) scale(1.2)';
                     }
                 });
 
                 card.addEventListener('mouseleave', function() {
-                    // Remove glow effect
+                    this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
                     this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
+                    this.style.transform = 'translateY(0) scale(1) rotate(0deg)';
                     
                     // Reset sticky elements
                     const tape = this.querySelector('.sticky-tape');
@@ -3238,18 +3333,21 @@ flex: 1;
                     }
                 });
 
-                // Click animation
+                // Smooth click animation
                 card.addEventListener('click', function() {
+                    this.style.transition = 'all 0.15s cubic-bezier(0.4, 0, 0.2, 1)';
                     this.style.transform = 'translateY(-8px) scale(0.98)';
+                    
                     setTimeout(() => {
+                        this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
                         this.style.transform = 'translateY(-8px) scale(1.02)';
                     }, 150);
                 });
             });
 
-            // Intersection Observer for scroll animations
+            // Optimized Intersection Observer
             const observerOptions = {
-                threshold: 0.3,
+                threshold: 0.2,
                 rootMargin: '0px 0px -50px 0px'
             };
 
@@ -3263,14 +3361,17 @@ flex: 1;
             }, observerOptions);
 
             projectCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateX(30px) scale(0.9) rotate(2deg)';
                 observer.observe(card);
             });
 
-            // Auto-scroll hint animation
+            // Subtle auto-scroll hint
             setTimeout(() => {
                 if (projectsGrid.scrollWidth > projectsGrid.clientWidth) {
+                    projectsGrid.style.scrollBehavior = 'smooth';
                     projectsGrid.scrollTo({
-                        left: 100,
+                        left: 80,
                         behavior: 'smooth'
                     });
                     
@@ -3279,11 +3380,11 @@ flex: 1;
                             left: 0,
                             behavior: 'smooth'
                         });
-                    }, 1000);
+                    }, 800);
                 }
-            }, 2000);
+            }, 2500);
 
-            console.log('Projects smooth scrolling and animations activated');
+            console.log('Optimized smooth scrolling and animations activated');
         });
     </script>
 </body>
