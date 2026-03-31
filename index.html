@@ -634,6 +634,358 @@
             animation: none;
         }
 
+        /* View More Gallery Button - Doodle Art Style */
+        .view-more-gallery-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            border: 3px dashed #fdcb6e;
+            border-radius: 25px 15px 30px 20px;
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2d3436;
+            cursor: pointer;
+            transform: rotate(-2deg);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.15),
+                        inset 2px 2px 4px rgba(255, 255, 255, 0.5);
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .view-more-gallery-btn::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            border-radius: 25px 15px 30px 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .view-more-gallery-btn:hover {
+            transform: rotate(2deg) scale(1.05);
+            box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2),
+                        inset 2px 2px 6px rgba(255, 255, 255, 0.7);
+            background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);
+        }
+
+        .view-more-gallery-btn:hover::before {
+            opacity: 1;
+        }
+
+        .view-more-gallery-btn:active {
+            transform: rotate(0deg) scale(0.98);
+            box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.15);
+        }
+
+        .view-more-gallery-btn .btn-icon {
+            font-size: 1.2em;
+            animation: bounce 2s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .view-more-gallery-btn .btn-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Doodle decoration for button */
+        .view-more-gallery-btn::after {
+            content: '✨';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            font-size: 0.8em;
+            animation: sparkle 1.5s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-5px);
+            }
+            60% {
+                transform: translateY(-3px);
+            }
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.2) rotate(180deg);
+            }
+        }
+
+        /* Mobile responsive for View More button */
+        @media (max-width: 768px) {
+            .view-more-gallery-btn {
+                padding: 10px 16px;
+                font-size: 1em;
+                border-radius: 20px 12px 25px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .view-more-gallery-btn {
+                padding: 8px 14px;
+                font-size: 0.9em;
+                border-radius: 15px 10px 20px 12px;
+            }
+        }
+
+        /* Gallery Modal - Doodle Art Style */
+        .gallery-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        .gallery-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .gallery-container {
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
+            max-height: 85vh;
+            background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
+            border: 4px dashed #ff9a00;
+            border-radius: 30px 20px 40px 25px;
+            padding: 20px;
+            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.15),
+                        inset 3px 3px 6px rgba(255, 255, 255, 0.7);
+            transform: rotate(-1deg);
+            animation: modalBounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .gallery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px dotted #ff9a00;
+        }
+
+        .gallery-title {
+            font-size: 2em;
+            color: #ff6b35;
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+            transform: rotate(-2deg);
+        }
+
+        .gallery-close-btn {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            border: 3px solid #d63031;
+            border-radius: 50% 40% 50% 40%;
+            color: white;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(15deg);
+            transition: all 0.3s ease;
+            box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-close-btn:hover {
+            transform: rotate(-15deg) scale(1.1);
+            background: linear-gradient(135deg, #d63031 0%, #ff6b6b 100%);
+        }
+
+        .gallery-close-btn:active {
+            transform: rotate(0deg) scale(0.95);
+        }
+
+        .gallery-content {
+            max-height: calc(85vh - 100px);
+            overflow-y: auto;
+            padding: 10px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            align-items: start;
+        }
+
+        /* Custom scrollbar for gallery */
+        .gallery-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .gallery-content::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        .gallery-content::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #ff9a00 0%, #ff6b35 100%);
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .gallery-item {
+            position: relative;
+            background: white;
+            border: 3px dashed #ff9a00;
+            border-radius: 20px 15px 25px 18px;
+            padding: 8px;
+            transform: rotate(var(--rotate, 0deg));
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .gallery-item:hover {
+            transform: rotate(var(--rotate, 0deg)) scale(1.05) translateY(-5px);
+            box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 15px 10px 20px 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item::before {
+            content: '📷';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            transform: rotate(15deg);
+            box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes modalBounceIn {
+            0% {
+                transform: rotate(-1deg) scale(0.3);
+                opacity: 0;
+            }
+            50% {
+                transform: rotate(2deg) scale(1.05);
+            }
+            70% {
+                transform: rotate(-1deg) scale(0.9);
+            }
+            100% {
+                transform: rotate(-1deg) scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Mobile responsive for gallery */
+        @media (max-width: 768px) {
+            .gallery-container {
+                width: 95%;
+                max-height: 90vh;
+                padding: 15px;
+                border-radius: 20px 15px 25px 18px;
+            }
+
+            .gallery-title {
+                font-size: 1.5em;
+            }
+
+            .gallery-content {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+                max-height: calc(90vh - 80px);
+            }
+
+            .gallery-item img {
+                height: 120px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-container {
+                width: 98%;
+                padding: 10px;
+                border-radius: 15px 10px 20px 12px;
+            }
+
+            .gallery-title {
+                font-size: 1.2em;
+            }
+
+            .gallery-content {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 10px;
+            }
+
+            .gallery-item img {
+                height: 100px;
+            }
+
+            .gallery-item::before {
+                width: 20px;
+                height: 20px;
+                font-size: 0.6em;
+            }
+        }
+
         /* Info Grid - Responsive Layout */
  .info-grid-container {
                   display: grid;
@@ -2535,10 +2887,23 @@ flex: 1;
                 <p class="font-f1"><i>Creative | Innovative | Passionate</i></p>
             </div>
             
-            <div id="phone-container">
-                <div id="phone-screen"></div>
-                <div class="sticky-tape"></div>
-                <div class="sticky-pin"></div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+                <div id="phone-container">
+                    <div id="phone-screen"></div>
+                    <div class="sticky-tape"></div>
+                    <div class="sticky-pin"></div>
+                </div>
+                
+                <!-- View More Button for Gallery -->
+                <button class="view-more-gallery-btn" onclick="openGallery()" style="margin-top: 10px;">
+                    <span class="btn-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23 19C23 19.5304 22.7893 20.0391 22.4142 20.4142C22.0391 20.7893 21.5304 21 21 21H3C2.46957 21 1.96086 20.7893 1.58579 20.4142C1.21071 20.0391 1 19.5304 1 19V8C1 7.46957 1.21071 6.96086 1.58579 6.58579C1.96086 6.21071 2.46957 6 3 6H7L9 3H15L17 6H21C21.5304 6 22.0391 6.21071 22.4142 6.58579C22.7893 6.96086 23 7.46957 23 8V19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="12" cy="13" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                    <span class="btn-text">View More Photos</span>
+                </button>
             </div>
         </div>
  
@@ -3835,7 +4200,247 @@ flex: 1;
                     closeImageViewer();
                 }
             });
-        });
+
+            });
+
+        // Gallery Functions - Global scope
+        function openGallery() {
+            const modal = document.getElementById('galleryModal');
+            const galleryContent = document.getElementById('galleryContent');
+            
+            // Show modal
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            // Load images
+            loadGalleryImages();
+        }
+
+        function closeGallery() {
+            const modal = document.getElementById('galleryModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function loadGalleryImages() {
+            const galleryContent = document.getElementById('galleryContent');
+            
+            // List of all images in My Images folder
+            const images = [
+                '1742013169599.jpg',
+                '1755607654091~2.jpg',
+                '1765430441202.jpg',
+                'Firefly 20250310005804.png',
+                'IMG_20250402_092000275_HDR_AE~2.jpg',
+                'IMG_20250609_160203941_AE.jpg',
+                'IMG_20250926_210303368_HDR.jpg',
+                'IMG_20260227_191103864~2.jpg',
+                'Image1.jpg',
+                'Image2.jpg',
+                'Screenshot_20251021-184324.Photos~2.png',
+                'Snapchat-1155631209~2.jpg',
+                'Snapchat-1835960118~2.jpg',
+                'Snapchat-184837749~2.jpg',
+                'ayush.jpg',
+                'image001.jpg',
+                'image002.jpg',
+                'image005.jpg',
+                'main image.jpg'
+            ];
+
+            // Clear existing content
+            galleryContent.innerHTML = '';
+
+            // Create gallery items with staggered animation
+            images.forEach((imageName, index) => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                galleryItem.style.setProperty('--rotate', `${Math.random() * 6 - 3}deg`);
+                galleryItem.style.animationDelay = `${index * 0.1}s`;
+                
+                const img = document.createElement('img');
+                img.src = `My Images/${imageName}`;
+                img.alt = `Gallery Image ${index + 1}`;
+                img.loading = 'lazy';
+                
+                // Add click event for full view
+                img.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    viewFullImage(`My Images/${imageName}`, imageName);
+                });
+                
+                // Add error handling
+                img.addEventListener('error', function() {
+                    galleryItem.style.display = 'none';
+                });
+                
+                galleryItem.appendChild(img);
+                galleryContent.appendChild(galleryItem);
+            });
+
+            // Add entrance animation
+            const items = galleryContent.querySelectorAll('.gallery-item');
+            items.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = `rotate(${Math.random() * 6 - 3}deg) scale(0.8)`;
+                
+                setTimeout(() => {
+                    item.style.transition = 'all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+                    item.style.opacity = '1';
+                    item.style.transform = `rotate(${Math.random() * 6 - 3}deg) scale(1)`;
+                }, index * 50);
+            });
+        }
+
+        function viewFullImage(imageSrc, imageName) {
+            // Create full screen image viewer
+            const viewer = document.createElement('div');
+            viewer.className = 'full-image-viewer';
+            viewer.innerHTML = `
+                <div class="viewer-backdrop" onclick="this.parentElement.remove()"></div>
+                <div class="viewer-container">
+                    <button class="viewer-close-btn" onclick="this.parentElement.parentElement.remove()">✖</button>
+                    <img src="${imageSrc}" alt="${imageName}" />
+                    <div class="viewer-info">
+                        <h3>${imageName}</h3>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(viewer);
+            document.body.style.overflow = 'hidden';
+            
+            // Add entrance animation
+            setTimeout(() => {
+                viewer.classList.add('show');
+            }, 10);
+            
+            // Close on escape key
+            const escapeHandler = (e) => {
+                if (e.key === 'Escape') {
+                    viewer.remove();
+                    document.body.style.overflow = 'auto';
+                    document.removeEventListener('keydown', escapeHandler);
+                }
+            };
+            document.addEventListener('keydown', escapeHandler);
+        }
+
+        // Add CSS for full image viewer
+        const viewerStyles = document.createElement('style');
+        viewerStyles.textContent = `
+            .full-image-viewer {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 10000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            
+            .full-image-viewer.show {
+                opacity: 1;
+            }
+            
+            .viewer-backdrop {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.9);
+                backdrop-filter: blur(10px);
+            }
+            
+            .viewer-container {
+                position: relative;
+                max-width: 90%;
+                max-height: 90%;
+                background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
+                border: 4px dashed #ff9a00;
+                border-radius: 30px 20px 40px 25px;
+                padding: 20px;
+                box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.3);
+                transform: rotate(-1deg);
+                z-index: 1;
+            }
+            
+            .viewer-close-btn {
+                position: absolute;
+                top: -15px;
+                right: -15px;
+                width: 40px;
+                height: 40px;
+                background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+                border: 3px solid #d63031;
+                border-radius: 50% 40% 50% 40%;
+                color: white;
+                font-size: 1.2em;
+                font-weight: bold;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transform: rotate(15deg);
+                transition: all 0.3s ease;
+                box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+                z-index: 2;
+            }
+            
+            .viewer-close-btn:hover {
+                transform: rotate(-15deg) scale(1.1);
+            }
+            
+            .viewer-container img {
+                width: 100%;
+                height: auto;
+                max-height: 70vh;
+                object-fit: contain;
+                border-radius: 20px 15px 25px 18px;
+                border: 3px dashed #ff9a00;
+            }
+            
+            .viewer-info {
+                margin-top: 15px;
+                text-align: center;
+                font-family: 'Patrick Hand', cursive;
+                color: #ff6b35;
+                font-size: 1.2em;
+            }
+            
+            @media (max-width: 768px) {
+                .viewer-container {
+                    max-width: 95%;
+                    padding: 15px;
+                }
+                
+                .viewer-container img {
+                    max-height: 60vh;
+                }
+            }
+        `;
+        document.head.appendChild(viewerStyles);
     </script>
+
+    <!-- Gallery Modal -->
+    <div id="galleryModal" class="gallery-modal" style="display: none;">
+        <div class="gallery-backdrop" onclick="closeGallery()"></div>
+        <div class="gallery-container">
+            <div class="gallery-header">
+                <h2 class="gallery-title font-f1">📸 My Photo Gallery 📸</h2>
+                <button class="gallery-close-btn" onclick="closeGallery()">
+                    <span>✖</span>
+                </button>
+            </div>
+            <div class="gallery-content" id="galleryContent">
+                <!-- Images will be dynamically loaded here -->
+            </div>
+        </div>
+    </div>
 </body>
 </html>
