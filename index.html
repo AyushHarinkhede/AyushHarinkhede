@@ -720,7 +720,7 @@
             }
         }
 
-        /* Gallery Modal - Enhanced Doodle Art Style */
+        /* Gallery Modal - Matching Main Webapp Doodle Style */
         .gallery-modal {
             position: fixed;
             top: 0;
@@ -740,24 +740,22 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
         }
 
         .gallery-container {
             position: relative;
-            width: 92%;
-            max-width: 1400px;
-            max-height: 90vh;
-            background: linear-gradient(145deg, #fefefe 0%, #f8f8f8 100%);
-            border: 3px solid #2c3e50;
-            border-radius: 15px 8px 20px 12px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3),
-                        inset 0 2px 4px rgba(255, 255, 255, 0.8),
-                        4px 4px 0px rgba(44, 62, 80, 0.2);
+            width: 90%;
+            max-width: 1200px;
+            max-height: 85vh;
+            background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
+            border: none;
+            border-radius: 2px;
+            padding: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             transform: rotate(-1deg);
-            animation: modalSlideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            animation: modalBounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             overflow: hidden;
             z-index: 1;
         }
@@ -766,120 +764,70 @@
             content: '';
             position: absolute;
             top: -8px;
-            left: 20px;
-            width: 60px;
-            height: 25px;
-            background: linear-gradient(90deg, #e74c3c 0%, #f39c12 50%, #3498db 100%);
-            border-radius: 15px 8px 20px 12px;
-            transform: rotate(-2deg);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            border: 2px solid #2c3e50;
+            left: 50%;
+            transform: translateX(-50%) rotate(-3deg);
+            width: 100px;
+            height: 30px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+            border: 1px solid rgba(200, 200, 200, 0.4);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            z-index: 10;
         }
 
         .gallery-container::after {
-            content: '📸';
+            content: '';
             position: absolute;
             top: -12px;
-            right: 20px;
-            font-size: 1.5em;
-            transform: rotate(8deg);
-            filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.3));
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+            width: 16px;
+            height: 16px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            border-radius: 50% 50% 0 0;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+            z-index: 11;
         }
 
         .gallery-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 18px;
-            border-bottom: 3px dashed #2c3e50;
-            position: relative;
-        }
-
-        .gallery-header::before {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 10%;
-            width: 30px;
-            height: 30px;
-            background: #f39c12;
-            border-radius: 50%;
-            transform: rotate(15deg);
-            box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .gallery-header::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            right: 15%;
-            width: 20px;
-            height: 20px;
-            background: #3498db;
-            border-radius: 8px 12px 15px 10px;
-            transform: rotate(-10deg);
-            box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px dotted #ff9a00;
         }
 
         .gallery-title {
-            font-size: 2.2em;
-            color: #2c3e50;
+            font-size: 2em;
+            color: #ff6b35;
             font-family: 'Patrick Hand', cursive;
             font-weight: 700;
             transform: rotate(-2deg);
-            text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.8),
-                        1px 1px 0px rgba(0, 0, 0, 0.2);
-            position: relative;
-        }
-
-        .gallery-title::before {
-            content: '✨';
-            position: absolute;
-            top: -10px;
-            right: -15px;
-            font-size: 0.6em;
-            animation: sparkle 2s infinite;
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
         }
 
         .gallery-close-btn {
             position: relative;
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(145deg, #e74c3c 0%, #c0392b 100%);
-            border: 3px solid #2c3e50;
-            border-radius: 12px 8px 15px 10px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            border: 3px solid #d63031;
+            border-radius: 50% 40% 50% 40%;
             color: white;
-            font-size: 1.3em;
+            font-size: 1.2em;
             font-weight: bold;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transform: rotate(3deg);
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2),
-                        inset 2px 2px 4px rgba(255, 255, 255, 0.3);
-            font-family: 'Kalam', cursive;
-        }
-
-        .gallery-close-btn::before {
-            content: '';
-            position: absolute;
-            top: -3px;
-            left: -3px;
-            width: 8px;
-            height: 8px;
-            background: #f39c12;
-            border-radius: 50%;
-            box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.3);
+            transform: rotate(15deg);
+            transition: all 0.3s ease;
+            box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
         }
 
         .gallery-close-btn:hover {
-            transform: rotate(-3deg) scale(1.08);
-            background: linear-gradient(145deg, #c0392b 0%, #e74c3c 100%);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3),
-                        inset 2px 2px 6px rgba(255, 255, 255, 0.4);
+            transform: rotate(-15deg) scale(1.1);
+            background: linear-gradient(135deg, #d63031 0%, #ff6b6b 100%);
         }
 
         .gallery-close-btn:active {
@@ -887,145 +835,83 @@
         }
 
         .gallery-content {
-            max-height: calc(90vh - 120px);
+            max-height: calc(85vh - 100px);
             overflow-y: auto;
-            padding: 15px;
+            overflow-x: hidden;
+            padding: 10px;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 20px;
             align-items: start;
-            position: relative;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
         }
 
-        .gallery-content::before {
-            content: '';
-            position: absolute;
-            top: 10px;
-            left: 5%;
-            width: 15px;
-            height: 15px;
-            background: #3498db;
-            border-radius: 50%;
-            transform: rotate(25deg);
-            box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.3);
-        }
-
-        .gallery-content::after {
-            content: '';
-            position: absolute;
-            bottom: 15px;
-            right: 8%;
-            width: 12px;
-            height: 12px;
-            background: #f39c12;
-            border-radius: 6px 8px 10px 7px;
-            transform: rotate(-15deg);
-            box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Custom scrollbar for gallery */
+        /* Custom scrollbar for gallery - Optimized */
         .gallery-content::-webkit-scrollbar {
-            width: 10px;
+            width: 6px;
         }
 
         .gallery-content::-webkit-scrollbar-track {
-            background: rgba(44, 62, 80, 0.1);
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
         }
 
         .gallery-content::-webkit-scrollbar-thumb {
-            background: linear-gradient(145deg, #2c3e50 0%, #34495e 100%);
-            border-radius: 8px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 154, 0, 0.5);
+            border-radius: 3px;
+            border: none;
+        }
+
+        .gallery-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 154, 0, 0.7);
         }
 
         .gallery-item {
             position: relative;
-            background: #ffffff;
-            border: 3px solid #2c3e50;
-            border-radius: 12px 8px 15px 10px;
-            padding: 10px;
+            background: white;
+            border: 3px dashed #ff9a00;
+            border-radius: 20px 15px 25px 18px;
+            padding: 8px;
             transform: rotate(var(--rotate, 0deg));
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15),
-                        inset 2px 2px 4px rgba(255, 255, 255, 0.8),
-                        2px 2px 0px rgba(44, 62, 80, 0.1);
+            transition: none;
+            box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.15);
             cursor: pointer;
             overflow: hidden;
             aspect-ratio: var(--aspect-ratio, 4/3);
-        }
-
-        .gallery-item::before {
-            content: '';
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            width: 8px;
-            height: 8px;
-            background: #f39c12;
-            border-radius: 50%;
-            box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.3);
-        }
-
-        .gallery-item::after {
-            content: '';
-            position: absolute;
-            bottom: 3px;
-            right: 3px;
-            width: 6px;
-            height: 6px;
-            background: #3498db;
-            border-radius: 3px 4px 5px 2px;
-            transform: rotate(15deg);
-            box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.3);
-        }
-
-        .gallery-item:hover {
-            transform: rotate(var(--rotate, 0deg)) scale(1.05) translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25),
-                        inset 2px 2px 6px rgba(255, 255, 255, 0.9),
-                        3px 3px 0px rgba(44, 62, 80, 0.15);
-            z-index: 10;
-            border-color: #e74c3c;
-            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            will-change: transform;
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 8px 6px 10px 7px;
-            transition: transform 0.3s ease;
-            filter: contrast(1.05) saturate(1.1);
+            border-radius: 15px 10px 20px 12px;
+            transition: none;
         }
 
-        .gallery-item:hover img {
-            transform: scale(1.08);
-            filter: contrast(1.1) saturate(1.2);
-        }
-
-        
-        @keyframes sparkle {
-            0%, 100% {
-                opacity: 1;
-                transform: scale(1) rotate(0deg);
-            }
-            50% {
-                opacity: 0.6;
-                transform: scale(1.3) rotate(180deg);
-            }
-        }
-
-        @keyframes modalSlideIn {
-            0% {
-                transform: rotate(-0.5deg) translateY(-50px) scale(0.9);
+        @keyframes modalFadeIn {
+            from {
                 opacity: 0;
             }
-            60% {
-                transform: rotate(0.5deg) translateY(5px) scale(1.02);
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes modalBounceIn {
+            0% {
+                transform: rotate(-1deg) scale(0.3);
+                opacity: 0;
+            }
+            50% {
+                transform: rotate(2deg) scale(1.05);
+            }
+            70% {
+                transform: rotate(-1deg) scale(0.9);
             }
             100% {
-                transform: rotate(-0.5deg) translateY(0px) scale(1);
+                transform: rotate(-1deg) scale(1);
                 opacity: 1;
             }
         }
