@@ -720,7 +720,7 @@
             }
         }
 
-        /* Gallery Modal - Mature Doodle Art Style */
+        /* Gallery Modal - Enhanced Doodle Art Style */
         .gallery-modal {
             position: fixed;
             top: 0;
@@ -751,14 +751,39 @@
             max-height: 90vh;
             background: linear-gradient(145deg, #fefefe 0%, #f8f8f8 100%);
             border: 3px solid #2c3e50;
-            border-radius: 8px 12px 15px 10px;
+            border-radius: 15px 8px 20px 12px;
             padding: 25px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3),
-                        inset 0 2px 4px rgba(255, 255, 255, 0.8);
-            transform: rotate(-0.5deg);
+                        inset 0 2px 4px rgba(255, 255, 255, 0.8),
+                        4px 4px 0px rgba(44, 62, 80, 0.2);
+            transform: rotate(-1deg);
             animation: modalSlideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             overflow: hidden;
             z-index: 1;
+        }
+
+        .gallery-container::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 20px;
+            width: 60px;
+            height: 25px;
+            background: linear-gradient(90deg, #e74c3c 0%, #f39c12 50%, #3498db 100%);
+            border-radius: 15px 8px 20px 12px;
+            transform: rotate(-2deg);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            border: 2px solid #2c3e50;
+        }
+
+        .gallery-container::after {
+            content: '📸';
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            font-size: 1.5em;
+            transform: rotate(8deg);
+            filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.3));
         }
 
         .gallery-header {
@@ -767,16 +792,54 @@
             align-items: center;
             margin-bottom: 25px;
             padding-bottom: 18px;
-            border-bottom: 2px solid #2c3e50;
+            border-bottom: 3px dashed #2c3e50;
+            position: relative;
+        }
+
+        .gallery-header::before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 10%;
+            width: 30px;
+            height: 30px;
+            background: #f39c12;
+            border-radius: 50%;
+            transform: rotate(15deg);
+            box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-header::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            right: 15%;
+            width: 20px;
+            height: 20px;
+            background: #3498db;
+            border-radius: 8px 12px 15px 10px;
+            transform: rotate(-10deg);
+            box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         .gallery-title {
             font-size: 2.2em;
             color: #2c3e50;
-            font-family: 'Kalam', cursive;
+            font-family: 'Patrick Hand', cursive;
             font-weight: 700;
-            transform: rotate(-1deg);
-            text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
+            transform: rotate(-2deg);
+            text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.8),
+                        1px 1px 0px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .gallery-title::before {
+            content: '✨';
+            position: absolute;
+            top: -10px;
+            right: -15px;
+            font-size: 0.6em;
+            animation: sparkle 2s infinite;
         }
 
         .gallery-close-btn {
@@ -784,8 +847,8 @@
             width: 45px;
             height: 45px;
             background: linear-gradient(145deg, #e74c3c 0%, #c0392b 100%);
-            border: 2px solid #2c3e50;
-            border-radius: 8px 12px 15px 10px;
+            border: 3px solid #2c3e50;
+            border-radius: 12px 8px 15px 10px;
             color: white;
             font-size: 1.3em;
             font-weight: bold;
@@ -793,20 +856,34 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transform: rotate(2deg);
+            transform: rotate(3deg);
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2),
+                        inset 2px 2px 4px rgba(255, 255, 255, 0.3);
             font-family: 'Kalam', cursive;
         }
 
+        .gallery-close-btn::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            width: 8px;
+            height: 8px;
+            background: #f39c12;
+            border-radius: 50%;
+            box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
         .gallery-close-btn:hover {
-            transform: rotate(-2deg) scale(1.05);
+            transform: rotate(-3deg) scale(1.08);
             background: linear-gradient(145deg, #c0392b 0%, #e74c3c 100%);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3),
+                        inset 2px 2px 6px rgba(255, 255, 255, 0.4);
         }
 
         .gallery-close-btn:active {
-            transform: rotate(0deg) scale(0.98);
+            transform: rotate(0deg) scale(0.95);
         }
 
         .gallery-content {
@@ -817,6 +894,33 @@
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 20px;
             align-items: start;
+            position: relative;
+        }
+
+        .gallery-content::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 5%;
+            width: 15px;
+            height: 15px;
+            background: #3498db;
+            border-radius: 50%;
+            transform: rotate(25deg);
+            box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-content::after {
+            content: '';
+            position: absolute;
+            bottom: 15px;
+            right: 8%;
+            width: 12px;
+            height: 12px;
+            background: #f39c12;
+            border-radius: 6px 8px 10px 7px;
+            transform: rotate(-15deg);
+            box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         /* Custom scrollbar for gallery */
@@ -838,43 +942,77 @@
         .gallery-item {
             position: relative;
             background: #ffffff;
-            border: 2px solid #2c3e50;
-            border-radius: 6px 8px 10px 7px;
-            padding: 8px;
+            border: 3px solid #2c3e50;
+            border-radius: 12px 8px 15px 10px;
+            padding: 10px;
             transform: rotate(var(--rotate, 0deg));
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15),
+                        inset 2px 2px 4px rgba(255, 255, 255, 0.8),
+                        2px 2px 0px rgba(44, 62, 80, 0.1);
             cursor: pointer;
             overflow: hidden;
             aspect-ratio: var(--aspect-ratio, 4/3);
         }
 
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 8px;
+            height: 8px;
+            background: #f39c12;
+            border-radius: 50%;
+            box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            bottom: 3px;
+            right: 3px;
+            width: 6px;
+            height: 6px;
+            background: #3498db;
+            border-radius: 3px 4px 5px 2px;
+            transform: rotate(15deg);
+            box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
         .gallery-item:hover {
-            transform: rotate(var(--rotate, 0deg)) scale(1.03) translateY(-3px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+            transform: rotate(var(--rotate, 0deg)) scale(1.05) translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25),
+                        inset 2px 2px 6px rgba(255, 255, 255, 0.9),
+                        3px 3px 0px rgba(44, 62, 80, 0.15);
             z-index: 10;
             border-color: #e74c3c;
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 4px 6px 8px 5px;
+            border-radius: 8px 6px 10px 7px;
             transition: transform 0.3s ease;
+            filter: contrast(1.05) saturate(1.1);
         }
 
         .gallery-item:hover img {
-            transform: scale(1.05);
+            transform: scale(1.08);
+            filter: contrast(1.1) saturate(1.2);
         }
 
         
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
+        @keyframes sparkle {
+            0%, 100% {
                 opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+            50% {
+                opacity: 0.6;
+                transform: scale(1.3) rotate(180deg);
             }
         }
 
