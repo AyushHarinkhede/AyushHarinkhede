@@ -62,12 +62,21 @@
 
 
 <div align="center">
-​<img src="https://nirzak-streak-stats.vercel.app/?user=AyushHarinkhede&theme=dark&hide_border=false" alt="Ayush's Streak Stats" />
-<p align="center">
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=AyushHArinkhede&theme=dark&hide_border=false&include_all_commits=false&count_private=false&layout=compact"/>
-<p align="center">
-<a href="https://github.com/AyushHarinkhede"><img src="https://github-readme-stats-one-bice.vercel.app/api?username=AyushHarinkhede&theme=gotham&show_icons=true&count_private=true&hide_border=true" width="48%" alt="Ayush's stats"/></a>
-</p></div>
+
+  <img src="https://streak-stats.demolab.com/?user=AyushHarinkhede&theme=dark&hide_border=false" alt="Ayush's Streak Stats" />
+
+  <p align="center">
+    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=AyushHarinkhede&theme=dark&hide_border=false&include_all_commits=false&count_private=false&layout=compact" alt="Top Languages" />
+  </p>
+
+  <p align="center">
+    <a href="https://github.com/AyushHarinkhede">
+      <img src="https://github-readme-stats.vercel.app/api?username=AyushHarinkhede&theme=gotham&show_icons=true&count_private=true&hide_border=true" width="48%" alt="Ayush's stats"/>
+    </a>
+  </p>
+
+</div>
+
 
 ---
 
