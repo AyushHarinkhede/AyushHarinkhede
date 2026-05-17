@@ -21,7 +21,7 @@
 <h3 align="center"> Inside the Mind of a Developer</h3>
 ​<div align="center">
 <img src="https://media.giphy.com/media/SWoSkN6DxTszqIKEqv/giphy.gif" width="220" align="right" alt="Coding GIF" />
-​<img align="left" src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=16&duration=2000&pause=300&color=FFFFFF&background=0D1117&multiline=true&width=550&height=230&lines=Hi,+I'm+Ayush!+A+passionate+coder+from+Nagpur,+India.;Working+on:+Fullstack+Web+Apps+%26+AI+Integration;Learning:+Advanced+React,+Next.js+%26+System+Design;Location:+Waghdhara+Issasani+Hingna+Road,+Nagpur+-+441110;Fun+Fact:+I+debug+code+faster+with+headphones+on!;Mail+me:+ayushharinkhere2005@gmail.com" alt="About Me Information" />
+​<img align="left" src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=16&duration=1000&pause=180&repeat=100&color=FFFFFF&background=0D1117&multiline=true&width=550&height=230&lines=Hi,+I'm+Ayush!+A+passionate+coder+from+Nagpur,+India.;Working+on:+Fullstack+Web+Apps+%26+AI+Integration;Learning:+Advanced+React,+Next.js+%26+System+Design;Location:+Waghdhara+Issasani+Hingna+Road,+Nagpur+-+441110;Fun+Fact:+I+debug+code+faster+with+headphones+on!;Mail+me:+ayushharinkhere2005@gmail.com" alt="About Me Information" />
 </div>
 ​<br clear="all"/>
 
