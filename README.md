@@ -19,21 +19,13 @@
 ---
 
 <h3 align="center"> Inside the Mind of a Developer</h3>
-
+​<!-- Text converted into a Dynamic Multiline SVG Image as requested -->
 <div align="center">
-  <img align="right" src="https://media.giphy.com/media/SWoSkN6DxTszqIKEqv/giphy.gif" width="250" />
-
-  <p align="left"> 
-    👋 <b>Hi, I'm Ayush!</b> A passionate coder from <b>Nagpur, India</b>.<br><br>
-    - 🔭 Working on: <b>Fullstack Web Apps & AI Integration</b><br>
-    - 🌱 Learning: <b>Advanced React, Next.js & System Design</b><br>
-    - 📍 Location: <b>Waghdhara Issasani Hingna Road, Nagpur - 441110</b><br>
-    - ⚡ Fun Fact: <b>I debug code faster with headphones on! 🎧</b><br>
-    - 📧 Mail me: <b><a href="mailto:ayushharinkhere2005@gmail.com">ayushharinkhere2005@gmail.com</a></b>
-  </p>
+<img src="https://media.giphy.com/media/SWoSkN6DxTszqIKEqv/giphy.gif" width="220" align="right" alt="Coding GIF" />
+​<img align="left" src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=16&pause=1000&color=23F709&background=0D1117&multiline=true&width=550&height=230&lines=%F0%9F%91%8B%20Hi,%20I'm%20Ayush!%20A%20passionate%20coder%20from%20Nagpur,%20India.;%F0%9F%94%AD%20Working%20on:%20Fullstack%20Web%20Apps%20%26%20AI%20Integration;%F0%9F%8C%B1%20Learning:%20Advanced%20React,%20Next.js%20%26%20System%20Design;%F0%9F%93%8D%20Location:%20Waghdhara%20Issasani%20Hingna%20Road,%20Nagpur%20-%20441110;%E2%9A%A1%20Fun%20Fact:%20I%20debug%20code%20faster%20with%20headphones%20on!%20%F0%9F%8E%A7;%F0%9F%93%A7%20Mail%20me:%20ayushharinkhere2005@gmail.com" alt="About Me Information" />
 </div>
+​<br clear="all"/>
 
-<br clear="all"/>
 
 ---
 
@@ -142,21 +134,6 @@
 </div>
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
