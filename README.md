@@ -152,21 +152,3 @@
 
 
 <br/>
-
-### 💻 My Tech Stack
-<p align="left">
-  <img src="https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
-  <img src="https://img.shields.io/badge/Express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB" alt="Express" />
-  <img src="https://img.shields.io/badge/React-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" alt="React" />
-  <img src="https://img.shields.io/badge/Node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white" alt="NodeJS" />
-  <img src="https://img.shields.io/badge/Tailwind_CSS-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
-</p>
-
-<br/>
-
-
-<p align="left">
-  <a href="https://github.com/AyushHarinkhede">
-    <img src="https://github-readme-stats.vercel.app/api?username=AyushHarinkhede&show_icons=true&theme=transparent&title_color=800080&text_color=ffffff&icon_color=00ff00&hide_border=true" alt="Ayush's GitHub Stats" />
-  </a>
- 
