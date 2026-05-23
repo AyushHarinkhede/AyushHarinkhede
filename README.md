@@ -1,7 +1,8 @@
-<div align="center"> 
-  <img src="https://capsule-render.vercel.app/api?type=venom&color=timeGradient&height=250&section=header&text=Hi%20there,%20I'm%20Ayush%20Harinkhede!&fontSize=38&fontColor=ffffff&fontAlign=center&fontAlignY=35&desc=━━━%20Fullstack%20Developer%20%7C%20Open%20Source%20Enthusiast%20━━━&descSize=20&descAlign=center&descAlignY=60&font=Finger%20Paint" />    
-</div>       
+<div align="center">  
+  <img src="https://capsule-render.vercel.app/api?type=venom&color=timeGradient&height=250&section=header&text=Hi%20there,%20I'm%20Ayush%20Harinkhede!&fontSize=38&fontColor=a020f0&fontAlign=center&fontAlignY=35&desc=━━━%20Fullstack%20Developer%20%7C%20Open%20Source%20Enthusiast%20━━━&descSize=20&descColor=00ff00&descAlign=center&descAlignY=60&font=Finger%20Paint" alt="Ayush Header" />   
+</div>   
   
+   
  
 <div align="center">   
   <a href="https://github.com/AyushHarinkhede">  
@@ -18,21 +19,12 @@
 ---
 
 <h3 align="center"> Inside the Mind of a Developer</h3>
-
-<div align="center">
-  <img align="right" src="https://media.giphy.com/media/SWoSkN6DxTszqIKEqv/giphy.gif" width="250" />
-
-  <p align="left"> 
-    👋 <b>Hi, I'm Ayush!</b> A passionate coder from <b>Nagpur, India</b>.<br><br>
-    - 🔭 Working on: <b>Fullstack Web Apps & AI Integration</b><br>
-    - 🌱 Learning: <b>Advanced React, Next.js & System Design</b><br>
-    - 📍 Location: <b>Waghdhara Issasani Hingna Road, Nagpur - 441110</b><br>
-    - ⚡ Fun Fact: <b>I debug code faster with headphones on! 🎧</b><br>
-    - 📧 Mail me: <b><a href="mailto:ayushharinkhere2005@gmail.com">ayushharinkhere2005@gmail.com</a></b>
-  </p>
+​<div align="center">
+<img src="https://media.giphy.com/media/SWoSkN6DxTszqIKEqv/giphy.gif" width="220" align="right" alt="Coding GIF" />
+​<img align="left" src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=16&duration=1000&pause=180&repeat=100&color=FFFFFF&background=0D1117&multiline=true&width=550&height=230&lines=Hi,+I'm+Ayush!+A+passionate+coder+from+Nagpur,+India.;Working+on:+Fullstack+Web+Apps+%26+AI+Integration;Learning:+Advanced+React,+Next.js+%26+System+Design;Location:+Waghdhara+Issasani+Hingna+Road,+Nagpur+-+441110;Fun+Fact:+I+debug+code+faster+with+headphones+on!;Mail+me:+ayushharinkhere2005@gmail.com" alt="About Me Information" />
 </div>
+​<br clear="all"/>
 
-<br clear="all"/>
 
 ---
 
@@ -62,12 +54,21 @@
 
 
 <div align="center">
-​<img src="https://nirzak-streak-stats.vercel.app/?user=AyushHarinkhede&theme=dark&hide_border=false" alt="Ayush's Streak Stats" />
-<p align="center">
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=AyushHArinkhede&theme=dark&hide_border=false&include_all_commits=false&count_private=false&layout=compact"/>
-<p align="center">
-<a href="https://github.com/AyushHarinkhede"><img src="https://github-readme-stats-one-bice.vercel.app/api?username=AyushHarinkhede&theme=gotham&show_icons=true&count_private=true&hide_border=true" width="48%" alt="Ayush's stats"/></a>
-</p></div>
+
+  <img src="https://streak-stats.demolab.com/?user=AyushHarinkhede&theme=dark&hide_border=false" alt="Ayush's Streak Stats" />
+
+  <p align="center">
+    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=AyushHarinkhede&theme=dark&hide_border=false&include_all_commits=false&count_private=false&layout=compact" alt="Top Languages" />
+  </p>
+
+  <p align="center">
+    <a href="https://github.com/AyushHarinkhede">
+      <img src="https://github-readme-stats.vercel.app/api?username=AyushHarinkhede&theme=gotham&show_icons=true&count_private=true&hide_border=true" width="48%" alt="Ayush's stats"/>
+    </a>
+  </p>
+
+</div>
+
 
 ---
 
@@ -132,21 +133,6 @@
 </div>
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
