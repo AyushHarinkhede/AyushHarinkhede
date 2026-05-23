@@ -57,7 +57,12 @@
 
   <img src="https://streak-stats.demolab.com/?user=AyushHarinkhede&theme=dark&hide_border=false" alt="Ayush's Streak Stats" />
 
-  <p align="center">
+
+<p align="center">
+
+<img src="https://github-readme-stats-salesp07.vercel.app/api/top-langs/?username=AyushHarinkhede&layout=compact&hide_border=true&bg_color=0d1117&title_color=00ff41&text_color=4a7a4a&langs_count=8" />
+  
+<!--  <p align="center">
     <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=AyushHarinkhede&theme=dark&hide_border=false&include_all_commits=false&count_private=false&layout=compact" alt="Top Languages" />
   </p>
 
@@ -65,12 +70,23 @@
     <a href="https://github.com/AyushHarinkhede">
       <img src="https://github-readme-stats.vercel.app/api?username=AyushHarinkhede&theme=gotham&show_icons=true&count_private=true&hide_border=true" width="48%" alt="Ayush's stats"/>
     </a>
-  </p>
+  </p> -->
 
 </div>
 
 
 ---
+
+
+
+
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/platane/snk/output/github-contribution-grid-snake-dark.svg" />
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/platane/snk/output/github-contribution-grid-snake.svg" />
+    <img alt="snake animation" src="https://raw.githubusercontent.com/platane/snk/output/github-contribution-grid-snake-dark.svg" width="100%" />
+  </picture>
+</div>
 
 
 <h3 align="center"><b>Let's Connect</b></h3>
