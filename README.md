@@ -75,8 +75,8 @@
 </div>
 
 
----
 
+---
 
 
 
@@ -87,6 +87,7 @@
     <img alt="snake animation" src="https://raw.githubusercontent.com/platane/snk/output/github-contribution-grid-snake-dark.svg" width="100%" />
   </picture>
 </div>
+
 
 
 <h3 align="center"><b>Let's Connect</b></h3>
@@ -149,6 +150,29 @@
 </div>
 
 ---
+
+
+<p align="center">
+  <a href="https://github.com/AyushHarinkhede">
+    <img src="https://github.githubassets.com/assets/starstruck-default-b6610abad518.png" width="85" alt="Starstruck" title="Starstruck: Earned by gaining stars on repositories"/>
+  </a>
+  <a href="https://github.com/AyushHarinkhede">
+    <img src="https://github.githubassets.com/assets/pull-shark-default-498c279a747d.png" width="85" alt="Pull Shark x3" title="Pull Shark: Levelled up to x3 (Silver) for authoring and merging pull requests"/>
+  </a>
+  <a href="https://github.com/AyushHarinkhede">
+    <img src="https://github.githubassets.com/assets/pair-extraordinaire-default-579438a20e01.png" width="85" alt="Pair Extraordinaire x2" title="Pair Extraordinaire: Levelled up to x2 (Bronze) for co-authored commits"/>
+  </a>
+  <a href="https://github.com/AyushHarinkhede">
+    <img src="https://github.githubassets.com/assets/galaxy-brain-default-847262c21056.png" width="85" alt="Galaxy Brain x2" title="Galaxy Brain: Levelled up to x2 for accepted answers in Discussions"/>
+  </a>
+  <a href="https://github.com/AyushHarinkhede">
+    <img src="https://github.githubassets.com/assets/quickdraw-default-39c6aec8ff89.png" width="85" alt="Quickdraw" title="Quickdraw: Closed issues/PRs within 5 minutes"/>
+  </a>
+  <a href="https://github.com/AyushHarinkhede">
+    <img src="https://github.githubassets.com/assets/yolo-default-be0bbff04951.png" width="85" alt="YOLO" title="YOLO: Merged PRs without code review"/>
+  </a>
+</p>
+
 
 
 <br/> 
