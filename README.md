@@ -2,7 +2,14 @@
   <img src="https://capsule-render.vercel.app/api?type=venom&color=timeGradient&height=250&section=header&text=Hi%20there,%20I'm%20Ayush%20Harinkhede!&fontSize=38&fontColor=a020f0&fontAlign=center&fontAlignY=35&desc=━━━%20Fullstack%20Developer%20%7C%20Open%20Source%20Enthusiast%20━━━&descSize=20&descColor=00ff00&descAlign=center&descAlignY=60&font=Finger%20Paint" alt="Ayush Header" />   
 </div>   
    
-  
+  <a href="https://www.gitanimals.org/en-US?utm_medium=image&utm_source=AyushHarinkhede&utm_content=farm">
+<img
+  src="https://render.gitanimals.org/farms/AyushHarinkhede"
+  width="600"
+  height="300"
+/>
+</a>
+
  
 <div align="center">    
   <a href="https://github.com/AyushHarinkhede">  
