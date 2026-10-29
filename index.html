@@ -1281,47 +1281,150 @@ header {
   padding: 0 24px 20px;
 }
 
-/* ─── SOCIAL MEDIA CHIPS GRID ──────────────────── */
+/* ─── APP LAUNCHER ICONS DOCK (TACTILE SQUIRCLE TILES) ── */
 .social-links-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-  gap: 14px;
-  margin-top: 20px;
-}
-.social-pill-item {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 16px 10px;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  margin-top: 20px;
+  padding: 14px 4px;
+}
+
+.app-tile-btn,
+.social-pill-item {
+  position: relative;
+  width: 62px;
+  height: 62px;
+  min-width: 62px;
+  min-height: 62px;
+  border-radius: 17px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
   text-decoration: none;
-  color: var(--text);
-  transition: all 0.25s ease;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12), inset 0 1px 1.5px rgba(255, 255, 255, 0.35);
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.28s ease, filter 0.25s ease;
+  user-select: none;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
 }
+
+/* Glass specular sheen on top half of app tile */
+.app-tile-btn::before,
+.social-pill-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0) 100%);
+  border-radius: 17px 17px 0 0;
+  pointer-events: none;
+}
+
+.app-tile-btn:hover,
 .social-pill-item:hover {
-  border-color: var(--accent);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.12);
+  transform: translateY(-6px) scale(1.08);
 }
+
+.app-tile-btn:active,
+.social-pill-item:active {
+  transform: translateY(0) scale(0.92);
+  transition-duration: 0.1s;
+}
+
+.app-tile-btn svg,
 .social-pill-item svg {
-  width: 26px; height: 26px;
-  transition: transform 0.25s ease;
+  width: 32px;
+  height: 32px;
+  display: block;
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
 }
+
+.app-tile-btn:hover svg,
 .social-pill-item:hover svg {
-  transform: scale(1.15);
+  transform: scale(1.14);
 }
-.social-pill-name {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text2);
-}
-.social-pill-item:hover .social-pill-name {
-  color: var(--accent);
+
+/* Branded Backgrounds & Dynamic Shadows for All 18 Apps */
+.app-github { background: #181717; }
+.app-github:hover { box-shadow: 0 12px 28px rgba(24, 23, 23, 0.55), inset 0 1px 1.5px rgba(255, 255, 255, 0.4); }
+
+.app-linkedin { background: #0A66C2; }
+.app-linkedin:hover { box-shadow: 0 12px 28px rgba(10, 102, 194, 0.5), inset 0 1px 1.5px rgba(255, 255, 255, 0.4); }
+
+.app-gmail { background: #FFFFFF; border-color: rgba(0, 0, 0, 0.1); }
+.app-gmail:hover { box-shadow: 0 12px 28px rgba(234, 67, 53, 0.4), inset 0 1px 1.5px rgba(255, 255, 255, 0.8); }
+
+.app-whatsapp { background: #25D366; }
+.app-whatsapp:hover { box-shadow: 0 12px 28px rgba(37, 211, 102, 0.5), inset 0 1px 1.5px rgba(255, 255, 255, 0.4); }
+
+.app-phone { background: linear-gradient(135deg, #10B981 0%, #059669 100%); }
+.app-phone:hover { box-shadow: 0 12px 28px rgba(16, 185, 129, 0.5), inset 0 1px 1.5px rgba(255, 255, 255, 0.4); }
+
+.app-sms { background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%); }
+.app-sms:hover { box-shadow: 0 12px 28px rgba(59, 130, 246, 0.5), inset 0 1px 1.5px rgba(255, 255, 255, 0.4); }
+
+.app-instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+.app-instagram:hover { box-shadow: 0 12px 28px rgba(214, 36, 159, 0.5), inset 0 1px 1.5px rgba(255, 255, 255, 0.4); }
+
+.app-facebook { background: #1877F2; }
+.app-facebook:hover { box-shadow: 0 12px 28px rgba(24, 119, 242, 0.5), inset 0 1px 1.5px rgba(255, 255, 255, 0.4); }
+
+.app-youtube { background: #FF0000; }
+.app-youtube:hover { box-shadow: 0 12px 28px rgba(255, 0, 0, 0.5), inset 0 1px 1.5px rgba(255, 255, 255, 0.4); }
+
+.app-telegram { background: linear-gradient(135deg, #2AABEE 0%, #229ED9 100%); }
+.app-telegram:hover { box-shadow: 0 12px 28px rgba(34, 158, 217, 0.5), inset 0 1px 1.5px rgba(255, 255, 255, 0.4); }
+
+.app-x { background: #000000; border-color: rgba(255, 255, 255, 0.22); }
+.app-x:hover { box-shadow: 0 12px 28px rgba(255, 255, 255, 0.3), inset 0 1px 1.5px rgba(255, 255, 255, 0.4); }
+
+.app-signal { background: #3A76F0; }
+.app-signal:hover { box-shadow: 0 12px 28px rgba(58, 118, 240, 0.5), inset 0 1px 1.5px rgba(255, 255, 255, 0.4); }
+
+.app-reddit { background: #FF4500; }
+.app-reddit:hover { box-shadow: 0 12px 28px rgba(255, 69, 0, 0.5), inset 0 1px 1.5px rgba(255, 255, 255, 0.4); }
+
+.app-snapchat { background: #FFFC00; border-color: rgba(0, 0, 0, 0.08); }
+.app-snapchat:hover { box-shadow: 0 12px 28px rgba(255, 252, 0, 0.65), inset 0 1px 1.5px rgba(255, 255, 255, 0.8); }
+
+.app-pinterest { background: #E60023; }
+.app-pinterest:hover { box-shadow: 0 12px 28px rgba(230, 0, 35, 0.5), inset 0 1px 1.5px rgba(255, 255, 255, 0.4); }
+
+.app-duolingo { background: #58CC02; }
+.app-duolingo:hover { box-shadow: 0 12px 28px rgba(88, 204, 2, 0.55), inset 0 1px 1.5px rgba(255, 255, 255, 0.4); }
+
+.app-arattai { background: #0F62FE; }
+.app-arattai:hover { box-shadow: 0 12px 28px rgba(15, 98, 254, 0.5), inset 0 1px 1.5px rgba(255, 255, 255, 0.4); }
+
+.app-inquiries { background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%); }
+.app-inquiries:hover { box-shadow: 0 12px 28px rgba(99, 102, 241, 0.5), inset 0 1px 1.5px rgba(255, 255, 255, 0.4); }
+
+@media (max-width: 600px) {
+  .app-tile-btn,
+  .social-pill-item {
+    width: 54px;
+    height: 54px;
+    min-width: 54px;
+    min-height: 54px;
+    border-radius: 15px;
+  }
+  .app-tile-btn svg,
+  .social-pill-item svg {
+    width: 28px;
+    height: 28px;
+  }
+  .social-links-grid {
+    gap: 14px;
+  }
 }
 
 /* ─── LIVE WAVE DIVIDER & OBSIDIAN FOOTER ───────── */
@@ -2609,96 +2712,107 @@ header {
       <p class="main-section-desc">Reach out across any professional platform, developer repository, or direct messaging channel</p>
     </div>
 
-    <div class="card">
+    <div class="card" style="padding: 24px 20px; display: flex; justify-content: center; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 20px;">
       <div class="social-links-grid">
-        <a href="https://github.com/AyushHarinkhede" class="social-pill-item" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="#181717"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
-          <span class="social-pill-name">GitHub</span>
+        <a href="https://github.com/AyushHarinkhede" class="app-tile-btn app-github" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
         </a>
 
-        <a href="https://linkedin.com" class="social-pill-item" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="#0A66C2"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg>
-          <span class="social-pill-name">LinkedIn</span>
+        <a href="https://linkedin.com" class="app-tile-btn app-linkedin" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg>
         </a>
 
-        <a href="mailto:ayushharinkhere2005@gmail.com" class="social-pill-item">
-          <svg viewBox="0 0 24 24" fill="#EA4335"><path d="M20 18H18V9.25L12 13L6 9.25V18H4V6H5.2L12 10.25L18.8 6H20M20 4H4C2.89 4 2 4.89 2 6V18A2 2 0 0 0 4 20H20A2 2 0 0 0 22 18V6C22 4.89 21.1 4 20 4Z"/></svg>
-          <span class="social-pill-name">Gmail</span>
+        <a href="mailto:ayushharinkhere2005@gmail.com" class="app-tile-btn app-gmail" title="Gmail" aria-label="Gmail">
+          <svg viewBox="0 0 24 24" width="32" height="32"><path fill="#EA4335" d="M12 13L20 7.5V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7.5L12 13z"/><path fill="#4285F4" d="M20 6H4a2 2 0 0 0-2 2v.5L12 14l10-5.5V8a2 2 0 0 0-2-2z"/><path fill="#34A853" d="M22 8v10a2 2 0 0 1-2 2h-2V11.2L22 8z"/><path fill="#FBBC05" d="M2 8l4 3.2V20H4a2 2 0 0 1-2-2V8z"/></svg>
         </a>
 
-        <a href="https://wa.me/919209514158" class="social-pill-item" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="#25D366"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.65 7.89 7 8.5 7 9.71C7 10.93 7.89 12.1 8 12.27C8.14 12.44 9.76 14.94 12.25 16C12.84 16.27 13.3 16.42 13.66 16.53C14.25 16.72 14.79 16.69 15.22 16.63C15.7 16.56 16.68 16.03 16.89 15.45C17.1 14.87 17.1 14.38 17.04 14.27C16.97 14.17 16.81 14.11 16.56 14C16.31 13.86 15.09 13.26 14.87 13.18C14.64 13.1 14.5 13.06 14.31 13.3C14.15 13.55 13.67 14.11 13.53 14.27C13.38 14.44 13.24 14.46 13 14.34C12.74 14.21 11.94 13.95 11 13.11C10.26 12.45 9.77 11.64 9.62 11.39C9.5 11.15 9.61 11 9.73 10.89C9.84 10.78 10 10.6 10.1 10.45C10.23 10.31 10.27 10.2 10.35 10.04C10.43 9.87 10.39 9.73 10.33 9.61C10.27 9.5 9.77 8.26 9.56 7.77C9.36 7.29 9.16 7.35 9 7.34C8.86 7.34 8.7 7.33 8.53 7.33Z"/></svg>
-          <span class="social-pill-name">WhatsApp</span>
+        <a href="https://wa.me/919209514158" class="app-tile-btn app-whatsapp" target="_blank" rel="noopener noreferrer" title="WhatsApp" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.65 7.89 7 8.5 7 9.71C7 10.93 7.89 12.1 8 12.27C8.14 12.44 9.76 14.94 12.25 16C12.84 16.27 13.3 16.42 13.66 16.53C14.25 16.72 14.79 16.69 15.22 16.63C15.7 16.56 16.68 16.03 16.89 15.45C17.1 14.87 17.1 14.38 17.04 14.27C16.97 14.17 16.81 14.11 16.56 14C16.31 13.86 15.09 13.26 14.87 13.18C14.64 13.1 14.5 13.06 14.31 13.3C14.15 13.55 13.67 14.11 13.53 14.27C13.38 14.44 13.24 14.46 13 14.34C12.74 14.21 11.94 13.95 11 13.11C10.26 12.45 9.77 11.64 9.62 11.39C9.5 11.15 9.61 11 9.73 10.89C9.84 10.78 10 10.6 10.1 10.45C10.23 10.31 10.27 10.2 10.35 10.04C10.43 9.87 10.39 9.73 10.33 9.61C10.27 9.5 9.77 8.26 9.56 7.77C9.36 7.29 9.16 7.35 9 7.34C8.86 7.34 8.7 7.33 8.53 7.33Z"/></svg>
         </a>
 
-        <a href="tel:+919209514158" class="social-pill-item">
-          <svg viewBox="0 0 24 24" fill="#3B82F6"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-          <span class="social-pill-name">Call Phone</span>
+        <a href="tel:+919209514158" class="app-tile-btn app-phone" title="Call Phone" aria-label="Call Phone">
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
         </a>
 
-        <a href="sms:+919209514158" class="social-pill-item">
-          <svg viewBox="0 0 24 24" fill="#10B981"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
-          <span class="social-pill-name">Message SMS</span>
+        <a href="sms:+919209514158" class="app-tile-btn app-sms" title="Message SMS" aria-label="Message SMS">
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
         </a>
 
-        <a href="https://www.instagram.com/ayush_harinkhere?igsh=ZWUxNXM0MGd3ZmNu" class="social-pill-item" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="#E1306C"><path d="M7.8 2H16.2C19.4 2 22 4.6 22 7.8V16.2A5.8 5.8 0 0 1 16.2 22H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2M7.6 4A3.6 3.6 0 0 0 4 7.6V16.4C4 18.39 5.61 20 7.6 20H16.4A3.6 3.6 0 0 0 20 16.4V7.6C20 5.61 18.39 4 16.4 4H7.6M17.25 5.5A1.25 1.25 0 0 1 18.5 6.75A1.25 1.25 0 0 1 17.25 8A1.25 1.25 0 0 1 16 6.75A1.25 1.25 0 0 1 17.25 5.5M12 7A5 5 0 0 1 17 12A5 5 0 0 1 12 17A5 5 0 0 1 7 12A5 5 0 0 1 12 7M12 9A3 3 0 0 0 9 12A3 3 0 0 0 12 15A3 3 0 0 0 15 12A3 3 0 0 0 12 9Z"/></svg>
-          <span class="social-pill-name">Instagram</span>
+        <a href="https://www.instagram.com/ayush_harinkhere?igsh=ZWUxNXM0MGd3ZmNu" class="app-tile-btn app-instagram" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
         </a>
 
-        <a href="https://www.facebook.com/share/17a26WTexc" class="social-pill-item" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="#1877F2"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg>
-          <span class="social-pill-name">Facebook</span>
+        <a href="https://www.facebook.com/share/17a26WTexc" class="app-tile-btn app-facebook" target="_blank" rel="noopener noreferrer" title="Facebook" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg>
         </a>
 
-        <a href="https://youtube.com/@ashtag_ayush?feature=shared" class="social-pill-item" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="#FF0000"><path d="M10 15L15.19 12L10 9V15M21.56 7.17C21.69 7.64 21.78 8.27 21.84 9.07C21.91 9.87 21.94 10.56 21.94 11.16L22 12C22 14.19 21.84 15.8 21.56 16.83C21.31 17.73 20.73 18.31 19.83 18.56C19.36 18.69 18.5 18.78 17.18 18.84C15.88 18.91 14.69 18.94 13.59 18.94L12 19C7.81 19 5.2 18.84 4.17 18.56C3.27 18.31 2.69 17.73 2.44 16.83C2.31 16.36 2.22 15.73 2.16 14.93C2.09 14.13 2.06 13.44 2.06 12.84L2 12C2 9.81 2.16 8.2 2.44 7.17C2.69 6.27 3.27 5.69 4.17 5.44C4.64 5.31 5.5 5.22 6.82 5.16C8.12 5.09 9.31 5.06 10.41 5.06L12 5C16.19 5 18.8 5.16 19.83 5.44C20.73 5.69 21.31 6.27 21.56 7.17Z"/></svg>
-          <span class="social-pill-name">YouTube</span>
+        <a href="https://youtube.com/@ashtag_ayush?feature=shared" class="app-tile-btn app-youtube" target="_blank" rel="noopener noreferrer" title="YouTube" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M21.582 6.186a2.806 2.806 0 0 0-1.974-1.986C17.868 3.75 12 3.75 12 3.75s-5.868 0-7.608.45a2.806 2.806 0 0 0-1.974 1.986C2 7.935 2 12 2 12s0 4.065.418 5.814a2.806 2.806 0 0 0 1.974 1.986c1.74.45 7.608.45 7.608.45s5.868 0 7.608-.45a2.806 2.806 0 0 0 1.974-1.986C22 16.065 22 12 22 12s0-4.065-.418-5.814zM10 15.464V8.536L16 12l-6 3.464z"/></svg>
         </a>
 
-        <a href="https://t.me/ayushharinkhere2005" class="social-pill-item" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="#229ED9"><path d="M9.78 18.65L10.06 14.42L17.74 7.5C18.08 7.19 17.67 7.04 17.22 7.31L7.74 13.3L3.64 12C2.76 11.75 2.75 11.14 3.84 10.7L19.81 4.54C20.54 4.21 21.24 4.72 20.96 5.84L18.24 18.65C18.05 19.56 17.5 19.78 16.74 19.36L12.6 16.3L10.61 18.23C10.38 18.46 10.19 18.65 9.78 18.65Z"/></svg>
-          <span class="social-pill-name">Telegram</span>
+        <a href="https://t.me/ayushharinkhere2005" class="app-tile-btn app-telegram" target="_blank" rel="noopener noreferrer" title="Telegram" aria-label="Telegram">
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M9.78 18.65L10.06 14.42L17.74 7.5C18.08 7.19 17.67 7.04 17.22 7.31L7.74 13.3L3.64 12C2.76 11.75 2.75 11.14 3.84 10.7L19.81 4.54C20.54 4.21 21.24 4.72 20.96 5.84L18.24 18.65C18.05 19.56 17.5 19.78 16.74 19.36L12.6 16.3L10.61 18.23C10.38 18.46 10.19 18.65 9.78 18.65Z"/></svg>
         </a>
 
-        <a href="https://x.com/AyushHarinkhere?t=9-6Rz3q9RqSvZK5q4mnvgw&s=09" class="social-pill-item" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="#000000"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          <span class="social-pill-name">X (Twitter)</span>
+        <a href="https://x.com/AyushHarinkhere?t=9-6Rz3q9RqSvZK5q4mnvgw&s=09" class="app-tile-btn app-x" target="_blank" rel="noopener noreferrer" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         </a>
 
-        <a href="https://signal.me/#eu/d-xnZ14twZOj_8DevTe34UqH0VyfFedVpjKkOI7W-n9a1XHFVdVNiZiPp9lb6Rtg" class="social-pill-item" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="#3A76F0"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.38 5.07L2.1 21.9l4.98-1.25C8.5 21.52 10.2 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.57 0-3.04-.42-4.32-1.16l-.31-.18-3.18.8 1-3.13-.19-.32C4.34 14.82 4 13.44 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
-          <span class="social-pill-name">Signal</span>
+        <a href="https://signal.me/#eu/d-xnZ14twZOj_8DevTe34UqH0VyfFedVpjKkOI7W-n9a1XHFVdVNiZiPp9lb6Rtg" class="app-tile-btn app-signal" target="_blank" rel="noopener noreferrer" title="Signal" aria-label="Signal">
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.38 5.07L2.1 21.9l4.98-1.25C8.5 21.52 10.2 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.57 0-3.04-.42-4.32-1.16l-.31-.18-3.18.8 1-3.13-.19-.32C4.34 14.82 4 13.44 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
         </a>
 
-        <a href="https://www.reddit.com/u/ayush_harinkhere/s/dFu9g0OBwP" class="social-pill-item" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="#FF4500"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
-          <span class="social-pill-name">Reddit</span>
+        <a href="https://www.reddit.com/u/ayush_harinkhere/s/dFu9g0OBwP" class="app-tile-btn app-reddit" target="_blank" rel="noopener noreferrer" title="Reddit" aria-label="Reddit">
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
         </a>
 
-        <a href="https://www.snapchat.com/add/ayushharinkhere?share_id=jmrUbhs5QJ4&locale=en-IN-u-mu-celsius" class="social-pill-item" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="#FFFC00"><path d="M12.001 2c-3.5 0-5.8 2.2-5.8 5.2 0 1.6.4 2.8 1.1 3.8.3.4.4.7.2 1.1-.3.6-.9.8-1.6 1-.5.1-.9.3-1 .6-.2.4.1.8.6 1 .7.3 1.5.5 2.1.8.3.2.5.4.4.8-.2.7-.9 1.3-1.7 1.5-.4.1-.7.4-.7.8 0 .4.4.7.8.8.8.2 1.6.3 2.4.4.4 0 .7.3.8.7.2.9.8 1.4 1.7 1.7.9.3 1.9.4 3 .4s2.1-.1 3-.4c.9-.3 1.5-.8 1.7-1.7.1-.4.4-.7.8-.7.8-.1 1.6-.2 2.4-.4.4-.1.8-.4.8-.8 0-.4-.3-.7-.7-.8-.8-.2-1.5-.8-1.7-1.5-.1-.4.1-.6.4-.8.6-.3 1.4-.5 2.1-.8.5-.2.8-.6.6-1-.1-.3-.5-.5-1-.6-.7-.2-1.3-.4-1.6-1-.2-.4-.1-.7.2-1.1.7-1 1.1-2.2 1.1-3.8 0-3-2.3-5.2-5.8-5.2z"/></svg>
-          <span class="social-pill-name">Snapchat</span>
+        <!-- REAL SNAPCHAT APP BUTTON WITH GHOSTFACE CHILLAH SVG -->
+        <a href="https://www.snapchat.com/add/ayushharinkhere?share_id=jmrUbhs5QJ4&locale=en-IN-u-mu-celsius" class="app-tile-btn app-snapchat" target="_blank" rel="noopener noreferrer" title="Snapchat" aria-label="Snapchat">
+          <svg viewBox="0 0 24 24" width="34" height="34" fill="none">
+            <path d="M21.798 16.987c-2.867-.472-4.151-3.401-4.204-3.526l-.006-.011a1.07 1.07 0 0 1-.102-.898c.192-.454.83-.656 1.251-.79c.106-.033.205-.065.283-.096c.763-.3.918-.613.914-.822a.66.66 0 0 0-.5-.543l-.007-.002a1 1 0 0 0-.356-.069a.8.8 0 0 0-.313.063a2.5 2.5 0 0 1-.955.266a.82.82 0 0 1-.53-.178l.032-.53l.004-.065a10.1 10.1 0 0 0-.24-4.035a5.25 5.25 0 0 0-4.874-3.14l-.402.005a5.24 5.24 0 0 0-4.864 3.137a10.1 10.1 0 0 0-.242 4.031q.02.299.036.598a.85.85 0 0 1-.584.178a2.45 2.45 0 0 1-1.014-.268a.6.6 0 0 0-.245-.049a.83.83 0 0 0-.81.533c-.082.43.532.743.906.89c.08.032.178.063.283.096c.422.134 1.06.336 1.252.79a1.07 1.07 0 0 1-.102.898l-.006.011a7 7 0 0 1-1.069 1.663A5.22 5.22 0 0 1 2.2 16.987a.24.24 0 0 0-.2.25a.4.4 0 0 0 .03.13c.177.411 1.059.75 2.553.981c.14.022.198.25.28.622c.032.15.066.305.113.465a.293.293 0 0 0 .32.228a2.5 2.5 0 0 0 .424-.06a5.5 5.5 0 0 1 1.12-.127a5 5 0 0 1 .809.068a3.9 3.9 0 0 1 1.535.784a4.44 4.44 0 0 0 2.69 1.06q.05 0 .1-.004c.04.002.095.004.151.004a4.45 4.45 0 0 0 2.692-1.06a3.9 3.9 0 0 1 1.533-.784a5 5 0 0 1 .808-.068a5.6 5.6 0 0 1 1.12.119a2.4 2.4 0 0 0 .425.053h.024a.28.28 0 0 0 .295-.22a7 7 0 0 0 .114-.462c.081-.371.14-.598.28-.62c1.494-.23 2.377-.57 2.551-.978a.4.4 0 0 0 .032-.13a.24.24 0 0 0-.2-.25z" fill="#FFFFFF" stroke="#000000" stroke-width="1.2" stroke-linejoin="round"/>
+          </svg>
         </a>
 
-        <a href="https://pin.it/2wUjXYwYsm" class="social-pill-item" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="#E60023"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg>
-          <span class="social-pill-name">Pinterest</span>
+        <a href="https://pin.it/2wUjXYwYsm" class="app-tile-btn app-pinterest" target="_blank" rel="noopener noreferrer" title="Pinterest" aria-label="Pinterest">
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg>
         </a>
 
-        <a href="https://www.duolingo.com/profile/AyushHarinkhere?via=share_profile_linkm" class="social-pill-item" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="#58CC02"><path d="M12 2C6.5 2 2 6.5 2 12c0 2.2.7 4.2 1.9 5.8L3 21l3.5-.8C8 21.2 9.9 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm-3 7c.8 0 1.5.7 1.5 1.5S9.8 12 9 12s-1.5-.7-1.5-1.5S8.2 9 9 9zm6 0c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5zm-3 8c-2.3 0-3.5-1.2-3.8-1.5-.3-.3-.3-.8 0-1.1.3-.3.8-.3 1.1 0 .1.1.9.9 2.7.9s2.6-.8 2.7-.9c.3-.3.8-.3 1.1 0 .3.3.3.8 0 1.1-.3.3-1.5 1.5-3.8 1.5z"/></svg>
-          <span class="social-pill-name">Duolingo</span>
+        <!-- REAL DUOLINGO APP BUTTON WITH AUTHENTIC DUO OWL FACE SVG -->
+        <a href="https://www.duolingo.com/profile/AyushHarinkhere?via=share_profile_linkm" class="app-tile-btn app-duolingo" target="_blank" rel="noopener noreferrer" title="Duolingo" aria-label="Duolingo">
+          <svg viewBox="0 0 64 64" width="44" height="44" fill="none">
+            <!-- Duo's crest feather tufts -->
+            <path d="M14 18C10 11 4 9 2 11C1 14 4 20 10 22Z" fill="#58CC02"/>
+            <path d="M50 18C54 11 60 9 62 11C63 14 60 20 54 22Z" fill="#58CC02"/>
+            <path d="M14 18C10 11 4 9 2 11C1 14 4 20 10 22Z" stroke="#46A302" stroke-width="1.5"/>
+            <path d="M50 18C54 11 60 9 62 11C63 14 60 20 54 22Z" stroke="#46A302" stroke-width="1.5"/>
+            <!-- Head body -->
+            <ellipse cx="32" cy="33" rx="24" ry="22" fill="#58CC02"/>
+            <!-- Eye shadow contour -->
+            <ellipse cx="23" cy="31" rx="10" ry="11" fill="#46A302" opacity="0.3"/>
+            <ellipse cx="41" cy="31" rx="10" ry="11" fill="#46A302" opacity="0.3"/>
+            <!-- White eyes -->
+            <ellipse cx="23" cy="31" rx="8.5" ry="9.5" fill="#FFFFFF"/>
+            <ellipse cx="41" cy="31" rx="8.5" ry="9.5" fill="#FFFFFF"/>
+            <!-- Pupils -->
+            <ellipse cx="25" cy="31.5" rx="5" ry="6" fill="#1B3203"/>
+            <ellipse cx="39" cy="31.5" rx="5" ry="6" fill="#1B3203"/>
+            <!-- Specular light reflections -->
+            <circle cx="26.5" cy="29" r="1.8" fill="#FFFFFF"/>
+            <circle cx="40.5" cy="29" r="1.8" fill="#FFFFFF"/>
+            <circle cx="23.5" cy="34" r="0.9" fill="#FFFFFF"/>
+            <circle cx="37.5" cy="34" r="0.9" fill="#FFFFFF"/>
+            <!-- Orange Beak -->
+            <path d="M28 36.5 Q32 35 36 36.5 Q32 46.5 28 36.5Z" fill="#FF9600"/>
+            <path d="M29.5 40 Q32 39 34.5 40 Q32 46.5 29.5 40Z" fill="#E57300"/>
+          </svg>
         </a>
 
-        <a href="https://www.arattai.com/u/@ayushharinkhere" class="social-pill-item" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="#3B82F6"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>
-          <span class="social-pill-name">Arattai</span>
+        <a href="https://www.arattai.com/u/@ayushharinkhere" class="app-tile-btn app-arattai" target="_blank" rel="noopener noreferrer" title="Arattai" aria-label="Arattai">
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-6 9H7V9h7v2zm3-4H7V5h10v2zm-3 8H7v-2h4v2z"/></svg>
         </a>
 
-        <div class="social-pill-item" onclick="copyToClipboard('ayushharinkhere2005@gmail.com', 'Contact Email Copied!')" style="cursor: pointer;">
-          <svg viewBox="0 0 24 24" fill="#94A3B8"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
-          <span class="social-pill-name">Other Inquiries</span>
+        <div class="app-tile-btn app-inquiries" onclick="copyToClipboard('ayushharinkhere2005@gmail.com', 'Contact Email Copied!')" role="button" tabindex="0" title="Copy Contact Email" aria-label="Copy Contact Email">
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/><path d="M10 9h7v2h-7zm0 3h7v2h-7zm0 3h5v2h-5z"/></svg>
         </div>
       </div>
     </div>
@@ -3127,7 +3241,7 @@ function triggerFeedback(type = 'tap') {
 document.addEventListener('pointerdown', (e) => {
   unlockAudio();
   const target = e.target.closest(
-    '.card, .cat-pill, .sm-chip, .spec-chip, .search-box-container, .search-clear, #scrollTopBtn, .scatter-char, .footer-chip, .footer-action-btn, .social-pill-item, .p-btn-action, button, a, [role="button"]'
+    '.card, .cat-pill, .sm-chip, .spec-chip, .search-box-container, .search-clear, #scrollTopBtn, .scatter-char, .footer-chip, .footer-action-btn, .app-tile-btn, .social-pill-item, .p-btn-action, button, a, [role="button"]'
   );
   if (!target) return;
 
@@ -3177,7 +3291,7 @@ function initInteractiveCursor() {
     }
     const target = e.target;
     if (target) {
-      const interactive = target.closest('.card, button, a, .cat-pill, .sm-chip, .spec-chip, .scatter-char, .footer-chip, .footer-action-btn, .social-pill-item, .p-btn-action, [role="button"]');
+      const interactive = target.closest('.card, button, a, .cat-pill, .sm-chip, .spec-chip, .scatter-char, .footer-chip, .footer-action-btn, .app-tile-btn, .social-pill-item, .p-btn-action, [role="button"]');
       const shouldHover = !!interactive;
       if (shouldHover !== isHovering) {
         isHovering = shouldHover;
