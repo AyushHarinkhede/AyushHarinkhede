@@ -73,10 +73,29 @@
 }
 
 html {
-  scrollbar-gutter: stable; 
   scroll-padding-top: 40px;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+/* ─── HIDE ALL SIDE SCROLLBARS / SCROLL INDICATORS GLOBALLY ─── */
+html,
+body,
+*,
+*::before,
+*::after {
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE & Edge */
+}
+
+::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none !important; /* Chrome, Safari, Blink, Android, iOS */
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
 }
 
 body {
@@ -252,9 +271,10 @@ body::after {
   position: fixed;
   top: 0;
   left: 0;
-  height: 3px;
+  height: 3.5px;
   width: 0%;
-  background: linear-gradient(90deg, #38BDF8, #6366F1, #A855F7);
+  background: linear-gradient(90deg, #38BDF8 0%, #6366F1 35%, #A855F7 70%, #EC4899 100%);
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.55), 0 0 4px rgba(56, 189, 248, 0.45);
   z-index: 99999;
   transition: width 0.1s linear;
 }
