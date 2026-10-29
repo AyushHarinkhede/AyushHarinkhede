@@ -59,7 +59,18 @@
   --accent3:   #A5B4FC;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+  user-drag: none;
+}
 
 html {
   scrollbar-gutter: stable; 
@@ -80,6 +91,118 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+}
+
+/* Allow text entry and selection in search & inputs */
+#searchInput,
+input[type="text"],
+textarea {
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
+}
+
+/* Prevent image dragging */
+img, svg, picture, canvas {
+  -webkit-user-drag: none !important;
+  user-drag: none !important;
+  pointer-events: auto;
+}
+
+/* ─── INTERACTIVE AMBIENT CURSOR FOLLOWER AURA (DESKTOP) ─── */
+@media (hover: hover) and (pointer: fine) {
+  .edc-cursor-follower {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 999999;
+    border: 1.5px solid rgba(79, 70, 229, 0.45);
+    background: rgba(79, 70, 229, 0.04);
+    opacity: 0;
+    transform: translate3d(-100px, -100px, 0) scale(0.6);
+    transition: opacity 0.25s ease, border-color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
+    will-change: transform, opacity;
+  }
+  [data-theme="dark"] .edc-cursor-follower {
+    border-color: rgba(129, 140, 248, 0.6);
+    background: rgba(129, 140, 248, 0.08);
+  }
+  .edc-cursor-follower.visible {
+    opacity: 1;
+  }
+  .edc-cursor-follower.is-hovering {
+    border-color: var(--accent);
+    background: rgba(79, 70, 229, 0.12);
+    box-shadow: 0 0 18px rgba(79, 70, 229, 0.35);
+  }
+  .edc-cursor-follower.is-clicking {
+    border-color: var(--accent2);
+    background: rgba(79, 70, 229, 0.24);
+  }
+  .edc-cursor-follower.is-grabbing {
+    border-color: #38BDF8;
+    background: rgba(56, 189, 248, 0.18);
+  }
+}
+@media (hover: none), (pointer: coarse) {
+  .edc-cursor-follower {
+    display: none !important;
+  }
+}
+
+/* ─── SECURITY ALERT TOAST NOTIFICATION ───────── */
+.security-toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(30px);
+  background: rgba(15, 23, 42, 0.94);
+  color: #F8FAFC;
+  padding: 11px 22px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.32), 0 0 0 1px rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 100000;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.security-toast.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+.security-toast svg {
+  width: 17px;
+  height: 17px;
+  stroke: #F59E0B;
+  fill: none;
+  flex-shrink: 0;
+}
+
+/* ─── SCROLL REVEAL ENGINE & SLIDE TRANSITIONS ─── */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ─── ANIMATED BACKGROUND & DOT GRID ─────────── */
@@ -179,7 +302,7 @@ header {
   font-weight: 500;
 }
 
-/* ─── 3D KINETIC TITLE (AYUSH HARINKHEDE) ───────── */
+/* ─── 3D KINETIC TITLE & LETTER DISPERSION (AYUSH HARINKHEDE) ─── */
 .header-title {
   font-size: clamp(3.8rem, 10vw, 7.5rem);
   font-weight: 700;
@@ -187,28 +310,81 @@ header {
   letter-spacing: -2px;
   animation: fadeDown 0.7s 0.1s ease both;
   margin-bottom: 16px;
-  user-select: none;
   -webkit-user-select: none;
+  user-select: none;
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
 }
 
-.header-title .title-edc {
+.header-title .scatter-char {
+  display: inline-block;
+  color: inherit;
+  -webkit-text-fill-color: currentColor;
+}
+
+.header-title .title-edc,
+.header-title .title-edc .scatter-char {
   color: var(--accent);
+  -webkit-text-fill-color: var(--accent);
   text-shadow: 0 0 45px rgba(79, 70, 229, 0.22);
-  display: inline-block;
-  transition: transform 0.3s ease;
-}
-.header-title .title-edc:hover {
-  transform: scale(1.03);
 }
 
-.header-title .title-catalyst {
+.header-title .title-catalyst,
+.header-title .title-catalyst .scatter-char {
   color: #1a1a1c;
-  display: inline-block;
-  transition: transform 0.3s ease, color 0.3s ease;
+  -webkit-text-fill-color: #1a1a1c;
+  transition: color 0.3s ease;
 }
-.header-title .title-catalyst:hover {
-  transform: scale(1.03);
-  color: var(--accent2);
+
+[data-theme="dark"] .header-title .title-edc,
+[data-theme="dark"] .header-title .title-edc .scatter-char {
+  color: var(--accent);
+  -webkit-text-fill-color: var(--accent);
+  text-shadow: 0 0 45px rgba(129, 140, 248, 0.35);
+}
+
+[data-theme="dark"] .header-title .title-catalyst,
+[data-theme="dark"] .header-title .title-catalyst .scatter-char {
+  color: #F1F5F9;
+  -webkit-text-fill-color: #F1F5F9;
+  text-shadow: 0 0 35px rgba(255, 255, 255, 0.08);
+}
+
+/* Scroll-Driven 3D Kinetic Letter Dispersion Engine */
+.scatter-line {
+  display: block;
+  transform-style: preserve-3d;
+}
+
+.scatter-word {
+  display: inline-block;
+  white-space: nowrap;
+  transform-style: preserve-3d;
+}
+
+.scatter-char {
+  display: inline-block;
+  position: relative;
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: text-shadow 0.2s ease;
+}
+
+.scatter-char:hover {
+  text-shadow: 0 0 28px rgba(99, 102, 241, 0.75);
+}
+
+.scatter-space {
+  display: inline-block;
+  width: 0.28em;
 }
 
 .header-sub {
@@ -310,6 +486,7 @@ header {
   padding: 18px 90px 18px 58px;
   font-size: 16px;
   font-weight: 500;
+  line-height: 24px;
   color: var(--text3);
   pointer-events: none;
   display: flex;
@@ -318,6 +495,7 @@ header {
   overflow: hidden;
   text-overflow: ellipsis;
   user-select: none;
+  z-index: 2;
 }
 
 .placeholder-cursor {
@@ -334,6 +512,98 @@ header {
   50% { opacity: 0; }
 }
 
+/* ─── LIVE ANIMATED SEARCH TEXT LAYER ─────────── */
+.search-animated-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 18px 90px 18px 58px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  font-family: 'Fredoka', sans-serif;
+  letter-spacing: 0.2px;
+  pointer-events: none;
+  overflow: hidden;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--text);
+  z-index: 3;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  user-select: none;
+  display: block;
+}
+
+.char-span {
+  display: inline-block;
+  white-space: pre;
+  position: relative;
+  will-change: transform, opacity, color;
+  transform-origin: center bottom;
+  vertical-align: baseline;
+}
+
+.char-span.char-enter {
+  display: inline-block;
+  animation: charPopSpring 0.18s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes charPopSpring {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.4) rotate(-4deg);
+    color: var(--accent);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.18) rotate(1.5deg);
+    color: var(--accent);
+    text-shadow: 0 2px 8px rgba(99, 102, 241, 0.45);
+  }
+  75% {
+    transform: translateY(1px) scale(0.97);
+    color: var(--accent);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+    color: inherit;
+    text-shadow: none;
+  }
+}
+
+.char-span.char-exit {
+  display: inline-block;
+  animation: charPoofExit 0.18s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+  pointer-events: none;
+}
+
+@keyframes charPoofExit {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    color: #EF4444 !important;
+    text-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+  }
+  35% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.22) rotate(3deg);
+    color: #DC2626 !important;
+    text-shadow: 0 2px 10px rgba(239, 68, 68, 0.7);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-18px) scale(0.35) rotate(-5deg);
+    color: #DC2626 !important;
+    max-width: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
+
 #searchInput {
   position: absolute;
   top: 0; left: 0;
@@ -343,11 +613,20 @@ header {
   padding: 18px 90px 18px 58px;
   font-size: 16px;
   font-weight: 500;
-  color: var(--text);
+  line-height: 24px;
+  letter-spacing: 0.2px;
+  color: transparent !important;
   caret-color: var(--accent);
   font-family: 'Fredoka', sans-serif;
   outline: none;
   z-index: 4;
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+
+#searchInput::selection {
+  background: rgba(99, 102, 241, 0.35) !important;
+  color: transparent !important;
 }
 
 .search-clear {
@@ -1375,7 +1654,10 @@ header {
   opacity: 0;
   pointer-events: none;
   transform: translateY(20px) scale(0.85);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: opacity 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              bottom 0.35s cubic-bezier(0.34, 1.35, 0.64, 1),
+              box-shadow 0.3s ease;
 }
 .scroll-top-btn.visible {
   opacity: 1;
@@ -1390,6 +1672,46 @@ header {
 .scroll-top-btn svg {
   width: 24px;
   height: 24px;
+  transition: stroke 0.25s ease, filter 0.25s ease;
+}
+.scroll-top-btn.docked-footer {
+  bottom: 38px !important;
+  box-shadow: 0 10px 28px rgba(79, 70, 229, 0.42), 0 2px 8px rgba(0, 0, 0, 0.12) !important;
+}
+@media (max-width: 600px) {
+  .scroll-top-btn.docked-footer {
+    bottom: max(26px, env(safe-area-inset-bottom, 26px)) !important;
+  }
+}
+.scroll-top-btn.is-online svg {
+  stroke: #10B981 !important;
+  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.85));
+}
+.scroll-top-btn.is-offline svg {
+  stroke: #EF4444 !important;
+  filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.85));
+}
+.scroll-top-btn.tapping {
+  animation: scrollBtnTapSquish 0.52s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.scroll-top-btn.tapping svg {
+  animation: arrowRocketLaunch 0.58s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+}
+@keyframes scrollBtnTapSquish {
+  0% { transform: scale(1) translateY(0); }
+  20% { transform: scale3d(1.18, 0.82, 1) translateY(5px); }
+  48% { transform: scale3d(0.92, 1.15, 1) translateY(-6px); }
+  75% { transform: scale3d(1.05, 0.96, 1) translateY(1.5px); }
+  100% { transform: scale(1) translateY(0); }
+}
+@keyframes arrowRocketLaunch {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  20% { transform: translateY(4px) scale(0.85, 1.15); opacity: 1; }
+  45% { transform: translateY(-26px) scale(0.65, 1.35); opacity: 0; }
+  46% { transform: translateY(24px) scale(0.7, 1.25); opacity: 0; }
+  74% { transform: translateY(-3px) scale(1.1, 0.92); opacity: 1; }
+  88% { transform: translateY(1px) scale(0.98, 1.02); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
 }
 
 /* ─── MODALS & LIGHTBOX ────────────────────────── */
@@ -1515,7 +1837,20 @@ header {
 </head>
 <body>
 
-<!-- ══ TOP SCROLL PROGRESS INDICATOR ═══════════════ -->
+<!-- 🌀 INTERACTIVE AMBIENT CURSOR FOLLOWER AURA (DESKTOP ONLY) 🌀 -->
+<div id="edcCursorFollower" class="edc-cursor-follower" aria-hidden="true"></div>
+
+<!-- 🛡️ SECURITY ALERT TOAST 🛡️ -->
+<div id="securityToast" class="security-toast" role="status" aria-live="polite">
+  <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10"></circle>
+    <line x1="12" y1="8" x2="12" y2="12"></line>
+    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+  </svg>
+  <span id="securityToastMsg">Action Restricted</span>
+</div>
+
+<!-- ⚡ TOP SCROLL PROGRESS INDICATOR ⚡ -->
 <div id="scrollProgressBar" class="scroll-progress-bar"></div>
 
 <!-- ══ BACKGROUND GRAIN & AMBIENT ORBS ═════════════ -->
@@ -1524,7 +1859,7 @@ header {
 <div class="orb orb2"></div>
 <div class="orb orb3"></div>
 
-<!-- ══ STANDALONE SCROLL-TO-TOP BUTTON (BOTTOM-RIGHT) ═ -->
+<!-- 🚀 STANDALONE SCROLL-TO-TOP BUTTON (FROM EDC CATALYST) 🚀 -->
 <button id="scrollTopBtn" class="scroll-top-btn" onclick="scrollToTop()" aria-label="Scroll to top" title="Back to top">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
     <path d="M12 19V5M5 12l7-7 7 7"/>
@@ -1541,10 +1876,31 @@ header {
       <span>PORTFOLIO SPECTRUM · WEB DEVELOPER &amp; IT SUPPORT ENGINEER</span>
     </div>
 
-    <!-- Majestic 3D Title exactly like EDC Catalyst -->
+    <!-- Majestic 3D Title with 3D Kinetic Dispersion / Break Effect -->
     <h1 class="header-title" id="mainHeaderTitle">
-      <span class="title-edc">Ayush</span><br/>
-      <span class="title-catalyst">Harinkhede</span>
+      <span class="scatter-line title-edc">
+        <span class="scatter-word">
+          <span class="scatter-char" onclick="onLetterClick(event, 0)" title="A">A</span>
+          <span class="scatter-char" onclick="onLetterClick(event, 1)" title="y">y</span>
+          <span class="scatter-char" onclick="onLetterClick(event, 2)" title="u">u</span>
+          <span class="scatter-char" onclick="onLetterClick(event, 3)" title="s">s</span>
+          <span class="scatter-char" onclick="onLetterClick(event, 4)" title="h">h</span>
+        </span>
+      </span><br/>
+      <span class="scatter-line title-catalyst">
+        <span class="scatter-word">
+          <span class="scatter-char" onclick="onLetterClick(event, 5)" title="H">H</span>
+          <span class="scatter-char" onclick="onLetterClick(event, 6)" title="a">a</span>
+          <span class="scatter-char" onclick="onLetterClick(event, 7)" title="r">r</span>
+          <span class="scatter-char" onclick="onLetterClick(event, 8)" title="i">i</span>
+          <span class="scatter-char" onclick="onLetterClick(event, 9)" title="n">n</span>
+          <span class="scatter-char" onclick="onLetterClick(event, 10)" title="k">k</span>
+          <span class="scatter-char" onclick="onLetterClick(event, 11)" title="h">h</span>
+          <span class="scatter-char" onclick="onLetterClick(event, 12)" title="e">e</span>
+          <span class="scatter-char" onclick="onLetterClick(event, 13)" title="d">d</span>
+          <span class="scatter-char" onclick="onLetterClick(event, 14)" title="e">e</span>
+        </span>
+      </span>
     </h1>
 
     <p class="header-sub">Creative · Innovative · Passionate</p>
@@ -1559,7 +1915,7 @@ header {
   </header>
 
   <!-- ══ ELASTIC SPRING SEARCH BAR (SEARCH AYUSH'S FULL PORTFOLIO) ══ -->
-  <div class="search-wrap" id="searchWrap">
+  <div class="search-wrap scroll-reveal" id="searchWrap">
     <div class="search-box-container" onclick="document.getElementById('searchInput').focus()">
       <span class="search-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
@@ -1568,6 +1924,7 @@ header {
         </svg>
       </span>
       <div class="search-placeholder" id="searchPlaceholder" aria-hidden="true"></div>
+      <div class="search-animated-text" id="searchAnimatedText" aria-hidden="true"></div>
       <input type="text" id="searchInput" placeholder="" autocomplete="off" spellcheck="false" aria-label="Search portfolio details" oninput="handlePortfolioSearch(this.value)" onfocus="handleSearchFocus()" onblur="handleSearchBlur()"/>
       <button class="search-clear" id="clearBtn" onclick="clearPortfolioSearch(event)" aria-label="Clear search">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -1629,7 +1986,7 @@ header {
   </div>
 
   <!-- ══ SECTION 1: ABOUT ME & PROFILE ══════════════ -->
-  <div class="searchable-section" id="about-section">
+  <div class="searchable-section scroll-reveal" id="about-section">
     <div class="section-title-wrap">
       <div class="section-badge-pill">Overview</div>
       <h2 class="main-section-heading">About Ayush Harinkhede</h2>
@@ -1714,7 +2071,7 @@ header {
   </div>
 
   <!-- ══ SECTION 2: PERSONAL & CONTACT INFORMATION ═ -->
-  <div class="searchable-section" id="credentials-section">
+  <div class="searchable-section scroll-reveal" id="credentials-section">
     <div class="section-title-wrap">
       <div class="section-badge-pill">Verification</div>
       <h2 class="main-section-heading">Personal &amp; Contact Credentials</h2>
@@ -1774,7 +2131,7 @@ header {
   </div>
 
   <!-- ══ SECTION 3: TECHNICAL COMPETENCIES (SKILLS) ═ -->
-  <div class="searchable-section" id="skills-section">
+  <div class="searchable-section scroll-reveal" id="skills-section">
     <div class="section-title-wrap">
       <div class="section-badge-pill">Capabilities</div>
       <h2 class="main-section-heading">Technical Competencies &amp; Tooling</h2>
@@ -1866,7 +2223,7 @@ header {
   </div>
 
   <!-- ══ SECTION 4: RESUME SHOWCASE CARD ════════════ -->
-  <div class="searchable-section" id="resume-card">
+  <div class="searchable-section scroll-reveal" id="resume-card">
     <div class="resume-showcase-box">
       <div>
         <h3 class="rs-title">Official Curriculum Vitae</h3>
@@ -1886,7 +2243,7 @@ header {
   </div>
 
   <!-- ══ SECTION 5: MY JOURNEY (EDUCATION ROADMAP) ══ -->
-  <div class="searchable-section" id="journey-section">
+  <div class="searchable-section scroll-reveal" id="journey-section">
     <div class="section-title-wrap">
       <div class="section-badge-pill">Milestones</div>
       <h2 class="main-section-heading">My Journey &amp; Academic Milestones</h2>
@@ -1942,7 +2299,7 @@ header {
   </div>
 
   <!-- ══ SECTION 6: MY CREATIONS (PROJECTS) ═════════ -->
-  <div class="searchable-section" id="creations-section">
+  <div class="searchable-section scroll-reveal" id="creations-section">
     <div class="section-title-wrap">
       <div class="section-badge-pill">Portfolio</div>
       <h2 class="main-section-heading">My Creations</h2>
@@ -2126,7 +2483,7 @@ header {
   </div>
 
   <!-- ══ SECTION 7: INTERVIEW QUESTIONS & ANSWERS ══ -->
-  <div class="searchable-section" id="interview-section">
+  <div class="searchable-section scroll-reveal" id="interview-section">
     <div class="section-title-wrap">
       <div class="section-badge-pill">FAQ &amp; Interview</div>
       <h2 class="main-section-heading">Interview Questions &amp; Answers</h2>
@@ -2225,7 +2582,7 @@ header {
   </div>
 
   <!-- ══ SECTION 8: CONNECT / GET IN TOUCH ══════════ -->
-  <div class="searchable-section" id="contact-section">
+  <div class="searchable-section scroll-reveal" id="contact-section">
     <div class="section-title-wrap">
       <div class="section-badge-pill">Reach Out</div>
       <h2 class="main-section-heading">Get in Touch — Connect With Me</h2>
@@ -2607,31 +2964,877 @@ header {
 
 <!-- ══ SCRIPTS ═════════════════════════════════════ -->
 <script>
-// === SCROLL PROGRESS INDICATOR & BACK TO TOP BUTTON ===
+/* ═══════════════════════════════════════════════════
+   1. HARDWARE-SYNCED HAPTICS & TACTILE WEB AUDIO ENGINE
+   (From EDC Catalyst: Synthesized acoustics & physical haptics)
+═══════════════════════════════════════════════════ */
+let audioCtx = null;
+
+if (typeof navigator !== 'undefined' && 'audioSession' in navigator) {
+  try { navigator.audioSession.type = 'ambient'; } catch (e) {}
+}
+
+function getAudioContext() {
+  if (!audioCtx) {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (AudioContextClass) audioCtx = new AudioContextClass();
+  }
+  if (audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume().catch(() => {});
+  }
+  return audioCtx;
+}
+
+function unlockAudio() {
+  const ctx = getAudioContext();
+  if (ctx && ctx.state === 'suspended') ctx.resume().catch(() => {});
+}
+
+function playTapSound(type = 'tap') {
+  if (document.hidden) return;
+  const ctx = getAudioContext();
+  if (!ctx || ctx.state !== 'running') return;
+  const now = ctx.currentTime;
+
+  if (type === 'tap') {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(1250, now);
+    osc.frequency.exponentialRampToValueAtTime(220, now + 0.022);
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.linearRampToValueAtTime(0.24, now + 0.002);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.022);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.023);
+  } else if (type === 'open') {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(320, now);
+    osc.frequency.exponentialRampToValueAtTime(640, now + 0.038);
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.linearRampToValueAtTime(0.22, now + 0.003);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.042);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.043);
+  } else if (type === 'close') {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(520, now);
+    osc.frequency.exponentialRampToValueAtTime(220, now + 0.03);
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.linearRampToValueAtTime(0.18, now + 0.002);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.032);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.033);
+  } else if (type === 'switch') {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(880, now);
+    osc.frequency.exponentialRampToValueAtTime(340, now + 0.018);
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.linearRampToValueAtTime(0.22, now + 0.002);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.02);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.021);
+  } else if (type === 'scroll_tap') {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(320, now);
+    osc.frequency.exponentialRampToValueAtTime(780, now + 0.05);
+    osc.frequency.exponentialRampToValueAtTime(520, now + 0.09);
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.linearRampToValueAtTime(0.22, now + 0.005);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.095);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.1);
+  } else if (type === 'search_open' || type === 'search_bounce') {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(260, now);
+    osc.frequency.exponentialRampToValueAtTime(620, now + 0.042);
+    osc.frequency.exponentialRampToValueAtTime(480, now + 0.065);
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.linearRampToValueAtTime(0.20, now + 0.004);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.068);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.07);
+  }
+}
+
+function triggerHaptic(type = 'light') {
+  if (document.hidden || !navigator.vibrate) return;
+  try {
+    if (type === 'tap' || type === 'light') {
+      navigator.vibrate(8);
+    } else if (type === 'switch' || type === 'medium') {
+      navigator.vibrate([10, 24, 7]);
+    } else if (type === 'open') {
+      navigator.vibrate([12, 140, 16, 90, 8]);
+    } else if (type === 'close') {
+      navigator.vibrate([14, 80, 9]);
+    } else if (type === 'scroll_tap') {
+      navigator.vibrate([14, 85, 18, 120, 8]);
+    } else if (type === 'search_bounce' || type === 'search_open') {
+      navigator.vibrate([12, 45, 9, 30, 6]);
+    }
+  } catch (e) {}
+}
+
+function triggerFeedback(type = 'tap') {
+  playTapSound(type);
+  triggerHaptic(type);
+}
+
+// Global delegated tap listener for interactive elements
+document.addEventListener('pointerdown', (e) => {
+  unlockAudio();
+  const target = e.target.closest(
+    '.card, .cat-pill, .sm-chip, .spec-chip, .search-box-container, .search-clear, #scrollTopBtn, .scatter-char, .footer-chip, .footer-action-btn, .social-pill-item, .p-btn-action, button, a, [role="button"]'
+  );
+  if (!target) return;
+
+  if (target.id === 'scrollTopBtn') {
+    triggerFeedback('scroll_tap');
+  } else if (target.classList.contains('cat-pill') || target.classList.contains('sm-chip')) {
+    triggerFeedback('switch');
+  } else if (target.classList.contains('search-box-container')) {
+    triggerFeedback('search_bounce');
+  } else if (target.classList.contains('search-clear') || target.classList.contains('modal-close-btn') || target.classList.contains('lightbox-close-btn')) {
+    triggerFeedback('close');
+  } else if (target.classList.contains('card') || target.classList.contains('project-card-item') || target.classList.contains('gallery-item-thumb')) {
+    triggerFeedback('open');
+  } else {
+    triggerFeedback('tap');
+  }
+}, { passive: true });
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    if (audioCtx && audioCtx.state === 'running') audioCtx.suspend().catch(() => {});
+  } else {
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume().catch(() => {});
+  }
+});
+
+/* ═══════════════════════════════════════════════════
+   2. INTERACTIVE AMBIENT CURSOR FOLLOWER AURA (DESKTOP)
+   (Smooth physical inertia tracking and interactive hover states)
+═══════════════════════════════════════════════════ */
+function initInteractiveCursor() {
+  if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return;
+  const follower = document.getElementById('edcCursorFollower');
+  if (!follower) return;
+
+  let mouseX = -100, mouseY = -100;
+  let followerX = -100, followerY = -100;
+  let isHovering = false, isClicking = false, isGrabbing = false;
+  let isVisible = false;
+
+  window.addEventListener('pointermove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    if (!isVisible) {
+      isVisible = true;
+      follower.classList.add('visible');
+    }
+    const target = e.target;
+    if (target) {
+      const interactive = target.closest('.card, button, a, .cat-pill, .sm-chip, .spec-chip, .scatter-char, .footer-chip, .footer-action-btn, .social-pill-item, .p-btn-action, [role="button"]');
+      const shouldHover = !!interactive;
+      if (shouldHover !== isHovering) {
+        isHovering = shouldHover;
+        follower.classList.toggle('is-hovering', isHovering);
+      }
+    }
+  }, { passive: true });
+
+  window.addEventListener('pointerdown', () => {
+    isClicking = true;
+    follower.classList.add('is-clicking');
+  }, { passive: true });
+
+  window.addEventListener('pointerup', () => {
+    isClicking = false;
+    follower.classList.remove('is-clicking');
+  }, { passive: true });
+
+  document.addEventListener('mouseleave', () => {
+    isVisible = false;
+    follower.classList.remove('visible');
+  });
+
+  function renderCursor() {
+    followerX += (mouseX - followerX) * 0.28;
+    followerY += (mouseY - followerY) * 0.28;
+    const scale = isClicking ? 0.8 : (isHovering ? 1.65 : 1);
+    const offset = 12;
+    follower.style.transform = `translate3d(${(followerX - offset).toFixed(1)}px, ${(followerY - offset).toFixed(1)}px, 0) scale(${scale})`;
+    requestAnimationFrame(renderCursor);
+  }
+  requestAnimationFrame(renderCursor);
+}
+initInteractiveCursor();
+
+/* ═══════════════════════════════════════════════════
+   3. SCROLL-DRIVEN 3D KINETIC LETTER DISPERSION / BREAK ENGINE
+   (Explosive 3D letter scatter on Ayush Harinkhede with magnetic repulsion)
+═══════════════════════════════════════════════════ */
+let scatterLetters = [];
+let scatterSeeds = [];
+let targetScatterProgress = 0;
+let currentScatterProgress = 0;
+let isScatterRafRunning = false;
+let hasScatteredOnce = false;
+
+function generate3DScatterTrajectory() {
+  return [
+    // 'Ayush' (0-4)
+    // 0: 'A' - High left vault with forward banking roll
+    { dx: -115 + (Math.random() * 24 - 12), dy: -180 - Math.random() * 40, dz: 135 + Math.random() * 35, rx: 38 + (Math.random() * 16 - 8), ry: -52 + (Math.random() * 16 - 8), rz: -32 + (Math.random() * 14 - 7), scale: 0.84, stagger: 0.00, glow: 'rgba(99, 102, 241, 0.85)' },
+    // 1: 'y' - Skyward rocket, tilts backward facing up
+    { dx: -35 + (Math.random() * 18 - 9), dy: -235 - Math.random() * 45, dz: 180 + Math.random() * 40, rx: 68 + (Math.random() * 16 - 8), ry: 18 + (Math.random() * 14 - 7), rz: 20 + (Math.random() * 12 - 6), scale: 0.90, stagger: 0.04, glow: 'rgba(129, 140, 248, 0.95)' },
+    // 2: 'u' - Flings up-right, soaring spiral
+    { dx: 45 + (Math.random() * 20 - 10), dy: -210 - Math.random() * 40, dz: 140 + Math.random() * 30, rx: 42 + (Math.random() * 14 - 7), ry: 40 + (Math.random() * 16 - 8), rz: 32 + (Math.random() * 14 - 7), scale: 0.86, stagger: 0.02, glow: 'rgba(99, 102, 241, 0.85)' },
+    // 3: 's' - Serpentine lateral drift left
+    { dx: -85 + (Math.random() * 22 - 11), dy: -140 - Math.random() * 35, dz: 90 + Math.random() * 25, rx: -36 + (Math.random() * 14 - 7), ry: -42 + (Math.random() * 14 - 7), rz: -28 + (Math.random() * 12 - 6), scale: 0.82, stagger: 0.06, glow: 'rgba(56, 189, 248, 0.85)' },
+    // 4: 'h' - Deep vault floating forward
+    { dx: -15 + (Math.random() * 18 - 9), dy: -250 - Math.random() * 45, dz: 160 + Math.random() * 35, rx: 55 + (Math.random() * 16 - 8), ry: -24 + (Math.random() * 12 - 6), rz: 18 + (Math.random() * 12 - 6), scale: 0.88, stagger: 0.03, glow: 'rgba(99, 102, 241, 0.9)' },
+
+    // 'Harinkhede' (5-14)
+    // 5: 'H' - Wide sweep out left with dramatic bank
+    { dx: -165 + (Math.random() * 28 - 14), dy: -125 - Math.random() * 35, dz: 95 + Math.random() * 30, rx: -38 + (Math.random() * 16 - 8), ry: -48 + (Math.random() * 16 - 8), rz: -44 + (Math.random() * 16 - 8), scale: 0.80, stagger: 0.01, glow: 'rgba(56, 189, 248, 0.85)' },
+    // 6: 'a' - Deep background tumble
+    { dx: -120 + (Math.random() * 20 - 10), dy: -195 - Math.random() * 40, dz: -110 - Math.random() * 35, rx: 54 + (Math.random() * 18 - 9), ry: -34 + (Math.random() * 14 - 7), rz: 38 + (Math.random() * 14 - 7), scale: 0.74, stagger: 0.05, glow: 'rgba(96, 165, 250, 0.8)' },
+    // 7: 'r' - Needle ascent directly upwards
+    { dx: -55 + (Math.random() * 18 - 9), dy: -260 - Math.random() * 50, dz: 145 + Math.random() * 35, rx: 76 + (Math.random() * 16 - 8), ry: 14 + (Math.random() * 12 - 6), rz: -18 + (Math.random() * 12 - 6), scale: 0.88, stagger: 0.08, glow: 'rgba(129, 140, 248, 0.85)' },
+    // 8: 'i' - Slender ascent floating into distant space
+    { dx: -10 + (Math.random() * 16 - 8), dy: -275 - Math.random() * 50, dz: 170 + Math.random() * 35, rx: 78 + (Math.random() * 16 - 8), ry: 10 + (Math.random() * 10 - 5), rz: -12 + (Math.random() * 10 - 5), scale: 0.86, stagger: 0.07, glow: 'rgba(56, 189, 248, 0.9)' },
+    // 9: 'n' - Center spiral roll forward
+    { dx: 22 + (Math.random() * 18 - 9), dy: -170 - Math.random() * 35, dz: 85 + Math.random() * 30, rx: -48 + (Math.random() * 16 - 8), ry: 42 + (Math.random() * 14 - 7), rz: 28 + (Math.random() * 12 - 6), scale: 0.79, stagger: 0.06, glow: 'rgba(56, 189, 248, 0.8)' },
+    // 10: 'k' - Wing sweep out to the right
+    { dx: 85 + (Math.random() * 22 - 11), dy: -195 - Math.random() * 40, dz: 115 + Math.random() * 35, rx: -42 + (Math.random() * 16 - 8), ry: 54 + (Math.random() * 16 - 8), rz: 38 + (Math.random() * 14 - 7), scale: 0.82, stagger: 0.04, glow: 'rgba(129, 140, 248, 0.85)' },
+    // 11: 'h' - S-curve serpentine drift outward
+    { dx: 140 + (Math.random() * 26 - 13), dy: -155 - Math.random() * 35, dz: -70 - Math.random() * 25, rx: 50 + (Math.random() * 16 - 8), ry: -44 + (Math.random() * 14 - 7), rz: -48 + (Math.random() * 16 - 8), scale: 0.78, stagger: 0.03, glow: 'rgba(56, 189, 248, 0.85)' },
+    // 12: 'e' - Soaring ascent
+    { dx: 185 + (Math.random() * 28 - 14), dy: -215 - Math.random() * 40, dz: 120 + Math.random() * 30, rx: 52 + (Math.random() * 16 - 8), ry: 50 + (Math.random() * 16 - 8), rz: 42 + (Math.random() * 14 - 7), scale: 0.82, stagger: 0.05, glow: 'rgba(99, 102, 241, 0.9)' },
+    // 13: 'd' - Far right bank sweep
+    { dx: 230 + (Math.random() * 30 - 15), dy: -160 - Math.random() * 40, dz: 95 + Math.random() * 30, rx: -36 + (Math.random() * 16 - 8), ry: 58 + (Math.random() * 18 - 9), rz: 48 + (Math.random() * 16 - 8), scale: 0.80, stagger: 0.02, glow: 'rgba(129, 140, 248, 0.85)' },
+    // 14: 'e' - Far right explosive vault
+    { dx: 270 + (Math.random() * 32 - 16), dy: -175 - Math.random() * 45, dz: 130 + Math.random() * 35, rx: 58 + (Math.random() * 18 - 9), ry: 64 + (Math.random() * 18 - 9), rz: 56 + (Math.random() * 16 - 8), scale: 0.82, stagger: 0.01, glow: 'rgba(99, 102, 241, 0.9)' }
+  ];
+}
+
+function onLetterClick(e, index) {
+  const el = e.currentTarget;
+  if (!el || currentScatterProgress > 0.2) return;
+  el.animate([
+    { transform: 'translate3d(0, 0, 0) scale(1) rotate(0deg)', offset: 0 },
+    { transform: 'translate3d(0, -18px, 60px) scale(1.35) rotate(-12deg)', offset: 0.4 },
+    { transform: 'translate3d(0, 4px, 10px) scale(0.94) rotate(4deg)', offset: 0.75 },
+    { transform: 'translate3d(0, 0, 0) scale(1) rotate(0deg)', offset: 1 }
+  ], {
+    duration: 480,
+    easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
+  });
+  triggerFeedback('tap');
+}
+
+function initHeaderHoverField() {
+  const title = document.getElementById('mainHeaderTitle');
+  if (!title) return;
+
+  let cachedLetterCenters = [];
+  let hoverRafPending = false;
+  let latestMouseX = 0;
+  let latestMouseY = 0;
+
+  function cacheLetterCenters() {
+    if (!scatterLetters || scatterLetters.length === 0) return;
+    cachedLetterCenters = scatterLetters.map(el => {
+      const r = el.getBoundingClientRect();
+      return { el: el, x: r.left + r.width / 2, y: r.top + r.height / 2 };
+    });
+  }
+
+  function updateHoverField() {
+    hoverRafPending = false;
+    if (currentScatterProgress > 0.15) return;
+    if (cachedLetterCenters.length === 0) cacheLetterCenters();
+    if (cachedLetterCenters.length === 0) return;
+
+    const maxDist = 130;
+    for (let i = 0; i < cachedLetterCenters.length; i++) {
+      const item = cachedLetterCenters[i];
+      const charCenterX = item.x;
+      const charCenterY = item.y;
+      const dist = Math.hypot(latestMouseX - charCenterX, latestMouseY - charCenterY);
+
+      if (dist < maxDist) {
+        const force = (1 - dist / maxDist) * 14;
+        const angle = Math.atan2(charCenterY - latestMouseY, charCenterX - latestMouseX);
+        const moveX = (Math.cos(angle) * force).toFixed(1);
+        const moveY = (Math.sin(angle) * force).toFixed(1);
+        const rot = ((latestMouseX - charCenterX) * -0.06).toFixed(1);
+        item.el.style.transform = `translate3d(${moveX}px, ${moveY}px, 20px) rotate(${rot}deg) scale(1.08)`;
+      } else {
+        if (currentScatterProgress === 0) item.el.style.transform = '';
+      }
+    }
+  }
+
+  title.addEventListener('mouseenter', () => { cacheLetterCenters(); }, { passive: true });
+  window.addEventListener('resize', () => { cachedLetterCenters = []; }, { passive: true });
+
+  title.addEventListener('mousemove', e => {
+    if (currentScatterProgress > 0.15) return;
+    latestMouseX = e.clientX;
+    latestMouseY = e.clientY;
+    if (!hoverRafPending) {
+      hoverRafPending = true;
+      requestAnimationFrame(updateHoverField);
+    }
+  }, { passive: true });
+
+  title.addEventListener('mouseleave', () => {
+    hoverRafPending = false;
+    cachedLetterCenters = [];
+    if (currentScatterProgress === 0) {
+      scatterLetters.forEach(el => {
+        el.style.transition = 'transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        el.style.transform = '';
+        setTimeout(() => { el.style.transition = ''; }, 380);
+      });
+    }
+  }, { passive: true });
+}
+
+function onScrollScatter(scrollY) {
+  const maxScroll = 360;
+  targetScatterProgress = Math.min(1, Math.max(0, scrollY / maxScroll));
+  if (!isScatterRafRunning) {
+    isScatterRafRunning = true;
+    requestAnimationFrame(renderScatterFrame);
+  }
+}
+
+function renderScatterFrame() {
+  if (!scatterLetters.length) {
+    isScatterRafRunning = false;
+    return;
+  }
+
+  const diff = targetScatterProgress - currentScatterProgress;
+  if (Math.abs(diff) < 0.0008) {
+    currentScatterProgress = targetScatterProgress;
+  } else {
+    currentScatterProgress += diff * 0.17;
+  }
+
+  if (currentScatterProgress <= 0.001) {
+    currentScatterProgress = 0;
+    scatterLetters.forEach(el => {
+      el.style.transform = '';
+      el.style.opacity = '';
+    });
+    if (hasScatteredOnce) {
+      scatterSeeds = generate3DScatterTrajectory();
+      hasScatteredOnce = false;
+      triggerFeedback('tap');
+    }
+    isScatterRafRunning = false;
+    return;
+  }
+
+  hasScatteredOnce = true;
+
+  scatterLetters.forEach((el, index) => {
+    const seed = scatterSeeds[index];
+    if (!seed) return;
+
+    const stagger = seed.stagger;
+    const rawP = Math.min(1, Math.max(0, (currentScatterProgress - stagger) / (1 - stagger * 0.85)));
+    const easeP = 1 - Math.pow(1 - rawP, 2.8);
+
+    const curDx = (seed.dx * easeP).toFixed(1);
+    const curDy = (seed.dy * easeP).toFixed(1);
+    const curDz = (seed.dz * easeP).toFixed(1);
+    const curRx = (seed.rx * easeP).toFixed(1);
+    const curRy = (seed.ry * easeP).toFixed(1);
+    const curRz = (seed.rz * easeP).toFixed(1);
+    const curScale = (1 - (1 - seed.scale) * easeP).toFixed(3);
+    const curOpacity = Math.max(0.04, 1 - (easeP * 0.88)).toFixed(2);
+
+    el.style.transform = `translate3d(${curDx}px, ${curDy}px, ${curDz}px) rotateX(${curRx}deg) rotateY(${curRy}deg) rotateZ(${curRz}deg) scale(${curScale})`;
+    el.style.opacity = curOpacity;
+  });
+
+  if (Math.abs(targetScatterProgress - currentScatterProgress) > 0.0004) {
+    requestAnimationFrame(renderScatterFrame);
+  } else {
+    isScatterRafRunning = false;
+  }
+}
+
+function initHeaderScatter() {
+  const title = document.getElementById('mainHeaderTitle');
+  if (!title) return;
+  scatterLetters = Array.from(title.querySelectorAll('.scatter-char'));
+  scatterSeeds = generate3DScatterTrajectory();
+  initHeaderHoverField();
+}
+initHeaderScatter();
+
+/* ═══════════════════════════════════════════════════
+   4. LIVE SEARCH CHARACTER SPRING ANIMATION & DEEP PORTFOLIO SEARCH
+   (Pop-in spring bounce on type, poof-exit on delete, live filter)
+═══════════════════════════════════════════════════ */
+let prevSearchValue = '';
+
+function syncSearchAnimatedText(newText) {
+  const container = document.getElementById('searchAnimatedText');
+  if (!container) return;
+  const oldText = prevSearchValue || '';
+  if (newText === oldText) return;
+
+  // Case 1: Search was completely emptied
+  if (newText.length === 0) {
+    const activeSpans = Array.from(container.querySelectorAll('.char-span:not(.char-exit)'));
+    activeSpans.forEach((span, i) => {
+      span.classList.remove('char-enter');
+      span.classList.add('char-exit');
+      span.style.animationDelay = `${i * 0.015}s`;
+      setTimeout(() => { span.remove(); }, 200 + i * 15);
+    });
+    prevSearchValue = '';
+    return;
+  }
+
+  // Case 2: User is typing / appending
+  if (newText.startsWith(oldText)) {
+    const addedChars = newText.slice(oldText.length);
+    const fragment = document.createDocumentFragment();
+    for (let i = 0; i < addedChars.length; i++) {
+      const ch = addedChars[i];
+      const span = document.createElement('span');
+      span.className = 'char-span char-enter';
+      span.textContent = ch;
+      fragment.appendChild(span);
+    }
+    container.appendChild(fragment);
+    prevSearchValue = newText;
+    return;
+  }
+
+  // Case 3: User pressed Backspace / Delete
+  if (oldText.startsWith(newText)) {
+    const removeCount = oldText.length - newText.length;
+    const activeSpans = Array.from(container.querySelectorAll('.char-span:not(.char-exit)'));
+    const toRemove = activeSpans.slice(-removeCount);
+    toRemove.forEach((span, i) => {
+      span.classList.remove('char-enter');
+      span.classList.add('char-exit');
+      span.style.animationDelay = `${(toRemove.length - 1 - i) * 0.015}s`;
+      setTimeout(() => { span.remove(); }, 200);
+    });
+    prevSearchValue = newText;
+    return;
+  }
+
+  // Case 4: General edit (replace / paste)
+  container.innerHTML = '';
+  const fragment = document.createDocumentFragment();
+  for (let i = 0; i < newText.length; i++) {
+    const span = document.createElement('span');
+    span.className = 'char-span char-enter';
+    span.textContent = newText[i];
+    fragment.appendChild(span);
+  }
+  container.appendChild(fragment);
+  prevSearchValue = newText;
+}
+
+// === REAL-TIME PORTFOLIO SEARCH FILTERING ===
+function handlePortfolioSearch(query) {
+  const clearBtn = document.getElementById('clearBtn');
+  const placeholderEl = document.getElementById('searchPlaceholder');
+  const cleanQ = query.trim().toLowerCase();
+
+  syncSearchAnimatedText(query);
+
+  if (clearBtn) clearBtn.style.display = query.length > 0 ? 'inline-flex' : 'none';
+  if (placeholderEl) {
+    if (query.length > 0) {
+      placeholderEl.style.display = 'none';
+      placeholderEl.classList.add('hidden');
+    } else {
+      placeholderEl.style.display = 'flex';
+      placeholderEl.classList.remove('hidden');
+    }
+  }
+
+  // Search through all project cards
+  const projectCards = document.querySelectorAll('.project-card-item');
+  let matchCount = 0;
+  projectCards.forEach(card => {
+    const text = card.textContent.toLowerCase();
+    const isMatch = (cleanQ === '' || text.includes(cleanQ));
+    card.style.display = isMatch ? '' : 'none';
+    if (isMatch) matchCount++;
+  });
+
+  // Search through FAQ accordion items
+  const faqCards = document.querySelectorAll('.faq-item-card');
+  faqCards.forEach(card => {
+    const text = card.textContent.toLowerCase();
+    const isMatch = (cleanQ === '' || text.includes(cleanQ));
+    card.style.display = isMatch ? '' : 'none';
+    if (cleanQ !== '' && isMatch) card.classList.add('active');
+  });
+
+  // Search through skills bundle strips
+  const bundleStrips = document.querySelectorAll('.card-bundle-strip');
+  bundleStrips.forEach(strip => {
+    const text = strip.textContent.toLowerCase();
+    strip.style.opacity = (cleanQ === '' || text.includes(cleanQ)) ? '1' : '0.22';
+  });
+}
+
+function clearPortfolioSearch(e) {
+  if (e) e.stopPropagation();
+  const input = document.getElementById('searchInput');
+  if (input) {
+    input.value = '';
+    handlePortfolioSearch('');
+    input.focus();
+    triggerFeedback('close');
+  }
+}
+
+function quickSearch(term) {
+  const input = document.getElementById('searchInput');
+  if (input) {
+    input.value = term;
+    handlePortfolioSearch(term);
+    triggerFeedback('switch');
+    if (term) {
+      input.focus();
+      if (term === 'Projects') document.getElementById('creations-section')?.scrollIntoView({ behavior: 'smooth' });
+      else if (term === 'Skills' || term === 'MERN Stack') document.getElementById('skills-section')?.scrollIntoView({ behavior: 'smooth' });
+      else if (term === 'Education') document.getElementById('journey-section')?.scrollIntoView({ behavior: 'smooth' });
+      else if (term === 'Interview') document.getElementById('interview-section')?.scrollIntoView({ behavior: 'smooth' });
+      else if (term === 'Contact') document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' });
+      else if (term === 'Resume') document.getElementById('resume-card')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  document.querySelectorAll('.sm-chip').forEach(c => {
+    c.classList.toggle('active', c.textContent.trim().toLowerCase() === term.toLowerCase() || (term === '' && c.textContent.trim() === 'All'));
+  });
+}
+
+function handleSearchFocus() {
+  document.getElementById('searchWrap')?.classList.add('focused');
+  triggerFeedback('search_open');
+}
+function handleSearchBlur() {
+  document.getElementById('searchWrap')?.classList.remove('focused');
+}
+
+// === ANIMATED SEARCH PLACEHOLDER CYCLE ===
+const SEARCH_PROMPTS = [
+  "Search Ayush's skills, MERN stack, projects…",
+  "Search HealthNest, VANIE, Mocha, Cacun…",
+  "Search Education details, BCA, SSC, HSC…",
+  "Search Email, Phone, WhatsApp, Contact info…",
+  "Search Interview questions & answers, Resume…"
+];
+
+let currentPromptIdx = 0;
+let charIdx = 0;
+let isDeleting = false;
+let placeholderTimer = null;
+
+function runSearchPlaceholderCycle() {
+  const placeholderEl = document.getElementById('searchPlaceholder');
+  const inputEl = document.getElementById('searchInput');
+  if (!placeholderEl || !inputEl) return;
+
+  if (inputEl.value.trim().length > 0) {
+    placeholderEl.innerHTML = '';
+    return;
+  }
+
+  const currentPrompt = SEARCH_PROMPTS[currentPromptIdx % SEARCH_PROMPTS.length];
+
+  if (!isDeleting) {
+    charIdx++;
+    placeholderEl.innerHTML = currentPrompt.substring(0, charIdx) + '<span class="placeholder-cursor"></span>';
+    if (charIdx === currentPrompt.length) {
+      isDeleting = true;
+      placeholderTimer = setTimeout(runSearchPlaceholderCycle, 2800);
+      return;
+    }
+    placeholderTimer = setTimeout(runSearchPlaceholderCycle, 35);
+  } else {
+    charIdx--;
+    placeholderEl.innerHTML = currentPrompt.substring(0, charIdx) + '<span class="placeholder-cursor"></span>';
+    if (charIdx === 0) {
+      isDeleting = false;
+      currentPromptIdx++;
+      placeholderTimer = setTimeout(runSearchPlaceholderCycle, 400);
+      return;
+    }
+    placeholderTimer = setTimeout(runSearchPlaceholderCycle, 18);
+  }
+}
+runSearchPlaceholderCycle();
+
+function triggerSearchEasterEgg() {
+  const prompts = ["MERN Stack", "HealthNest", "VANIE", "GH Raisoni", "Nagpur"];
+  const pick = prompts[Math.floor(Math.random() * prompts.length)];
+  const inp = document.getElementById("searchInput");
+  if (!inp) return;
+  inp.value = pick;
+  handlePortfolioSearch(pick);
+  inp.focus();
+  triggerFeedback('open');
+  showSecurityToast(`Easter Egg Activated: Auto-filled "${pick}" (Ctrl+E)`);
+}
+
+/* ═══════════════════════════════════════════════════
+   5. SCROLL-TO-TOP BUTTON, PROGRESS & FOOTER DOCKING
+═══════════════════════════════════════════════════ */
 window.addEventListener('scroll', () => {
+  const scrollY = window.pageYOffset || document.documentElement.scrollTop;
   const scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
-  const progress = (window.scrollY / scrollTotal) * 100;
+  const progress = (scrollY / scrollTotal) * 100;
+
   const bar = document.getElementById('scrollProgressBar');
   if (bar) bar.style.width = Math.min(100, Math.max(0, progress)) + '%';
 
   const btn = document.getElementById('scrollTopBtn');
   if (btn) {
-    if (window.scrollY > 300) {
-      btn.classList.add('visible');
-    } else {
-      btn.classList.remove('visible');
-    }
+    if (scrollY > 280) btn.classList.add('visible');
+    else btn.classList.remove('visible');
   }
-});
+
+  onScrollScatter(scrollY);
+}, { passive: true });
 
 function scrollToTop() {
+  const btn = document.getElementById('scrollTopBtn');
+  if (btn) {
+    btn.classList.remove('tapping');
+    void btn.offsetWidth;
+    btn.classList.add('tapping');
+    triggerFeedback('scroll_tap');
+    setTimeout(() => { btn.classList.remove('tapping'); }, 600);
+  }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+function initFooterScrollButtonDocking() {
+  const footerEl = document.querySelector('.footer-content');
+  const scrollTopBtn = document.getElementById('scrollTopBtn');
+  if (!footerEl || !scrollTopBtn || !('IntersectionObserver' in window)) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        scrollTopBtn.classList.add('docked-footer');
+      } else {
+        scrollTopBtn.classList.remove('docked-footer');
+      }
+    });
+  }, { rootMargin: '0px 0px -15px 0px', threshold: 0 });
+  observer.observe(footerEl);
+}
+initFooterScrollButtonDocking();
+
+// Online / Offline Status Synchronizer
+function updateNetworkStatus() {
+  const isOnline = navigator.onLine;
+  const btn = document.getElementById('scrollTopBtn');
+  if (btn) {
+    btn.classList.toggle('is-online', isOnline);
+    btn.classList.toggle('is-offline', !isOnline);
+  }
+}
+window.addEventListener('online', updateNetworkStatus);
+window.addEventListener('offline', updateNetworkStatus);
+updateNetworkStatus();
+
+/* ═══════════════════════════════════════════════════
+   6. SECURITY SYSTEM & CLIENT INTEGRITY SAFEGUARDS
+   (From EDC Catalyst: Safe protection toasts & shortcuts handler)
+═══════════════════════════════════════════════════ */
+let toastTimeout = null;
+function showSecurityToast(msg) {
+  const toast = document.getElementById('securityToast');
+  const msgEl = document.getElementById('securityToastMsg');
+  if (!toast || !msgEl) return;
+  msgEl.textContent = msg;
+  toast.classList.add('active');
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => {
+    toast.classList.remove('active');
+  }, 2600);
+}
+
+// Disable Right-Click Context Menu (allow in search bar & inputs)
+document.addEventListener('contextmenu', e => {
+  const isSearchTarget = e.target && (
+    e.target.id === 'searchInput' || 
+    e.target.closest('.search-box-container') || 
+    e.target.closest('.search-wrap') || 
+    e.target.tagName === 'INPUT' || 
+    e.target.tagName === 'TEXTAREA'
+  );
+  if (isSearchTarget) return true;
+  e.preventDefault();
+  showSecurityToast('Right click is disabled on this site');
+  return false;
+});
+
+// Disable Copy on content (allow inside search bar)
+document.addEventListener('copy', e => {
+  const isSearchTarget = e.target && (
+    e.target.id === 'searchInput' || 
+    e.target.closest('.search-box-container') || 
+    e.target.closest('.search-wrap') || 
+    e.target.tagName === 'INPUT' || 
+    e.target.tagName === 'TEXTAREA'
+  );
+  if (isSearchTarget) return true;
+  e.preventDefault();
+  if (e.clipboardData) {
+    e.clipboardData.setData('text/plain', 'Protected Content: Ayush Harinkhede Portfolio Spectrum.');
+  }
+  showSecurityToast('Copying text is restricted');
+  return false;
+});
+
+// Disable Cut on content
+document.addEventListener('cut', e => {
+  const isSearchTarget = e.target && (
+    e.target.id === 'searchInput' || 
+    e.target.closest('.search-box-container') || 
+    e.target.closest('.search-wrap') || 
+    e.target.tagName === 'INPUT' || 
+    e.target.tagName === 'TEXTAREA'
+  );
+  if (isSearchTarget) return true;
+  e.preventDefault();
+  showSecurityToast('Cutting content is restricted');
+  return false;
+});
+
+// Disable Dragging of Images & Media
+document.addEventListener('dragstart', e => {
+  const isSearchTarget = e.target && e.target.id === 'searchInput';
+  if (isSearchTarget) return true;
+  e.preventDefault();
+  return false;
+});
+
+// Keyboard shortcuts defense & interception
+document.addEventListener('keydown', e => {
+  const key = e.key;
+  const isCtrl = e.ctrlKey || e.metaKey;
+
+  // Ctrl+E / Cmd+E: Search Suggestion Easter Egg
+  if (isCtrl && (key === 'e' || key === 'E')) {
+    e.preventDefault();
+    triggerSearchEasterEgg();
+    return false;
+  }
+
+  // Developer Tools: F12, Ctrl+Shift+I/J/C
+  if (key === 'F12' || (isCtrl && e.shiftKey && ['I', 'J', 'C', 'i', 'j', 'c'].includes(key))) {
+    e.preventDefault();
+    showSecurityToast('Developer Tools are restricted');
+    return false;
+  }
+
+  // Block Ctrl+U (View Source)
+  if (isCtrl && (key === 'u' || key === 'U')) {
+    e.preventDefault();
+    showSecurityToast('Viewing page source is disabled');
+    return false;
+  }
+
+  // Block Ctrl+S (Save Page)
+  if (isCtrl && (key === 's' || key === 'S')) {
+    e.preventDefault();
+    showSecurityToast('Saving this page is disabled');
+    return false;
+  }
+
+  // Block Ctrl+P (Print Page)
+  if (isCtrl && (key === 'p' || key === 'P')) {
+    e.preventDefault();
+    showSecurityToast('Printing content is disabled');
+    return false;
+  }
+});
+
+// Global client stability error boundary
+window.addEventListener('error', (event) => {
+  console.warn('Portfolio UI guard intercepted harmless exception:', event.message);
+});
+
+// Console Security Warning
+console.log('%cPortfolio Spectrum', 'color:#4F46E5;font-size:24px;font-weight:bold;');
+console.log('%cHandcrafted with modern UI, 3D kinetic dispersion, and security mechanisms.', 'color:#818CF8;font-size:12px;');
+
+/* ═══════════════════════════════════════════════════
+   7. SCROLL REVEAL ENGINE & CARD STABILITY
+═══════════════════════════════════════════════════ */
+function initScrollReveal() {
+  const elements = document.querySelectorAll('.scroll-reveal, .card');
+  if (!('IntersectionObserver' in window)) {
+    elements.forEach(el => el.classList.add('revealed'));
+    return;
+  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -40px 0px', threshold: 0.05 });
+
+  elements.forEach(el => observer.observe(el));
+}
+initScrollReveal();
+
+/* ═══════════════════════════════════════════════════
+   8. ALL PORTFOLIO FEATURES, MODALS & PHOTO GALLERY
+═══════════════════════════════════════════════════ */
 // === TOAST NOTIFICATION ===
 function showToast(text) {
   const box = document.getElementById('toastMsgBox');
   const span = document.getElementById('toastMsgText');
+  if (!box || !span) return;
   span.textContent = text;
   box.classList.add('show');
   setTimeout(() => box.classList.remove('show'), 3000);
@@ -2692,128 +3895,6 @@ function updateLiveChrono() {
 setInterval(updateLiveChrono, 1000);
 updateLiveChrono();
 
-// === ANIMATED SEARCH PLACEHOLDER (EDC CATALYST STYLE) ===
-const SEARCH_PROMPTS = [
-  "Search Ayush's skills, MERN stack, projects…",
-  "Search HealthNest, VANIE, Mocha, Cacun…",
-  "Search Education details, BCA, SSC, HSC…",
-  "Search Email, Phone, WhatsApp, Contact info…",
-  "Search Interview questions & answers, Resume…"
-];
-
-let currentPromptIdx = 0;
-let charIdx = 0;
-let isDeleting = false;
-let placeholderTimer = null;
-
-function runSearchPlaceholderCycle() {
-  const placeholderEl = document.getElementById('searchPlaceholder');
-  const inputEl = document.getElementById('searchInput');
-  if (!placeholderEl || !inputEl) return;
-
-  if (inputEl.value.trim().length > 0) {
-    placeholderEl.innerHTML = '';
-    return;
-  }
-
-  const currentPrompt = SEARCH_PROMPTS[currentPromptIdx % SEARCH_PROMPTS.length];
-
-  if (!isDeleting) {
-    charIdx++;
-    placeholderEl.innerHTML = currentPrompt.substring(0, charIdx) + '<span class="placeholder-cursor"></span>';
-    if (charIdx === currentPrompt.length) {
-      isDeleting = true;
-      placeholderTimer = setTimeout(runSearchPlaceholderCycle, 2800);
-      return;
-    }
-    placeholderTimer = setTimeout(runSearchPlaceholderCycle, 35);
-  } else {
-    charIdx--;
-    placeholderEl.innerHTML = currentPrompt.substring(0, charIdx) + '<span class="placeholder-cursor"></span>';
-    if (charIdx === 0) {
-      isDeleting = false;
-      currentPromptIdx++;
-      placeholderTimer = setTimeout(runSearchPlaceholderCycle, 400);
-      return;
-    }
-    placeholderTimer = setTimeout(runSearchPlaceholderCycle, 18);
-  }
-}
-runSearchPlaceholderCycle();
-
-function handleSearchFocus() {
-  document.getElementById('searchWrap')?.classList.add('focused');
-}
-function handleSearchBlur() {
-  document.getElementById('searchWrap')?.classList.remove('focused');
-}
-
-// === REAL-TIME PORTFOLIO SEARCH FILTERING ===
-function handlePortfolioSearch(query) {
-  const clearBtn = document.getElementById('clearBtn');
-  const placeholderEl = document.getElementById('searchPlaceholder');
-  const cleanQ = query.trim().toLowerCase();
-
-  if (clearBtn) clearBtn.style.display = query.length > 0 ? 'inline-flex' : 'none';
-  if (placeholderEl) placeholderEl.style.display = query.length > 0 ? 'none' : 'flex';
-
-  // Search through all cards and project cards
-  const projectCards = document.querySelectorAll('.project-card-item');
-  const faqCards = document.querySelectorAll('.faq-item-card');
-  const bundleStrips = document.querySelectorAll('.card-bundle-strip');
-
-  projectCards.forEach(card => {
-    const text = card.textContent.toLowerCase();
-    card.style.display = (cleanQ === '' || text.includes(cleanQ)) ? '' : 'none';
-  });
-
-  faqCards.forEach(card => {
-    const text = card.textContent.toLowerCase();
-    card.style.display = (cleanQ === '' || text.includes(cleanQ)) ? '' : 'none';
-    if (cleanQ !== '' && text.includes(cleanQ)) {
-      card.classList.add('active');
-    }
-  });
-
-  bundleStrips.forEach(strip => {
-    const text = strip.textContent.toLowerCase();
-    strip.style.opacity = (cleanQ === '' || text.includes(cleanQ)) ? '1' : '0.25';
-  });
-}
-
-function clearPortfolioSearch(e) {
-  if (e) e.stopPropagation();
-  const input = document.getElementById('searchInput');
-  if (input) {
-    input.value = '';
-    handlePortfolioSearch('');
-    input.focus();
-  }
-}
-
-function quickSearch(term) {
-  const input = document.getElementById('searchInput');
-  if (input) {
-    input.value = term;
-    handlePortfolioSearch(term);
-    if (term) {
-      input.focus();
-      // Scroll smoothly to section if applicable
-      if (term === 'Projects') document.getElementById('creations-section')?.scrollIntoView({ behavior: 'smooth' });
-      else if (term === 'Skills' || term === 'MERN Stack') document.getElementById('skills-section')?.scrollIntoView({ behavior: 'smooth' });
-      else if (term === 'Education') document.getElementById('journey-section')?.scrollIntoView({ behavior: 'smooth' });
-      else if (term === 'Interview') document.getElementById('interview-section')?.scrollIntoView({ behavior: 'smooth' });
-      else if (term === 'Contact') document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' });
-      else if (term === 'Resume') document.getElementById('resume-card')?.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
-
-  // Update chip active state
-  document.querySelectorAll('.sm-chip').forEach(c => {
-    c.classList.toggle('active', c.textContent.trim().toLowerCase() === term.toLowerCase() || (term === '' && c.textContent.trim() === 'All'));
-  });
-}
-
 function pickRandomProject() {
   const projects = [
     { name: 'AyushHarinkhede', url: 'https://ayushharinkhede.vercel.app/' },
@@ -2833,6 +3914,7 @@ function pickRandomProject() {
 function toggleFaqAccordion(btn) {
   const card = btn.parentElement;
   card.classList.toggle('active');
+  triggerFeedback('tap');
 }
 
 // === PHOTO GALLERY LIGHTBOX ===
@@ -2864,6 +3946,7 @@ function openGallery() {
   const modal = document.getElementById('galleryModal');
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
+  triggerFeedback('open');
 
   if (!galleryRendered) {
     const container = document.getElementById('galleryPhotosContainer');
@@ -2889,6 +3972,7 @@ function openGallery() {
 function closeGallery() {
   document.getElementById('galleryModal').classList.remove('active');
   document.body.style.overflow = 'auto';
+  triggerFeedback('close');
 }
 
 function openLightbox(src, caption) {
@@ -2899,39 +3983,47 @@ function openLightbox(src, caption) {
   cap.textContent = caption || '';
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
+  triggerFeedback('open');
 }
 
 function closeLightbox() {
   document.getElementById('lightboxModal').classList.remove('active');
   document.body.style.overflow = 'auto';
+  triggerFeedback('close');
 }
 
 // === POLICY MODALS ===
 function showMoreAboutModal() {
   document.getElementById('moreAboutModal').classList.add('active');
   document.body.style.overflow = 'hidden';
+  triggerFeedback('open');
 }
 function closeMoreAboutModal() {
   document.getElementById('moreAboutModal').classList.remove('active');
   document.body.style.overflow = 'auto';
+  triggerFeedback('close');
 }
 
 function showPrivacyModal() {
   document.getElementById('privacyModal').classList.add('active');
   document.body.style.overflow = 'hidden';
+  triggerFeedback('open');
 }
 function closePrivacyModal() {
   document.getElementById('privacyModal').classList.remove('active');
   document.body.style.overflow = 'auto';
+  triggerFeedback('close');
 }
 
 function showTermsModal() {
   document.getElementById('termsModal').classList.add('active');
   document.body.style.overflow = 'hidden';
+  triggerFeedback('open');
 }
 function closeTermsModal() {
   document.getElementById('termsModal').classList.remove('active');
   document.body.style.overflow = 'auto';
+  triggerFeedback('close');
 }
 
 // Global Escape Key to close modals
@@ -2945,6 +4037,70 @@ document.addEventListener('keydown', (e) => {
     clearPortfolioSearch();
   }
 });
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     9. SERVER FUNCTIONALITY (Node.js Embedded Backend)
+     (Run via: node index.html with path security & security headers)
+═══════════════════════════════════════════════════ -->
+<script>
+if (typeof module !== 'undefined' && module.exports) {
+  const http = require('http');
+  const fs = require('fs');
+  const path = require('path');
+
+  const server = http.createServer((req, res) => {
+    let safeUrl = req.url.split('?')[0];
+    let filePath = path.join(__dirname, safeUrl === '/' ? 'index.html' : safeUrl);
+
+    // Security check: Directory Traversal Prevention
+    const normalizedPath = path.normalize(filePath);
+    if (!normalizedPath.startsWith(__dirname)) {
+      res.writeHead(403, { 'Content-Type': 'text/plain' });
+      res.end('403: Access Denied');
+      return;
+    }
+
+    const extname = path.extname(filePath).toLowerCase();
+    let contentType = 'text/html; charset=utf-8';
+    switch (extname) {
+      case '.js': contentType = 'text/javascript; charset=utf-8'; break;
+      case '.css': contentType = 'text/css; charset=utf-8'; break;
+      case '.json': contentType = 'application/json; charset=utf-8'; break;
+      case '.png': contentType = 'image/png'; break;
+      case '.jpg': case '.jpeg': contentType = 'image/jpeg'; break;
+      case '.svg': contentType = 'image/svg+xml'; break;
+      case '.webp': contentType = 'image/webp'; break;
+      case '.ico': contentType = 'image/x-icon'; break;
+    }
+
+    // Security Headers
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+    res.setHeader('X-XSS-Protection', '1; mode=block');
+    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+
+    fs.readFile(filePath, (error, content) => {
+      if (error) {
+        if (error.code === 'ENOENT') {
+          res.writeHead(404, { 'Content-Type': 'text/plain' });
+          res.end('404: Resource Not Found');
+        } else {
+          res.writeHead(500, { 'Content-Type': 'text/plain' });
+          res.end('500: Server Error');
+        }
+      } else {
+        res.writeHead(200, { 'Content-Type': contentType });
+        res.end(content);
+      }
+    });
+  });
+
+  const PORT = process.env.PORT || 3000;
+  server.listen(PORT, () => {
+    console.log(`Portfolio Spectrum Server running at http://localhost:${PORT}/`);
+  });
+}
 </script>
 </body>
 </html>
