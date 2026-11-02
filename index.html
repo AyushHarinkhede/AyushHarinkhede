@@ -600,31 +600,47 @@ header {
 
 .search-clear {
   position: absolute;
-  right: 16px;
+  right: 14px;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) scale(0.85);
+  opacity: 0;
+  pointer-events: none;
   background: var(--bg3);
   border: 1px solid var(--border);
   color: var(--text2);
-  padding: 6px 14px;
+  height: 32px;
+  padding: 0 12px;
   border-radius: 99px;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  display: none;
+  display: inline-flex;
   align-items: center;
-  gap: 5px;
-  z-index: 5;
-  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  justify-content: center;
+  gap: 6px;
+  z-index: 6;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  transition: opacity 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.18s ease, color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.search-clear.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%) scale(1);
 }
 .search-clear:hover {
-  background: #EF4444;
-  color: #fff;
-  border-color: #EF4444;
-  transform: translateY(-50%) scale(1.06);
+  background: rgba(239, 68, 68, 0.14);
+  color: #EF4444;
+  border-color: rgba(239, 68, 68, 0.45);
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 0 14px rgba(239, 68, 68, 0.28);
 }
 .search-clear:active {
   transform: translateY(-50%) scale(0.92);
+  background: #EF4444;
+  color: #FFFFFF;
+  border-color: #EF4444;
 }
 
 /* ─── SEARCH EMPTY STATE ────────────────────────── */
@@ -2208,8 +2224,9 @@ header {
     height: 24px;
   }
   .search-clear {
-    right: 20px;
-    padding: 7px 16px;
+    right: 18px;
+    height: 36px;
+    padding: 0 16px;
     font-size: 13px;
   }
   .sm-chip {
@@ -2447,10 +2464,20 @@ header {
     height: 18px;
   }
   .search-clear {
-    right: 12px;
-    padding: 4px 10px;
-    font-size: 11px;
-    border-radius: 20px;
+    right: 10px;
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    padding: 0;
+    border-radius: 50%;
+    justify-content: center;
+  }
+  .search-clear span {
+    display: none;
+  }
+  .search-clear svg {
+    width: 14px;
+    height: 14px;
   }
 
   /* Horizontal swipeable chips */
@@ -2775,7 +2802,7 @@ header {
 
   <!-- ══ ELASTIC SPRING SEARCH BAR (SEARCH AAYUSH'S FULL PORTFOLIO) ══ -->
   <div class="search-wrap scroll-reveal" id="searchWrap">
-    <div class="search-box-container" onclick="document.getElementById('searchInput').focus()">
+    <div class="search-box-container" onclick="handleSearchBoxClick(event)">
       <span class="search-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="7.5"></circle>
@@ -2784,9 +2811,12 @@ header {
       </span>
       <div class="search-placeholder" id="searchPlaceholder" aria-hidden="true"></div>
       <input type="text" id="searchInput" placeholder="" autocomplete="off" spellcheck="false" aria-label="Search portfolio details" oninput="handlePortfolioSearch(this.value)" onkeydown="handleSearchKeyDown(event)" onfocus="handleSearchFocus()" onblur="handleSearchBlur()"/>
-      <button class="search-clear" id="clearBtn" onclick="clearPortfolioSearch(event)" aria-label="Clear search">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        clear
+      <button type="button" class="search-clear" id="clearBtn" onclick="clearPortfolioSearch(event)" aria-label="Clear search" title="Clear search query">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+        <span>clear</span>
       </button>
     </div>
 
@@ -4592,7 +4622,9 @@ function handlePortfolioSearch(query) {
 
   if (searchWrap) searchWrap.classList.toggle('has-value', hasVal);
   if (boxContainer) boxContainer.classList.toggle('has-value', hasVal);
-  if (clearBtn) clearBtn.style.display = hasVal ? 'inline-flex' : 'none';
+  if (clearBtn) {
+    clearBtn.classList.toggle('visible', hasVal);
+  }
 
   if (placeholderEl) {
     if (hasVal) {
@@ -4644,20 +4676,82 @@ function handleSearchKeyDown(e) {
   }
 }
 
+let lastClearTimestamp = 0;
 function clearPortfolioSearch(e) {
-  if (e) e.stopPropagation();
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  const now = Date.now();
+  if (now - lastClearTimestamp < 100) return;
+  lastClearTimestamp = now;
+
+  clearTimeout(searchDebounceTimer);
+
   const input = document.getElementById('searchInput');
+  const clearBtn = document.getElementById('clearBtn');
+  const placeholderEl = document.getElementById('searchPlaceholder');
+  const searchWrap = document.getElementById('searchWrap');
+  const boxContainer = document.querySelector('.search-box-container');
+
   if (input) {
     input.value = '';
-    handlePortfolioSearch('');
-    input.focus();
-    triggerFeedback('close');
+    if (document.activeElement === input) {
+      input.focus({ preventScroll: true });
+    }
   }
 
+  if (clearBtn) {
+    clearBtn.classList.remove('visible');
+  }
+
+  if (searchWrap) {
+    searchWrap.classList.remove('has-value', 'has-results');
+  }
+  if (boxContainer) {
+    boxContainer.classList.remove('has-value', 'key-pulse');
+  }
+
+  // Restore animated placeholder if not focused
+  if (placeholderEl && (!input || document.activeElement !== input)) {
+    placeholderEl.style.opacity = '';
+    placeholderEl.style.visibility = '';
+  }
+
+  // Instant 0ms DOM filter reset
+  executeDomFilter('');
+
+  // Reset discovery chips to 'All'
   document.querySelectorAll('.sm-chip').forEach(c => {
-    c.classList.toggle('active', c.textContent.trim() === 'All');
+    const text = c.textContent.trim().toLowerCase();
+    c.classList.toggle('active', text === 'all');
   });
+
+  triggerFeedback('close');
 }
+
+function handleSearchBoxClick(e) {
+  if (e.target.closest('#clearBtn')) return;
+  const input = document.getElementById('searchInput');
+  if (input && document.activeElement !== input) {
+    input.focus({ preventScroll: true });
+  }
+}
+
+// Bind high-priority touch & pointer events on clear button
+document.addEventListener('DOMContentLoaded', () => {
+  const clearBtn = document.getElementById('clearBtn');
+  if (clearBtn) {
+    const triggerClear = (ev) => {
+      ev.preventDefault();
+      ev.stopPropagation();
+      clearPortfolioSearch(ev);
+    };
+    clearBtn.addEventListener('pointerdown', triggerClear);
+    clearBtn.addEventListener('mousedown', triggerClear);
+    clearBtn.addEventListener('touchstart', triggerClear, { passive: false });
+  }
+});
 
 function quickSearch(term) {
   const input = document.getElementById('searchInput');
