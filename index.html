@@ -311,7 +311,7 @@ body::after {
 /* ─── GRAND HEADER SCREEN (NO NAVBAR) ─────────── */
 header {
   text-align: center;
-  padding: clamp(90px, 12vh, 150px) 0 clamp(24px, 4vw, 42px);
+  padding: calc(clamp(140px, 17vh, 205px) + env(safe-area-inset-top, 0px)) 0 clamp(20px, 3vw, 36px);
 }
 .header-badge {
   display: inline-flex; align-items: center; gap: 8px;
@@ -474,7 +474,7 @@ header {
 .search-wrap {
   width: 100%;
   max-width: 580px;
-  margin: 32px auto 28px;
+  margin: 24px auto 22px;
   position: relative;
   transition: max-width 0.38s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
@@ -2216,6 +2216,9 @@ header {
     max-width: 1680px;
     padding: 0 max(48px, env(safe-area-inset-right)) 160px max(48px, env(safe-area-inset-left));
   }
+  header {
+    padding: calc(clamp(160px, 17vh, 230px) + env(safe-area-inset-top, 0px)) 0 38px;
+  }
   .header-title {
     font-size: clamp(5.5rem, 7vw, 9.5rem);
     margin-bottom: 6px;
@@ -2344,7 +2347,7 @@ header {
     padding: 0 max(64px, env(safe-area-inset-right)) 220px max(64px, env(safe-area-inset-left));
   }
   header {
-    padding: 140px 0 60px;
+    padding: calc(clamp(185px, 18vh, 260px) + env(safe-area-inset-top, 0px)) 0 45px;
   }
   .header-badge {
     padding: 14px 36px;
@@ -2413,7 +2416,7 @@ header {
     padding: 0 24px 100px;
   }
   header {
-    padding: clamp(70px, 10vh, 110px) 0 32px;
+    padding: calc(clamp(95px, 13vh, 140px) + env(safe-area-inset-top, 0px)) 0 24px;
   }
   .header-badge {
     margin-top: 14px;
@@ -2448,7 +2451,7 @@ header {
   }
   
   header {
-    padding: clamp(52px, 9vh, 76px) 0 24px;
+    padding: calc(clamp(72px, 11vh, 100px) + env(safe-area-inset-top, 0px)) 0 20px;
   }
 
   .header-badge {
