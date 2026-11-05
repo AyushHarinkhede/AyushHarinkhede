@@ -134,46 +134,155 @@ img, svg, picture, canvas {
   pointer-events: auto;
 }
 
-/* ─── INTERACTIVE AMBIENT CURSOR FOLLOWER AURA (DESKTOP) ─── */
+/* ─── ULTRA-MODERN NATIVE-REPLACING CUSTOM THEME UI CURSOR (DESKTOP) ─── */
 @media (hover: hover) and (pointer: fine) {
-  .edc-cursor-follower {
+  html, body, *, *::before, *::after {
+    cursor: none !important;
+  }
+
+  .custom-cursor {
     position: fixed;
     top: 0;
     left: 0;
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
+    pointer-events: none;
+    z-index: 1000000;
+    transform: translate3d(-100px, -100px, 0);
+    opacity: 0;
+    will-change: transform;
+    transition: opacity 0.2s ease;
+  }
+  .custom-cursor.visible {
+    opacity: 1;
+  }
+
+  .cursor-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    filter: drop-shadow(0 2px 7px rgba(79, 70, 229, 0.45));
+    transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.16s ease;
+  }
+  .cursor-svg .cursor-fill {
+    fill: var(--accent);
+  }
+  .cursor-svg {
+    color: #FFFFFF;
+  }
+
+  /* Dark mode cursor appearance */
+  [data-theme="dark"] .cursor-svg {
+    filter: drop-shadow(0 0 10px rgba(129, 140, 248, 0.65));
+    color: #0F172A;
+  }
+  [data-theme="dark"] .cursor-svg .cursor-fill {
+    fill: #818CF8;
+  }
+
+  /* Mode 1: Default Pointer Arrow */
+  .custom-cursor.mode-default .cursor-svg-default {
+    display: block;
+    transform: scale(1);
+  }
+
+  /* Mode 2: Interactive Hand Pointer */
+  .custom-cursor.mode-pointer .cursor-svg-pointer {
+    display: block;
+    transform: scale(1.15) rotate(-6deg);
+  }
+
+  /* Mode 3: Text Input Type Bar / I-Beam */
+  .custom-cursor.mode-text .cursor-svg-text {
+    display: block;
+    color: var(--accent);
+    filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.55));
+    transform: scale(1.1);
+  }
+  [data-theme="dark"] .custom-cursor.mode-text .cursor-svg-text {
+    color: #818CF8;
+    filter: drop-shadow(0 0 10px rgba(129, 140, 248, 0.7));
+  }
+
+  /* Mode 4: Prohibited / Block Circle */
+  .custom-cursor.mode-blocked .cursor-svg-blocked {
+    display: block;
+    color: #EF4444;
+    filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.65));
+    transform: scale(1.08);
+  }
+
+  /* Mode 5: Grab Hand */
+  .custom-cursor.mode-grab .cursor-svg-grab {
+    display: block;
+    transform: scale(1.15);
+  }
+
+  /* Magnetic Aura Halo Follower */
+  .custom-cursor-aura {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     pointer-events: none;
     z-index: 999999;
     border: 1.5px solid rgba(79, 70, 229, 0.45);
     background: rgba(79, 70, 229, 0.04);
     opacity: 0;
-    transform: translate3d(-100px, -100px, 0) scale(0.6);
-    transition: opacity 0.22s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-    contain: layout paint;
+    transform: translate3d(-100px, -100px, 0);
+    will-change: transform;
+    transition: opacity 0.22s ease, width 0.22s ease, height 0.22s ease, border-radius 0.22s ease, border-color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
   }
-  [data-theme="dark"] .edc-cursor-follower {
-    border-color: rgba(129, 140, 248, 0.6);
-    background: rgba(129, 140, 248, 0.08);
-  }
-  .edc-cursor-follower.visible {
+  .custom-cursor-aura.visible {
     opacity: 1;
   }
-  .edc-cursor-follower.is-hovering {
+  [data-theme="dark"] .custom-cursor-aura {
+    border-color: rgba(129, 140, 248, 0.55);
+    background: rgba(129, 140, 248, 0.08);
+  }
+
+  /* Aura Dynamic Morphing per Mode */
+  .custom-cursor-aura.aura-pointer {
+    width: 48px;
+    height: 48px;
     border-color: var(--accent);
     background: rgba(79, 70, 229, 0.12);
-    box-shadow: 0 0 18px rgba(79, 70, 229, 0.35);
+    box-shadow: 0 0 20px rgba(79, 70, 229, 0.25);
   }
-  .edc-cursor-follower.is-clicking {
-    border-color: var(--accent2);
-    background: rgba(79, 70, 229, 0.24);
+  .custom-cursor-aura.aura-text {
+    width: 24px;
+    height: 36px;
+    border-radius: 6px;
+    border-color: var(--accent);
+    background: rgba(79, 70, 229, 0.08);
   }
-  .edc-cursor-follower.is-grabbing {
+  .custom-cursor-aura.aura-blocked {
+    width: 44px;
+    height: 44px;
+    border-color: #EF4444;
+    background: rgba(239, 68, 68, 0.12);
+    box-shadow: 0 0 16px rgba(239, 68, 68, 0.35);
+  }
+  .custom-cursor-aura.aura-grab {
+    width: 46px;
+    height: 46px;
     border-color: #38BDF8;
-    background: rgba(56, 189, 248, 0.18);
+    background: rgba(56, 189, 248, 0.15);
+  }
+  .custom-cursor-aura.is-clicking {
+    border-color: var(--accent2);
+    background: rgba(79, 70, 229, 0.22);
   }
 }
+
 @media (hover: none), (pointer: coarse) {
+  .custom-cursor,
+  .custom-cursor-aura,
   .edc-cursor-follower {
     display: none !important;
   }
@@ -3667,6 +3776,8 @@ header {
   .wave-track {
     animation: none !important;
   }
+  .custom-cursor,
+  .custom-cursor-aura,
   .edc-cursor-follower {
     display: none !important;
   }
@@ -3675,8 +3786,37 @@ header {
 </head>
 <body>
 
-<!-- 🌀 INTERACTIVE AMBIENT CURSOR FOLLOWER AURA (DESKTOP ONLY) 🌀 -->
-<div id="edcCursorFollower" class="edc-cursor-follower" aria-hidden="true"></div>
+<!-- ══ ULTRA-MODERN THEME-AWARE CUSTOM UI CURSOR (DESKTOP ONLY) ══ -->
+<div id="customCursor" class="custom-cursor mode-default" aria-hidden="true">
+  <!-- 1. Default Aerodynamic Pointer Arrow -->
+  <svg class="cursor-svg cursor-svg-default" viewBox="0 0 24 24" fill="none">
+    <path d="M3.5 2.5L9.5 21L12.8 13.5L20.5 10.2L3.5 2.5Z" class="cursor-fill" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+  </svg>
+  
+  <!-- 2. Interactive Hand Pointer -->
+  <svg class="cursor-svg cursor-svg-pointer" viewBox="0 0 24 24" fill="none">
+    <path d="M10 2a2 2 0 0 0-2 2v7.5l-1.3-.9a2.1 2.1 0 0 0-2.9.4 2.1 2.1 0 0 0 .3 2.9l5.5 5.2a6 6 0 0 0 4.4 1.9h2a6 6 0 0 0 6-6V9a2 2 0 0 0-2-2 2 2 0 0 0-2 2v-1a2 2 0 0 0-2-2 2 2 0 0 0-2 2V4a2 2 0 0 0-2-2z" class="cursor-fill" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+  </svg>
+
+  <!-- 3. Text Input Type Bar / I-Beam -->
+  <svg class="cursor-svg cursor-svg-text" viewBox="0 0 24 24" fill="none">
+    <path d="M9 4h6M12 4v16M9 20h6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+  </svg>
+
+  <!-- 4. Blocked / Prohibited Circle -->
+  <svg class="cursor-svg cursor-svg-blocked" viewBox="0 0 24 24" fill="none">
+    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2.2"/>
+    <line x1="5.6" y1="5.6" x2="18.4" y2="18.4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+  </svg>
+
+  <!-- 5. Drag / Grab Hand -->
+  <svg class="cursor-svg cursor-svg-grab" viewBox="0 0 24 24" fill="none">
+    <path d="M7 11V5a1.5 1.5 0 0 1 3 0v5M10 10V4a1.5 1.5 0 0 1 3 0v6M13 10V5a1.5 1.5 0 0 1 3 0v6M16 11V7a1.5 1.5 0 0 1 3 0v6c0 4.4-3.6 8-8 8s-8-3.6-8-8v-3a1.5 1.5 0 0 1 3 0v3" class="cursor-fill" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</div>
+
+<!-- Magnetic Aura Halo Follower -->
+<div id="customCursorAura" class="custom-cursor-aura" aria-hidden="true"></div>
 
 <!-- 🛡️ SECURITY ALERT TOAST 🛡️ -->
 <div id="securityToast" class="security-toast" role="status" aria-live="polite">
@@ -5164,45 +5304,69 @@ document.addEventListener('visibilitychange', () => {
 });
 
 /* ═══════════════════════════════════════════════════
-   2. INTERACTIVE AMBIENT CURSOR FOLLOWER AURA (DESKTOP)
-   (Smooth physical inertia tracking and interactive hover states)
+   2. ULTRA-MODERN NATIVE-REPLACING THEME UI CURSOR (DESKTOP)
+   (Adaptive morphing states: Pointer, Hand, Text I-Beam, Blocked, Grab)
 ═══════════════════════════════════════════════════ */
 function initInteractiveCursor() {
   if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return;
-  const follower = document.getElementById('edcCursorFollower');
-  if (!follower) return;
+  const cursorHead = document.getElementById('customCursor');
+  const cursorAura = document.getElementById('customCursorAura');
+  if (!cursorHead || !cursorAura) return;
 
   let mouseX = -100, mouseY = -100;
-  let followerX = -100, followerY = -100;
-  let isHovering = false, isClicking = false;
+  let auraX = -100, auraY = -100;
+  let isClicking = false;
   let isVisible = false;
+  let currentMode = 'default';
   let rafId = null;
   let lastTarget = null;
 
-  function renderCursor() {
-    const dx = mouseX - followerX;
-    const dy = mouseY - followerY;
+  // Pixel-accurate click hotspots for each cursor SVG shape
+  const HOTSPOTS = {
+    default: { x: 3.5, y: 2.5 },
+    pointer: { x: 10, y: 2 },
+    text: { x: 12, y: 12 },
+    blocked: { x: 12, y: 12 },
+    grab: { x: 12, y: 12 }
+  };
 
-    // Smooth physical inertia
-    followerX += dx * 0.32;
-    followerY += dy * 0.32;
-
-    const scale = isClicking ? 0.8 : (isHovering ? 1.65 : 1);
-    follower.style.transform = `translate3d(${(followerX - 12).toFixed(1)}px, ${(followerY - 12).toFixed(1)}px, 0) scale(${scale})`;
-
-    // If settled close enough to cursor, sleep RAF to save 100% CPU/GPU overhead
-    if (Math.abs(dx) < 0.15 && Math.abs(dy) < 0.15) {
-      followerX = mouseX;
-      followerY = mouseY;
-      follower.style.transform = `translate3d(${(followerX - 12).toFixed(1)}px, ${(followerY - 12).toFixed(1)}px, 0) scale(${scale})`;
-      rafId = null;
-      return;
-    }
-
-    rafId = requestAnimationFrame(renderCursor);
+  function setCursorMode(newMode) {
+    if (newMode === currentMode) return;
+    cursorHead.classList.remove(`mode-${currentMode}`);
+    cursorAura.classList.remove(`aura-${currentMode}`);
+    currentMode = newMode;
+    cursorHead.classList.add(`mode-${currentMode}`);
+    cursorAura.classList.add(`aura-${currentMode}`);
   }
 
-  function startCursorLoop() {
+  function renderCursor() {
+    // 1. Position cursor head instantly with zero latency
+    const offset = HOTSPOTS[currentMode] || HOTSPOTS.default;
+    const hx = (mouseX - offset.x).toFixed(1);
+    const hy = (mouseY - offset.y).toFixed(1);
+    cursorHead.style.transform = `translate3d(${hx}px, ${hy}px, 0)${isClicking ? ' scale(0.82)' : ''}`;
+
+    // 2. Position magnetic aura with fluid spring inertia
+    const dax = mouseX - auraX;
+    const day = mouseY - auraY;
+    auraX += dax * 0.28;
+    auraY += day * 0.28;
+
+    const ax = (auraX - 19).toFixed(1);
+    const ay = (auraY - 19).toFixed(1);
+    cursorAura.style.transform = `translate3d(${ax}px, ${ay}px, 0)${isClicking ? ' scale(0.7)' : ''}`;
+
+    // Continue loop until aura catches up, then sleep loop for 0% CPU waste
+    if (Math.abs(dax) > 0.1 || Math.abs(day) > 0.1) {
+      rafId = requestAnimationFrame(renderCursor);
+    } else {
+      auraX = mouseX;
+      auraY = mouseY;
+      rafId = null;
+    }
+  }
+
+  function startLoop() {
     if (!rafId && isVisible) {
       rafId = requestAnimationFrame(renderCursor);
     }
@@ -5212,44 +5376,73 @@ function initInteractiveCursor() {
     if (e.pointerType === 'touch') return;
     mouseX = e.clientX;
     mouseY = e.clientY;
+
     if (!isVisible) {
       isVisible = true;
-      follower.classList.add('visible');
+      cursorHead.classList.add('visible');
+      cursorAura.classList.add('visible');
     }
+
     const target = e.target;
     if (target && target !== lastTarget) {
       lastTarget = target;
-      const interactive = target.closest('.card, button, a, .cat-pill, .sm-chip, .spec-chip, .scatter-char, .footer-chip, .footer-action-btn, .app-tile-btn, .social-pill-item, .p-btn-action, [role="button"]');
-      const shouldHover = !!interactive;
-      if (shouldHover !== isHovering) {
-        isHovering = shouldHover;
-        follower.classList.toggle('is-hovering', isHovering);
+
+      // Check hierarchy of cursor states:
+      // 1. Prohibited / Blocked elements
+      if (target.closest('[disabled], button:disabled, .is-disabled, .disabled, [aria-disabled="true"], .blocked')) {
+        setCursorMode('blocked');
+      }
+      // 2. Text input / Type bar elements
+      else if (target.closest('input, textarea, [contenteditable="true"], .search-box-container')) {
+        setCursorMode('text');
+      }
+      // 3. Draggable / Swipe tracks
+      else if (target.closest('.timeline-track, .cats-wrap, .swipe-track, [data-draggable="true"]')) {
+        setCursorMode('grab');
+      }
+      // 4. Clickable / Hand pointer elements
+      else if (target.closest('a, button, [role="button"], .card, .cat-pill, .sm-chip, .spec-chip, .scatter-char, .footer-chip, .footer-action-btn, .app-tile-btn, .social-pill-item, .p-btn-action, .suggest-phrase-chip, .suggest-match-card, #clearBtn, #scrollTopBtn, .project-card-item')) {
+        setCursorMode('pointer');
+      }
+      // 5. Default aerodynamic arrow pointer
+      else {
+        setCursorMode('default');
       }
     }
-    startCursorLoop();
+
+    startLoop();
   }, { passive: true });
 
   window.addEventListener('pointerdown', (e) => {
     if (e.pointerType === 'touch') return;
     isClicking = true;
-    follower.classList.add('is-clicking');
-    startCursorLoop();
+    cursorHead.classList.add('is-clicking');
+    cursorAura.classList.add('is-clicking');
+    startLoop();
   }, { passive: true });
 
   window.addEventListener('pointerup', (e) => {
     if (e.pointerType === 'touch') return;
     isClicking = false;
-    follower.classList.remove('is-clicking');
-    startCursorLoop();
+    cursorHead.classList.remove('is-clicking');
+    cursorAura.classList.remove('is-clicking');
+    startLoop();
   }, { passive: true });
 
   document.addEventListener('mouseleave', () => {
     isVisible = false;
-    follower.classList.remove('visible');
+    cursorHead.classList.remove('visible');
+    cursorAura.classList.remove('visible');
     if (rafId) {
       cancelAnimationFrame(rafId);
       rafId = null;
     }
+  });
+
+  window.addEventListener('blur', () => {
+    isVisible = false;
+    cursorHead.classList.remove('visible');
+    cursorAura.classList.remove('visible');
   });
 }
 initInteractiveCursor();
