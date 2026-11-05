@@ -144,8 +144,8 @@ img, svg, picture, canvas {
     background: rgba(79, 70, 229, 0.04);
     opacity: 0;
     transform: translate3d(-100px, -100px, 0) scale(0.6);
-    transition: opacity 0.25s ease, border-color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
-    will-change: transform, opacity;
+    transition: opacity 0.22s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    contain: layout paint;
   }
   [data-theme="dark"] .edc-cursor-follower {
     border-color: rgba(129, 140, 248, 0.6);
@@ -196,7 +196,7 @@ img, svg, picture, canvas {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
 }
 .security-toast.active {
   opacity: 1;
@@ -214,10 +214,9 @@ img, svg, picture, canvas {
 /* ─── SCROLL REVEAL ENGINE & SLIDE TRANSITIONS ─── */
 .scroll-reveal {
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, opacity;
+  transform: translateY(18px);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .scroll-reveal.revealed {
   opacity: 1;
@@ -249,34 +248,55 @@ body::after {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-size: 256px 256px;
   pointer-events: none;
+  contain: strict;
 }
 
-/* ─── FLOATING ORBS ────────────────────────────── */
+/* ─── FLOATING ORBS (HARDWARE-ACCELERATED RADIAL GLOW, ZERO BLUR FILTER) ─── */
 .orb {
   position: fixed; border-radius: 50%;
-  filter: blur(100px); pointer-events: none;
-  z-index: 0; animation: orbFloat 18s ease-in-out infinite alternate;
-  will-change: transform;
+  pointer-events: none;
+  z-index: 0;
+  animation: orbFloat 22s ease-in-out infinite alternate;
+  transform: translate3d(0, 0, 0);
+  contain: strict;
 }
-.orb1 { width:600px;height:600px;background:rgba(79, 70, 229, 0.04);top:-10%;left:-10%; animation-delay:0s; }
-.orb2 { width:500px;height:500px;background:rgba(129, 140, 248, 0.03);top:60%;right:-5%; animation-delay:-6s; }
-.orb3 { width:350px;height:350px;background:rgba(79, 70, 229, 0.03);top:30%;left:60%; animation-delay:-11s; }
+.orb1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(79, 70, 229, 0.08) 0%, rgba(79, 70, 229, 0.02) 45%, transparent 70%);
+  top: -10%; left: -10%;
+  animation-delay: 0s;
+}
+.orb2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(129, 140, 248, 0.07) 0%, rgba(129, 140, 248, 0.015) 45%, transparent 70%);
+  top: 60%; right: -5%;
+  animation-delay: -6s;
+}
+.orb3 {
+  width: 350px; height: 350px;
+  background: radial-gradient(circle, rgba(79, 70, 229, 0.06) 0%, rgba(79, 70, 229, 0.015) 45%, transparent 70%);
+  top: 30%; left: 60%;
+  animation-delay: -11s;
+}
 @keyframes orbFloat {
-  0%   { transform: translate(0,0) scale(1); }
-  100% { transform: translate(30px,40px) scale(1.12); }
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(28px, 36px, 0) scale(1.08); }
 }
 
-/* ─── TOP SCROLL PROGRESS BAR ─────────────────── */
+/* ─── TOP SCROLL PROGRESS BAR (GPU-COMPOSITED TRANSFORM, ZERO REFLOW) ─── */
 .scroll-progress-bar {
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
   height: 3.5px;
-  width: 0%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
   background: linear-gradient(90deg, #38BDF8 0%, #6366F1 35%, #A855F7 70%, #EC4899 100%);
   box-shadow: 0 0 10px rgba(99, 102, 241, 0.55), 0 0 4px rgba(56, 189, 248, 0.45);
   z-index: 99999;
-  transition: width 0.1s linear;
+  will-change: transform;
 }
 
 /* ─── WRAPPER ──────────────────────────────────── */
@@ -441,7 +461,7 @@ header {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-  transition: all 0.25s ease;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 .stat-pill:hover {
   border-color: var(--accent3);
@@ -456,15 +476,14 @@ header {
   max-width: 580px;
   margin: 32px auto 28px;
   position: relative;
-  transition: max-width 0.64s cubic-bezier(0.34, 1.9, 0.64, 1),
-              transform 0.64s cubic-bezier(0.34, 1.9, 0.64, 1);
-  will-change: max-width, transform;
+  transition: max-width 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .search-wrap:focus-within,
 .search-wrap.focused {
   max-width: 860px !important;
-  transition: max-width 0.68s cubic-bezier(0.34, 2.15, 0.64, 1),
-              transform 0.68s cubic-bezier(0.34, 2.15, 0.64, 1) !important;
+  transition: max-width 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.38s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .search-box-container {
@@ -588,14 +607,14 @@ header {
   color: var(--text) !important;
 }
 
-/* Keystroke elastic bounce spring pulse */
+/* Keystroke elastic bounce spring pulse on search icon */
 @keyframes searchKeyPulse {
-  0% { transform: translateY(-2px) scale(1); }
-  45% { transform: translateY(-2px) scale(1.012); }
-  100% { transform: translateY(-2px) scale(1); }
+  0% { transform: scale(1.1) rotate(-6deg); }
+  50% { transform: scale(1.24) rotate(-10deg); }
+  100% { transform: scale(1.1) rotate(-6deg); }
 }
 
-.search-box-container.key-pulse {
+.search-icon.key-pulse {
   animation: searchKeyPulse 0.18s cubic-bezier(0.34, 1.8, 0.64, 1);
 }
 
@@ -709,7 +728,7 @@ header {
   font-size: 12.5px;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.22s ease;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   user-select: none;
 }
 .sm-chip:hover, .sm-chip.active {
@@ -744,7 +763,7 @@ header {
   color: var(--text2);
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: border-color 0.24s cubic-bezier(0.16, 1, 0.3, 1), color 0.24s cubic-bezier(0.16, 1, 0.3, 1), transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.24s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 2px 6px rgba(0,0,0,0.02);
 }
 .cat-pill:hover, .cat-pill.active {
@@ -878,7 +897,7 @@ header {
   background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.03) 100%);
   border: 1px solid rgba(99, 102, 241, 0.16);
   border-radius: 18px;
-  transition: all 0.25s ease;
+  transition: border-color 0.25s ease, background 0.25s ease;
 }
 .card-bundle-strip:hover {
   border-color: rgba(99, 102, 241, 0.35);
@@ -915,7 +934,7 @@ header {
   border: 1px solid var(--border);
   padding: 6px 14px;
   border-radius: 8px;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 .bs-tag:hover {
   background: var(--accent);
@@ -952,7 +971,7 @@ header {
   justify-content: center;
   cursor: pointer;
   position: relative;
-  transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.25s ease, box-shadow 0.25s ease;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
   -webkit-user-select: none;
   user-select: none;
@@ -1126,7 +1145,7 @@ header {
   border: none;
   cursor: pointer;
   box-shadow: 0 4px 16px rgba(79, 70, 229, 0.3);
-  transition: all 0.25s ease;
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 .btn-primary-catalyst:hover {
   background: var(--accent2);
@@ -1146,7 +1165,7 @@ header {
   text-decoration: none;
   border: 1px solid rgba(255, 255, 255, 0.2);
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: background 0.25s ease, transform 0.25s ease;
 }
 .btn-secondary-catalyst:hover {
   background: rgba(255, 255, 255, 0.2);
@@ -1184,7 +1203,7 @@ header {
   border: 1px solid var(--border);
   border-radius: var(--r);
   padding: 22px 26px;
-  transition: all 0.28s ease;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 .timeline-card:hover {
   border-color: var(--accent2);
@@ -1228,7 +1247,7 @@ header {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
 }
 .project-card-item:hover {
@@ -1308,7 +1327,7 @@ header {
   padding: 9px 14px; border-radius: 8px;
   font-size: 13px; font-weight: 600;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
 }
 .p-btn-live {
   background: var(--accent);
@@ -1340,7 +1359,7 @@ header {
   border: 1px solid var(--border);
   border-radius: var(--r);
   overflow: hidden;
-  transition: all 0.25s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 .faq-item-card:hover {
   border-color: var(--accent3);
@@ -1551,6 +1570,8 @@ header {
   z-index: 2;
   display: block;
   background: radial-gradient(ellipse 80% 120px at 50% 100%, rgba(56, 189, 248, 0.18), rgba(79, 70, 229, 0.12) 45%, transparent 75%);
+  contain: layout paint;
+  content-visibility: auto;
 }
 
 @media (max-width: 768px) {
@@ -1566,8 +1587,7 @@ header {
   width: 200%;
   height: 100%;
   display: flex;
-  will-change: transform;
-  transform: translateZ(0);
+  transform: translate3d(0, 0, 0);
 }
 .wave-divider .wave-track svg {
   width: 100%;
@@ -1575,12 +1595,12 @@ header {
   display: block;
 }
 .wave-divider .wave-track-glow {
-  animation: waveScrollGlow 10s linear infinite;
+  animation: waveScrollGlow 12s linear infinite;
   opacity: 0.65;
   z-index: 1;
 }
 .wave-divider .wave-track-mid {
-  animation: waveScrollMid 7s linear infinite;
+  animation: waveScrollMid 8s linear infinite;
   opacity: 0.8;
   z-index: 2;
 }
@@ -1588,14 +1608,19 @@ header {
   fill: rgba(37, 99, 235, 0.35);
 }
 .wave-divider .wave-track-front {
-  animation: waveScrollFront 5s linear infinite;
+  animation: waveScrollFront 6s linear infinite;
   z-index: 3;
 }
 .wave-divider .shape-wave-front {
   fill: var(--footer-bg-top);
 }
 .wave-divider .shape-wave-ridge {
-  filter: drop-shadow(0 -3px 8px rgba(56, 189, 248, 0.65));
+  opacity: 0.95;
+}
+
+/* Pause wave animations when not visible in viewport to save 100% GPU/CPU overhead */
+.wave-divider:not(.is-in-view) .wave-track {
+  animation-play-state: paused !important;
 }
 
 @keyframes waveScrollFront {
@@ -2742,6 +2767,25 @@ header {
     padding: 16px 12px;
   }
 }
+
+/* ─── 6. HARDWARE & ACCESSIBILITY OPTIMIZATIONS (PREFERS-REDUCED-MOTION) ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .orb {
+    animation: none !important;
+  }
+  .wave-track {
+    animation: none !important;
+  }
+  .edc-cursor-follower {
+    display: none !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -2833,7 +2877,7 @@ header {
           <path d="m21 21-4.35-4.35"></path>
         </svg>
       </span>
-      <div class="search-placeholder" id="searchPlaceholder" aria-hidden="true"></div>
+      <div class="search-placeholder" id="searchPlaceholder" aria-hidden="true"><span id="placeholderText"></span><span class="placeholder-cursor"></span></div>
       <input type="text" id="searchInput" placeholder="" autocomplete="off" spellcheck="false" aria-label="Search portfolio details" oninput="handlePortfolioSearch(this.value)" onkeydown="handleSearchKeyDown(event)" onfocus="handleSearchFocus()" onblur="handleSearchBlur()"/>
       <button type="button" class="search-clear" id="clearBtn" onclick="clearPortfolioSearch(event)" aria-label="Clear search" title="Clear search query">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -4249,8 +4293,39 @@ function initInteractiveCursor() {
 
   let mouseX = -100, mouseY = -100;
   let followerX = -100, followerY = -100;
-  let isHovering = false, isClicking = false, isGrabbing = false;
+  let isHovering = false, isClicking = false;
   let isVisible = false;
+  let rafId = null;
+  let lastTarget = null;
+
+  function renderCursor() {
+    const dx = mouseX - followerX;
+    const dy = mouseY - followerY;
+
+    // Smooth physical inertia
+    followerX += dx * 0.32;
+    followerY += dy * 0.32;
+
+    const scale = isClicking ? 0.8 : (isHovering ? 1.65 : 1);
+    follower.style.transform = `translate3d(${(followerX - 12).toFixed(1)}px, ${(followerY - 12).toFixed(1)}px, 0) scale(${scale})`;
+
+    // If settled close enough to cursor, sleep RAF to save 100% CPU/GPU overhead
+    if (Math.abs(dx) < 0.15 && Math.abs(dy) < 0.15) {
+      followerX = mouseX;
+      followerY = mouseY;
+      follower.style.transform = `translate3d(${(followerX - 12).toFixed(1)}px, ${(followerY - 12).toFixed(1)}px, 0) scale(${scale})`;
+      rafId = null;
+      return;
+    }
+
+    rafId = requestAnimationFrame(renderCursor);
+  }
+
+  function startCursorLoop() {
+    if (!rafId && isVisible) {
+      rafId = requestAnimationFrame(renderCursor);
+    }
+  }
 
   window.addEventListener('pointermove', (e) => {
     if (e.pointerType === 'touch') return;
@@ -4261,7 +4336,8 @@ function initInteractiveCursor() {
       follower.classList.add('visible');
     }
     const target = e.target;
-    if (target) {
+    if (target && target !== lastTarget) {
+      lastTarget = target;
       const interactive = target.closest('.card, button, a, .cat-pill, .sm-chip, .spec-chip, .scatter-char, .footer-chip, .footer-action-btn, .app-tile-btn, .social-pill-item, .p-btn-action, [role="button"]');
       const shouldHover = !!interactive;
       if (shouldHover !== isHovering) {
@@ -4269,34 +4345,31 @@ function initInteractiveCursor() {
         follower.classList.toggle('is-hovering', isHovering);
       }
     }
+    startCursorLoop();
   }, { passive: true });
 
   window.addEventListener('pointerdown', (e) => {
     if (e.pointerType === 'touch') return;
     isClicking = true;
     follower.classList.add('is-clicking');
+    startCursorLoop();
   }, { passive: true });
 
   window.addEventListener('pointerup', (e) => {
     if (e.pointerType === 'touch') return;
     isClicking = false;
     follower.classList.remove('is-clicking');
+    startCursorLoop();
   }, { passive: true });
 
   document.addEventListener('mouseleave', () => {
     isVisible = false;
     follower.classList.remove('visible');
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
   });
-
-  function renderCursor() {
-    followerX += (mouseX - followerX) * 0.28;
-    followerY += (mouseY - followerY) * 0.28;
-    const scale = isClicking ? 0.8 : (isHovering ? 1.65 : 1);
-    const offset = 12;
-    follower.style.transform = `translate3d(${(followerX - offset).toFixed(1)}px, ${(followerY - offset).toFixed(1)}px, 0) scale(${scale})`;
-    requestAnimationFrame(renderCursor);
-  }
-  requestAnimationFrame(renderCursor);
 }
 initInteractiveCursor();
 
@@ -4393,7 +4466,7 @@ function initHeaderHoverField() {
 
   function updateHoverField() {
     hoverRafPending = false;
-    if (currentScatterProgress > 0.15) return;
+    if (currentScatterProgress > 0.1) return;
     if (cachedLetterCenters.length === 0) cacheLetterCenters();
     if (cachedLetterCenters.length === 0) return;
 
@@ -4421,7 +4494,7 @@ function initHeaderHoverField() {
   window.addEventListener('resize', () => { cachedLetterCenters = []; }, { passive: true });
 
   title.addEventListener('mousemove', e => {
-    if (currentScatterProgress > 0.15) return;
+    if (currentScatterProgress > 0.1) return;
     latestMouseX = e.clientX;
     latestMouseY = e.clientY;
     if (!hoverRafPending) {
@@ -4435,59 +4508,29 @@ function initHeaderHoverField() {
     cachedLetterCenters = [];
     if (currentScatterProgress === 0) {
       scatterLetters.forEach(el => {
-        el.style.transition = 'transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        el.style.transition = 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)';
         el.style.transform = '';
-        setTimeout(() => { el.style.transition = ''; }, 380);
+        setTimeout(() => { el.style.transition = ''; }, 350);
       });
     }
   }, { passive: true });
 }
 
-function onScrollScatter(scrollY) {
-  const maxScroll = 360;
-  targetScatterProgress = Math.min(1, Math.max(0, scrollY / maxScroll));
-  if (!isScatterRafRunning) {
-    isScatterRafRunning = true;
-    requestAnimationFrame(renderScatterFrame);
-  }
-}
-
-function renderScatterFrame() {
-  if (!scatterLetters.length) {
-    isScatterRafRunning = false;
-    return;
-  }
-
-  const diff = targetScatterProgress - currentScatterProgress;
-  if (Math.abs(diff) < 0.0008) {
-    currentScatterProgress = targetScatterProgress;
-  } else {
-    currentScatterProgress += diff * 0.17;
-  }
-
-  if (currentScatterProgress <= 0.001) {
-    currentScatterProgress = 0;
+function applyScatterPositions(progress) {
+  if (progress <= 0) {
     scatterLetters.forEach(el => {
       el.style.transform = '';
       el.style.opacity = '';
     });
-    if (hasScatteredOnce) {
-      scatterSeeds = generate3DScatterTrajectory();
-      hasScatteredOnce = false;
-      triggerFeedback('tap');
-    }
-    isScatterRafRunning = false;
     return;
   }
-
-  hasScatteredOnce = true;
 
   scatterLetters.forEach((el, index) => {
     const seed = scatterSeeds[index];
     if (!seed) return;
 
     const stagger = seed.stagger;
-    const rawP = Math.min(1, Math.max(0, (currentScatterProgress - stagger) / (1 - stagger * 0.85)));
+    const rawP = Math.min(1, Math.max(0, (progress - stagger) / (1 - stagger * 0.85)));
     const easeP = 1 - Math.pow(1 - rawP, 2.8);
 
     const curDx = (seed.dx * easeP).toFixed(1);
@@ -4502,8 +4545,73 @@ function renderScatterFrame() {
     el.style.transform = `translate3d(${curDx}px, ${curDy}px, ${curDz}px) rotateX(${curRx}deg) rotateY(${curRy}deg) rotateZ(${curRz}deg) scale(${curScale})`;
     el.style.opacity = curOpacity;
   });
+}
 
-  if (Math.abs(targetScatterProgress - currentScatterProgress) > 0.0004) {
+function onScrollScatter(scrollY) {
+  // If scrolled far past header (> 400px) and already scattered, skip completely!
+  if (scrollY >= 400 && currentScatterProgress >= 0.999) {
+    if (currentScatterProgress !== 1) {
+      currentScatterProgress = 1;
+      targetScatterProgress = 1;
+      applyScatterPositions(1);
+    }
+    isScatterRafRunning = false;
+    return;
+  }
+
+  // If at top and already reset, skip completely!
+  if (scrollY <= 0 && currentScatterProgress <= 0.001) {
+    if (currentScatterProgress !== 0) {
+      currentScatterProgress = 0;
+      targetScatterProgress = 0;
+      applyScatterPositions(0);
+    }
+    isScatterRafRunning = false;
+    return;
+  }
+
+  const maxScroll = 360;
+  const newTarget = Math.min(1, Math.max(0, scrollY / maxScroll));
+  if (Math.abs(newTarget - targetScatterProgress) < 0.001 && targetScatterProgress === currentScatterProgress) {
+    return;
+  }
+
+  targetScatterProgress = newTarget;
+  if (!isScatterRafRunning) {
+    isScatterRafRunning = true;
+    requestAnimationFrame(renderScatterFrame);
+  }
+}
+
+function renderScatterFrame() {
+  if (!scatterLetters.length) {
+    isScatterRafRunning = false;
+    return;
+  }
+
+  const diff = targetScatterProgress - currentScatterProgress;
+  if (Math.abs(diff) < 0.001) {
+    currentScatterProgress = targetScatterProgress;
+  } else {
+    currentScatterProgress += diff * 0.22;
+  }
+
+  applyScatterPositions(currentScatterProgress);
+
+  if (currentScatterProgress <= 0.001) {
+    currentScatterProgress = 0;
+    applyScatterPositions(0);
+    if (hasScatteredOnce) {
+      scatterSeeds = generate3DScatterTrajectory();
+      hasScatteredOnce = false;
+    }
+    isScatterRafRunning = false;
+    return;
+  }
+
+  hasScatteredOnce = true;
+
+  if (Math.abs(targetScatterProgress - currentScatterProgress) > 0.001) {
     requestAnimationFrame(renderScatterFrame);
   } else {
     isScatterRafRunning = false;
@@ -4548,9 +4656,14 @@ function getSearchIndex() {
     const metaAttrs = Array.from(strip.querySelectorAll('[title], [data-tech], [aria-label]'))
       .map(el => [el.getAttribute('title') || '', el.getAttribute('data-tech') || '', el.getAttribute('aria-label') || ''].join(' '))
       .join(' ');
+    const tiles = Array.from(strip.querySelectorAll('.tech-tile-btn')).map(tile => ({
+      el: tile,
+      meta: [tile.getAttribute('title') || '', tile.getAttribute('data-tech') || '', tile.getAttribute('aria-label') || ''].join(' ').toLowerCase()
+    }));
     return {
       el: strip,
-      text: (strip.textContent + ' ' + metaAttrs).toLowerCase()
+      text: (strip.textContent + ' ' + metaAttrs).toLowerCase(),
+      tiles: tiles
     };
   });
   searchItemsCache = { projectCards, faqCards, bundleStrips };
@@ -4587,22 +4700,19 @@ function executeDomFilter(cleanQ) {
     item.el.style.opacity = isMatch ? '1' : '0.22';
     if (cleanQ !== '' && isMatch) {
       matchSkills++;
-      const tiles = item.el.querySelectorAll('.tech-tile-btn');
-      tiles.forEach(tile => {
-        const tileMeta = [tile.getAttribute('title') || '', tile.getAttribute('data-tech') || '', tile.getAttribute('aria-label') || ''].join(' ').toLowerCase();
-        if (tileMeta.includes(cleanQ)) {
-          tile.style.transform = 'translateY(-3px) scale(1.08)';
-          tile.style.boxShadow = '0 0 16px var(--accent)';
+      item.tiles.forEach(tile => {
+        if (tile.meta.includes(cleanQ)) {
+          tile.el.style.transform = 'translateY(-3px) scale(1.08)';
+          tile.el.style.boxShadow = '0 0 16px var(--accent)';
         } else {
-          tile.style.transform = '';
-          tile.style.boxShadow = '';
+          tile.el.style.transform = '';
+          tile.el.style.boxShadow = '';
         }
       });
     } else {
-      const tiles = item.el.querySelectorAll('.tech-tile-btn');
-      tiles.forEach(tile => {
-        tile.style.transform = '';
-        tile.style.boxShadow = '';
+      item.tiles.forEach(tile => {
+        tile.el.style.transform = '';
+        tile.el.style.boxShadow = '';
       });
     }
   });
@@ -4631,6 +4741,7 @@ function handlePortfolioSearch(query) {
   const placeholderEl = document.getElementById('searchPlaceholder');
   const searchWrap = document.getElementById('searchWrap');
   const boxContainer = document.querySelector('.search-box-container');
+  const searchIcon = document.querySelector('.search-icon');
   const hasVal = query.length > 0;
 
   if (searchWrap) searchWrap.classList.toggle('has-value', hasVal);
@@ -4649,12 +4760,11 @@ function handlePortfolioSearch(query) {
     }
   }
 
-  // Trigger elastic keystroke spring bounce on search box
-  if (boxContainer && hasVal) {
-    boxContainer.classList.remove('key-pulse');
-    requestAnimationFrame(() => {
-      boxContainer.classList.add('key-pulse');
-    });
+  // Trigger playful spring pulse on search icon instead of whole container
+  if (searchIcon && hasVal) {
+    searchIcon.classList.remove('key-pulse');
+    void searchIcon.offsetWidth;
+    searchIcon.classList.add('key-pulse');
   }
 
   // Debounced search filtering prevents typing lag and keyboard stutter
@@ -4855,33 +4965,38 @@ function runSearchPlaceholderCycle() {
   if (!placeholderEl || !inputEl) return;
 
   const isFocused = document.activeElement === inputEl;
-  if (isFocused || inputEl.value.trim().length > 0) {
-    // Pause cycle while user is actively typing or focused
+  if (document.hidden || isFocused || inputEl.value.trim().length > 0) {
+    // Pause cycle while document is hidden, user is actively typing, or focused
     placeholderTimer = setTimeout(runSearchPlaceholderCycle, 1000);
     return;
   }
 
   const currentPrompt = SEARCH_PROMPTS[currentPromptIdx % SEARCH_PROMPTS.length];
+  let textSpan = document.getElementById('placeholderText');
+  if (!textSpan) {
+    placeholderEl.innerHTML = '<span id="placeholderText"></span><span class="placeholder-cursor"></span>';
+    textSpan = document.getElementById('placeholderText');
+  }
 
   if (!isDeleting) {
     charIdx++;
-    placeholderEl.innerHTML = currentPrompt.substring(0, charIdx) + '<span class="placeholder-cursor"></span>';
-    if (charIdx === currentPrompt.length) {
+    textSpan.textContent = currentPrompt.substring(0, charIdx);
+    if (charIdx >= currentPrompt.length) {
       isDeleting = true;
-      placeholderTimer = setTimeout(runSearchPlaceholderCycle, 2800);
+      placeholderTimer = setTimeout(runSearchPlaceholderCycle, 2600);
       return;
     }
-    placeholderTimer = setTimeout(runSearchPlaceholderCycle, 35);
+    placeholderTimer = setTimeout(runSearchPlaceholderCycle, 48);
   } else {
     charIdx--;
-    placeholderEl.innerHTML = currentPrompt.substring(0, charIdx) + '<span class="placeholder-cursor"></span>';
-    if (charIdx === 0) {
+    textSpan.textContent = currentPrompt.substring(0, charIdx);
+    if (charIdx <= 0) {
       isDeleting = false;
       currentPromptIdx++;
-      placeholderTimer = setTimeout(runSearchPlaceholderCycle, 400);
+      placeholderTimer = setTimeout(runSearchPlaceholderCycle, 380);
       return;
     }
-    placeholderTimer = setTimeout(runSearchPlaceholderCycle, 18);
+    placeholderTimer = setTimeout(runSearchPlaceholderCycle, 24);
   }
 }
 runSearchPlaceholderCycle();
@@ -4902,13 +5017,31 @@ function triggerSearchEasterEgg() {
    5. SCROLL-TO-TOP BUTTON, PROGRESS & FOOTER DOCKING
 ═══════════════════════════════════════════════════ */
 let scrollBtnTimer = null;
-window.addEventListener('scroll', () => {
+let scrollRafId = null;
+let lastScrollY = -1;
+let cachedScrollHeight = 0;
+let cachedInnerHeight = 0;
+
+function updateScrollMetrics() {
+  cachedScrollHeight = document.documentElement.scrollHeight;
+  cachedInnerHeight = window.innerHeight;
+}
+window.addEventListener('resize', updateScrollMetrics, { passive: true });
+updateScrollMetrics();
+
+function handleScrollTick() {
+  scrollRafId = null;
   const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-  const scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
-  const progress = (scrollY / scrollTotal) * 100;
+  if (scrollY === lastScrollY) return;
+  lastScrollY = scrollY;
+
+  const scrollTotal = (cachedScrollHeight || document.documentElement.scrollHeight) - (cachedInnerHeight || window.innerHeight);
+  const progress = scrollTotal > 0 ? (scrollY / scrollTotal) * 100 : 0;
 
   const bar = document.getElementById('scrollProgressBar');
-  if (bar) bar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+  if (bar) {
+    bar.style.transform = `scaleX(${Math.min(1, Math.max(0, progress / 100)).toFixed(4)})`;
+  }
 
   const btn = document.getElementById('scrollTopBtn');
   if (btn) {
@@ -4934,6 +5067,12 @@ window.addEventListener('scroll', () => {
   }
 
   onScrollScatter(scrollY);
+}
+
+window.addEventListener('scroll', () => {
+  if (!scrollRafId) {
+    scrollRafId = requestAnimationFrame(handleScrollTick);
+  }
 }, { passive: true });
 
 function scrollToTop() {
@@ -5103,10 +5242,10 @@ console.log('%cPortfolio Spectrum', 'color:#4F46E5;font-size:24px;font-weight:bo
 console.log('%cHandcrafted with modern UI, 3D kinetic dispersion, and security mechanisms.', 'color:#818CF8;font-size:12px;');
 
 /* ═══════════════════════════════════════════════════
-   7. SCROLL REVEAL ENGINE & CARD STABILITY
+   7. SCROLL REVEAL ENGINE & WAVE DIVIDER OPTIMIZER
 ═══════════════════════════════════════════════════ */
 function initScrollReveal() {
-  const elements = document.querySelectorAll('.scroll-reveal, .card');
+  const elements = document.querySelectorAll('.scroll-reveal');
   if (!('IntersectionObserver' in window)) {
     elements.forEach(el => el.classList.add('revealed'));
     return;
@@ -5123,6 +5262,19 @@ function initScrollReveal() {
   elements.forEach(el => observer.observe(el));
 }
 initScrollReveal();
+
+// Pause wave animations when footer is out of viewport to save 100% GPU/CPU resources
+function initWaveDividerObserver() {
+  const waveDivider = document.querySelector('.wave-divider');
+  if (!waveDivider || !('IntersectionObserver' in window)) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      waveDivider.classList.toggle('is-in-view', entry.isIntersecting);
+    });
+  }, { rootMargin: '120px 0px' });
+  observer.observe(waveDivider);
+}
+initWaveDividerObserver();
 
 /* ═══════════════════════════════════════════════════
    8. ALL PORTFOLIO FEATURES, MODALS & PHOTO GALLERY
