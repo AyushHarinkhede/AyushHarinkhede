@@ -475,9 +475,10 @@ header {
   color: var(--accent);
   -webkit-text-fill-color: var(--accent);
   text-shadow: 
-    0 6px 20px rgba(79, 70, 229, 0.42),
-    0 12px 42px rgba(79, 70, 229, 0.28),
-    0 0 55px rgba(99, 102, 241, 0.2);
+    0 4px 12px rgba(79, 70, 229, 0.78),
+    0 10px 28px rgba(79, 70, 229, 0.62),
+    0 18px 52px rgba(79, 70, 229, 0.44),
+    0 0 35px rgba(67, 56, 202, 0.35);
 }
 
 .header-title .title-catalyst,
@@ -485,9 +486,10 @@ header {
   color: #111827;
   -webkit-text-fill-color: #111827;
   text-shadow: 
-    0 6px 20px rgba(17, 24, 39, 0.35),
-    0 14px 44px rgba(17, 24, 39, 0.2),
-    0 0 48px rgba(0, 0, 0, 0.12);
+    0 4px 12px rgba(17, 24, 39, 0.75),
+    0 10px 28px rgba(17, 24, 39, 0.58),
+    0 18px 52px rgba(17, 24, 39, 0.40),
+    0 0 35px rgba(0, 0, 0, 0.30);
   transition: color 0.3s ease;
 }
 
@@ -496,9 +498,10 @@ header {
   color: var(--accent);
   -webkit-text-fill-color: var(--accent);
   text-shadow: 
-    0 6px 25px rgba(129, 140, 248, 0.6),
-    0 12px 50px rgba(99, 102, 241, 0.38),
-    0 0 65px rgba(79, 70, 229, 0.28);
+    0 4px 14px rgba(129, 140, 248, 0.88),
+    0 10px 32px rgba(99, 102, 241, 0.70),
+    0 18px 60px rgba(79, 70, 229, 0.52),
+    0 0 45px rgba(99, 102, 241, 0.42);
 }
 
 [data-theme="dark"] .header-title .title-catalyst,
@@ -506,9 +509,10 @@ header {
   color: #F1F5F9;
   -webkit-text-fill-color: #F1F5F9;
   text-shadow: 
-    0 6px 24px rgba(241, 245, 249, 0.42),
-    0 12px 48px rgba(241, 245, 249, 0.24),
-    0 0 55px rgba(255, 255, 255, 0.18);
+    0 4px 14px rgba(241, 245, 249, 0.70),
+    0 10px 30px rgba(241, 245, 249, 0.50),
+    0 18px 55px rgba(255, 255, 255, 0.36),
+    0 0 40px rgba(255, 255, 255, 0.28);
 }
 
 /* Scroll-Driven 3D Kinetic Letter Dispersion Engine */
@@ -544,15 +548,21 @@ header {
 }
 
 .title-edc .scatter-char:hover {
-  text-shadow: 0 4px 28px rgba(79, 70, 229, 0.75), 0 0 50px rgba(99, 102, 241, 0.5);
+  text-shadow: 
+    0 4px 16px rgba(79, 70, 229, 0.90),
+    0 12px 38px rgba(79, 70, 229, 0.75),
+    0 0 55px rgba(99, 102, 241, 0.60);
 }
 
 .title-catalyst .scatter-char:hover {
-  text-shadow: 0 4px 24px rgba(17, 24, 39, 0.6), 0 0 40px rgba(17, 24, 39, 0.35);
+  text-shadow: 
+    0 4px 16px rgba(17, 24, 39, 0.88),
+    0 12px 38px rgba(17, 24, 39, 0.70),
+    0 0 50px rgba(0, 0, 0, 0.50);
 }
 
 [data-theme="dark"] .title-catalyst .scatter-char:hover {
-  text-shadow: 0 4px 28px rgba(241, 245, 249, 0.7), 0 0 50px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 4px 28px rgba(241, 245, 249, 0.85), 0 0 50px rgba(255, 255, 255, 0.65);
 }
 
 .scatter-space {
@@ -921,47 +931,56 @@ header {
   font-weight: 600;
 }
 
-/* ─── SMART SEARCH SUGGESTIONS & AUTOCOMPLETE DROPDOWN ─── */
+/* ─── SMART IN-FLOW SEARCH SUGGESTIONS & AUTOCOMPLETE CONTAINER ─── */
 .search-suggestions-dropdown {
-  position: absolute;
-  top: calc(100% + 10px);
-  left: 0;
-  right: 0;
+  position: relative;
   width: 100%;
+  box-sizing: border-box;
   background: var(--bg2);
-  border: 1.5px solid var(--border);
-  border-radius: 22px;
-  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.12), 0 8px 24px rgba(79, 70, 229, 0.1);
+  border: 1.5px solid transparent;
+  border-radius: 24px;
+  box-shadow: none;
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  z-index: 1000;
-  padding: 16px 18px;
-  box-sizing: border-box;
-  display: none;
+  z-index: 50;
+  padding: 0 18px;
+  max-height: 0;
   opacity: 0;
-  transform: translateY(-8px);
-  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-top: 0;
+  overflow: hidden;
   pointer-events: none;
-  max-height: 440px;
-  overflow-y: auto;
-  overscroll-behavior: contain;
+  transition: max-height 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              margin-top 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              padding 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease,
+              box-shadow 0.35s ease;
 }
 
-/* CRITICAL: ONLY visible when search-wrap is focused (expanded) AND has suggestions! */
+/* CRITICAL: IN-FLOW EXPANSION PUSHES .cats-section AND WEB CONTENT DOWN SMOOTHLY */
 .search-wrap.focused.has-suggestions .search-suggestions-dropdown,
 .search-wrap:focus-within.has-suggestions .search-suggestions-dropdown {
-  display: block;
+  max-height: 520px;
   opacity: 1;
-  transform: translateY(0);
+  margin-top: 14px;
+  padding: 16px 18px 18px;
+  border-color: var(--border);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.08), 0 6px 20px rgba(79, 70, 229, 0.08);
   pointer-events: auto;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 /* Dark mode adjustment */
 [data-theme="dark"] .search-suggestions-dropdown {
   background: rgba(17, 24, 39, 0.94);
+  border-color: transparent;
+  box-shadow: none;
+}
+[data-theme="dark"] .search-wrap.focused.has-suggestions .search-suggestions-dropdown,
+[data-theme="dark"] .search-wrap:focus-within.has-suggestions .search-suggestions-dropdown {
   border-color: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(99, 102, 241, 0.18);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 8px 25px rgba(99, 102, 241, 0.2);
 }
 
 /* Suggestions Scrollbar */
@@ -977,6 +996,19 @@ header {
   background: var(--accent);
 }
 
+/* Match Highlight Pill */
+.search-hl {
+  background: rgba(99, 102, 241, 0.16);
+  color: var(--accent);
+  font-weight: 700;
+  border-radius: 3px;
+  padding: 1px 3px;
+}
+[data-theme="dark"] .search-hl {
+  background: rgba(129, 140, 248, 0.28);
+  color: #A5B4FC;
+}
+
 /* Group Headers */
 .suggest-group-header {
   font-family: 'DM Mono', monospace;
@@ -984,29 +1016,30 @@ header {
   text-transform: uppercase;
   letter-spacing: 1.5px;
   color: var(--text3);
-  margin: 12px 6px 8px;
+  margin: 12px 4px 8px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 .suggest-group-header:first-child {
-  margin-top: 2px;
+  margin-top: 0;
 }
 .suggest-group-header .suggest-count-badge {
   background: var(--bg3);
-  padding: 2px 8px;
+  padding: 2px 9px;
   border-radius: 99px;
   font-size: 10px;
   color: var(--accent);
   font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 /* Suggested Keyword / Sentence Chips */
 .suggest-phrases-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 7px;
-  margin-bottom: 12px;
+  gap: 8px;
+  margin-bottom: 14px;
 }
 .suggest-phrase-chip {
   display: inline-flex;
@@ -1045,7 +1078,7 @@ header {
 .suggest-matches-list {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 .suggest-match-card {
   display: flex;
@@ -1062,11 +1095,12 @@ header {
   width: 100%;
   box-sizing: border-box;
 }
-.suggest-match-card:hover {
+.suggest-match-card:hover,
+.suggest-match-card.is-selected {
   background: var(--bg2);
   border-color: var(--accent);
   transform: translateX(4px);
-  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.12);
+  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.14);
 }
 .suggest-match-left {
   display: flex;
@@ -1076,9 +1110,9 @@ header {
   flex: 1;
 }
 .suggest-icon-box {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1113,13 +1147,41 @@ header {
   color: var(--text2);
   flex-shrink: 0;
 }
+.suggest-match-badge.badge-projects {
+  background: rgba(59, 130, 246, 0.12);
+  color: #2563EB;
+}
+[data-theme="dark"] .suggest-match-badge.badge-projects {
+  color: #60A5FA;
+}
+.suggest-match-badge.badge-skills {
+  background: rgba(16, 185, 129, 0.12);
+  color: #059669;
+}
+[data-theme="dark"] .suggest-match-badge.badge-skills {
+  color: #34D399;
+}
+.suggest-match-badge.badge-education {
+  background: rgba(139, 92, 246, 0.12);
+  color: #7C3AED;
+}
+[data-theme="dark"] .suggest-match-badge.badge-education {
+  color: #A78BFA;
+}
+.suggest-match-badge.badge-contact {
+  background: rgba(245, 158, 11, 0.12);
+  color: #D97706;
+}
+[data-theme="dark"] .suggest-match-badge.badge-contact {
+  color: #FBBF24;
+}
 .suggest-match-desc {
   font-size: 12px;
   color: var(--text3);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-top: 2px;
+  margin-top: 3px;
 }
 .suggest-match-action {
   font-size: 12px;
@@ -1129,6 +1191,29 @@ header {
   gap: 4px;
   font-weight: 600;
   flex-shrink: 0;
+}
+
+/* Keyboard Helper Footer Bar */
+.suggest-footer-hint {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 10px;
+  margin-top: 10px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text3);
+}
+.suggest-footer-hint kbd {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--text2);
+  margin-right: 3px;
 }
 
 /* Direct Match Scroll Target Glowing Pulse Animation */
@@ -1175,6 +1260,7 @@ header {
 /* ─── SECTION NAV PILLS / CATEGORIES BAR ──────── */
 .cats-section {
   margin: 36px 0 40px;
+  transition: margin-top 0.38s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .cats-wrap {
   display: flex;
@@ -3068,12 +3154,13 @@ header {
     height: 14px;
   }
 
-  /* Mobile smart search suggestions dropdown tuning */
-  .search-suggestions-dropdown {
-    max-height: 380px;
-    padding: 12px 14px;
+  /* Mobile smart search suggestions container tuning */
+  .search-wrap.focused.has-suggestions .search-suggestions-dropdown,
+  .search-wrap:focus-within.has-suggestions .search-suggestions-dropdown {
+    max-height: 420px;
+    padding: 14px 12px 16px;
     border-radius: 18px;
-    top: calc(100% + 6px);
+    margin-top: 10px;
   }
   .suggest-phrase-chip {
     font-size: 11.5px;
@@ -5911,6 +5998,28 @@ function selectKnowledgeMatch(idx) {
   }
 }
 
+// Search Token Match Highlighter
+function highlightSearchMatch(text, query) {
+  if (!text || !query) return text || '';
+  const tokens = query.trim().split(/\s+/).filter(t => t.length > 0);
+  if (tokens.length === 0) return text;
+  const escaped = tokens.map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+  const regex = new RegExp(`(${escaped})`, 'gi');
+  return text.replace(regex, '<mark class="search-hl">$1</mark>');
+}
+
+// Category Badge Color Stylizer
+function getSuggestionBadgeClass(badge) {
+  const b = (badge || '').toLowerCase();
+  if (b.includes('project')) return 'badge-projects';
+  if (b.includes('mern') || b.includes('stack') || b.includes('skill')) return 'badge-skills';
+  if (b.includes('education') || b.includes('bca')) return 'badge-education';
+  if (b.includes('contact') || b.includes('location') || b.includes('social')) return 'badge-contact';
+  return '';
+}
+
+let currentSuggestionIndex = -1;
+
 // Renders Smart Suggestions & Instant Matches Dropdown
 function triggerKnowledgeSuggestions(query) {
   const searchWrap = document.getElementById('searchWrap');
@@ -5918,9 +6027,42 @@ function triggerKnowledgeSuggestions(query) {
   if (!dropdown || !searchWrap) return;
 
   const cleanQ = (query || '').trim().toLowerCase();
+  currentSuggestionIndex = -1;
+
+  // Initial Zero-State: Show Curated Quick Discovery Tray
   if (cleanQ.length === 0) {
-    searchWrap.classList.remove('has-suggestions');
-    dropdown.innerHTML = '';
+    dropdown.innerHTML = `
+      <div class="suggest-group-header">
+        <span>⚡ Quick Section Jump</span>
+        <span class="suggest-count-badge">Top Picks</span>
+      </div>
+      <div class="suggest-phrases-grid">
+        <button type="button" class="suggest-phrase-chip" onmousedown="quickSearch('Projects')">
+          <span>🚀 All Projects (7)</span>
+        </button>
+        <button type="button" class="suggest-phrase-chip" onmousedown="quickSearch('MERN Stack')">
+          <span>💻 MERN Stack</span>
+        </button>
+        <button type="button" class="suggest-phrase-chip" onmousedown="quickSearch('Education')">
+          <span>🎓 BCA Degree (2026)</span>
+        </button>
+        <button type="button" class="suggest-phrase-chip" onmousedown="quickSearch('Resume')">
+          <span>📄 Official Resume</span>
+        </button>
+        <button type="button" class="suggest-phrase-chip" onmousedown="quickSearch('Contact')">
+          <span>📞 Contact &amp; Phone</span>
+        </button>
+        <button type="button" class="suggest-phrase-chip" onmousedown="quickSearch('Skills')">
+          <span>🛠️ IT Support &amp; Skills</span>
+        </button>
+      </div>
+      <div class="suggest-footer-hint">
+        <span>Type to filter live · <kbd>esc</kbd> close</span>
+      </div>
+    `;
+    if (searchWrap.classList.contains('focused')) {
+      searchWrap.classList.add('has-suggestions');
+    }
     return;
   }
 
@@ -5928,13 +6070,14 @@ function triggerKnowledgeSuggestions(query) {
 
   if (matches.length === 0 && phrases.length === 0) {
     dropdown.innerHTML = `
-      <div style="text-align: center; padding: 20px 14px;">
-        <p style="font-size: 13.5px; font-weight: 600; color: var(--text); margin-bottom: 4px;">No direct match for "${query}"</p>
-        <p style="font-size: 12px; color: var(--text3); margin-bottom: 12px;">Try searching: <strong>Projects</strong>, <strong>BCA</strong>, <strong>Skills</strong>, <strong>Phone</strong>, <strong>Email</strong>, or <strong>Resume</strong></p>
-        <div style="display: flex; gap: 6px; justify-content: center; flex-wrap: wrap;">
-          <button type="button" class="suggest-phrase-chip" onmousedown="selectSuggestionPhrase('Projects')" style="font-size: 11.5px;">📁 Projects</button>
-          <button type="button" class="suggest-phrase-chip" onmousedown="selectSuggestionPhrase('Education')" style="font-size: 11.5px;">🎓 Education</button>
-          <button type="button" class="suggest-phrase-chip" onmousedown="selectSuggestionPhrase('Contact Phone')" style="font-size: 11.5px;">📞 Contact</button>
+      <div style="text-align: center; padding: 24px 14px;">
+        <p style="font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px;">No direct match for "${query}"</p>
+        <p style="font-size: 12px; color: var(--text3); margin-bottom: 14px;">Try searching by project name, tech stack, or key sections:</p>
+        <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+          <button type="button" class="suggest-phrase-chip" onmousedown="selectSuggestionPhrase('Projects')">📁 Projects</button>
+          <button type="button" class="suggest-phrase-chip" onmousedown="selectSuggestionPhrase('MERN Stack')">💻 MERN Stack</button>
+          <button type="button" class="suggest-phrase-chip" onmousedown="selectSuggestionPhrase('Education')">🎓 Education</button>
+          <button type="button" class="suggest-phrase-chip" onmousedown="selectSuggestionPhrase('Contact')">📞 Contact</button>
         </div>
       </div>
     `;
@@ -5950,17 +6093,18 @@ function triggerKnowledgeSuggestions(query) {
   if (phrases.length > 0) {
     html += `
       <div class="suggest-group-header">
-        <span>Suggested Searches</span>
+        <span>Suggested Queries</span>
         <span class="suggest-count-badge">${phrases.length} predictions</span>
       </div>
       <div class="suggest-phrases-grid">
     `;
     phrases.forEach(phrase => {
       const safePhrase = phrase.replace(/'/g, "\\'");
+      const hlPhrase = highlightSearchMatch(phrase, cleanQ);
       html += `
         <button type="button" class="suggest-phrase-chip" onmousedown="selectSuggestionPhrase('${safePhrase}')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
-          <span>${phrase}</span>
+          <span>${hlPhrase}</span>
         </button>
       `;
     });
@@ -5974,20 +6118,23 @@ function triggerKnowledgeSuggestions(query) {
         <span>Instant Portfolio Matches</span>
         <span class="suggest-count-badge">${matches.length} found</span>
       </div>
-      <div class="suggest-matches-list">
+      <div class="suggest-matches-list" id="suggestMatchesList">
     `;
-    matches.forEach(item => {
+    matches.forEach((item, cardIdx) => {
       const originalIdx = PORTFOLIO_KNOWLEDGE_BASE.indexOf(item);
+      const hlTitle = highlightSearchMatch(item.title, cleanQ);
+      const hlDesc = highlightSearchMatch(item.desc, cleanQ);
+      const badgeCls = getSuggestionBadgeClass(item.badge);
       html += `
-        <div class="suggest-match-card" onmousedown="selectKnowledgeMatch(${originalIdx})">
+        <div class="suggest-match-card" data-index="${cardIdx}" onmousedown="selectKnowledgeMatch(${originalIdx})">
           <div class="suggest-match-left">
             <span class="suggest-icon-box">${item.icon || '✦'}</span>
             <div class="suggest-match-content">
               <div class="suggest-match-title-row">
-                <span class="suggest-match-title">${item.title}</span>
-                <span class="suggest-match-badge">${item.badge}</span>
+                <span class="suggest-match-title">${hlTitle}</span>
+                <span class="suggest-match-badge ${badgeCls}">${item.badge}</span>
               </div>
-              <div class="suggest-match-desc">${item.desc}</div>
+              <div class="suggest-match-desc">${hlDesc}</div>
             </div>
           </div>
           <div class="suggest-match-action">
@@ -5999,6 +6146,15 @@ function triggerKnowledgeSuggestions(query) {
     });
     html += `</div>`;
   }
+
+  // 3. Keyboard Navigation Footer Hint
+  html += `
+    <div class="suggest-footer-hint">
+      <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
+      <span><kbd>↵</kbd> select</span>
+      <span><kbd>esc</kbd> close</span>
+    </div>
+  `;
 
   dropdown.innerHTML = html;
 
@@ -6053,11 +6209,27 @@ function handlePortfolioSearch(query) {
 }
 
 function handleSearchKeyDown(e) {
-  if (e.key === 'Escape') {
-    e.preventDefault();
-    clearPortfolioSearch(e);
-    e.target.blur();
+  const dropdown = document.getElementById('searchSuggestionsDropdown');
+  const cards = dropdown ? dropdown.querySelectorAll('.suggest-match-card') : [];
+
+  if (e.key === 'ArrowDown') {
+    if (cards.length > 0) {
+      e.preventDefault();
+      currentSuggestionIndex = (currentSuggestionIndex + 1) % cards.length;
+      updateSuggestionHighlight(cards);
+    }
+  } else if (e.key === 'ArrowUp') {
+    if (cards.length > 0) {
+      e.preventDefault();
+      currentSuggestionIndex = (currentSuggestionIndex - 1 + cards.length) % cards.length;
+      updateSuggestionHighlight(cards);
+    }
   } else if (e.key === 'Enter') {
+    if (cards.length > 0 && currentSuggestionIndex >= 0 && currentSuggestionIndex < cards.length) {
+      e.preventDefault();
+      cards[currentSuggestionIndex].dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+      return;
+    }
     e.preventDefault();
     const cleanQ = (e.target.value || '').trim().toLowerCase();
     if (cleanQ) {
@@ -6073,7 +6245,24 @@ function handleSearchKeyDown(e) {
         }
       }
     }
+  } else if (e.key === 'Escape') {
+    e.preventDefault();
+    const searchWrap = document.getElementById('searchWrap');
+    if (searchWrap) searchWrap.classList.remove('has-suggestions');
+    clearPortfolioSearch(e);
+    e.target.blur();
   }
+}
+
+function updateSuggestionHighlight(cards) {
+  cards.forEach((card, idx) => {
+    if (idx === currentSuggestionIndex) {
+      card.classList.add('is-selected');
+      card.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    } else {
+      card.classList.remove('is-selected');
+    }
+  });
 }
 
 let lastClearTimestamp = 0;
@@ -6153,6 +6342,19 @@ document.addEventListener('DOMContentLoaded', () => {
     clearBtn.addEventListener('mousedown', triggerClear);
     clearBtn.addEventListener('touchstart', triggerClear, { passive: false });
   }
+
+  const dropdown = document.getElementById('searchSuggestionsDropdown');
+  if (dropdown) {
+    dropdown.addEventListener('mousedown', (e) => {
+      // Keep input focused while interacting with dropdown cards or chips
+      const input = document.getElementById('searchInput');
+      if (input && document.activeElement === input) {
+        if (!e.target.closest('input, textarea')) {
+          e.preventDefault();
+        }
+      }
+    });
+  }
 });
 
 function quickSearch(term) {
@@ -6204,9 +6406,8 @@ function handleSearchFocus() {
     placeholderEl.style.visibility = 'hidden';
   }
   const input = document.getElementById('searchInput');
-  if (input && input.value.trim().length > 0) {
-    triggerKnowledgeSuggestions(input.value);
-  }
+  const val = input ? input.value.trim() : '';
+  triggerKnowledgeSuggestions(val);
   triggerFeedback('search_open');
 }
 
