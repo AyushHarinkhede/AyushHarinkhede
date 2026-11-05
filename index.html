@@ -164,8 +164,6 @@ img, svg, picture, canvas {
 /* Ensure cursor elements NEVER intercept mouse, pointer, or touch events anywhere */
 .custom-cursor,
 .custom-cursor *,
-.custom-cursor-aura,
-.custom-cursor-aura *,
 .cursor-svg,
 .cursor-svg * {
   pointer-events: none !important;
@@ -185,8 +183,7 @@ a, button, input, select, textarea, [role="button"],
 }
 
 /* Hidden by default on mobile / touchscreens */
-.custom-cursor,
-.custom-cursor-aura {
+.custom-cursor {
   display: none !important;
 }
 
@@ -227,23 +224,21 @@ a, button, input, select, textarea, [role="button"],
     height: 100%;
     display: none;
     pointer-events: none !important;
-    filter: drop-shadow(0 2px 7px rgba(79, 70, 229, 0.45));
+    color: #FFFFFF;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.45));
     transition: opacity 0.15s ease;
   }
   .cursor-svg .cursor-fill {
-    fill: var(--accent);
-  }
-  .cursor-svg {
-    color: #FFFFFF;
+    fill: var(--accent, #4F46E5);
   }
 
-  /* Dark mode cursor appearance */
+  /* Dark mode cursor appearance: high-contrast electric cyan fill with crisp white outline */
   [data-theme="dark"] .cursor-svg {
-    filter: drop-shadow(0 0 10px rgba(129, 140, 248, 0.65));
-    color: #0F172A;
+    filter: drop-shadow(0 3px 10px rgba(56, 189, 248, 0.45)) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.9));
+    color: #FFFFFF;
   }
   [data-theme="dark"] .cursor-svg .cursor-fill {
-    fill: #818CF8;
+    fill: #38BDF8;
   }
 
   /* Mode 1: Default Pointer Arrow */
@@ -253,11 +248,11 @@ a, button, input, select, textarea, [role="button"],
     transform-origin: 3.5px 2.5px;
   }
 
-  /* Mode 2: Interactive Hand Pointer (Zero-drift alignment with index finger) */
+  /* Mode 2: Interactive Hand Pointer (Authentic 1-Finger Index Point) */
   .custom-cursor.mode-pointer .cursor-svg-pointer {
     display: block;
     transform: none;
-    transform-origin: 10px 2px;
+    transform-origin: 9px 1.5px;
   }
 
   /* Mode 3: Text Input Type Bar / I-Beam */
@@ -288,72 +283,11 @@ a, button, input, select, textarea, [role="button"],
     transform: none;
     transform-origin: 12px 12px;
   }
-
-  /* Magnetic Aura Halo Follower */
-  .custom-cursor-aura {
-    display: block !important;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    pointer-events: none !important;
-    z-index: 9999999;
-    border: 1.5px solid rgba(79, 70, 229, 0.45);
-    background: rgba(79, 70, 229, 0.04);
-    opacity: 0;
-    transform: translate3d(-100px, -100px, 0);
-    will-change: transform;
-    transition: opacity 0.22s ease, width 0.22s ease, height 0.22s ease, border-radius 0.22s ease, border-color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
-  }
-  .custom-cursor-aura.visible {
-    opacity: 1;
-  }
-  [data-theme="dark"] .custom-cursor-aura {
-    border-color: rgba(129, 140, 248, 0.55);
-    background: rgba(129, 140, 248, 0.08);
-  }
-
-  /* Aura Dynamic Morphing per Mode */
-  .custom-cursor-aura.aura-pointer {
-    width: 48px;
-    height: 48px;
-    border-color: var(--accent);
-    background: rgba(79, 70, 229, 0.12);
-    box-shadow: 0 0 20px rgba(79, 70, 229, 0.25);
-  }
-  .custom-cursor-aura.aura-text {
-    width: 24px;
-    height: 36px;
-    border-radius: 6px;
-    border-color: var(--accent);
-    background: rgba(79, 70, 229, 0.08);
-  }
-  .custom-cursor-aura.aura-blocked {
-    width: 44px;
-    height: 44px;
-    border-color: #EF4444;
-    background: rgba(239, 68, 68, 0.12);
-    box-shadow: 0 0 16px rgba(239, 68, 68, 0.35);
-  }
-  .custom-cursor-aura.aura-grab {
-    width: 46px;
-    height: 46px;
-    border-color: #38BDF8;
-    background: rgba(56, 189, 248, 0.15);
-  }
-  .custom-cursor-aura.is-clicking {
-    border-color: var(--accent2);
-    background: rgba(79, 70, 229, 0.22);
-  }
 }
 
 @media (hover: none), (pointer: coarse) {
   .custom-cursor,
   .custom-cursor *,
-  .custom-cursor-aura,
-  .custom-cursor-aura *,
   .edc-cursor-follower {
     display: none !important;
     pointer-events: none !important;
@@ -3500,7 +3434,7 @@ header {
   body > *:not(#resumeModal) {
     display: none !important;
   }
-  .nav-bar, header, footer, .footer-wrapper, .custom-cursor, .custom-cursor-aura, #canvas3d {
+  .nav-bar, header, footer, .footer-wrapper, .custom-cursor, #canvas3d {
     display: none !important;
   }
   #resumeModal {
@@ -4744,7 +4678,6 @@ header {
     animation: none !important;
   }
   .custom-cursor,
-  .custom-cursor-aura,
   .edc-cursor-follower {
     display: none !important;
   }
@@ -4760,9 +4693,9 @@ header {
     <path d="M3.5 2.5L9.5 21L12.8 13.5L20.5 10.2L3.5 2.5Z" class="cursor-fill" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
   </svg>
   
-  <!-- 2. Interactive Hand Pointer -->
+  <!-- 2. Interactive Hand Pointer (Authentic 1-Finger Index Pointer) -->
   <svg class="cursor-svg cursor-svg-pointer" viewBox="0 0 24 24" fill="none">
-    <path d="M10 2a2 2 0 0 0-2 2v7.5l-1.3-.9a2.1 2.1 0 0 0-2.9.4 2.1 2.1 0 0 0 .3 2.9l5.5 5.2a6 6 0 0 0 4.4 1.9h2a6 6 0 0 0 6-6V9a2 2 0 0 0-2-2 2 2 0 0 0-2 2v-1a2 2 0 0 0-2-2 2 2 0 0 0-2 2V4a2 2 0 0 0-2-2z" class="cursor-fill" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M9 1.5C7.9 1.5 7 2.4 7 3.5V11.2L5.8 10C5 9.2 3.7 9.2 2.9 10C2.1 10.8 2.1 12 2.9 12.8L8.6 18.5C9.9 19.8 11.6 20.5 13.4 20.5H15.5C18.5 20.5 21 18 21 15V10.5C21 9.4 20.1 8.5 19 8.5C18.7 8.5 18.4 8.6 18.2 8.7C17.8 7.8 16.9 7.2 15.9 7.2C15.6 7.2 15.3 7.3 15 7.4C14.6 6.5 13.7 6 12.7 6C12.4 6 12.1 6.1 11.8 6.2V3.5C11.8 2.4 10.9 1.5 9.8 1.5H9z" class="cursor-fill" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
   </svg>
 
   <!-- 3. Text Input Type Bar / I-Beam -->
@@ -4781,9 +4714,6 @@ header {
     <path d="M7 11V5a1.5 1.5 0 0 1 3 0v5M10 10V4a1.5 1.5 0 0 1 3 0v6M13 10V5a1.5 1.5 0 0 1 3 0v6M16 11V7a1.5 1.5 0 0 1 3 0v6c0 4.4-3.6 8-8 8s-8-3.6-8-8v-3a1.5 1.5 0 0 1 3 0v3" class="cursor-fill" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
 </div>
-
-<!-- Magnetic Aura Halo Follower -->
-<div id="customCursorAura" class="custom-cursor-aura" aria-hidden="true"></div>
 
 <!-- ══ SECURITY ALERT TOAST ═══════════════════════ -->
 <div id="securityToast" class="security-toast" role="status" aria-live="polite">
@@ -6832,21 +6762,18 @@ document.addEventListener('visibilitychange', () => {
 function initInteractiveCursor() {
   if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return;
   const cursorHead = document.getElementById('customCursor');
-  const cursorAura = document.getElementById('customCursorAura');
-  if (!cursorHead || !cursorAura) return;
+  if (!cursorHead) return;
 
   let mouseX = -100, mouseY = -100;
-  let auraX = -100, auraY = -100;
   let isClicking = false;
   let isVisible = false;
   let currentMode = 'default';
-  let rafId = null;
   let lastTarget = null;
 
   // Pixel-accurate click hotspots for each cursor SVG shape
   const HOTSPOTS = {
     default: { x: 3.5, y: 2.5 },
-    pointer: { x: 10, y: 2 },
+    pointer: { x: 9, y: 1.5 },
     text: { x: 12, y: 12 },
     blocked: { x: 12, y: 12 },
     grab: { x: 12, y: 12 }
@@ -6855,44 +6782,17 @@ function initInteractiveCursor() {
   function setCursorMode(newMode) {
     if (newMode === currentMode) return;
     cursorHead.classList.remove(`mode-${currentMode}`);
-    cursorAura.classList.remove(`aura-${currentMode}`);
     currentMode = newMode;
     cursorHead.classList.add(`mode-${currentMode}`);
-    cursorAura.classList.add(`aura-${currentMode}`);
+    updateCursorTransform();
   }
 
-  function renderCursor() {
-    // 1. Position cursor head instantly with zero latency
+  function updateCursorTransform() {
     const offset = HOTSPOTS[currentMode] || HOTSPOTS.default;
     const hx = (mouseX - offset.x).toFixed(1);
     const hy = (mouseY - offset.y).toFixed(1);
     cursorHead.style.transformOrigin = `${offset.x}px ${offset.y}px`;
     cursorHead.style.transform = `translate3d(${hx}px, ${hy}px, 0)${isClicking ? ' scale(0.92)' : ''}`;
-
-    // 2. Position magnetic aura with fluid spring inertia
-    const dax = mouseX - auraX;
-    const day = mouseY - auraY;
-    auraX += dax * 0.28;
-    auraY += day * 0.28;
-
-    const ax = (auraX - 19).toFixed(1);
-    const ay = (auraY - 19).toFixed(1);
-    cursorAura.style.transform = `translate3d(${ax}px, ${ay}px, 0)${isClicking ? ' scale(0.7)' : ''}`;
-
-    // Continue loop until aura catches up, then sleep loop for 0% CPU waste
-    if (Math.abs(dax) > 0.1 || Math.abs(day) > 0.1) {
-      rafId = requestAnimationFrame(renderCursor);
-    } else {
-      auraX = mouseX;
-      auraY = mouseY;
-      rafId = null;
-    }
-  }
-
-  function startLoop() {
-    if (!rafId && isVisible) {
-      rafId = requestAnimationFrame(renderCursor);
-    }
   }
 
   window.addEventListener('pointermove', (e) => {
@@ -6903,8 +6803,9 @@ function initInteractiveCursor() {
     if (!isVisible) {
       isVisible = true;
       cursorHead.classList.add('visible');
-      cursorAura.classList.add('visible');
     }
+
+    updateCursorTransform();
 
     const target = e.target;
     if (target && target !== lastTarget) {
@@ -6924,7 +6825,7 @@ function initInteractiveCursor() {
         setCursorMode('grab');
       }
       // 4. Clickable / Hand pointer elements
-      else if (target.closest('a, button, [role="button"], .card, .cat-pill, .sm-chip, .spec-chip, .scatter-char, .footer-chip, .footer-action-btn, .app-tile-btn, .social-pill-item, .p-btn-action, .suggest-phrase-chip, .suggest-match-card, #clearBtn, #scrollTopBtn, .project-card-item')) {
+      else if (target.closest('a, button, [role="button"], .card, .cat-pill, .sm-chip, .spec-chip, .scatter-char, .footer-chip, .footer-action-btn, .app-tile-btn, .social-pill-item, .p-btn-action, .suggest-phrase-chip, .suggest-match-card, #clearBtn, #scrollTopBtn, .project-card-item, .macos-dot, .macos-action-pill, .thumb-zoom-badge, .map-dest-circle-wrap')) {
         setCursorMode('pointer');
       }
       // 5. Default aerodynamic arrow pointer
@@ -6932,51 +6833,36 @@ function initInteractiveCursor() {
         setCursorMode('default');
       }
     }
-
-    startLoop();
   }, { passive: true });
 
   window.addEventListener('pointerdown', (e) => {
     if (e.pointerType === 'touch') return;
     isClicking = true;
     cursorHead.classList.add('is-clicking');
-    cursorAura.classList.add('is-clicking');
-    startLoop();
+    updateCursorTransform();
   }, { passive: true });
 
   window.addEventListener('pointerup', (e) => {
     if (e.pointerType === 'touch') return;
     isClicking = false;
     cursorHead.classList.remove('is-clicking');
-    cursorAura.classList.remove('is-clicking');
-    startLoop();
+    updateCursorTransform();
   }, { passive: true });
 
   document.addEventListener('mouseleave', () => {
     isVisible = false;
     cursorHead.classList.remove('visible');
-    cursorAura.classList.remove('visible');
-    if (rafId) {
-      cancelAnimationFrame(rafId);
-      rafId = null;
-    }
   });
 
   window.addEventListener('blur', () => {
     isVisible = false;
     cursorHead.classList.remove('visible');
-    cursorAura.classList.remove('visible');
   });
 
   window.addEventListener('touchstart', () => {
     // Any direct touchscreen interaction instantly hides the custom cursor
     isVisible = false;
     cursorHead.classList.remove('visible');
-    cursorAura.classList.remove('visible');
-    if (rafId) {
-      cancelAnimationFrame(rafId);
-      rafId = null;
-    }
   }, { passive: true });
 }
 initInteractiveCursor();
