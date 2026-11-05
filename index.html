@@ -600,12 +600,12 @@ header {
   margin: 24px auto 22px;
   position: relative;
   transform-origin: center center;
-  transition: max-width 0.48s cubic-bezier(0.34, 1.35, 0.64, 1);
+  transition: max-width 0.58s cubic-bezier(0.34, 1.45, 0.64, 1);
 }
 .search-wrap:focus-within,
 .search-wrap.focused {
   max-width: 860px !important;
-  transition: max-width 0.52s cubic-bezier(0.34, 1.48, 0.64, 1) !important;
+  transition: max-width 0.62s cubic-bezier(0.34, 1.55, 0.64, 1) !important;
 }
 
 .search-box-container {
@@ -632,42 +632,51 @@ header {
   transform: translateY(-2px);
 }
 
-/* ─── ELASTIC SPRING & JELLY STRETCH KEYFRAMES (SIDE-TO-SIDE BOUNCE) ─── */
-@keyframes searchSpringOpen {
+/* ─── ELASTIC RUBBER-BAND SQUASH & STRETCH ANIMATION ─── */
+@keyframes rubberBandOpen {
   0% {
-    transform: scale3d(0.96, 1, 1) translateY(0);
+    transform: scale3d(1, 1, 1) translateY(0);
   }
-  32% {
-    /* Outward lateral stretch beyond target with subtle organic squash */
-    transform: scale3d(1.036, 0.952, 1) translateY(-3px);
+  14% {
+    /* Rubber band initial pull tension / squeeze */
+    transform: scale3d(0.938, 1.055, 1) translateY(0);
   }
-  58% {
-    /* Inward recoil */
-    transform: scale3d(0.984, 1.014, 1) translateY(-1.5px);
+  35% {
+    /* High horizontal stretch & vertical thinning (squash & stretch volume preservation) */
+    transform: scale3d(1.088, 0.875, 1) translateY(-3px);
   }
-  78% {
-    /* Secondary micro-bounce */
-    transform: scale3d(1.008, 0.996, 1) translateY(-2px);
+  55% {
+    /* Elastic snap-back past resting boundary */
+    transform: scale3d(0.948, 1.065, 1) translateY(-1.5px);
+  }
+  72% {
+    /* Secondary rebound stretch */
+    transform: scale3d(1.026, 0.984, 1) translateY(-2px);
+  }
+  86% {
+    /* Micro-oscillation settling */
+    transform: scale3d(0.992, 1.008, 1) translateY(-2px);
   }
   100% {
     transform: scale3d(1, 1, 1) translateY(-2px);
   }
 }
 
-@keyframes searchSpringClose {
+@keyframes rubberBandClose {
   0% {
-    transform: scale3d(1.02, 0.98, 1) translateY(-2px);
+    transform: scale3d(1, 1, 1) translateY(-2px);
   }
-  36% {
-    /* Inward compression stretch */
-    transform: scale3d(0.958, 1.026, 1) translateY(0);
+  22% {
+    /* Inward snap / rubber contraction */
+    transform: scale3d(0.932, 1.068, 1) translateY(0);
   }
-  66% {
-    /* Gentle outward recoil bounce */
-    transform: scale3d(1.016, 0.992, 1) translateY(0);
+  48% {
+    /* Elastic outward snap rebound */
+    transform: scale3d(1.042, 0.968, 1) translateY(0);
   }
-  86% {
-    transform: scale3d(0.996, 1.002, 1) translateY(0);
+  72% {
+    /* Micro inward recoil */
+    transform: scale3d(0.985, 1.012, 1) translateY(0);
   }
   100% {
     transform: scale3d(1, 1, 1) translateY(0);
@@ -675,16 +684,44 @@ header {
 }
 
 .search-wrap.is-opening .search-box-container {
-  animation: searchSpringOpen 0.52s cubic-bezier(0.2, 0.9, 0.3, 1.3) both;
+  animation: rubberBandOpen 0.65s cubic-bezier(0.2, 0.85, 0.25, 1.25) both;
 }
 
 .search-wrap.is-closing .search-box-container {
-  animation: searchSpringClose 0.46s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+  animation: rubberBandClose 0.52s cubic-bezier(0.2, 0.85, 0.25, 1.2) both;
+}
+
+/* Rubber stretch effect on search icon */
+@keyframes rubberIconOpen {
+  0% { transform: scale(1) rotate(0deg); }
+  22% { transform: scale(0.85) rotate(6deg); }
+  42% { transform: scale(1.28) rotate(-14deg); }
+  65% { transform: scale(1.06) rotate(-5deg); }
+  84% { transform: scale(1.18) rotate(-9deg); }
+  100% { transform: scale(1.15) rotate(-8deg); }
+}
+
+@keyframes rubberIconClose {
+  0% { transform: scale(1.15) rotate(-8deg); }
+  30% { transform: scale(0.82) rotate(8deg); }
+  60% { transform: scale(1.08) rotate(-3deg); }
+  85% { transform: scale(0.97) rotate(1deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.search-wrap.is-opening .search-icon {
+  animation: rubberIconOpen 0.65s cubic-bezier(0.2, 0.85, 0.25, 1.25) both;
+}
+
+.search-wrap.is-closing .search-icon {
+  animation: rubberIconClose 0.52s cubic-bezier(0.2, 0.85, 0.25, 1.2) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .search-wrap.is-opening .search-box-container,
-  .search-wrap.is-closing .search-box-container {
+  .search-wrap.is-closing .search-box-container,
+  .search-wrap.is-opening .search-icon,
+  .search-wrap.is-closing .search-icon {
     animation: none !important;
   }
 }
@@ -6092,12 +6129,13 @@ function handleSearchBoxClick(e) {
     if (document.activeElement !== input) {
       input.focus({ preventScroll: true });
     } else {
-      // Re-trigger subtle organic spring pulse if clicked while already open
+      // Re-trigger tactile rubber-band stretch if clicked while already open
       const searchWrap = document.getElementById('searchWrap');
       if (searchWrap && !searchWrap.classList.contains('is-opening')) {
         searchWrap.classList.remove('is-closing');
         searchWrap.classList.add('is-opening');
-        setTimeout(() => searchWrap.classList.remove('is-opening'), 520);
+        clearTimeout(searchOpenAnimTimer);
+        searchOpenAnimTimer = setTimeout(() => searchWrap.classList.remove('is-opening'), 680);
       }
     }
   }
@@ -6158,7 +6196,7 @@ function handleSearchFocus() {
     clearTimeout(searchOpenAnimTimer);
     searchOpenAnimTimer = setTimeout(() => {
       searchWrap.classList.remove('is-opening');
-    }, 550);
+    }, 680);
   }
   const placeholderEl = document.getElementById('searchPlaceholder');
   if (placeholderEl) {
@@ -6184,7 +6222,7 @@ function handleSearchBlur() {
       clearTimeout(searchCloseAnimTimer);
       searchCloseAnimTimer = setTimeout(() => {
         searchWrap.classList.remove('is-closing');
-      }, 500);
+      }, 540);
     }
     const input = document.getElementById('searchInput');
     const placeholderEl = document.getElementById('searchPlaceholder');
