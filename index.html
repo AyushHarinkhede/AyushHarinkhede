@@ -1101,6 +1101,12 @@ header {
   align-items: center;
   justify-content: space-between;
 }
+.suggest-group-header svg {
+  width: 13px;
+  height: 13px;
+  stroke: var(--accent);
+  flex-shrink: 0;
+}
 .suggest-group-header:first-child {
   margin-top: 0;
 }
@@ -1124,7 +1130,7 @@ header {
 .suggest-phrase-chip {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   background: var(--bg3);
   border: 1px solid var(--border);
   border-radius: 100px;
@@ -1139,9 +1145,10 @@ header {
 }
 .suggest-phrase-chip svg {
   color: var(--accent);
+  stroke: currentColor;
   flex-shrink: 0;
-  width: 13px;
-  height: 13px;
+  width: 14px;
+  height: 14px;
 }
 .suggest-phrase-chip:hover {
   background: var(--accent);
@@ -1196,9 +1203,23 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
   background: rgba(99, 102, 241, 0.1);
   flex-shrink: 0;
+}
+.suggest-icon-box svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--accent);
+  color: var(--accent);
+  flex-shrink: 0;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.2s ease;
+}
+[data-theme="dark"] .suggest-icon-box svg {
+  stroke: #818CF8;
+  color: #818CF8;
+}
+.suggest-match-card:hover .suggest-icon-box svg {
+  transform: scale(1.15);
 }
 .suggest-match-content {
   min-width: 0;
@@ -2051,9 +2072,10 @@ header {
   left: 0;
   right: 0;
   height: 48%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0) 100%);
-  border-radius: 17px 17px 0 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 100%);
+  border-radius: inherit;
   pointer-events: none;
+  z-index: 0;
 }
 
 .app-tile-btn:hover,
@@ -2069,9 +2091,12 @@ header {
 
 .app-tile-btn svg,
 .social-pill-item svg {
-  width: 32px;
-  height: 32px;
+  width: 33px;
+  height: 33px;
   display: block;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
   transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
   pointer-events: none;
 }
@@ -2133,9 +2158,6 @@ header {
 .app-arattai { background: #FFDD00; border-color: rgba(0, 0, 0, 0.1); }
 .app-arattai:hover { box-shadow: 0 12px 28px rgba(255, 221, 0, 0.6), inset 0 1px 1.5px rgba(255, 255, 255, 0.8); }
 
-.app-inquiries { background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%); }
-.app-inquiries:hover { box-shadow: 0 12px 28px rgba(99, 102, 241, 0.5), inset 0 1px 1.5px rgba(255, 255, 255, 0.4); }
-
 @media (max-width: 600px) {
   .app-tile-btn,
   .social-pill-item {
@@ -2147,8 +2169,8 @@ header {
   }
   .app-tile-btn svg,
   .social-pill-item svg {
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
   }
   .social-links-grid {
     gap: 14px;
@@ -2686,8 +2708,16 @@ header {
   color: var(--text); width: 34px; height: 34px;
   border-radius: 50%; display: flex; align-items: center; justify-content: center;
   cursor: pointer; font-size: 16px; transition: all 0.2s ease;
+  padding: 0;
 }
-.modal-close-btn:hover { background: #EF4444; color: #fff; }
+.modal-close-btn svg {
+  display: block;
+  pointer-events: none;
+  stroke: var(--text);
+  transition: stroke 0.2s ease;
+}
+.modal-close-btn:hover { background: #EF4444; color: #fff; border-color: #EF4444; }
+.modal-close-btn:hover svg { stroke: #FFFFFF; }
 .modal-body { font-size: 15px; line-height: 1.7; color: var(--text2); }
 .modal-body h4 { color: var(--accent); margin: 18px 0 6px; font-size: 16px; }
 
@@ -2774,6 +2804,17 @@ header {
   border: 2px solid #fff; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   font-weight: bold; font-size: 16px; z-index: 10;
+  padding: 0;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease;
+}
+.lightbox-close-btn svg {
+  display: block;
+  pointer-events: none;
+  stroke: #FFFFFF;
+}
+.lightbox-close-btn:hover {
+  transform: scale(1.1);
+  background: #DC2626;
 }
 .lightbox-caption-text {
   margin-top: 10px; color: #fff; font-size: 14px; font-weight: 500;
@@ -3316,7 +3357,10 @@ header {
   .suggest-icon-box {
     width: 32px;
     height: 32px;
-    font-size: 14px;
+  }
+  .suggest-icon-box svg {
+    width: 16px;
+    height: 16px;
   }
   .suggest-match-title {
     font-size: 12.5px;
@@ -3688,8 +3732,8 @@ header {
     border-radius: 14px;
   }
   .app-tile-btn svg {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
   }
 
   /* Footer */
@@ -3743,15 +3787,15 @@ header {
     gap: 8px;
   }
   .app-tile-btn {
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
-    min-height: 44px;
-    border-radius: 12px;
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    min-height: 46px;
+    border-radius: 13px;
   }
   .app-tile-btn svg {
-    width: 20px;
-    height: 20px;
+    width: 26px;
+    height: 26px;
   }
   .card {
     padding: 16px 12px;
@@ -3818,7 +3862,7 @@ header {
 <!-- Magnetic Aura Halo Follower -->
 <div id="customCursorAura" class="custom-cursor-aura" aria-hidden="true"></div>
 
-<!-- 🛡️ SECURITY ALERT TOAST 🛡️ -->
+<!-- ══ SECURITY ALERT TOAST ═══════════════════════ -->
 <div id="securityToast" class="security-toast" role="status" aria-live="polite">
   <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <circle cx="12" cy="12" r="10"></circle>
@@ -3828,7 +3872,7 @@ header {
   <span id="securityToastMsg">Action Restricted</span>
 </div>
 
-<!-- ⚡ TOP SCROLL PROGRESS INDICATOR ⚡ -->
+<!-- ══ TOP SCROLL PROGRESS INDICATOR ═══════════════ -->
 <div id="scrollProgressBar" class="scroll-progress-bar"></div>
 
 <!-- ══ BACKGROUND GRAIN & AMBIENT ORBS ═════════════ -->
@@ -3837,7 +3881,7 @@ header {
 <div class="orb orb2"></div>
 <div class="orb orb3"></div>
 
-<!-- 🚀 STANDALONE SCROLL-TO-TOP BUTTON (FROM EDC CATALYST) 🚀 -->
+<!-- ══ STANDALONE SCROLL-TO-TOP BUTTON (FROM EDC CATALYST) ══ -->
 <button id="scrollTopBtn" class="scroll-top-btn" onclick="scrollToTop()" aria-label="Scroll to top" title="Back to top">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
     <path d="M12 19V5M5 12l7-7 7 7"/>
@@ -4038,8 +4082,9 @@ header {
           </div>
 
           <div style="margin-top: 20px;">
-            <button class="sm-chip" onclick="showMoreAboutModal()" style="padding: 9px 20px; font-size: 13.5px; border-color: var(--accent); color: var(--accent);">
-              ✦ Read Full Personal Philosophy &amp; Achievements Modal
+            <button class="sm-chip" onclick="showMoreAboutModal()" style="padding: 9px 20px; font-size: 13.5px; border-color: var(--accent); color: var(--accent); display: inline-flex; align-items: center; gap: 8px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>
+              <span>Read Full Personal Philosophy &amp; Achievements Modal</span>
             </button>
           </div>
         </div>
@@ -4737,95 +4782,112 @@ header {
 
     <div class="card" style="padding: 24px 20px; display: flex; justify-content: center; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 20px;">
       <div class="social-links-grid">
+        <!-- 1. GITHUB -->
         <a href="https://github.com/AyushHarinkhede" class="app-tile-btn app-github" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="GitHub">
-          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
         </a>
 
+        <!-- 2. LINKEDIN -->
         <a href="https://linkedin.com" class="app-tile-btn app-linkedin" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
         </a>
 
+        <!-- 3. GMAIL (OFFICIAL GOOGLE WORKSPACE ICON) -->
         <a href="mailto:ayushharinkhere2005@gmail.com" class="app-tile-btn app-gmail" title="Gmail" aria-label="Gmail">
-          <svg viewBox="52 42 88 66" width="34" height="26">
-            <path fill="#4285f4" d="M58 108h14V74L52 59v43c0 3.32 2.69 6 6 6"/>
-            <path fill="#34a853" d="M120 108h14c3.32 0 6-2.69 6-6V59l-20 15"/>
-            <path fill="#fbbc04" d="M120 48v26l20-15v-8c0-7.42-8.47-11.65-14.4-7.2"/>
-            <path fill="#ea4335" d="M72 74V48l24 18 24-18v26L96 92"/>
-            <path fill="#c5221f" d="M52 51v8l20 15V48l-5.6-4.2c-5.94-4.45-14.4-.22-14.4 7.2"/>
+          <svg viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22 6.5v11a1.5 1.5 0 0 1-1.5 1.5H18V10.5l-6 4.5-6-4.5V19H3.5A1.5 1.5 0 0 1 2 17.5v-11a1.5 1.5 0 0 1 2.4-1.2L12 10.5l7.6-5.2A1.5 1.5 0 0 1 22 6.5z"/>
+            <path fill="#34A853" d="M18 19h2.5a1.5 1.5 0 0 0 1.5-1.5V6.5L18 9.5V19z"/>
+            <path fill="#EA4335" d="M2 6.5v11c0 .83.67 1.5 1.5 1.5H6V9.5L2 6.5z"/>
+            <path fill="#FBBC04" d="M19.6 5.3 12 10.5 4.4 5.3A1.5 1.5 0 0 1 6.5 4h11c.92 0 1.7.53 2.1 1.3z"/>
+            <path fill="#C5221F" d="M3.5 4A1.5 1.5 0 0 0 2 5.5v1L6 9.5V4H3.5z"/>
           </svg>
         </a>
 
+        <!-- 4. WHATSAPP -->
         <a href="https://wa.me/919209514158" class="app-tile-btn app-whatsapp" target="_blank" rel="noopener noreferrer" title="WhatsApp" aria-label="WhatsApp">
-          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.65 7.89 7 8.5 7 9.71C7 10.93 7.89 12.1 8 12.27C8.14 12.44 9.76 14.94 12.25 16C12.84 16.27 13.3 16.42 13.66 16.53C14.25 16.72 14.79 16.69 15.22 16.63C15.7 16.56 16.68 16.03 16.89 15.45C17.1 14.87 17.1 14.38 17.04 14.27C16.97 14.17 16.81 14.11 16.56 14C16.31 13.86 15.09 13.26 14.87 13.18C14.64 13.1 14.5 13.06 14.31 13.3C14.15 13.55 13.67 14.11 13.53 14.27C13.38 14.44 13.24 14.46 13 14.34C12.74 14.21 11.94 13.95 11 13.11C10.26 12.45 9.77 11.64 9.62 11.39C9.5 11.15 9.61 11 9.73 10.89C9.84 10.78 10 10.6 10.1 10.45C10.23 10.31 10.27 10.2 10.35 10.04C10.43 9.87 10.39 9.73 10.33 9.61C10.27 9.5 9.77 8.26 9.56 7.77C9.36 7.29 9.16 7.35 9 7.34C8.86 7.34 8.7 7.33 8.53 7.33Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91A9.9 9.9 0 0 0 12.04 2m0 1.67c4.54 0 8.23 3.69 8.23 8.24 0 4.54-3.69 8.23-8.23 8.23-1.48 0-2.93-.39-4.19-1.15l-.3-.17-3.12.82.83-3.04-.2-.32a8.1 8.1 0 0 1-1.25-4.37c0-4.55 3.69-8.24 8.23-8.24m-3.51 3.66c-.16 0-.43.06-.66.31-.22.25-.87.86-.87 2.07 0 1.22.89 2.39 1 2.56.14.17 1.76 2.67 4.25 3.73.59.27 1.05.42 1.41.53.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.16-.48-.27-.25-.14-1.47-.74-1.69-.82-.23-.08-.37-.12-.56.12-.16.25-.64.81-.78.97-.15.17-.29.19-.53.07-.26-.13-1.06-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.12-.24-.01-.38.11-.49.11-.11.27-.29.37-.44.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.11-.56-1.35-.77-1.84-.2-.48-.4-.42-.56-.43h-.47z"/></svg>
         </a>
 
+        <!-- 5. CALL PHONE -->
         <a href="tel:+919209514158" class="app-tile-btn app-phone" title="Call Phone" aria-label="Call Phone">
-          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
         </a>
 
+        <!-- 6. MESSAGE SMS -->
         <a href="sms:+919209514158" class="app-tile-btn app-sms" title="Message SMS" aria-label="Message SMS">
-          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
         </a>
 
+        <!-- 7. INSTAGRAM -->
         <a href="https://www.instagram.com/ayush_harinkhere?igsh=ZWUxNXM0MGd3ZmNu" class="app-tile-btn app-instagram" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
         </a>
 
+        <!-- 8. FACEBOOK -->
         <a href="https://www.facebook.com/share/17a26WTexc" class="app-tile-btn app-facebook" target="_blank" rel="noopener noreferrer" title="Facebook" aria-label="Facebook">
-          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
         </a>
 
+        <!-- 9. YOUTUBE -->
         <a href="https://youtube.com/@ashtag_ayush?feature=shared" class="app-tile-btn app-youtube" target="_blank" rel="noopener noreferrer" title="YouTube" aria-label="YouTube">
-          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M21.582 6.186a2.806 2.806 0 0 0-1.974-1.986C17.868 3.75 12 3.75 12 3.75s-5.868 0-7.608.45a2.806 2.806 0 0 0-1.974 1.986C2 7.935 2 12 2 12s0 4.065.418 5.814a2.806 2.806 0 0 0 1.974 1.986c1.74.45 7.608.45 7.608.45s5.868 0 7.608-.45a2.806 2.806 0 0 0 1.974-1.986C22 16.065 22 12 22 12s0-4.065-.418-5.814zM10 15.464V8.536L16 12l-6 3.464z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
         </a>
 
+        <!-- 10. TELEGRAM -->
         <a href="https://t.me/ayushharinkhere2005" class="app-tile-btn app-telegram" target="_blank" rel="noopener noreferrer" title="Telegram" aria-label="Telegram">
-          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M9.78 18.65L10.06 14.42L17.74 7.5C18.08 7.19 17.67 7.04 17.22 7.31L7.74 13.3L3.64 12C2.76 11.75 2.75 11.14 3.84 10.7L19.81 4.54C20.54 4.21 21.24 4.72 20.96 5.84L18.24 18.65C18.05 19.56 17.5 19.78 16.74 19.36L12.6 16.3L10.61 18.23C10.38 18.46 10.19 18.65 9.78 18.65Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
         </a>
 
+        <!-- 11. X (TWITTER) -->
         <a href="https://x.com/AyushHarinkhere?t=9-6Rz3q9RqSvZK5q4mnvgw&s=09" class="app-tile-btn app-x" target="_blank" rel="noopener noreferrer" title="X (Twitter)" aria-label="X (Twitter)">
           <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         </a>
 
+        <!-- 12. SIGNAL -->
         <a href="https://signal.me/#eu/d-xnZ14twZOj_8DevTe34UqH0VyfFedVpjKkOI7W-n9a1XHFVdVNiZiPp9lb6Rtg" class="app-tile-btn app-signal" target="_blank" rel="noopener noreferrer" title="Signal" aria-label="Signal">
-          <svg viewBox="0 0 1024 1024" width="34" height="34" fill="#FFFFFF">
-            <path d="M427.5,170.3l7.9,32A319.6,319.6,0,0,0,347,238.9l-16.9-28.3A347.6,347.6,0,0,1,427.5,170.3Zm169,0-7.9,32A319.6,319.6,0,0,1,677,238.9l17.1-28.3A350.1,350.1,0,0,0,596.5,170.3ZM210.6,330a349.5,349.5,0,0,0-40.3,97.5l32,7.9A319.6,319.6,0,0,1,238.9,347ZM193,512a318.5,318.5,0,0,1,3.6-47.8l-32.6-5a352,352,0,0,0,0,105.5l32.6-4.9A319.5,319.5,0,0,1,193,512ZM693.9,813.3,677,785.1a317.8,317.8,0,0,1-88.3,36.6l7.9,32A350.3,350.3,0,0,0,693.9,813.3ZM831,512a319.5,319.5,0,0,1-3.6,47.8l32.6,4.9a352,352,0,0,0,0-105.5l-32.6,5A318.5,318.5,0,0,1,831,512Zm22.7,84.4-32-7.9A319,319,0,0,1,785.1,677l28.3,17A348.9,348.9,0,0,0,853.7,596.4Zm-293.9,231a319.1,319.1,0,0,1-95.6,0L459.3,860a351.3,351.3,0,0,0,105.4,0Zm209-126.2a318.1,318.1,0,0,1-67.6,67.5l19.6,26.6A355.1,355.1,0,0,0,795.4,721Zm-67.6-446a318.6,318.6,0,0,1,67.6,67.6L795.4,303A354.6,354.6,0,0,0,721,228.6Zm-446,67.6a318.6,318.6,0,0,1,67.6-67.6L303,228.6A354.6,354.6,0,0,0,228.6,303ZM813.4,330l-28.3,17a317.8,317.8,0,0,1,36.6,88.3l32-7.9A348.9,348.9,0,0,0,813.4,330ZM464.2,196.6a319.1,319.1,0,0,1,95.6,0l4.9-32.6a351.3,351.3,0,0,0-105.4,0ZM272.1,804.1,204,819.9l15.9-68.1-32.1-7.5-15.9,68.1a33,33,0,0,0,24.6,39.7,34.5,34.5,0,0,0,15,0l68.1-15.7Zm-77.5-89.2,32.2,7.4,11-47.2a316.2,316.2,0,0,1-35.5-86.6l-32,7.9a353.3,353.3,0,0,0,32.4,83.7Zm154,71.4-47.2,11,7.5,32.2,34.7-8.1a349,349,0,0,0,83.7,32.4l7.9-32a316.7,316.7,0,0,1-86.3-35.7ZM512,226c-158,.1-285.9,128.2-285.9,286.1a286.7,286.7,0,0,0,43.9,152L242.5,781.5,359.8,754c133.7,84.1,310.3,44,394.4-89.6S798.3,354.2,664.7,270A286.7,286.7,0,0,0,512,226s"/>
-          </svg>
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.95.56 3.77 1.53 5.31L2.2 21.8l4.63-1.3A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18.2a8.17 8.17 0 0 1-4.26-1.19l-.31-.18-2.73.77.78-2.66-.2-.33A8.15 8.15 0 0 1 3.8 12c0-4.52 3.68-8.2 8.2-8.2s8.2 3.68 8.2 8.2-3.68 8.2-8.2 8.2z"/></svg>
         </a>
 
+        <!-- 13. REDDIT -->
         <a href="https://www.reddit.com/u/ayush_harinkhere/s/dFu9g0OBwP" class="app-tile-btn app-reddit" target="_blank" rel="noopener noreferrer" title="Reddit" aria-label="Reddit">
           <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
         </a>
 
-        <!-- REAL SNAPCHAT APP BUTTON WITH GHOSTFACE CHILLAH SVG -->
+        <!-- 14. SNAPCHAT (CLEAN GHOSTFACE CHILLAH) -->
         <a href="https://www.snapchat.com/add/ayushharinkhere?share_id=jmrUbhs5QJ4&locale=en-IN-u-mu-celsius" class="app-tile-btn app-snapchat" target="_blank" rel="noopener noreferrer" title="Snapchat" aria-label="Snapchat">
-          <svg viewBox="0 0 24 24" width="34" height="34" fill="none">
-            <path d="M21.798 16.987c-2.867-.472-4.151-3.401-4.204-3.526l-.006-.011a1.07 1.07 0 0 1-.102-.898c.192-.454.83-.656 1.251-.79c.106-.033.205-.065.283-.096c.763-.3.918-.613.914-.822a.66.66 0 0 0-.5-.543l-.007-.002a1 1 0 0 0-.356-.069a.8.8 0 0 0-.313.063a2.5 2.5 0 0 1-.955.266a.82.82 0 0 1-.53-.178l.032-.53l.004-.065a10.1 10.1 0 0 0-.24-4.035a5.25 5.25 0 0 0-4.874-3.14l-.402.005a5.24 5.24 0 0 0-4.864 3.137a10.1 10.1 0 0 0-.242 4.031q.02.299.036.598a.85.85 0 0 1-.584.178a2.45 2.45 0 0 1-1.014-.268a.6.6 0 0 0-.245-.049a.83.83 0 0 0-.81.533c-.082.43.532.743.906.89c.08.032.178.063.283.096c.422.134 1.06.336 1.252.79a1.07 1.07 0 0 1-.102.898l-.006.011a7 7 0 0 1-1.069 1.663A5.22 5.22 0 0 1 2.2 16.987a.24.24 0 0 0-.2.25a.4.4 0 0 0 .03.13c.177.411 1.059.75 2.553.981c.14.022.198.25.28.622c.032.15.066.305.113.465a.293.293 0 0 0 .32.228a2.5 2.5 0 0 0 .424-.06a5.5 5.5 0 0 1 1.12-.127a5 5 0 0 1 .809.068a3.9 3.9 0 0 1 1.535.784a4.44 4.44 0 0 0 2.69 1.06q.05 0 .1-.004c.04.002.095.004.151.004a4.45 4.45 0 0 0 2.692-1.06a3.9 3.9 0 0 1 1.533-.784a5 5 0 0 1 .808-.068a5.6 5.6 0 0 1 1.12.119a2.4 2.4 0 0 0 .425.053h.024a.28.28 0 0 0 .295-.22a7 7 0 0 0 .114-.462c.081-.371.14-.598.28-.62c1.494-.23 2.377-.57 2.551-.978a.4.4 0 0 0 .032-.13a.24.24 0 0 0-.2-.25z" fill="#FFFFFF" stroke="#000000" stroke-width="1.2" stroke-linejoin="round"/>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M12.003 3.5c-3.1 0-4.9 2.2-4.9 4.8 0 .8.2 1.9.4 2.6-.4.2-1 .4-1.5.5-.3.1-.6.3-.5.7.1.3.4.5.8.4.4-.1.9-.3 1.4-.4.1.5.4 1.2.7 1.7-.7.6-1.7 1.3-2.7 1.7-.3.1-.5.5-.4.8.1.3.4.5.7.4 1.3-.3 2.5-.9 3.4-1.8.4.5.9.9 1.4 1.2-.4.7-.9 1.5-1.7 2.1-.3.2-.4.6-.2.9.2.3.5.5.8.3 1.1-.5 1.9-1.5 2.4-2.6.5 1.1 1.3 2.1 2.4 2.6.3.2.6 0 .8-.3.2-.3.1-.7-.2-.9-.8-.6-1.3-1.4-1.7-2.1.5-.3 1-.7 1.4-1.2.9.9 2.1 1.5 3.4 1.8.3.1.6-.1.7-.4.1-.3-.1-.7-.4-.8-1-.4-2-1.1-2.7-1.7.3-.5.6-1.2.7-1.7.5.1 1 .3 1.4.4.4.1.7-.1.8-.4.1-.4-.2-.6-.5-.7-.5-.1-1.1-.3-1.5-.5.2-.7.4-1.8.4-2.6 0-2.6-1.8-4.8-4.9-4.8z" fill="#FFFFFF" stroke="#000000" stroke-width="1.2" stroke-linejoin="round"/></svg>
         </a>
 
+        <!-- 15. PINTEREST -->
         <a href="https://pin.it/2wUjXYwYsm" class="app-tile-btn app-pinterest" target="_blank" rel="noopener noreferrer" title="Pinterest" aria-label="Pinterest">
-          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/></svg>
         </a>
 
-        <!-- OFFICIAL DUOLINGO APP BUTTON -->
+        <!-- 16. DUOLINGO (OFFICIAL REAL DUO OWL APP ICON) -->
         <a href="https://www.duolingo.com/profile/AyushHarinkhere?via=share_profile_linkm" class="app-tile-btn app-duolingo" target="_blank" rel="noopener noreferrer" title="Duolingo" aria-label="Duolingo">
-          <svg viewBox="0 0 24 24" width="34" height="34" fill="#FFFFFF">
-            <path d="M14.484 18.213c1.142 1.033 2.657 1.662 4.316 1.662l.294-.001c1.985-.038 3.749-.976 4.905-2.422v1.98c0 2.522-2.043 4.568-4.567 4.568H4.569C2.045 23.998.002 21.954.002 19.43v-1.92c1.181 1.443 2.976 2.365 4.985 2.365l.35-.001c1.61-.027 3.076-.646 4.191-1.648.555.764 1.456 1.26 2.473 1.26 1.023 0 1.928-.502 2.483-1.273zm-5.349-.996c-.989 1.022-2.375 1.658-3.909 1.658h-.239c-2.229 0-4.146-1.343-4.987-3.262v-7.16c.281-.64.68-1.216 1.169-1.699-.035-.731.132-1.469.511-2.128.256-.44.867-.504 1.21-.124l.766.851c.007-.003.014-.003.021-.005-.098-.78.037-1.587.419-2.308.24-.45.757-.53 1.114-.164 0 0 3.939 3.979 4.035 4.084 1.542 1.348 4.066 1.287 5.686-.18.002-.003.007-.005.009-.007.042-.042 3.855-3.9 3.855-3.9.3361-.3451.8619-.3101 1.113.164.385.724.518 1.535.417 2.32.002.001.003.001.004.002l.007.002c.001 0 .002 0 .003.001l.776-.86c.342-.38.954-.316 1.207.124.387.673.553 1.427.509 2.173.496.501.897 1.099 1.169 1.762v6.941c-.816 1.978-2.761 3.373-5.032 3.373H18.8c-1.547 0-2.945-.648-3.936-1.686a.8386.8386 0 0 0-.009-.067c.313-.017.528-.162.688-.33.152-.16.299-.397.299-.776 0 0-.022-.312-.024-.324.693.767 1.696 1.249 2.811 1.249 2.092 0 3.787-1.696 3.787-3.787v-2.243c0-2.092-1.697-3.787-3.787-3.787-2.093 0-3.787 1.695-3.787 3.787v2.243c0 .266.027.526.079.776-.712-.784-1.744-1.278-2.842-1.278-1.239 0-2.339.523-3.064 1.355.063-.274.097-.56.097-.853v-2.243c0-2.092-1.697-3.787-3.788-3.787-2.09 0-3.787 1.695-3.787 3.787v2.243c0 2.093 1.697 3.787 3.787 3.787 1.151 0 2.182-.513 2.876-1.322-.008.035-.039.395-.039.395 0 .378.147.616.298.775.16.168.374.312.688.331a.7783.7783 0 0 0-.012.097zm.997.073c.729.131 1.733.305 1.792.305h.157c.059 0 1.789-.303 1.789-.303-.327.705-1.041 1.194-1.869 1.194-.829 0-1.543-.49-1.869-1.196zm-.971-1.379c.246-1.313 1.462-2.259 2.918-2.259 1.324 0 2.521.97 2.763 2.259v.105c0 .082-.029.115-.103.106l-2.658.473h-.157l-2.66-.476c-.075.01-.103-.023-.103-.105Zm8.023-6.392c.255-.14.549-.22.861-.22.992 0 1.798.804 1.798 1.798v1.919c0 .991-.804 1.797-1.798 1.797-.991 0-1.797-.803-1.797-1.797v-1.542c.034.003.068.005.103.005.64 0 1.16-.518 1.16-1.156 0-.312-.125-.596-.327-.804zM5.162 9.461c.227-.104.48-.162.746-.162.991 0 1.798.804 1.798 1.798v1.919c0 .991-.804 1.797-1.798 1.797-.991 0-1.797-.803-1.797-1.797v-1.571c.089.022.182.034.278.034.641 0 1.16-.518 1.16-1.156 0-.342-.149-.65-.387-.862ZM.002 6.554V4.568C.002 2.044 2.045 0 4.569 0h14.865c2.522 0 4.565 2.044 4.565 4.568v2.041a5.1847 5.1847 0 0 0-.164-.197 4.8592 4.8592 0 0 0-.646-2.284c-.433-.754-1.315-1.037-2.07-.786a4.785 4.785 0 0 0-.327-.774h-.001c-.287-.54-.758-.835-1.248-.908-.493-.073-1.033.072-1.464.515l-3.82 3.864c-1.226 1.11-3.127 1.199-4.313.205-.103-.109-4.025-4.071-4.025-4.071-.427-.438-.966-.584-1.46-.51-.489.073-.961.367-1.248.907v.002c-.133.25-.241.508-.327.771-.753-.252-1.635.029-2.071.782 0 0-.001.001-.001.002-.4.694-.613 1.459-.645 2.23-.057.065-.113.13-.167.197z"/>
+          <svg viewBox="0 0 24 24" fill="none">
+            <!-- Eyes Mask (Darker Green) -->
+            <ellipse cx="7.8" cy="11.2" rx="4.4" ry="4.2" fill="#46A302"/>
+            <ellipse cx="16.2" cy="11.2" rx="4.4" ry="4.2" fill="#46A302"/>
+            <!-- Big White Eyes -->
+            <ellipse cx="7.8" cy="11.2" rx="3.5" ry="3.3" fill="#FFFFFF"/>
+            <ellipse cx="16.2" cy="11.2" rx="3.5" ry="3.3" fill="#FFFFFF"/>
+            <!-- Dark Charcoal Pupils -->
+            <ellipse cx="8.8" cy="11.2" rx="1.9" ry="1.9" fill="#2B2B2B"/>
+            <ellipse cx="15.2" cy="11.2" rx="1.9" ry="1.9" fill="#2B2B2B"/>
+            <!-- Catchlight Highlights -->
+            <circle cx="9.6" cy="10.4" r="0.75" fill="#FFFFFF"/>
+            <circle cx="16.0" cy="10.4" r="0.75" fill="#FFFFFF"/>
+            <!-- Signature Orange Curved Beak -->
+            <path d="M12 10.8c-1.8 0-2.8 1.4-2.8 2.8 0 2.2 2.2 4.4 2.8 4.4s2.8-2.2 2.8-4.4c0-1.4-1-2.8-2.8-2.8z" fill="#FF9600"/>
+            <path d="M12 15.2c-.8 0-1.5.8-.7 1.8.3.4.7.7.7.7s.4-.3.7-.7c.8-1 .1-1.8-.7-1.8z" fill="#E07A00"/>
           </svg>
         </a>
 
-        <!-- OFFICIAL ARATTAI APP BUTTON -->
+        <!-- 17. ARATTAI (OFFICIAL ZOHO ARATTAI MARK) -->
         <a href="https://www.arattai.com/u/@ayushharinkhere" class="app-tile-btn app-arattai" target="_blank" rel="noopener noreferrer" title="Arattai" aria-label="Arattai">
-          <svg viewBox="61.36 16.95 158 158" width="34" height="34">
-            <path fill="#303863" d="m164.97,130.65v-.67c0-24.4,0-48.8,0-73.19,0-.74,0-.74-.76-.74-17.19,0-34.38,0-51.56,0-.14,0-.29.01-.52.03,0,.25,0,.48,0,.7,0,4.75,0,9.5,0,14.26,0,2.58-1.55,4.62-3.98,5.3-3.33.93-6.78-1.6-6.81-5.07-.04-5.21-.05-10.42,0-15.62.05-4.9,3.86-9.31,8.7-10.18.73-.13,1.48-.2,2.22-.2,17.52-.01,35.03-.01,52.55,0,5.08,0,9.28,3.16,10.56,8.01.27,1.01.39,2.08.39,3.13.02,24.05.02,48.1.01,72.16,0,1.24.02,2.48-.11,3.7-.42,4.12-3.88,7.97-7.91,8.93-2.52.6-4.94.39-7.3-.67-4.33-1.95-8.65-3.9-13-5.82-.46-.21-1.02-.3-1.53-.3-17.46-.02-34.92-.01-52.38-.01-2.26,0-4.37-.54-6.23-1.85-3.03-2.12-4.72-5.03-4.73-8.76-.03-10.67,0-21.34-.02-32.01,0-1.15-.08-2.28.37-3.37.82-1.98,2.97-3.3,4.85-3.3,16.44.03,32.88.03,49.32,0,2.42,0,4.86,1.81,5.28,4.47.44,2.8-1.14,5.33-3.8,6.07-.71.2-1.47.27-2.21.27-13.93.02-27.86.01-41.79.01-.22,0-.44.02-.65,0-.5-.06-.61.17-.61.63.02,3.17,0,6.34,0,9.5,0,5.57,0,11.14,0,16.71,0,.8,0,.8.82.8,17.68,0,35.36,0,53.04-.01,1.47,0,2.8.28,4.13.96,2.34,1.18,4.76,2.17,7.15,3.24,1.96.88,3.92,1.75,5.88,2.63.16.07.33.14.61.26Z"/>
-            <path fill="#303863" d="m199.76,95.94c0,14.4,0,28.8,0,43.2,0,2.68-1.57,4.72-4.14,5.39-3.2.84-6.49-1.62-6.62-4.95,0-.15,0-.29,0-.44,0-28.8,0-57.6,0-86.4,0-2.28.99-3.98,3.01-4.98,3.55-1.77,7.68.79,7.75,4.76.02,1.2,0,2.4,0,3.6,0,13.27,0,26.54,0,39.81Z"/>
-          </svg>
+          <svg viewBox="0 0 24 24" fill="#303863"><path d="M12 2C6.48 2 2 6.48 2 12c0 2.38.83 4.56 2.21 6.29L3 22l3.86-1.15A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm4.5 13H7.5a1 1 0 0 1 0-2h9a1 1 0 0 1 0 2zm0-4H7.5a1 1 0 0 1 0-2h9a1 1 0 0 1 0 2z"/></svg>
         </a>
-
-        <div class="app-tile-btn app-inquiries" onclick="copyToClipboard('ayushharinkhere2005@gmail.com', 'Contact Email Copied!')" role="button" tabindex="0" title="Copy Contact Email" aria-label="Copy Contact Email">
-          <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/><path d="M10 9h7v2h-7zm0 3h7v2h-7zm0 3h5v2h-5z"/></svg>
-        </div>
       </div>
     </div>
   </div>
@@ -4976,7 +5038,7 @@ header {
       <!-- Footer Bottom Strip -->
       <div class="footer-bottom-strip">
         <div>
-          © <span id="footerYearSpan">2026</span> <strong>Aayush Harinkhede</strong> — Portfolio Spectrum. Handcrafted with precision.
+          &copy; <span id="footerYearSpan">2026</span> <strong>Aayush Harinkhede</strong> — Portfolio Spectrum. Handcrafted with precision.
         </div>
         <div class="footer-actions">
           <button class="footer-action-btn" onclick="showPrivacyModal()">Privacy Policy</button>
@@ -4994,7 +5056,9 @@ header {
   <div class="modal-dialog">
     <div class="modal-header">
       <h3 class="modal-title">More About Aayush Harinkhede</h3>
-      <button class="modal-close-btn" onclick="closeMoreAboutModal()">✕</button>
+      <button class="modal-close-btn" onclick="closeMoreAboutModal()" aria-label="Close modal">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
     </div>
     <div class="modal-body">
       <h4>Career Goals</h4>
@@ -5024,7 +5088,9 @@ header {
   <div class="modal-dialog">
     <div class="modal-header">
       <h3 class="modal-title">Privacy Policy</h3>
-      <button class="modal-close-btn" onclick="closePrivacyModal()">✕</button>
+      <button class="modal-close-btn" onclick="closePrivacyModal()" aria-label="Close Privacy Policy">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
     </div>
     <div class="modal-body">
       <h4>Information We Collect</h4>
@@ -5053,7 +5119,9 @@ header {
   <div class="modal-dialog">
     <div class="modal-header">
       <h3 class="modal-title">Terms and Conditions</h3>
-      <button class="modal-close-btn" onclick="closeTermsModal()">✕</button>
+      <button class="modal-close-btn" onclick="closeTermsModal()" aria-label="Close Terms and Conditions">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
     </div>
     <div class="modal-body">
       <h4>Acceptance of Terms</h4>
@@ -5089,7 +5157,9 @@ header {
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
           <span>Download</span>
         </button>
-        <button class="modal-close-btn" onclick="closeResumeModal()" aria-label="Close Resume Viewer">✕</button>
+        <button class="modal-close-btn" onclick="closeResumeModal()" aria-label="Close Resume Viewer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
     </div>
     <div class="modal-body resume-modal-body">
@@ -5107,7 +5177,9 @@ header {
         <h3 class="modal-title">Photo Gallery</h3>
         <p style="color: var(--text3); font-size: 13px;">19 curated captures and visual moments</p>
       </div>
-      <button class="modal-close-btn" onclick="closeGallery()">✕</button>
+      <button class="modal-close-btn" onclick="closeGallery()" aria-label="Close Photo Gallery">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
     </div>
     <div class="gallery-grid-box" id="galleryPhotosContainer">
       <!-- Injected by script -->
@@ -5119,7 +5191,9 @@ header {
 <div id="lightboxModal" class="lightbox-modal">
   <div class="modal-backdrop" onclick="closeLightbox()"></div>
   <div class="lightbox-content-box">
-    <button class="lightbox-close-btn" onclick="closeLightbox()">✕</button>
+    <button class="lightbox-close-btn" onclick="closeLightbox()" aria-label="Close Lightbox Preview">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
     <img id="lightboxImg" src="" alt="Preview">
     <div class="lightbox-caption-text" id="lightboxCaption"></div>
   </div>
@@ -5713,11 +5787,43 @@ initHeaderScatter();
    (Full-site knowledge graph, instant predictions, expanded-only dropdown)
 ═══════════════════════════════════════════════════ */
 
+/* ─── SCALABLE THEME-AWARE SVG ICONS FOR SEARCH & DISCOVERY ─── */
+const SEARCH_ICONS = {
+  health: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5v6m-3-3h6"/></svg>',
+  mic: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>',
+  bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+  cloud: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>',
+  tools: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+  coffee: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>',
+  sparkle: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>',
+  phone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
+  chat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>',
+  mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>',
+  pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
+  globe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
+  grad: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>',
+  school: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 6 8-4 8 4"/><path d="m18 10 4 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-8l4-2"/><path d="M14 22v-4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v4"/><path d="M18 5v17"/><path d="M6 5v17"/></svg>',
+  book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 2v20"/></svg>',
+  doc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
+  react: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="12" rx="10" ry="4.5"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(120 12 12)"/></svg>',
+  laptop: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="12" x="3" y="4" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg>',
+  desktop: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
+  wrench: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+  user: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+  speech: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+  image: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>',
+  lightbulb: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>',
+  target: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
+  folder: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>',
+  rocket: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>'
+};
+
+
 const PORTFOLIO_KNOWLEDGE_BASE = [
   // PROJECTS
   {
     category: 'Project',
-    icon: '🩺',
+    icon: SEARCH_ICONS.health,
     badge: 'Projects',
     title: 'HealthNest Healthcare Platform',
     desc: 'Teleconsultation, doctor appointment booking, patient history & health metrics (React, MongoDB, Express, Node)',
@@ -5728,7 +5834,7 @@ const PORTFOLIO_KNOWLEDGE_BASE = [
   },
   {
     category: 'Project',
-    icon: '🎙️',
+    icon: SEARCH_ICONS.mic,
     badge: 'Projects',
     title: 'VANIE / VANI AI Voice Assistant',
     desc: 'Voice-Activated Next-gen Intelligent Engine with speech recognition & neural synthesis',
@@ -5739,7 +5845,7 @@ const PORTFOLIO_KNOWLEDGE_BASE = [
   },
   {
     category: 'Project',
-    icon: '⚡',
+    icon: SEARCH_ICONS.bolt,
     badge: 'Projects',
     title: 'Mr.NodeMan API Tester',
     desc: 'Interactive REST API client & endpoint automation testing suite (Postman alternative)',
@@ -5750,7 +5856,7 @@ const PORTFOLIO_KNOWLEDGE_BASE = [
   },
   {
     category: 'Project',
-    icon: '☁️',
+    icon: SEARCH_ICONS.cloud,
     badge: 'Projects',
     title: 'Cacun Fluid Cloud Storage',
     desc: 'Secure drag-and-drop cloud file storage with instant shareable download links',
@@ -5761,7 +5867,7 @@ const PORTFOLIO_KNOWLEDGE_BASE = [
   },
   {
     category: 'Project',
-    icon: '🛠️',
+    icon: SEARCH_ICONS.tools,
     badge: 'Projects',
     title: 'Tooler Multi-Utility Suite',
     desc: 'Developer tools: Code formatters, base64 encoder, regex tester & regex validators',
@@ -5772,7 +5878,7 @@ const PORTFOLIO_KNOWLEDGE_BASE = [
   },
   {
     category: 'Project',
-    icon: '☕',
+    icon: SEARCH_ICONS.coffee,
     badge: 'Projects',
     title: 'Mocha Coffee House',
     desc: 'Aesthetic café ordering web application with responsive cart workflow & menu',
@@ -5783,7 +5889,7 @@ const PORTFOLIO_KNOWLEDGE_BASE = [
   },
   {
     category: 'Project',
-    icon: '✨',
+    icon: SEARCH_ICONS.sparkle,
     badge: 'Projects',
     title: 'Portfolio Spectrum (This Website)',
     desc: 'Signature 3D kinetic portfolio with dynamic letter dispersion engine & zero lag',
@@ -5796,7 +5902,7 @@ const PORTFOLIO_KNOWLEDGE_BASE = [
   // CONTACT & REACH
   {
     category: 'Contact',
-    icon: '📞',
+    icon: SEARCH_ICONS.phone,
     badge: 'Contact',
     title: 'Phone & Mobile Contact',
     desc: '+91 9322047395 / +91 9307767175 (Direct Calling & Reach)',
@@ -5806,7 +5912,7 @@ const PORTFOLIO_KNOWLEDGE_BASE = [
   },
   {
     category: 'Contact',
-    icon: '💬',
+    icon: SEARCH_ICONS.chat,
     badge: 'Contact',
     title: 'WhatsApp Direct Chat',
     desc: '+91 9322047395 (Instant messaging for project inquiries & hiring)',
@@ -5816,7 +5922,7 @@ const PORTFOLIO_KNOWLEDGE_BASE = [
   },
   {
     category: 'Contact',
-    icon: '✉️',
+    icon: SEARCH_ICONS.mail,
     badge: 'Contact',
     title: 'Official Email Address',
     desc: 'ayushharinkhere2005@gmail.com (Professional & business inquiries)',
@@ -5826,7 +5932,7 @@ const PORTFOLIO_KNOWLEDGE_BASE = [
   },
   {
     category: 'Contact',
-    icon: '📍',
+    icon: SEARCH_ICONS.pin,
     badge: 'Location',
     title: 'Current Base & Location',
     desc: 'Nagpur, Maharashtra, India (Coordinates: 21.1458° N, 79.0882° E)',
@@ -5836,7 +5942,7 @@ const PORTFOLIO_KNOWLEDGE_BASE = [
   },
   {
     category: 'Contact',
-    icon: '🌐',
+    icon: SEARCH_ICONS.globe,
     badge: 'Social',
     title: 'LinkedIn & GitHub Profiles',
     desc: 'Connect on LinkedIn (/in/aayush-harinkhede) & GitHub (@AyushHarinkhede)',
@@ -5848,7 +5954,7 @@ const PORTFOLIO_KNOWLEDGE_BASE = [
   // EDUCATION
   {
     category: 'Education',
-    icon: '🎓',
+    icon: SEARCH_ICONS.grad,
     badge: 'Education',
     title: 'BCA Degree (Bachelor of Computer Applications)',
     desc: 'GH Raisoni University, Amravati / Nagpur (2023 – 2026, Final Year)',
@@ -5858,7 +5964,7 @@ const PORTFOLIO_KNOWLEDGE_BASE = [
   },
   {
     category: 'Education',
-    icon: '🏫',
+    icon: SEARCH_ICONS.school,
     badge: 'Education',
     title: 'HSC (Class 12th) — 61.80%',
     desc: 'Vaidik Convent Higher Secondary School, Balaghat, MP (2021 – 2023, 61.80%)',
@@ -5868,7 +5974,7 @@ const PORTFOLIO_KNOWLEDGE_BASE = [
   },
   {
     category: 'Education',
-    icon: '📚',
+    icon: SEARCH_ICONS.book,
     badge: 'Education',
     title: 'SSC (Class 10th) — 61.80%',
     desc: 'Priyadarshini Indira Gandhi High School, Nagpur, Maharashtra (2020 – 2021, 61.80%)',
@@ -5880,7 +5986,7 @@ const PORTFOLIO_KNOWLEDGE_BASE = [
   // RESUME & CV
   {
     category: 'Resume',
-    icon: '📄',
+    icon: SEARCH_ICONS.doc,
     badge: 'Resume',
     title: 'Official Resume & CV Document',
     desc: 'Download Ayush_Harinkhede_Resume.pdf or view directly in browser viewer',
@@ -5893,7 +5999,7 @@ const PORTFOLIO_KNOWLEDGE_BASE = [
   // TECHNICAL SKILLS & STACK
   {
     category: 'Skill',
-    icon: '⚛️',
+    icon: SEARCH_ICONS.react,
     badge: 'MERN Stack',
     title: 'MERN Stack Development',
     desc: 'MongoDB, Express.js, React.js, Node.js full-stack scalable web architecture',
@@ -5903,7 +6009,7 @@ const PORTFOLIO_KNOWLEDGE_BASE = [
   },
   {
     category: 'Skill',
-    icon: '💻',
+    icon: SEARCH_ICONS.laptop,
     badge: 'Languages',
     title: 'Programming Languages',
     desc: 'Java (OOPs, Collections), JavaScript (ES6+), C, C++, HTML5 & Modern CSS3',
@@ -5913,7 +6019,7 @@ const PORTFOLIO_KNOWLEDGE_BASE = [
   },
   {
     category: 'Skill',
-    icon: '🖥️',
+    icon: SEARCH_ICONS.desktop,
     badge: 'IT Support',
     title: 'IT Support & Systems Engineering',
     desc: 'Hardware assembly, OS installation (Windows/Linux), LAN/WAN networking, DNS/DHCP troubleshooting',
@@ -5923,7 +6029,7 @@ const PORTFOLIO_KNOWLEDGE_BASE = [
   },
   {
     category: 'Skill',
-    icon: '🔧',
+    icon: SEARCH_ICONS.wrench,
     badge: 'Tools',
     title: 'Developer Tools & Platforms',
     desc: 'Git, GitHub, VS Code, Postman, Vercel, Netlify, Chrome DevTools, NPM, Figma',
@@ -5935,7 +6041,7 @@ const PORTFOLIO_KNOWLEDGE_BASE = [
   // PERSONAL CREDENTIALS
   {
     category: 'Profile',
-    icon: '👤',
+    icon: SEARCH_ICONS.user,
     badge: 'Credentials',
     title: 'Personal Credentials & Identity',
     desc: 'Father: Santosh Harinkhede · DOB: 01-03-2005 · Male · Single · Indian',
@@ -5945,7 +6051,7 @@ const PORTFOLIO_KNOWLEDGE_BASE = [
   },
   {
     category: 'Profile',
-    icon: '🗣️',
+    icon: SEARCH_ICONS.speech,
     badge: 'Languages',
     title: 'Languages Known',
     desc: 'English (Professional), Hindi (Fluent / Native), Marathi (Conversational)',
@@ -5957,7 +6063,7 @@ const PORTFOLIO_KNOWLEDGE_BASE = [
   // PHOTO GALLERY
   {
     category: 'Gallery',
-    icon: '🖼️',
+    icon: SEARCH_ICONS.image,
     badge: 'Gallery',
     title: 'Photo Gallery (19 Photos)',
     desc: 'View personal, professional, and campus life photographs in high-resolution lightbox',
@@ -5970,7 +6076,7 @@ const PORTFOLIO_KNOWLEDGE_BASE = [
   // INTERVIEW Q&A
   {
     category: 'Interview',
-    icon: '💡',
+    icon: SEARCH_ICONS.lightbulb,
     badge: 'Interview',
     title: 'Why Should You Hire Aayush?',
     desc: 'Unique blend of full-stack development logic with real-world IT troubleshooting expertise',
@@ -5980,7 +6086,7 @@ const PORTFOLIO_KNOWLEDGE_BASE = [
   },
   {
     category: 'Interview',
-    icon: '🎯',
+    icon: SEARCH_ICONS.target,
     badge: 'Goals',
     title: 'Career Aspirations & Vision',
     desc: 'Aspiring to lead full-stack engineering teams and architect AI-driven scalable web solutions',
@@ -6260,27 +6366,36 @@ function triggerKnowledgeSuggestions(query) {
   if (cleanQ.length === 0) {
     dropdown.innerHTML = `
       <div class="suggest-group-header">
-        <span>⚡ Quick Section Jump</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px;">
+          ${SEARCH_ICONS.bolt}
+          <span>Quick Section Jump</span>
+        </span>
         <span class="suggest-count-badge">Top Picks</span>
       </div>
       <div class="suggest-phrases-grid">
         <button type="button" class="suggest-phrase-chip" onmousedown="quickSearch('Projects')">
-          <span>🚀 All Projects (7)</span>
+          ${SEARCH_ICONS.rocket}
+          <span>All Projects (7)</span>
         </button>
         <button type="button" class="suggest-phrase-chip" onmousedown="quickSearch('MERN Stack')">
-          <span>💻 MERN Stack</span>
+          ${SEARCH_ICONS.react}
+          <span>MERN Stack</span>
         </button>
         <button type="button" class="suggest-phrase-chip" onmousedown="quickSearch('Education')">
-          <span>🎓 BCA Degree (2026)</span>
+          ${SEARCH_ICONS.grad}
+          <span>BCA Degree (2026)</span>
         </button>
         <button type="button" class="suggest-phrase-chip" onmousedown="quickSearch('Resume')">
-          <span>📄 Official Resume</span>
+          ${SEARCH_ICONS.doc}
+          <span>Official Resume</span>
         </button>
         <button type="button" class="suggest-phrase-chip" onmousedown="quickSearch('Contact')">
-          <span>📞 Contact &amp; Phone</span>
+          ${SEARCH_ICONS.phone}
+          <span>Contact &amp; Phone</span>
         </button>
         <button type="button" class="suggest-phrase-chip" onmousedown="quickSearch('Skills')">
-          <span>🛠️ IT Support &amp; Skills</span>
+          ${SEARCH_ICONS.tools}
+          <span>IT Support &amp; Skills</span>
         </button>
       </div>
       <div class="suggest-footer-hint">
@@ -6301,10 +6416,10 @@ function triggerKnowledgeSuggestions(query) {
         <p style="font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px;">No direct match for "${query}"</p>
         <p style="font-size: 12px; color: var(--text3); margin-bottom: 14px;">Try searching by project name, tech stack, or key sections:</p>
         <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
-          <button type="button" class="suggest-phrase-chip" onmousedown="selectSuggestionPhrase('Projects')">📁 Projects</button>
-          <button type="button" class="suggest-phrase-chip" onmousedown="selectSuggestionPhrase('MERN Stack')">💻 MERN Stack</button>
-          <button type="button" class="suggest-phrase-chip" onmousedown="selectSuggestionPhrase('Education')">🎓 Education</button>
-          <button type="button" class="suggest-phrase-chip" onmousedown="selectSuggestionPhrase('Contact')">📞 Contact</button>
+          <button type="button" class="suggest-phrase-chip" onmousedown="selectSuggestionPhrase('Projects')">${SEARCH_ICONS.folder}<span>Projects</span></button>
+          <button type="button" class="suggest-phrase-chip" onmousedown="selectSuggestionPhrase('MERN Stack')">${SEARCH_ICONS.react}<span>MERN Stack</span></button>
+          <button type="button" class="suggest-phrase-chip" onmousedown="selectSuggestionPhrase('Education')">${SEARCH_ICONS.grad}<span>Education</span></button>
+          <button type="button" class="suggest-phrase-chip" onmousedown="selectSuggestionPhrase('Contact')">${SEARCH_ICONS.phone}<span>Contact</span></button>
         </div>
       </div>
     `;
@@ -6355,7 +6470,7 @@ function triggerKnowledgeSuggestions(query) {
       html += `
         <div class="suggest-match-card" data-index="${cardIdx}" onmousedown="selectKnowledgeMatch(${originalIdx})">
           <div class="suggest-match-left">
-            <span class="suggest-icon-box">${item.icon || '✦'}</span>
+            <span class="suggest-icon-box">${item.icon || SEARCH_ICONS.sparkle}</span>
             <div class="suggest-match-content">
               <div class="suggest-match-title-row">
                 <span class="suggest-match-title">${hlTitle}</span>
