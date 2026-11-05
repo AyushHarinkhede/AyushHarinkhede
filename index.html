@@ -320,30 +320,31 @@ body::after {
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  max-width: 1800px;
+  max-width: 1920px;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  opacity: 0.44;
-  mix-blend-mode: multiply;
+  opacity: 0.88;
   -webkit-mask-image: 
-    radial-gradient(ellipse 78% 70% at 50% 34%, rgba(0,0,0,1) 25%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0) 95%),
+    linear-gradient(to right, transparent 0%, #000 4%, #000 96%, transparent 100%),
     linear-gradient(to bottom, 
-      rgba(0,0,0,1) 0%, 
-      rgba(0,0,0,0.95) 35%, 
-      rgba(0,0,0,0.7) 62%, 
-      rgba(0,0,0,0.25) 82%, 
-      rgba(0,0,0,0) 98%
+      #000 0%, 
+      #000 42%, 
+      rgba(0, 0, 0, 0.82) 58%, 
+      rgba(0, 0, 0, 0.4) 75%, 
+      rgba(0, 0, 0, 0.1) 90%, 
+      transparent 100%
     );
   mask-image: 
-    radial-gradient(ellipse 78% 70% at 50% 34%, rgba(0,0,0,1) 25%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0) 95%),
+    linear-gradient(to right, transparent 0%, #000 4%, #000 96%, transparent 100%),
     linear-gradient(to bottom, 
-      rgba(0,0,0,1) 0%, 
-      rgba(0,0,0,0.95) 35%, 
-      rgba(0,0,0,0.7) 62%, 
-      rgba(0,0,0,0.25) 82%, 
-      rgba(0,0,0,0) 98%
+      #000 0%, 
+      #000 42%, 
+      rgba(0, 0, 0, 0.82) 58%, 
+      rgba(0, 0, 0, 0.4) 75%, 
+      rgba(0, 0, 0, 0.1) 90%, 
+      transparent 100%
     );
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
@@ -354,72 +355,45 @@ body::after {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 18%;
-  filter: contrast(135%) brightness(110%) saturate(65%);
-  transform: scale(1.02);
+  object-position: center 12%;
+  filter: grayscale(100%) contrast(116%) brightness(102%);
+  transform: scale(1.01);
   will-change: transform;
 }
 
-/* Contrast Dark & Subtle Blue Duotone Tint for Shadows */
-.hero-bg-duotone-layer {
+/* Seamless Bottom Dissolve into White / var(--bg) UI Background */
+.hero-bg-bottom-dissolve {
   position: absolute;
-  inset: 0;
-  background: 
-    radial-gradient(ellipse 85% 65% at 50% 32%, 
-      rgba(37, 99, 235, 0.28) 0%, 
-      rgba(79, 70, 229, 0.32) 40%, 
-      rgba(30, 27, 75, 0.42) 75%, 
-      transparent 100%
-    );
-  mix-blend-mode: multiply;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 48%;
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    rgba(251, 251, 254, 0.15) 20%, 
+    rgba(251, 251, 254, 0.55) 50%, 
+    rgba(251, 251, 254, 0.88) 78%, 
+    var(--bg) 100%
+  );
   pointer-events: none;
-}
-
-/* Seamless Double-Blend Vignette into Web UI Background (White / var(--bg)) */
-.hero-bg-gradient-fade {
-  position: absolute;
-  inset: 0;
-  background: 
-    radial-gradient(ellipse 70% 55% at 50% 32%, transparent 20%, var(--bg) 92%),
-    linear-gradient(to bottom, 
-      transparent 0%, 
-      transparent 35%, 
-      rgba(248, 249, 250, 0.35) 55%, 
-      rgba(248, 249, 250, 0.75) 75%, 
-      rgba(248, 249, 250, 0.95) 90%, 
-      var(--bg) 100%
-    );
-  pointer-events: none;
+  z-index: 2;
 }
 
 /* Dark mode adaptability */
 [data-theme="dark"] .hero-bg-photo-wrapper {
-  opacity: 0.28;
-  mix-blend-mode: screen;
+  opacity: 0.55;
 }
 [data-theme="dark"] .hero-bg-photo {
-  filter: contrast(140%) brightness(95%) saturate(70%);
+  filter: grayscale(100%) contrast(125%) brightness(95%);
 }
-[data-theme="dark"] .hero-bg-duotone-layer {
-  background: 
-    radial-gradient(ellipse 85% 65% at 50% 32%, 
-      rgba(59, 130, 246, 0.35) 0%, 
-      rgba(99, 102, 241, 0.28) 45%, 
-      transparent 80%
-    );
-  mix-blend-mode: screen;
-}
-[data-theme="dark"] .hero-bg-gradient-fade {
-  background: 
-    radial-gradient(ellipse 70% 55% at 50% 32%, transparent 20%, var(--bg) 92%),
-    linear-gradient(to bottom, 
-      transparent 0%, 
-      transparent 35%, 
-      rgba(11, 15, 25, 0.35) 55%, 
-      rgba(11, 15, 25, 0.75) 75%, 
-      rgba(11, 15, 25, 0.95) 90%, 
-      var(--bg) 100%
-    );
+[data-theme="dark"] .hero-bg-bottom-dissolve {
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    rgba(11, 15, 25, 0.2) 20%, 
+    rgba(11, 15, 25, 0.65) 50%, 
+    rgba(11, 15, 25, 0.92) 80%, 
+    var(--bg) 100%
+  );
 }
 
 /* ─── WRAPPER ──────────────────────────────────── */
@@ -495,13 +469,14 @@ header {
 .header-title .title-edc .scatter-char {
   color: var(--accent);
   -webkit-text-fill-color: var(--accent);
-  text-shadow: 0 0 45px rgba(79, 70, 229, 0.22);
+  text-shadow: 0 0 32px rgba(255, 255, 255, 0.9), 0 2px 14px rgba(79, 70, 229, 0.28);
 }
 
 .header-title .title-catalyst,
 .header-title .title-catalyst .scatter-char {
-  color: #1a1a1c;
-  -webkit-text-fill-color: #1a1a1c;
+  color: #111827;
+  -webkit-text-fill-color: #111827;
+  text-shadow: 0 0 28px rgba(255, 255, 255, 0.95), 0 2px 12px rgba(255, 255, 255, 0.85);
   transition: color 0.3s ease;
 }
 
@@ -509,14 +484,14 @@ header {
 [data-theme="dark"] .header-title .title-edc .scatter-char {
   color: var(--accent);
   -webkit-text-fill-color: var(--accent);
-  text-shadow: 0 0 45px rgba(129, 140, 248, 0.35);
+  text-shadow: 0 0 45px rgba(129, 140, 248, 0.45);
 }
 
 [data-theme="dark"] .header-title .title-catalyst,
 [data-theme="dark"] .header-title .title-catalyst .scatter-char {
   color: #F1F5F9;
   -webkit-text-fill-color: #F1F5F9;
-  text-shadow: 0 0 35px rgba(255, 255, 255, 0.08);
+  text-shadow: 0 0 35px rgba(0, 0, 0, 0.9);
 }
 
 /* Scroll-Driven 3D Kinetic Letter Dispersion Engine */
@@ -2959,6 +2934,9 @@ header {
   .hero-bg-photo {
     object-position: center 14%;
   }
+  .hero-bg-bottom-dissolve {
+    height: 55%;
+  }
 
   /* About profile identity banner mobile layout */
   .about-identity-banner {
@@ -3199,12 +3177,10 @@ header {
 <!-- ══ HERO IMMERSIVE AMBIENT BACKDROP (AAYUSH PHOTO BLENDED BACKGROUND) ═════ -->
 <div class="hero-ambient-backdrop" id="heroAmbientBackdrop" aria-hidden="true">
   <div class="hero-bg-photo-wrapper">
-    <img src="My Images/main image.jpg" alt="" class="hero-bg-photo" loading="eager" fetchpriority="high" decoding="async">
-    <!-- Contrast Dark & Subtle Blue Duotone Tint Layer -->
-    <div class="hero-bg-duotone-layer"></div>
+    <img src="My Images/main image.jpg" alt="Aayush Harinkhede" class="hero-bg-photo" loading="eager" fetchpriority="high" decoding="async">
   </div>
-  <!-- Seamless Mixed-Blend Vignette & Bottom Dissolve into UI Background -->
-  <div class="hero-bg-gradient-fade"></div>
+  <!-- Seamless Bottom Dissolve into White UI Background -->
+  <div class="hero-bg-bottom-dissolve"></div>
 </div>
 
 <!-- ══ MAIN CONTENT WRAPPER (NO NAVBAR) ═════════════ -->
