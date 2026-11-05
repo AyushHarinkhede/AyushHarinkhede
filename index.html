@@ -474,14 +474,20 @@ header {
 .header-title .title-edc .scatter-char {
   color: var(--accent);
   -webkit-text-fill-color: var(--accent);
-  text-shadow: 0 0 32px rgba(255, 255, 255, 0.9), 0 2px 14px rgba(79, 70, 229, 0.28);
+  text-shadow: 
+    0 6px 20px rgba(79, 70, 229, 0.42),
+    0 12px 42px rgba(79, 70, 229, 0.28),
+    0 0 55px rgba(99, 102, 241, 0.2);
 }
 
 .header-title .title-catalyst,
 .header-title .title-catalyst .scatter-char {
   color: #111827;
   -webkit-text-fill-color: #111827;
-  text-shadow: 0 0 28px rgba(255, 255, 255, 0.95), 0 2px 12px rgba(255, 255, 255, 0.85);
+  text-shadow: 
+    0 6px 20px rgba(17, 24, 39, 0.35),
+    0 14px 44px rgba(17, 24, 39, 0.2),
+    0 0 48px rgba(0, 0, 0, 0.12);
   transition: color 0.3s ease;
 }
 
@@ -489,14 +495,20 @@ header {
 [data-theme="dark"] .header-title .title-edc .scatter-char {
   color: var(--accent);
   -webkit-text-fill-color: var(--accent);
-  text-shadow: 0 0 45px rgba(129, 140, 248, 0.45);
+  text-shadow: 
+    0 6px 25px rgba(129, 140, 248, 0.6),
+    0 12px 50px rgba(99, 102, 241, 0.38),
+    0 0 65px rgba(79, 70, 229, 0.28);
 }
 
 [data-theme="dark"] .header-title .title-catalyst,
 [data-theme="dark"] .header-title .title-catalyst .scatter-char {
   color: #F1F5F9;
   -webkit-text-fill-color: #F1F5F9;
-  text-shadow: 0 0 35px rgba(0, 0, 0, 0.9);
+  text-shadow: 
+    0 6px 24px rgba(241, 245, 249, 0.42),
+    0 12px 48px rgba(241, 245, 249, 0.24),
+    0 0 55px rgba(255, 255, 255, 0.18);
 }
 
 /* Scroll-Driven 3D Kinetic Letter Dispersion Engine */
@@ -531,8 +543,16 @@ header {
   transition: text-shadow 0.2s ease;
 }
 
-.scatter-char:hover {
-  text-shadow: 0 0 28px rgba(99, 102, 241, 0.75);
+.title-edc .scatter-char:hover {
+  text-shadow: 0 4px 28px rgba(79, 70, 229, 0.75), 0 0 50px rgba(99, 102, 241, 0.5);
+}
+
+.title-catalyst .scatter-char:hover {
+  text-shadow: 0 4px 24px rgba(17, 24, 39, 0.6), 0 0 40px rgba(17, 24, 39, 0.35);
+}
+
+[data-theme="dark"] .title-catalyst .scatter-char:hover {
+  text-shadow: 0 4px 28px rgba(241, 245, 249, 0.7), 0 0 50px rgba(255, 255, 255, 0.5);
 }
 
 .scatter-space {
