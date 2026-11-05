@@ -299,6 +299,129 @@ body::after {
   will-change: transform;
 }
 
+/* ─── FULL-SCREEN HERO IMMERSIVE AMBIENT BACKDROP (AAYUSH PHOTO) ─── */
+.hero-ambient-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: clamp(660px, 92vh, 960px);
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.hero-bg-photo-wrapper {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1800px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  opacity: 0.44;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: 
+    radial-gradient(ellipse 75% 65% at 50% 26%, rgba(0,0,0,1) 25%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0) 95%),
+    linear-gradient(to bottom, 
+      rgba(0,0,0,1) 0%, 
+      rgba(0,0,0,0.95) 28%, 
+      rgba(0,0,0,0.7) 55%, 
+      rgba(0,0,0,0.25) 75%, 
+      rgba(0,0,0,0) 95%
+    );
+  mask-image: 
+    radial-gradient(ellipse 75% 65% at 50% 26%, rgba(0,0,0,1) 25%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0) 95%),
+    linear-gradient(to bottom, 
+      rgba(0,0,0,1) 0%, 
+      rgba(0,0,0,0.95) 28%, 
+      rgba(0,0,0,0.7) 55%, 
+      rgba(0,0,0,0.25) 75%, 
+      rgba(0,0,0,0) 95%
+    );
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  transition: opacity 0.5s ease;
+}
+
+.hero-bg-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 12%;
+  filter: contrast(135%) brightness(110%) saturate(65%);
+  transform: scale(1.02);
+  will-change: transform;
+}
+
+/* Contrast Dark & Subtle Blue Duotone Tint for Shadows */
+.hero-bg-duotone-layer {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 85% 65% at 50% 24%, 
+      rgba(37, 99, 235, 0.28) 0%, 
+      rgba(79, 70, 229, 0.32) 40%, 
+      rgba(30, 27, 75, 0.42) 75%, 
+      transparent 100%
+    );
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* Seamless Double-Blend Vignette into Web UI Background (White / var(--bg)) */
+.hero-bg-gradient-fade {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 70% 55% at 50% 26%, transparent 20%, var(--bg) 92%),
+    linear-gradient(to bottom, 
+      transparent 0%, 
+      transparent 28%, 
+      rgba(248, 249, 250, 0.35) 48%, 
+      rgba(248, 249, 250, 0.75) 70%, 
+      rgba(248, 249, 250, 0.95) 88%, 
+      var(--bg) 100%
+    );
+  pointer-events: none;
+}
+
+/* Dark mode adaptability */
+[data-theme="dark"] .hero-bg-photo-wrapper {
+  opacity: 0.28;
+  mix-blend-mode: screen;
+}
+[data-theme="dark"] .hero-bg-photo {
+  filter: contrast(140%) brightness(95%) saturate(70%);
+}
+[data-theme="dark"] .hero-bg-duotone-layer {
+  background: 
+    radial-gradient(ellipse 85% 65% at 50% 24%, 
+      rgba(59, 130, 246, 0.35) 0%, 
+      rgba(99, 102, 241, 0.28) 45%, 
+      transparent 80%
+    );
+  mix-blend-mode: screen;
+}
+[data-theme="dark"] .hero-bg-gradient-fade {
+  background: 
+    radial-gradient(ellipse 70% 55% at 50% 26%, transparent 20%, var(--bg) 92%),
+    linear-gradient(to bottom, 
+      transparent 0%, 
+      transparent 28%, 
+      rgba(11, 15, 25, 0.35) 48%, 
+      rgba(11, 15, 25, 0.75) 70%, 
+      rgba(11, 15, 25, 0.95) 88%, 
+      var(--bg) 100%
+    );
+}
+
 /* ─── WRAPPER ──────────────────────────────────── */
 .wrap {
   position: relative; z-index: 2;
@@ -836,58 +959,66 @@ header {
 }
 .card:hover::before { opacity: 1; }
 
-/* ─── ABOUT PROFILE SPLIT GRID ─────────────────── */
-.profile-about-grid {
-  display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 32px;
-  align-items: start;
-}
-@media (max-width: 960px) {
-  .profile-about-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.profile-avatar-card {
-  text-align: center;
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: var(--r2);
-  padding: 28px;
-  position: relative;
-}
-.avatar-img-box {
+/* ─── ABOUT PROFILE IDENTITY & PILLARS ─────────── */
+.about-content-wrap {
   width: 100%;
-  aspect-ratio: 1/1.15;
-  border-radius: var(--r);
-  background-image: url('My Images/main image.jpg');
-  background-size: cover;
-  background-position: center top;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-  margin-bottom: 20px;
-  position: relative;
 }
-.avatar-status-chip {
-  position: absolute;
-  bottom: 12px;
-  left: 12px;
-  right: 12px;
-  background: rgba(15, 20, 38, 0.85);
-  backdrop-filter: blur(8px);
-  color: #FFFFFF;
-  padding: 8px 14px;
-  border-radius: 12px;
-  font-size: 13px;
-  font-weight: 600;
+.about-identity-banner {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 22px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
 }
-.profile-btn-row {
+.about-identity-main {
+  flex: 1;
+  min-width: 280px;
+}
+.about-identity-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.badge-dot {
+  color: var(--text3);
+}
+.badge-role {
+  color: var(--text2);
+  font-weight: 500;
+}
+.about-headline {
+  font-size: clamp(22px, 2.5vw, 28px);
+  font-weight: 700;
+  color: var(--text);
+  margin: 6px 0 6px;
+}
+.about-academic-meta {
+  font-size: 13.5px;
+  color: var(--text3);
+  font-family: 'DM Mono', monospace;
+}
+.about-identity-action {
   display: flex;
-  gap: 10px;
-  margin-top: 15px;
+  align-items: center;
+}
+.profile-about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: start;
 }
 
 /* ─── DIGITAL SUITE BUNDLE STRIPS (SKILLS) ──────── */
@@ -2219,6 +2350,12 @@ header {
   header {
     padding: calc(clamp(160px, 17vh, 230px) + env(safe-area-inset-top, 0px)) 0 38px;
   }
+  .hero-ambient-backdrop {
+    height: clamp(750px, 92vh, 1050px);
+  }
+  .hero-bg-photo-wrapper {
+    max-width: 2000px;
+  }
   .header-title {
     font-size: clamp(5.5rem, 7vw, 9.5rem);
     margin-bottom: 6px;
@@ -2349,6 +2486,12 @@ header {
   header {
     padding: calc(clamp(185px, 18vh, 260px) + env(safe-area-inset-top, 0px)) 0 45px;
   }
+  .hero-ambient-backdrop {
+    height: clamp(880px, 94vh, 1300px);
+  }
+  .hero-bg-photo-wrapper {
+    max-width: 2500px;
+  }
   .header-badge {
     padding: 14px 36px;
     font-size: 16px;
@@ -2426,9 +2569,8 @@ header {
     font-size: clamp(3.2rem, 8vw, 5.5rem);
     margin-bottom: 4px;
   }
-  .profile-about-grid {
-    grid-template-columns: 280px 1fr;
-    gap: 24px;
+  .hero-ambient-backdrop {
+    height: clamp(600px, 88vh, 850px);
   }
   .projects-catalyst-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -2586,20 +2728,28 @@ header {
     font-size: 13.5px;
   }
 
-  /* About profile card */
-  .profile-about-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+  /* Hero ambient backdrop mobile tuning */
+  .hero-ambient-backdrop {
+    height: clamp(520px, 85vh, 720px);
   }
-  .profile-avatar-card {
-    padding: 18px;
-    border-radius: 16px;
+  .hero-bg-photo {
+    object-position: center 8%;
   }
-  .avatar-img-box {
-    max-width: 260px;
-    margin: 0 auto 16px;
-    aspect-ratio: 1/1;
-    border-radius: 16px;
+
+  /* About profile identity banner mobile layout */
+  .about-identity-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding-bottom: 18px;
+    margin-bottom: 20px;
+  }
+  .about-identity-action {
+    width: 100%;
+  }
+  .about-identity-action .btn-primary-catalyst {
+    width: 100%;
+    justify-content: center;
   }
 
   /* Credentials */
@@ -2822,6 +2972,17 @@ header {
   </svg>
 </button>
 
+<!-- ══ HERO IMMERSIVE AMBIENT BACKDROP (AAYUSH PHOTO BLENDED BACKGROUND) ═════ -->
+<div class="hero-ambient-backdrop" id="heroAmbientBackdrop" aria-hidden="true">
+  <div class="hero-bg-photo-wrapper">
+    <img src="My Images/main image.jpg" alt="" class="hero-bg-photo" loading="eager" fetchpriority="high" decoding="async">
+    <!-- Contrast Dark & Subtle Blue Duotone Tint Layer -->
+    <div class="hero-bg-duotone-layer"></div>
+  </div>
+  <!-- Seamless Mixed-Blend Vignette & Bottom Dissolve into UI Background -->
+  <div class="hero-bg-gradient-fade"></div>
+</div>
+
 <!-- ══ MAIN CONTENT WRAPPER (NO NAVBAR) ═════════════ -->
 <div class="wrap">
 
@@ -2953,31 +3114,31 @@ header {
     </div>
 
     <div class="card">
-      <div class="profile-about-grid">
-        <!-- Left: Avatar Card -->
-        <div class="profile-avatar-card">
-          <div class="avatar-img-box">
-            <div class="avatar-status-chip">
-              <span>Aayush S. Harinkhede</span>
+      <div class="about-content-wrap">
+        <!-- Identity Header Banner with Photo Gallery Shortcut (No separate avatar container) -->
+        <div class="about-identity-banner">
+          <div class="about-identity-main">
+            <div class="about-identity-badge">
               <span class="live-pulse-dot"></span>
+              <span class="badge-name">Aayush S. Harinkhede</span>
+              <span class="badge-dot">·</span>
+              <span class="badge-role">Web Developer &amp; IT Support Engineer</span>
             </div>
+            <h3 class="about-headline">
+              Full-Stack Developer &amp; IT Systems Specialist
+            </h3>
+            <p class="about-academic-meta">BCA Degree (2026) · GH Raisoni University · Nagpur, Maharashtra</p>
           </div>
-          <p style="font-size: 14.5px; font-weight: 600; color: var(--text);">Web Developer &amp; IT Support Engineer</p>
-          <p style="font-size: 13px; color: var(--text3); margin-top: 4px;">BCA • GH Raisoni University (2026)</p>
-          
-          <div class="profile-btn-row">
-            <button class="btn-primary-catalyst" style="width: 100%; justify-content: center;" onclick="openGallery()">
+          <div class="about-identity-action">
+            <button class="btn-primary-catalyst" onclick="openGallery()" style="white-space: nowrap;">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
               View Photo Gallery (19)
             </button>
           </div>
         </div>
 
-        <!-- Right: Bio & Detailed Pillars -->
-        <div>
-          <h3 style="font-size: 24px; font-weight: 700; color: var(--text); margin-bottom: 14px;">
-            Full-Stack Developer &amp; IT Systems Specialist
-          </h3>
+        <!-- Bio & Detailed Pillars -->
+        <div class="about-bio-body">
           <p style="font-size: 15.5px; line-height: 1.8; color: var(--text2); margin-bottom: 22px;">
             Motivated BCA student specializing in full-stack web development with hands-on experience in building scalable and user-focused applications. Skilled in developing responsive UI, authentication systems, and performance-oriented browser applications using MERN stack and modern JavaScript frameworks. Strong interest in AI-driven solutions and real-world problem solving through technology.
           </p>
