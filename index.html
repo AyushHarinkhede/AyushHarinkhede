@@ -474,22 +474,14 @@ header {
 .header-title .title-edc .scatter-char {
   color: var(--accent);
   -webkit-text-fill-color: var(--accent);
-  text-shadow: 
-    0 4px 12px rgba(79, 70, 229, 0.78),
-    0 10px 28px rgba(79, 70, 229, 0.62),
-    0 18px 52px rgba(79, 70, 229, 0.44),
-    0 0 35px rgba(67, 56, 202, 0.35);
+  text-shadow: none;
 }
 
 .header-title .title-catalyst,
 .header-title .title-catalyst .scatter-char {
   color: #111827;
   -webkit-text-fill-color: #111827;
-  text-shadow: 
-    0 4px 12px rgba(17, 24, 39, 0.75),
-    0 10px 28px rgba(17, 24, 39, 0.58),
-    0 18px 52px rgba(17, 24, 39, 0.40),
-    0 0 35px rgba(0, 0, 0, 0.30);
+  text-shadow: none;
   transition: color 0.3s ease;
 }
 
@@ -497,22 +489,14 @@ header {
 [data-theme="dark"] .header-title .title-edc .scatter-char {
   color: var(--accent);
   -webkit-text-fill-color: var(--accent);
-  text-shadow: 
-    0 4px 14px rgba(129, 140, 248, 0.88),
-    0 10px 32px rgba(99, 102, 241, 0.70),
-    0 18px 60px rgba(79, 70, 229, 0.52),
-    0 0 45px rgba(99, 102, 241, 0.42);
+  text-shadow: none;
 }
 
 [data-theme="dark"] .header-title .title-catalyst,
 [data-theme="dark"] .header-title .title-catalyst .scatter-char {
   color: #F1F5F9;
   -webkit-text-fill-color: #F1F5F9;
-  text-shadow: 
-    0 4px 14px rgba(241, 245, 249, 0.70),
-    0 10px 30px rgba(241, 245, 249, 0.50),
-    0 18px 55px rgba(255, 255, 255, 0.36),
-    0 0 40px rgba(255, 255, 255, 0.28);
+  text-shadow: none;
 }
 
 /* Scroll-Driven 3D Kinetic Letter Dispersion Engine */
@@ -544,25 +528,12 @@ header {
   -webkit-tap-highlight-color: transparent;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  transition: text-shadow 0.2s ease;
 }
 
-.title-edc .scatter-char:hover {
-  text-shadow: 
-    0 4px 16px rgba(79, 70, 229, 0.90),
-    0 12px 38px rgba(79, 70, 229, 0.75),
-    0 0 55px rgba(99, 102, 241, 0.60);
-}
-
-.title-catalyst .scatter-char:hover {
-  text-shadow: 
-    0 4px 16px rgba(17, 24, 39, 0.88),
-    0 12px 38px rgba(17, 24, 39, 0.70),
-    0 0 50px rgba(0, 0, 0, 0.50);
-}
-
+.title-edc .scatter-char:hover,
+.title-catalyst .scatter-char:hover,
 [data-theme="dark"] .title-catalyst .scatter-char:hover {
-  text-shadow: 0 4px 28px rgba(241, 245, 249, 0.85), 0 0 50px rgba(255, 255, 255, 0.65);
+  text-shadow: none;
 }
 
 .scatter-space {
@@ -642,89 +613,89 @@ header {
   transform: translateY(-2px);
 }
 
-/* ─── ELASTIC RUBBER-BAND SQUASH & STRETCH ANIMATION ─── */
+/* ─── ULTRA-SMOOTH ELASTIC RUBBER-BAND SQUASH & STRETCH ─── */
 @keyframes rubberBandOpen {
   0% {
-    transform: scale3d(1, 1, 1) translateY(0);
+    transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
   }
   14% {
-    /* Rubber band initial pull tension / squeeze */
-    transform: scale3d(0.938, 1.055, 1) translateY(0);
+    /* Fluid initial tension compression */
+    transform: translate3d(0, 0.5px, 0) scale3d(0.95, 1.04, 1);
   }
-  35% {
-    /* High horizontal stretch & vertical thinning (squash & stretch volume preservation) */
-    transform: scale3d(1.088, 0.875, 1) translateY(-3px);
+  36% {
+    /* High horizontal stretch & vertical thinning */
+    transform: translate3d(0, -3.5px, 0) scale3d(1.082, 0.885, 1);
   }
-  55% {
-    /* Elastic snap-back past resting boundary */
-    transform: scale3d(0.948, 1.065, 1) translateY(-1.5px);
+  56% {
+    /* Smooth elastic snap-back inward past rest */
+    transform: translate3d(0, -1px, 0) scale3d(0.955, 1.045, 1);
   }
-  72% {
-    /* Secondary rebound stretch */
-    transform: scale3d(1.026, 0.984, 1) translateY(-2px);
+  74% {
+    /* Secondary gentle flex rebound */
+    transform: translate3d(0, -2.5px, 0) scale3d(1.022, 0.985, 1);
   }
-  86% {
-    /* Micro-oscillation settling */
-    transform: scale3d(0.992, 1.008, 1) translateY(-2px);
+  88% {
+    /* Micro dampening settle */
+    transform: translate3d(0, -2px, 0) scale3d(0.995, 1.005, 1);
   }
   100% {
-    transform: scale3d(1, 1, 1) translateY(-2px);
+    transform: translate3d(0, -2px, 0) scale3d(1, 1, 1);
   }
 }
 
 @keyframes rubberBandClose {
   0% {
-    transform: scale3d(1, 1, 1) translateY(-2px);
+    transform: translate3d(0, -2px, 0) scale3d(1, 1, 1);
   }
   22% {
-    /* Inward snap / rubber contraction */
-    transform: scale3d(0.932, 1.068, 1) translateY(0);
+    /* Inward recoil */
+    transform: translate3d(0, 0, 0) scale3d(0.938, 1.055, 1);
   }
   48% {
-    /* Elastic outward snap rebound */
-    transform: scale3d(1.042, 0.968, 1) translateY(0);
+    /* Elastic outward rebound */
+    transform: translate3d(0, 0, 0) scale3d(1.038, 0.972, 1);
   }
   72% {
-    /* Micro inward recoil */
-    transform: scale3d(0.985, 1.012, 1) translateY(0);
+    /* Micro counter recoil */
+    transform: translate3d(0, 0, 0) scale3d(0.988, 1.01, 1);
   }
   100% {
-    transform: scale3d(1, 1, 1) translateY(0);
+    transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
   }
 }
 
 .search-wrap.is-opening .search-box-container {
-  animation: rubberBandOpen 0.65s cubic-bezier(0.2, 0.85, 0.25, 1.25) both;
+  animation: rubberBandOpen 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .search-wrap.is-closing .search-box-container {
-  animation: rubberBandClose 0.52s cubic-bezier(0.2, 0.85, 0.25, 1.2) both;
+  animation: rubberBandClose 0.52s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* Rubber stretch effect on search icon */
 @keyframes rubberIconOpen {
   0% { transform: scale(1) rotate(0deg); }
   22% { transform: scale(0.85) rotate(6deg); }
-  42% { transform: scale(1.28) rotate(-14deg); }
+  42% { transform: scale(1.24) rotate(-12deg); }
   65% { transform: scale(1.06) rotate(-5deg); }
-  84% { transform: scale(1.18) rotate(-9deg); }
+  84% { transform: scale(1.17) rotate(-9deg); }
   100% { transform: scale(1.15) rotate(-8deg); }
 }
 
 @keyframes rubberIconClose {
   0% { transform: scale(1.15) rotate(-8deg); }
-  30% { transform: scale(0.82) rotate(8deg); }
-  60% { transform: scale(1.08) rotate(-3deg); }
-  85% { transform: scale(0.97) rotate(1deg); }
+  30% { transform: scale(0.85) rotate(7deg); }
+  60% { transform: scale(1.07) rotate(-3deg); }
+  85% { transform: scale(0.98) rotate(1deg); }
   100% { transform: scale(1) rotate(0deg); }
 }
 
 .search-wrap.is-opening .search-icon {
-  animation: rubberIconOpen 0.65s cubic-bezier(0.2, 0.85, 0.25, 1.25) both;
+  animation: rubberIconOpen 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .search-wrap.is-closing .search-icon {
-  animation: rubberIconClose 0.52s cubic-bezier(0.2, 0.85, 0.25, 1.2) both;
+  animation: rubberIconClose 0.52s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -777,11 +748,11 @@ header {
   box-sizing: border-box;
 }
 
+/* Alternate placeholder words continue to display while expanded until user types! */
 .search-wrap.has-value .search-placeholder,
-.search-wrap.focused .search-placeholder,
 .search-box-container.has-value .search-placeholder {
-  opacity: 0;
-  visibility: hidden;
+  opacity: 0 !important;
+  visibility: hidden !important;
   pointer-events: none;
 }
 
@@ -3101,37 +3072,100 @@ header {
     color: var(--text);
   }
 
-  /* Compact touch-friendly search bar */
+  /* Mobile dedicated elastic stretch & flex physics */
+  @keyframes rubberBandOpenMobile {
+    0% {
+      transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+    }
+    16% {
+      transform: translate3d(0, 1px, 0) scale3d(0.92, 1.05, 1);
+    }
+    38% {
+      transform: translate3d(0, -3px, 0) scale3d(1.065, 0.92, 1);
+    }
+    58% {
+      transform: translate3d(0, -1px, 0) scale3d(0.965, 1.035, 1);
+    }
+    76% {
+      transform: translate3d(0, -2px, 0) scale3d(1.018, 0.99, 1);
+    }
+    100% {
+      transform: translate3d(0, -2px, 0) scale3d(1, 1, 1);
+    }
+  }
+
+  @keyframes rubberBandCloseMobile {
+    0% {
+      transform: translate3d(0, -2px, 0) scale3d(1, 1, 1);
+    }
+    24% {
+      transform: translate3d(0, 0, 0) scale3d(0.93, 1.06, 1);
+    }
+    50% {
+      transform: translate3d(0, 0, 0) scale3d(1.035, 0.975, 1);
+    }
+    75% {
+      transform: translate3d(0, 0, 0) scale3d(0.99, 1.01, 1);
+    }
+    100% {
+      transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+    }
+  }
+
+  /* Compact touch-friendly elastic search bar for mobile */
   .search-wrap {
+    width: 86%;
+    max-width: 86%;
     margin: 18px auto 22px;
-    max-width: 100%;
-    width: 100%;
     box-sizing: border-box;
+    transform-origin: center center;
+    transition: width 0.54s cubic-bezier(0.34, 1.45, 0.64, 1),
+                max-width 0.54s cubic-bezier(0.34, 1.45, 0.64, 1);
   }
   .search-wrap:focus-within,
   .search-wrap.focused {
+    width: 100% !important;
     max-width: 100% !important;
+    transition: width 0.58s cubic-bezier(0.34, 1.55, 0.64, 1) !important,
+                max-width 0.58s cubic-bezier(0.34, 1.55, 0.64, 1) !important;
   }
   .search-box-container {
-    height: 52px;
-    border-radius: 26px;
+    height: 48px;
+    border-radius: 24px;
     max-width: 100%;
+    transition: height 0.35s ease, border-radius 0.35s ease, border-color 0.3s ease, box-shadow 0.35s ease, transform 0.35s ease;
+  }
+  .search-wrap:focus-within .search-box-container,
+  .search-wrap.focused .search-box-container {
+    height: 54px;
+    border-radius: 27px;
+  }
+  .search-wrap.is-opening .search-box-container {
+    animation: rubberBandOpenMobile 0.62s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .search-wrap.is-closing .search-box-container {
+    animation: rubberBandCloseMobile 0.48s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
   #searchInput {
-    padding: 14px 62px 14px 44px;
+    padding: 13px 56px 13px 44px;
     font-size: 16px; /* Prevents auto-zoom on iOS Safari */
-    line-height: 24px;
+    line-height: 22px;
   }
   .search-placeholder {
-    padding: 14px 62px 14px 44px;
+    padding: 13px 56px 13px 44px;
     font-size: 13.5px;
-    line-height: 24px;
+    line-height: 22px;
   }
   .search-icon {
     left: 14px;
-    top: 15px;
+    top: 14px;
     width: 20px;
     height: 20px;
+    transition: top 0.3s ease, color 0.3s ease, transform 0.4s ease;
+  }
+  .search-wrap:focus-within .search-icon,
+  .search-wrap.focused .search-icon {
+    top: 17px;
   }
   .search-icon svg {
     width: 18px;
@@ -3139,9 +3173,9 @@ header {
   }
   .search-clear {
     right: 10px;
-    width: 34px;
-    height: 34px;
-    min-width: 34px;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
     padding: 0;
     border-radius: 50%;
     justify-content: center;
@@ -3150,8 +3184,8 @@ header {
     display: none;
   }
   .search-clear svg {
-    width: 14px;
-    height: 14px;
+    width: 13px;
+    height: 13px;
   }
 
   /* Mobile smart search suggestions container tuning */
@@ -6181,9 +6215,9 @@ function handlePortfolioSearch(query) {
     if (hasVal) {
       placeholderEl.style.opacity = '0';
       placeholderEl.style.visibility = 'hidden';
-    } else if (!document.activeElement || document.activeElement.id !== 'searchInput') {
-      placeholderEl.style.opacity = '';
-      placeholderEl.style.visibility = '';
+    } else {
+      placeholderEl.style.opacity = '1';
+      placeholderEl.style.visibility = 'visible';
     }
   }
 
@@ -6302,9 +6336,9 @@ function clearPortfolioSearch(e) {
   const dropdown = document.getElementById('searchSuggestionsDropdown');
   if (dropdown) dropdown.innerHTML = '';
 
-  if (placeholderEl && (!input || document.activeElement !== input)) {
-    placeholderEl.style.opacity = '';
-    placeholderEl.style.visibility = '';
+  if (placeholderEl) {
+    placeholderEl.style.opacity = '1';
+    placeholderEl.style.visibility = 'visible';
   }
 
   executeDomFilter('');
@@ -6400,12 +6434,21 @@ function handleSearchFocus() {
       searchWrap.classList.remove('is-opening');
     }, 680);
   }
-  const placeholderEl = document.getElementById('searchPlaceholder');
-  if (placeholderEl) {
-    placeholderEl.style.opacity = '0';
-    placeholderEl.style.visibility = 'hidden';
+  // Mobile tactile haptic pulse
+  if ('vibrate' in navigator) {
+    try { navigator.vibrate(14); } catch (e) {}
   }
   const input = document.getElementById('searchInput');
+  const placeholderEl = document.getElementById('searchPlaceholder');
+  if (placeholderEl) {
+    if (input && input.value.trim().length > 0) {
+      placeholderEl.style.opacity = '0';
+      placeholderEl.style.visibility = 'hidden';
+    } else {
+      placeholderEl.style.opacity = '1';
+      placeholderEl.style.visibility = 'visible';
+    }
+  }
   const val = input ? input.value.trim() : '';
   triggerKnowledgeSuggestions(val);
   triggerFeedback('search_open');
@@ -6428,8 +6471,8 @@ function handleSearchBlur() {
     const input = document.getElementById('searchInput');
     const placeholderEl = document.getElementById('searchPlaceholder');
     if (placeholderEl && (!input || input.value.trim().length === 0)) {
-      placeholderEl.style.opacity = '';
-      placeholderEl.style.visibility = '';
+      placeholderEl.style.opacity = '1';
+      placeholderEl.style.visibility = 'visible';
     }
   }, 180);
 }
@@ -6453,10 +6496,9 @@ function runSearchPlaceholderCycle() {
   const inputEl = document.getElementById('searchInput');
   if (!placeholderEl || !inputEl) return;
 
-  const isFocused = document.activeElement === inputEl;
-  if (document.hidden || isFocused || inputEl.value.trim().length > 0) {
-    // Pause cycle while document is hidden, user is actively typing, or focused
-    placeholderTimer = setTimeout(runSearchPlaceholderCycle, 1000);
+  // Continue rotating alternate prompts while open/focused as long as input is empty!
+  if (document.hidden || inputEl.value.trim().length > 0) {
+    placeholderTimer = setTimeout(runSearchPlaceholderCycle, 700);
     return;
   }
 
