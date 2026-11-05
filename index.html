@@ -1766,14 +1766,22 @@ header {
 }
 .rs-title {
   font-size: 26px;
-  font-weight: 700;
-  margin-bottom: 6px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: var(--text1, #0F172A);
+  letter-spacing: -0.02em;
+}
+[data-theme="dark"] .rs-title {
   color: #FFFFFF;
 }
 .rs-desc {
   font-size: 14.5px;
+  color: var(--text2, #475569);
+  max-width: 580px;
+  line-height: 1.6;
+}
+[data-theme="dark"] .rs-desc {
   color: #94A3B8;
-  max-width: 540px;
 }
 .resume-btn-group {
   display: flex;
@@ -1809,20 +1817,40 @@ header {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #FFFFFF;
+  background: rgba(99, 102, 241, 0.08);
+  color: #1E293B;
   font-weight: 600;
   font-size: 14px;
   padding: 12px 24px;
   border-radius: 99px;
   text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1.5px solid rgba(99, 102, 241, 0.28);
   cursor: pointer;
-  transition: background 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s ease;
+}
+.btn-secondary-catalyst svg {
+  stroke: currentColor;
+  color: inherit;
 }
 .btn-secondary-catalyst:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(99, 102, 241, 0.16);
+  border-color: rgba(99, 102, 241, 0.5);
+  color: #4338CA;
   transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(99, 102, 241, 0.15);
+}
+[data-theme="dark"] .btn-secondary-catalyst {
+  background: rgba(255, 255, 255, 0.08);
+  color: #F8FAFC;
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+}
+[data-theme="dark"] .btn-secondary-catalyst:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #FFFFFF;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 }
 
 /* ═══════════════════════════════════════════════════
@@ -2679,47 +2707,58 @@ header {
 }
 
 .footer-brand-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  display: block;
   margin-bottom: 18px;
-}
-.footer-brand-logo {
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(135deg, var(--accent) 0%, #4338CA 100%);
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #FFFFFF;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  box-shadow: 0 4px 18px rgba(79, 70, 229, 0.4);
-  font-weight: 800;
-  font-size: 20px;
-  font-family: 'DM Mono', monospace;
-  flex-shrink: 0;
-}
-.footer-brand-logo:hover {
-  transform: scale(1.08) rotate(-4deg);
+  perspective: 1000px;
 }
 .footer-title {
-  font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+  font-size: clamp(1.9rem, 3.4vw, 2.7rem);
   font-weight: 800;
   letter-spacing: -0.03em;
-  line-height: 1.05;
+  line-height: 1.1;
   margin: 0;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
-.footer-title .title-edc {
-  color: #FFFFFF;
+.footer-scatter-word {
+  display: inline-flex;
+  transform-style: preserve-3d;
+  white-space: nowrap;
 }
-.footer-title .title-catalyst {
+.footer-scatter-space {
+  display: inline-block;
+  width: 0.3em;
+}
+.footer-char {
+  display: inline-block;
+  position: relative;
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+/* Aayush word in Blue */
+.footer-title .title-first .footer-char {
   color: #38BDF8;
-  background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 50%, #2563EB 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 24px rgba(56, 189, 248, 0.45);
+}
+/* Harinkhede word in White */
+.footer-title .title-last .footer-char {
+  color: #FFFFFF;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
+}
+.footer-title .title-first .footer-char:hover {
+  color: #60A5FA;
+  text-shadow: 0 0 32px rgba(56, 189, 248, 0.85);
+}
+.footer-title .title-last .footer-char:hover {
+  color: #F8FAFC;
+  text-shadow: 0 0 28px rgba(255, 255, 255, 0.65);
 }
 .footer-bio {
   font-size: 13.5px;
@@ -3166,28 +3205,23 @@ header {
   color: #10B981;
 }
 
-/* ─── ULTRA-AUTHENTIC macOS PREVIEW WINDOW (RESUME MODAL) ─── */
+/* ─── ULTRA-AUTHENTIC macOS LIGHT THEME PREVIEW WINDOW (RESUME MODAL) ─── */
 .resume-modal-dialog {
   max-width: 960px;
   width: 95%;
-  max-height: 94vh;
+  height: 90vh;
+  max-height: 90vh;
   padding: 0 !important;
-  background: rgba(22, 27, 38, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 16px;
-  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(32px) saturate(180%);
-  -webkit-backdrop-filter: blur(32px) saturate(180%);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-[data-theme="light"] .resume-modal-dialog {
-  background: rgba(246, 248, 252, 0.95);
-  border-color: rgba(0, 0, 0, 0.12);
-  box-shadow: 0 30px 80px rgba(15, 23, 42, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  background: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.32), 0 0 0 1px rgba(0, 0, 0, 0.08) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .resume-modal-dialog.is-fullscreen {
@@ -3200,27 +3234,22 @@ header {
   border: none !important;
 }
 
-/* macOS Window Frosted Header */
+/* macOS Window Header (Pure Light Theme Frosted Header) */
 .macos-window-header {
-  height: 52px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 18px;
-  background: rgba(255, 255, 255, 0.04);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0 16px;
+  background: #F6F6F6 !important;
+  border-bottom: 1px solid #E5E7EB !important;
   user-select: none;
   -webkit-user-select: none;
   flex-shrink: 0;
   gap: 12px;
 }
 
-[data-theme="light"] .macos-window-header {
-  background: rgba(255, 255, 255, 0.65);
-  border-bottom-color: rgba(0, 0, 0, 0.08);
-}
-
-/* Real macOS Traffic Lights */
+/* Real macOS Traffic Lights with ALWAYS-VISIBLE Control Icons */
 .macos-traffic-lights {
   display: flex;
   align-items: center;
@@ -3232,7 +3261,7 @@ header {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  border: 0.5px solid transparent;
+  border: 0.5px solid rgba(0, 0, 0, 0.14);
   padding: 0;
   margin: 0;
   cursor: pointer;
@@ -3241,11 +3270,11 @@ header {
   align-items: center;
   justify-content: center;
   transition: transform 0.15s ease, filter 0.15s ease;
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.35), 0 1px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.45), 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
 .macos-traffic-btn:hover {
-  transform: scale(1.12);
+  transform: scale(1.14);
 }
 
 .macos-traffic-btn.close {
@@ -3261,104 +3290,179 @@ header {
   border-color: #1AAB29;
 }
 
-/* Iconic macOS Traffic Symbols on Hover */
+/* Control Symbols: Always visible at all times */
 .macos-traffic-btn svg {
-  width: 6.5px;
-  height: 6.5px;
-  opacity: 0;
-  transition: opacity 0.15s ease;
-  color: rgba(0, 0, 0, 0.72);
+  width: 7px;
+  height: 7px;
+  opacity: 0.9 !important;
   display: block;
+  transition: opacity 0.15s ease, transform 0.15s ease;
 }
 
-.macos-traffic-lights:hover .macos-traffic-btn svg {
-  opacity: 1;
+.macos-traffic-btn.close svg {
+  color: #5A0000;
+  stroke: #5A0000;
+}
+.macos-traffic-btn.minimize svg {
+  color: #7A4B00;
+  stroke: #7A4B00;
+}
+.macos-traffic-btn.fullscreen svg {
+  color: #004D00;
+  fill: #004D00;
 }
 
-/* macOS Window Title with Official Apple Logo */
-.macos-window-title {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
-  color: #FFFFFF;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.macos-traffic-btn:hover svg {
+  opacity: 1 !important;
+  transform: scale(1.12);
 }
 
-[data-theme="light"] .macos-window-title {
-  color: #0F172A;
-}
-
-.macos-apple-logo {
-  color: #FFFFFF;
-  opacity: 0.9;
-  flex-shrink: 0;
-}
-
-[data-theme="light"] .macos-apple-logo {
-  color: #0F172A;
-}
-
-.macos-title-sub {
-  color: var(--text3);
-  font-weight: 500;
-  font-size: 12px;
-}
-
-/* macOS Window Action Buttons */
+/* macOS Window Action Toolbar (Icon-Only, High Visibility) */
 .macos-window-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex-shrink: 0;
 }
 
-.macos-action-pill {
+.macos-action-icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 7px;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 13px;
-  border-radius: 8px;
-  font-size: 12.5px;
-  font-weight: 600;
+  justify-content: center;
   cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--text1);
+  border: 1px solid #D1D5DB;
+  background: #FFFFFF;
+  color: #374151;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   transition: all 0.2s ease;
+  padding: 0;
   font-family: inherit;
 }
 
-.macos-action-pill:hover {
-  background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 255, 255, 0.24);
+.macos-action-icon-btn:hover {
+  background: #F3F4F6;
+  border-color: #9CA3AF;
+  color: #111827;
   transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
 }
 
-[data-theme="light"] .macos-action-pill {
-  background: rgba(0, 0, 0, 0.05);
-  border-color: rgba(0, 0, 0, 0.12);
+.macos-action-icon-btn:active {
+  transform: translateY(0);
 }
 
-[data-theme="light"] .macos-action-pill:hover {
-  background: rgba(0, 0, 0, 0.09);
-  border-color: rgba(0, 0, 0, 0.2);
-}
-
-.macos-action-pill.primary {
-  background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
-  border-color: rgba(99, 102, 241, 0.4);
+.macos-action-icon-btn.primary {
+  background: #4F46E5;
+  border-color: #4338CA;
   color: #FFFFFF;
+  box-shadow: 0 1px 3px rgba(79, 70, 229, 0.35);
 }
 
-.macos-action-pill.primary:hover {
-  background: linear-gradient(135deg, #4F46E5 0%, #4338CA 100%);
-  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+.macos-action-icon-btn.primary:hover {
+  background: #4338CA;
+  border-color: #3730A3;
+  color: #FFFFFF;
+  box-shadow: 0 3px 8px rgba(79, 70, 229, 0.45);
+}
+
+.macos-action-icon-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+}
+
+.macos-toolbar-divider {
+  width: 1px;
+  height: 18px;
+  background: #E5E7EB;
+  margin: 0 3px;
+}
+
+.macos-zoom-pill {
+  display: inline-flex;
+  align-items: center;
+  background: #FFFFFF;
+  border: 1px solid #D1D5DB;
+  border-radius: 7px;
+  padding: 2px;
+  gap: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.macos-zoom-pill .macos-action-icon-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.macos-zoom-pill .macos-action-icon-btn:hover {
+  background: #F3F4F6;
+}
+
+.macos-zoom-label {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #4B5563;
+  padding: 0 6px;
+  min-width: 40px;
+  text-align: center;
+  user-select: none;
+  cursor: pointer;
+}
+.macos-zoom-label:hover {
+  color: #111827;
+}
+
+/* Modal Body & Document Paper Viewport */
+.resume-modal-body {
+  flex: 1 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background: #EFF1F5 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: calc(100% - 48px) !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+.resume-sheet-viewport.modal-viewport {
+  padding: 24px 20px 60px !important;
+  background: #EFF1F5 !important;
+  flex: 1 !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  justify-content: center !important;
+  scroll-behavior: smooth !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+/* Authentic macOS Scrollbar for Resume Viewport */
+.resume-sheet-viewport.modal-viewport::-webkit-scrollbar {
+  width: 8px;
+}
+.resume-sheet-viewport.modal-viewport::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.03);
+}
+.resume-sheet-viewport.modal-viewport::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 99px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+.resume-sheet-viewport.modal-viewport::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.45);
 }
 
 /* Authentic A4 Document Sheet (Screen View) */
@@ -3366,36 +3470,17 @@ header {
   width: 100%;
   max-width: 780px;
   background: #FFFFFF !important;
-  color: #111827 !important;
-  padding: 44px 48px;
+  color: #0F172A !important;
+  padding: 38px 44px;
   border-radius: 8px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), 0 1px 3px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06) !important;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   box-sizing: border-box;
   text-align: left;
   margin: 0 auto;
-}
-
-/* Document Paper Viewport */
-.resume-sheet-viewport.modal-viewport {
-  padding: 28px 20px;
-  background: #0B0F19;
-  max-height: calc(94vh - 54px);
-  overflow-y: auto;
-  width: 100%;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-}
-
-.resume-modal-dialog.is-fullscreen .resume-sheet-viewport.modal-viewport {
-  max-height: calc(100vh - 52px) !important;
-  height: calc(100vh - 52px) !important;
-}
-
-[data-theme="light"] .resume-sheet-viewport.modal-viewport {
-  background: #E2E8F0;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: top center;
 }
 
 @media (max-width: 768px) {
@@ -3412,12 +3497,6 @@ header {
   .resume-btn-group button {
     width: 100%;
     justify-content: center;
-  }
-  .macos-window-title .macos-title-sub {
-    display: none;
-  }
-  .macos-action-pill span {
-    display: none;
   }
 }
 
@@ -3561,32 +3640,7 @@ header {
   margin: 0;
 }
 
-/* Modal Dialog Sizing for Resume */
-.resume-modal-dialog {
-  max-width: 900px;
-  width: 95%;
-  max-height: 94vh;
-  padding: 22px;
-  display: flex;
-  flex-direction: column;
-}
-.resume-modal-controls {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.resume-modal-body {
-  flex: 1;
-  padding: 0 !important;
-  overflow: hidden;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: #0B0F19;
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-}
+
 
 @media print {
   body * {
@@ -3836,14 +3890,8 @@ header {
   .footer-wrap {
     max-width: 1680px;
   }
-  .footer-brand-logo {
-    width: 60px;
-    height: 60px;
-    font-size: 20px;
-    border-radius: 16px;
-  }
   .footer-title {
-    font-size: 32px;
+    font-size: 34px;
   }
   .footer-bio {
     font-size: 16px;
@@ -4484,40 +4532,21 @@ header {
   }
   .resume-modal-dialog {
     width: 98% !important;
-    padding: 16px 12px !important;
+    padding: 0 !important;
     max-height: 94vh !important;
-  }
-  .resume-modal-controls {
-    width: 100%;
-    justify-content: flex-end;
-    margin-top: 8px;
+    border-radius: 14px !important;
+    overflow: hidden !important;
   }
   .resume-modal-body {
-    height: 72vh !important;
-    min-height: 360px !important;
+    flex: 1 !important;
+    height: calc(94vh - 48px) !important;
   }
-  .resume-container-toolbar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 12px 14px;
-  }
-  .resume-toolbar-actions {
-    width: 100%;
-    justify-content: space-between;
-  }
-  .resume-action-btn {
-    flex: 1;
-    justify-content: center;
-    padding: 8px 10px;
-    font-size: 12px;
-  }
-  .resume-sheet-viewport {
-    padding: 16px 8px;
+  .resume-sheet-viewport.modal-viewport {
+    padding: 16px 10px 48px !important;
   }
   .resume-a4-sheet {
-    padding: 22px 16px;
-    border-radius: 4px;
+    padding: 22px 16px !important;
+    border-radius: 6px !important;
   }
   .cv-header-name {
     font-size: 20px;
@@ -6051,12 +6080,29 @@ header {
         <!-- Col 1: Brand & Live Chrono Widget -->
         <div class="footer-col-brand">
           <div class="footer-brand-header">
-            <div class="footer-brand-logo" onclick="scrollToTop()" title="Aayush Harinkhede - Back to Top">
-              AH
-            </div>
-            <div class="footer-title-text">
-              <h2 class="footer-title"><span class="title-edc">Aayush</span> <span class="title-catalyst">Harinkhede</span></h2>
-            </div>
+            <h2 class="footer-title" id="footerScatterTitle" onclick="scrollToTop()" title="Aayush Harinkhede — Back to Top" style="cursor: pointer;">
+              <span class="footer-scatter-word title-first">
+                <span class="footer-char" data-idx="0">A</span>
+                <span class="footer-char" data-idx="1">a</span>
+                <span class="footer-char" data-idx="2">y</span>
+                <span class="footer-char" data-idx="3">u</span>
+                <span class="footer-char" data-idx="4">s</span>
+                <span class="footer-char" data-idx="5">h</span>
+              </span>
+              <span class="footer-scatter-space">&nbsp;</span>
+              <span class="footer-scatter-word title-last">
+                <span class="footer-char" data-idx="6">H</span>
+                <span class="footer-char" data-idx="7">a</span>
+                <span class="footer-char" data-idx="8">r</span>
+                <span class="footer-char" data-idx="9">i</span>
+                <span class="footer-char" data-idx="10">n</span>
+                <span class="footer-char" data-idx="11">k</span>
+                <span class="footer-char" data-idx="12">h</span>
+                <span class="footer-char" data-idx="13">e</span>
+                <span class="footer-char" data-idx="14">d</span>
+                <span class="footer-char" data-idx="15">e</span>
+              </span>
+            </h2>
           </div>
           <p class="footer-bio">
             Portfolio Spectrum — Personal digital ecosystem, software engineering portfolio, and project catalog of Aayush Harinkhede. Handcrafted for modern recruiters, engineers, and digital explorers.
@@ -6253,9 +6299,9 @@ header {
   <div class="modal-backdrop" onclick="closeResumeModal()"></div>
   <div class="modal-dialog resume-modal-dialog" id="resumeModalDialog">
     
-    <!-- 1. Authentic macOS Window Frosted Titlebar -->
+    <!-- 1. Authentic macOS Window Frosted Titlebar (Light Theme) -->
     <div class="macos-window-header">
-      <!-- Left: Real macOS Traffic Light Buttons -->
+      <!-- Left: Real macOS Traffic Light Buttons with Always-Visible Icons -->
       <div class="macos-traffic-lights" aria-label="macOS Window Controls">
         <button type="button" class="macos-traffic-btn close" onclick="closeResumeModal()" title="Close Window (×)" aria-label="Close">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -6268,24 +6314,33 @@ header {
         </button>
       </div>
 
-      <!-- Center: Official Apple Logo + Document Name -->
-      <div class="macos-window-title">
-        <svg class="macos-apple-logo" width="14" height="14" viewBox="0 0 170 170" fill="currentColor" aria-hidden="true">
-          <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.58-7.74-11.64-14.1-6.19-9.78-10.9-20.76-14.13-32.93-3.23-12.18-4.85-23.71-4.85-34.6 0-14.58 3.54-26.68 10.63-36.31 7.09-9.62 16.32-14.57 27.69-14.85 4.8 0 10.1 1.25 15.9 3.75 5.8 2.5 9.78 3.82 11.95 3.97 1.8.15 5.89-1.25 12.28-4.2 6.39-2.95 12.21-4.27 17.47-3.97 13.59.83 24.16 5.8 31.71 14.92-12.08 7.37-18.01 17.56-17.78 30.56.24 10.55 4.3 19.34 12.18 26.37 3.98 3.61 8.65 6.35 14 8.23-2.68 7.74-5.69 15.17-9.02 22.31zM119.22 31.84c0-7.39 2.66-14.28 7.97-20.67 5.31-6.39 11.94-10.28 19.89-11.67.24 1.23.36 2.37.36 3.42 0 7.3-2.73 14.27-8.19 20.91-5.46 6.64-12.12 10.37-19.98 11.19-.05-1.07-.05-2.13-.05-3.18z"/>
-        </svg>
-        <span class="macos-title-text">Ayush_Harinkhede_Resume.pdf</span>
-        <span class="macos-title-sub">— Preview</span>
-      </div>
-
-      <!-- Right: Action Buttons (Print & Download) -->
+      <!-- Right: Action Buttons (Zoom Controls, Print & Download — Only Icons) -->
       <div class="macos-window-actions">
-        <button type="button" class="macos-action-pill" onclick="printResumeDocument()" title="System Print / Save as PDF">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-          <span>Print</span>
+        <!-- Zoom Controls -->
+        <div class="macos-zoom-pill">
+          <button type="button" class="macos-action-icon-btn" onclick="zoomResumeOut()" title="Zoom Out (−)" aria-label="Zoom Out">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+          </button>
+          <span class="macos-zoom-label" id="resumeZoomVal" onclick="fitResumePage()" title="Click to Fit Full Page / 100%">100%</span>
+          <button type="button" class="macos-action-icon-btn" onclick="zoomResumeIn()" title="Zoom In (+)" aria-label="Zoom In">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+          </button>
+        </div>
+
+        <button type="button" class="macos-action-icon-btn" onclick="fitResumePage()" title="Fit Full Page in Window" aria-label="Fit Page">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
         </button>
-        <button type="button" class="macos-action-pill primary" onclick="downloadResumeDirect(event)" title="Direct Download PDF">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-          <span>Download PDF</span>
+
+        <div class="macos-toolbar-divider"></div>
+
+        <!-- Print Document (Icon Only) -->
+        <button type="button" class="macos-action-icon-btn" onclick="printResumeDocument()" title="Print Resume" aria-label="Print Resume">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+        </button>
+
+        <!-- Download PDF (Icon Only) -->
+        <button type="button" class="macos-action-icon-btn primary" onclick="downloadResumeDirect(event)" title="Download PDF" aria-label="Download PDF">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
         </button>
       </div>
     </div>
@@ -6825,7 +6880,7 @@ function initInteractiveCursor() {
         setCursorMode('grab');
       }
       // 4. Clickable / Hand pointer elements
-      else if (target.closest('a, button, [role="button"], .card, .cat-pill, .sm-chip, .spec-chip, .scatter-char, .footer-chip, .footer-action-btn, .app-tile-btn, .social-pill-item, .p-btn-action, .suggest-phrase-chip, .suggest-match-card, #clearBtn, #scrollTopBtn, .project-card-item, .macos-dot, .macos-action-pill, .thumb-zoom-badge, .map-dest-circle-wrap')) {
+      else if (target.closest('a, button, [role="button"], .card, .cat-pill, .sm-chip, .spec-chip, .scatter-char, .footer-chip, .footer-action-btn, .app-tile-btn, .social-pill-item, .p-btn-action, .suggest-phrase-chip, .suggest-match-card, #clearBtn, #scrollTopBtn, .project-card-item, .macos-dot, .macos-traffic-btn, .macos-action-icon-btn, .macos-action-pill, .thumb-zoom-badge, .map-dest-circle-wrap')) {
         setCursorMode('pointer');
       }
       // 5. Default aerodynamic arrow pointer
@@ -7127,6 +7182,115 @@ function initHeaderScatter() {
   }, { passive: true });
 }
 initHeaderScatter();
+
+/* ═══════════════════════════════════════════════════
+   3B. FOOTER CONVERGENCE / RE-ASSEMBLY LETTER ENGINE
+   (Scattered characters assemble into "Aayush Harinkhede" on scroll)
+═══════════════════════════════════════════════════ */
+let footerScatterChars = [];
+let footerTargetProgress = 1; // 1 = scattered/broken, 0 = arranged/assembled
+let footerCurrentProgress = 1;
+let isFooterRafRunning = false;
+
+const FOOTER_SCATTER_SEEDS = [
+  // Aayush (0-5)
+  { dx: -60, dy: -80, dz: 80, rx: 25, ry: -30, rz: -18, scale: 0.82, stagger: 0.00 },
+  { dx: -45, dy: 60, dz: 60, rx: -20, ry: 25, rz: 14, scale: 0.85, stagger: 0.02 },
+  { dx: -25, dy: -70, dz: 90, rx: 30, ry: -20, rz: -12, scale: 0.80, stagger: 0.04 },
+  { dx: -10, dy: 75, dz: 70, rx: -25, ry: 30, rz: 16, scale: 0.85, stagger: 0.03 },
+  { dx: 20, dy: -65, dz: 85, rx: 22, ry: -25, rz: -10, scale: 0.82, stagger: 0.05 },
+  { dx: 40, dy: 80, dz: 65, rx: -30, ry: 20, rz: 15, scale: 0.84, stagger: 0.04 },
+  // Harinkhede (6-15)
+  { dx: -50, dy: -85, dz: 95, rx: 28, ry: -35, rz: -20, scale: 0.80, stagger: 0.01 },
+  { dx: -30, dy: 70, dz: 60, rx: -22, ry: 28, rz: 12, scale: 0.86, stagger: 0.03 },
+  { dx: -15, dy: -60, dz: 75, rx: 24, ry: -18, rz: -14, scale: 0.84, stagger: 0.02 },
+  { dx: 5, dy: 85, dz: 65, rx: -26, ry: 22, rz: 18, scale: 0.88, stagger: 0.04 },
+  { dx: 25, dy: -75, dz: 80, rx: 20, ry: -24, rz: -12, scale: 0.83, stagger: 0.03 },
+  { dx: 45, dy: 65, dz: 70, rx: -28, ry: 26, rz: 15, scale: 0.82, stagger: 0.05 },
+  { dx: 60, dy: -80, dz: 90, rx: 32, ry: -30, rz: -16, scale: 0.80, stagger: 0.04 },
+  { dx: 75, dy: 70, dz: 65, rx: -24, ry: 22, rz: 14, scale: 0.85, stagger: 0.02 },
+  { dx: 90, dy: -65, dz: 85, rx: 26, ry: -25, rz: -18, scale: 0.82, stagger: 0.03 },
+  { dx: 105, dy: 80, dz: 75, rx: -30, ry: 30, rz: 20, scale: 0.80, stagger: 0.01 }
+];
+
+function applyFooterScatterPositions(progress) {
+  if (!footerScatterChars.length) return;
+  if (progress <= 0.001) {
+    footerScatterChars.forEach(el => {
+      el.style.transform = '';
+      el.style.opacity = '';
+    });
+    return;
+  }
+  footerScatterChars.forEach((el, index) => {
+    const seed = FOOTER_SCATTER_SEEDS[index];
+    if (!seed) return;
+    const stagger = seed.stagger;
+    const rawP = Math.min(1, Math.max(0, (progress - stagger) / (1 - stagger * 0.85)));
+    const easeP = Math.pow(rawP, 1.8);
+
+    const curDx = (seed.dx * easeP).toFixed(1);
+    const curDy = (seed.dy * easeP).toFixed(1);
+    const curDz = (seed.dz * easeP).toFixed(1);
+    const curRx = (seed.rx * easeP).toFixed(1);
+    const curRy = (seed.ry * easeP).toFixed(1);
+    const curRz = (seed.rz * easeP).toFixed(1);
+    const curScale = (1 - (1 - seed.scale) * easeP).toFixed(3);
+    const curOpacity = Math.max(0.12, 1 - (easeP * 0.82)).toFixed(2);
+
+    el.style.transform = `translate3d(${curDx}px, ${curDy}px, ${curDz}px) rotateX(${curRx}deg) rotateY(${curRy}deg) rotateZ(${curRz}deg) scale(${curScale})`;
+    el.style.opacity = curOpacity;
+  });
+}
+
+function renderFooterScatterFrame() {
+  const diff = footerTargetProgress - footerCurrentProgress;
+  if (Math.abs(diff) < 0.002) {
+    footerCurrentProgress = footerTargetProgress;
+  } else {
+    footerCurrentProgress += diff * 0.22;
+  }
+
+  applyFooterScatterPositions(footerCurrentProgress);
+
+  if (Math.abs(footerTargetProgress - footerCurrentProgress) > 0.002) {
+    requestAnimationFrame(renderFooterScatterFrame);
+  } else {
+    isFooterRafRunning = false;
+  }
+}
+
+function onScrollFooterAssemble() {
+  const title = document.getElementById('footerScatterTitle');
+  if (!title) return;
+  const rect = title.getBoundingClientRect();
+  const vh = window.innerHeight || 800;
+
+  // When footer title enters the active viewport area (rect.top <= vh * 0.86), letters are 100% assembled
+  // When footer title is well below viewport (rect.top >= vh + 180), letters are fully scattered/broken
+  const fullyAssembled = vh * 0.86;
+  const startScatter = vh + 180;
+  const raw = (rect.top - fullyAssembled) / (startScatter - fullyAssembled);
+  const newTarget = Math.min(1, Math.max(0, raw));
+
+  if (Math.abs(newTarget - footerTargetProgress) < 0.001 && footerTargetProgress === footerCurrentProgress) {
+    return;
+  }
+
+  footerTargetProgress = newTarget;
+  if (!isFooterRafRunning) {
+    isFooterRafRunning = true;
+    requestAnimationFrame(renderFooterScatterFrame);
+  }
+}
+
+function initFooterScatter() {
+  const title = document.getElementById('footerScatterTitle');
+  if (!title) return;
+  footerScatterChars = Array.from(title.querySelectorAll('.footer-char'));
+  onScrollFooterAssemble();
+}
+initFooterScatter();
 
 /* ═══════════════════════════════════════════════════
    4. DEEP KNOWLEDGE SEARCH ENGINE & SMART SUGGESTIONS
@@ -8252,6 +8416,7 @@ function handleScrollTick() {
   }
 
   onScrollScatter(scrollY);
+  onScrollFooterAssemble();
 }
 
 window.addEventListener('scroll', () => {
@@ -8629,11 +8794,62 @@ function closeLightbox() {
 // === RESUME VIEWER & DIRECT DOWNLOAD ===
 const RESUME_PDF_BASE64 = "JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgaHR0cDovL3d3dy5yZXBvcnRsYWIuY29tCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUgo+PgplbmRvYmoKMiAwIG9iago8PAovQmFzZUZvbnQgL0hlbHZldGljYSAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjEgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iagozIDAgb2JqCjw8Ci9CYXNlRm9udCAvSGVsdmV0aWNhLUJvbGQgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcgL05hbWUgL0YyIC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKNCAwIG9iago8PAovQSA8PAovUyAvVVJJIC9UeXBlIC9BY3Rpb24gL1VSSSAoaHR0cHM6Ly9naXRodWIuY29tL0F5dXNoSGFyaW5raGVkZS9jYWN1bikKPj4gL0JvcmRlciBbIDAgMCAwIF0gL1JlY3QgWyA0MSA3MzUuMzI5OCA2OC4zODU2IDc0NS44ODk4IF0gL1N1YnR5cGUgL0xpbmsgL1R5cGUgL0Fubm90Cj4+CmVuZG9iago1IDAgb2JqCjw8Ci9BIDw8Ci9TIC9VUkkgL1R5cGUgL0FjdGlvbiAvVVJJIChodHRwczovL3d3dy5saW5rZWRpbi5jb20vaW4vYXl1c2gtaGFyaW5raGVkZS0yMjgwOTkyYjIpCj4+IC9Cb3JkZXIgWyAwIDAgMCBdIC9SZWN0IFsgNzUuNTY2NCA3MzUuMzI5OCAxMDguODMwNCA3NDUuODg5OCBdIC9TdWJ0eXBlIC9MaW5rIC9UeXBlIC9Bbm5vdAo+PgplbmRvYmoKNiAwIG9iago8PAovQSA8PAovUyAvVVJJIC9UeXBlIC9BY3Rpb24gL1VSSSAoaHR0cHM6Ly9naXRodWIuY29tL0F5dXNoSGFyaW5raGVkZS9jYWN1bikKPj4gL0JvcmRlciBbIDAgMCAwIF0gL1JlY3QgWyAyNzMuNzk1MiA0MDcuMzI5OCAzNDUuNjgyNCA0MTcuODg5OCBdIC9TdWJ0eXBlIC9MaW5rIC9UeXBlIC9Bbm5vdAo+PgplbmRvYmoKNyAwIG9iago8PAovQSA8PAovUyAvVVJJIC9UeXBlIC9BY3Rpb24gL1VSSSAoaHR0cHM6Ly9oZWFsdGgtbmVzdC1wcm9qZWN0Lm5ldGxpZnkuYXBwLykKPj4gL0JvcmRlciBbIDAgMCAwIF0gL1JlY3QgWyAzNDMuMjYyNCAzNTEuMzI5OCAzNTkuNDAxNiAzNjEuODg5OCBdIC9TdWJ0eXBlIC9MaW5rIC9UeXBlIC9Bbm5vdAo+PgplbmRvYmoKOCAwIG9iago8PAovQSA8PAovUyAvVVJJIC9UeXBlIC9BY3Rpb24gL1VSSSAoaHR0cHM6Ly9naXRodWIuY29tL0F5dXNoSGFyaW5raGVkZS9IZWFsdGhOZXN0KQo+PiAvQm9yZGVyIFsgMCAwIDAgXSAvUmVjdCBbIDM2Ni41ODI0IDM1MS4zMjk4IDM5My45NjggMzYxLjg4OTggXSAvU3VidHlwZSAvTGluayAvVHlwZSAvQW5ub3QKPj4KZW5kb2JqCjkgMCBvYmoKPDwKL0EgPDwKL1MgL1VSSSAvVHlwZSAvQWN0aW9uIC9VUkkgKGh0dHBzOi8vZ2l0aHViLmNvbS9BeXVzaEhhcmlua2hlZGUvVkFOSUUpCj4+IC9Cb3JkZXIgWyAwIDAgMCBdIC9SZWN0IFsgMjcwLjM3MiAyOTUuMzI5OCAzNDIuMjU5MiAzMDUuODg5OCBdIC9TdWJ0eXBlIC9MaW5rIC9UeXBlIC9Bbm5vdAo+PgplbmRvYmoKMTAgMCBvYmoKPDwKL0EgPDwKL1MgL1VSSSAvVHlwZSAvQWN0aW9uIC9VUkkgKGh0dHBzOi8vZ2l0aHViLmNvbS9BeXVzaEhhcmlua2hlZGUvVG9vbGVyKQo+PiAvQm9yZGVyIFsgMCAwIDAgXSAvUmVjdCBbIDE0OS41NzQ0IDIzOS4zMjk4IDIyMS40NjE2IDI0OS44ODk4IF0gL1N1YnR5cGUgL0xpbmsgL1R5cGUgL0Fubm90Cj4+CmVuZG9iagoxMSAwIG9iago8PAovQW5ub3RzIFsgNCAwIFIgNSAwIFIgNiAwIFIgNyAwIFIgOCAwIFIgOSAwIFIgMTAgMCBSIF0gL0NvbnRlbnRzIDE1IDAgUiAvTWVkaWFCb3ggWyAwIDAgNTk1LjI3NTYgODQxLjg4OTggXSAvUGFyZW50IDE0IDAgUiAvUmVzb3VyY2VzIDw8Ci9Gb250IDEgMCBSIC9Qcm9jU2V0IFsgL1BERiAvVGV4dCAvSW1hZ2VCIC9JbWFnZUMgL0ltYWdlSSBdCj4+IC9Sb3RhdGUgMCAKICAvVHJhbnMgPDwKCj4+IC9UeXBlIC9QYWdlCj4+CmVuZG9iagoxMiAwIG9iago8PAovUGFnZU1vZGUgL1VzZU5vbmUgL1BhZ2VzIDE0IDAgUiAvVHlwZSAvQ2F0YWxvZwo+PgplbmRvYmoKMTMgMCBvYmoKPDwKL0F1dGhvciAoXChhbm9ueW1vdXNcKSkgL0NyZWF0aW9uRGF0ZSAoRDoyMDI2MDIxMTE4MzA0OSswMCcwMCcpIC9DcmVhdG9yIChcKHVuc3BlY2lmaWVkXCkpIC9LZXl3b3JkcyAoKSAvTW9kRGF0ZSAoRDoyMDI2MDIxMTE4MzA0OSswMCcwMCcpIC9Qcm9kdWNlciAoUmVwb3J0TGFiIFBERiBMaWJyYXJ5IC0gd3d3LnJlcG9ydGxhYi5jb20pIAogIC9TdWJqZWN0IChcKHVuc3BlY2lmaWVkXCkpIC9UaXRsZSAoXChhbm9ueW1vdXNcKSkgL1RyYXBwZWQgL0ZhbHNlCj4+CmVuZG9iagoxNCAwIG9iago8PAovQ291bnQgMSAvS2lkcyBbIDExIDAgUiBdIC9UeXBlIC9QYWdlcwo+PgplbmRvYmoKMTUgMCBvYmoKPDwKL0ZpbHRlciBbIC9BU0NJSTg1RGVjb2RlIC9GbGF0ZURlY29kZSBdIC9MZW5ndGggMjQ3MQo+PgpzdHJlYW0KR2F0bTw+dVRjQyg0R0BJZ20+LVBWTlheP0hrPy1nQnByb3AiWTxCcl1zVWw9LCZBUStAcDohRyVgOSZISWE9Okw/cDUzTFFuOFhYQUVocXFsMC1uSTgoPlJUalNwUDFkPidhXHAqbF5hVllQaDxAO2VeLjFITHJtck5SLnI0YmpVaTlMY187akRdXF9HZ1EwcWJdNDUoVUo4NlFibVQyXi4ybTkrMzlFTCc3c0RBY2tZckMhaElKQyxeWDJsYGMlImdgP2ghWUhiQldTbVFGSWBkNDsiOW5gdU9uQ3MtRDovOzZGSDQuciI0PTAjWSZxOW8lIl8tQiwwczFTUjdjMTAlZDJLTWhBYiNVYj0mcTBOYDpqZkZsVE9gQS0jcVdGImBvYihPMWZrJSRScTQ/RmA3V11MQSVuRyMkKUdQQywpQFRpQz9HWzxUWmsuclNBa0RsbFBybCtPSUpFSldCSEpXXC9ZVW86ZClwSDZtX2ZfMXJyTlEwVGRHNSIvcmExLkNSJE1AOjolTVtLWG9qJkJmcGktZHBUUCIrM3E4bS8pYiMyKy0pRSdcaVErUSw/cjhYTS1VIVxQdFAiJC9hPkllPXNvSVBcY208K15uJChoaEM9amgtSGFoXUZcMi4iME05R0JPWmAhQTxkRGgyQ2Eqbj5TUCk6NldpXCw2S2hoLSpYc15ZMldbXyksRTEiKiRkSGo/YTNBO1VHUERjMVFCZSk7SC5uTypHKj41ZCdKPW1jS3A8R14lZlQrOFknRlNhYiE/YlttSjlaaCM3YyxDS1s7dT9YNj5wOCVUM1BZdVFtZF89Rj1MIVZeUGVBRSx0Om1wKC5LIy88Z3QkdGwmPj8laiQ2bzkpIiNfWFJpMjgwKjFiXCkhc15TWmpCVzI7IVI1O1o3KTltRTQ9Y2E5PnFgTW4iPUtEN2VAQW9Cb2xiNk1AL05LR1NZVUNxcjc6QTRcMlBISzlQPzgjVENDXF80ckI7KEhNV0siLSYqR1kxZCgsJyhLbF1tYE5QPVZHbj5CNywmVGZUS2xnImA2XGAyUDsoZGltb0dcZkRqNCZaPldOQ2NTK2BTTCgjPklrV1BjTEcjVzc/KUdmZC0/UidGKk4vOjpUIkFtZDY5ZiM9UFhSOCwrM2klInBJNShOY2E6V2xGMk1kMCQwLXFgW2QncEt0QUhEPz43U1NiRDg+LickITA/Vj9MIz1RU3MzTj5jYC04aSZbIWBybC9aYSgpdXExIidDWmBuIlBJW2JVKCtuMDpgWiZuNEtpUkhRRFtdIVBOWEVEQy9lXUFQVjY1MlxnXjFaQFBNKCsuanRbZCE1LWhAZ1ImcyxWJGw3X1wwalkkJHAlU05oWmFnQzVnUyNdJzJSW2E/IXNvRmB1RSYmNzAhYSdOXTZOdDAzPHIwLEktY1s1LV1bcWtnVnJXKGphRlBGOnRTIzYxW1E8J0BBbkNiPiFZXEQiQUZrXjxaWyxLMz4lN2AiV2lDZGpCVVFIKS5UOjpAYDhdXGNAOiNoVCdKaGU1YV1NVk1mWEI9LEg0UXM2MC0hUi5Tcy0qKzlEVismSk1HWTpZZCwrbU1KKyZULmxJZT9BR05laFhdOGZ0WTowWSc+biI3aERtaUlWUjNOaUE+bUM2PktNSk0yWmZSLXRtRUYlaFVsMjpIcSJLXHJfVEwyZC5aVDAlMzovU0wnKm0zNS1DIjc3JV5ES19jRG9YcltXTm4xTUtgQzo1MEw2YFUyTThgPyZwYmcvWHFoU0dAb1RJW182Jio4JVhoN0VDMDk+cjtuQzFBPVshUm1rR1pHa2dLaTI7UkNKZ0MpQGcrdWhBXGcjNTs+TEYsLHJiWVZtQDlPNWFDMzFTOSxxRktldEo/a0pIIkY9NjFYWmwtK3FdbTVtLFpANnFmXlhETjRpZ0haPWUwIXJ0UDklVEFOUkInNGBuR24xZUs0R1ZyYSx0K0hhX0EmS14uajdpP0heSlItZWsoI2dddSE6SzZtbkU2UihoKT4mKU4sQG5lVyEnaFUhbiReNSouYGU4XF1CVkJHXDRuJV5MazZkTUosUk41VkNSKFpQWG8wOSE+KXRqKWhiYkBuSl5FOUlYQWJxOy01czlmS1JrLEMlQVY4a0oxT2IvQXJCSE9hUmQkJygkJGg2JEohY1Fcc0FhZC47YUIsJT09YSklVG9RKUBlRlYnNGRbNSdTT0tJR0dxUV46MnNANzU7KFdMb2UlJi9jNVtJa2w5YVdBOEBPXVBzKG8tSWJxKVhMcUA1dXMyJDsuTzVMOTNUO2I8M0AoXm43bGsjRFg7MkFBWE1wPkAocE1rKCxvVV8sYic+L1g/Y0s/P2o3b1VNXCFPTUlvPkdpXCNILTdtR0sjXzZyXSxNW0RwNEdqY0huSD1tbzFLUVg4cD5gNXNWLjUlPUc+ZT8rcGpFREhscSJkcjthUT1YImg/QEt0UzhDL282NnE5QEQiMnMoUzNWSVc+SkxUNmRiOWBiMCFpSlo3RUpyYUYjYHRKPUMiYCxLUkMlPStHSDZULz10OFMkclsmaEFbLUJVZ3BZW2FfOm86am1IQSMqJyJJWT1gUE4jJGQ/TT9vaihfOV0jUjp1VF5OQCpZYStyRVFiV2Q9U2MsL0tYLTUra1s/Yl9QQ2c+LGJsPypccHAtLls7SEcua0ZtInRGXzkoLVdmJzxKOileKW4/TkdtQnVqKkZTKjYpaTNMVCU/SDYyZkZcUSVtQ0MqXzxSOHNYJDQnXU41XWRzblJrXy1SODtsRjVkTUZgNUhBS0MucFFTZzApY1JAQyYtbXBPJC8jW0xfOC1YRUdZOWdZNzJubF84RU4nI1lXX0QmIWFjIj9HaC5zalpZUjFvaUpLP1wrV0wxVlI4JS5FMGZCcTxuKDMpTFgzZFZjPnEpVSM9a0MmMDsuMjtKMkJYTSRLNV1iZyVbQDokR2FvQTE/MkFjKCFqakYtYEc6Nm1GQHQ3UHVSMSUpNG4jQXUhP1Q3dF8nc0AqQyJWV3U8cWw8VURCVmZPaU9zZ0FUcjsiQyhhUEJKZnFrK3EjZy5hPi5wOEJRVlthPGA+UF9hPysvPlloa1tMOylpPHUkKj5TRk1YKGZ0MyhKNy5mMzdmI3VAQiUlUTEpQlw8OzxBVWFIWko2cjdNXGpYRnAzakcpWlw9WUpPZEdcSGpqM3RKOD9pN0AnaUhVWGUibSZUMi5ec1IscEdBNTJKMnRrcUVOTXFgLi8tRDVzJ0I5Zl1OO1lBajdTU1taMWcyWmYvc0xLZ0E7dTUkbFdefj5lbmRzdHJlYW0KZW5kb2JqCnhyZWYKMCAxNgowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwNzMgMDAwMDAgbiAKMDAwMDAwMDExNCAwMDAwMCBuIAowMDAwMDAwMjIxIDAwMDAwIG4gCjAwMDAwMDAzMzMgMDAwMDAgbiAKMDAwMDAwMDUxOCAwMDAwMCBuIAowMDAwMDAwNzIzIDAwMDAwIG4gCjAwMDAwMDA5MTUgMDAwMDAgbiAKMDAwMDAwMTEwNyAwMDAwMCBuIAowMDAwMDAxMzAzIDAwMDAwIG4gCjAwMDAwMDE0OTQgMDAwMDAgbiAKMDAwMDAwMTY4OCAwMDAwMCBuIAowMDAwMDAxOTQ5IDAwMDAwIG4gCjAwMDAwMDIwMTkgMDAwMDAgbiAKMDAwMDAwMjMwMyAwMDAwMCBuIAowMDAwMDAyMzY0IDAwMDAwIG4gCnRyYWlsZXIKPDwKL0lEIApbPGM3MTk0ODk1M2Q2YTQ0NDk0YjBjMTFmMDVhZjY4NzRlPjxjNzE5NDg5NTNkNmE0NDQ5NGIwYzExZjA1YWY2ODc0ZT5dCiUgUmVwb3J0TGFiIGdlbmVyYXRlZCBQREYgZG9jdW1lbnQgLS0gZGlnZXN0IChodHRwOi8vd3d3LnJlcG9ydGxhYi5jb20pCgovSW5mbyAxMyAwIFIKL1Jvb3QgMTIgMCBSCi9TaXplIDE2Cj4+CnN0YXJ0eHJlZgo0OTI3CiUlRU9GCg==";
 
+let resumeZoomLevel = 1.0;
+
+function updateResumeZoomDisplay() {
+  const sheet = document.getElementById('printableResumeSheet');
+  const label = document.getElementById('resumeZoomVal');
+  if (sheet) {
+    sheet.style.transform = resumeZoomLevel === 1.0 ? '' : `scale(${resumeZoomLevel})`;
+    sheet.style.transformOrigin = 'top center';
+    sheet.style.marginBottom = resumeZoomLevel < 1.0 ? `-${Math.round((1 - resumeZoomLevel) * (sheet.offsetHeight || 900))}px` : '0px';
+  }
+  if (label) {
+    label.textContent = `${Math.round(resumeZoomLevel * 100)}%`;
+  }
+}
+
+function zoomResumeIn() {
+  resumeZoomLevel = Math.min(1.4, Math.round((resumeZoomLevel + 0.1) * 10) / 10);
+  updateResumeZoomDisplay();
+  if (typeof triggerFeedback === 'function') triggerFeedback('click');
+}
+
+function zoomResumeOut() {
+  resumeZoomLevel = Math.max(0.6, Math.round((resumeZoomLevel - 0.1) * 10) / 10);
+  updateResumeZoomDisplay();
+  if (typeof triggerFeedback === 'function') triggerFeedback('click');
+}
+
+function fitResumePage() {
+  const viewport = document.querySelector('.resume-sheet-viewport.modal-viewport');
+  const sheet = document.getElementById('printableResumeSheet');
+  if (!viewport || !sheet) return;
+
+  if (resumeZoomLevel !== 1.0) {
+    resumeZoomLevel = 1.0;
+  } else {
+    const availH = viewport.clientHeight - 60;
+    const sheetH = sheet.scrollHeight || 1000;
+    if (availH > 0 && sheetH > 0) {
+      resumeZoomLevel = Math.max(0.6, Math.min(1.0, Math.floor((availH / sheetH) * 100) / 100));
+    }
+  }
+  updateResumeZoomDisplay();
+  if (typeof triggerFeedback === 'function') triggerFeedback('click');
+}
+
+window.zoomResumeIn = zoomResumeIn;
+window.zoomResumeOut = zoomResumeOut;
+window.fitResumePage = fitResumePage;
+
 function openResumeModal() {
   const modal = document.getElementById('resumeModal');
   if (!modal) return;
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
+  const vp = modal.querySelector('.resume-sheet-viewport');
+  if (vp) vp.scrollTop = 0;
   if (typeof triggerFeedback === 'function') triggerFeedback('open');
 }
 
