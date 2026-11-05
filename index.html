@@ -2939,7 +2939,10 @@ header {
 }
 .footer-actions {
   display: flex;
+  align-items: center;
   gap: 12px;
+  margin-right: clamp(72px, 6.5vw, 96px);
+  transition: margin-right 0.25s ease;
 }
 .footer-action-btn {
   background: rgba(255, 255, 255, 0.06);
@@ -2953,6 +2956,7 @@ header {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  white-space: nowrap;
   transition: all 0.2s ease;
 }
 .footer-action-btn:hover {
@@ -4667,6 +4671,8 @@ header {
   .footer-actions {
     flex-wrap: wrap;
     justify-content: center;
+    margin-right: 0;
+    padding-bottom: 8px;
   }
 
   /* Scroll top button */
