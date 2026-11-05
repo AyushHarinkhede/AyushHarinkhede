@@ -140,24 +140,60 @@ img, svg, picture, canvas {
   pointer-events: auto;
 }
 
+/* ─── GLOBAL POINTER & TAP ASSURANCE ─── */
+/* Ensure cursor elements NEVER intercept mouse, pointer, or touch events anywhere */
+.custom-cursor,
+.custom-cursor *,
+.custom-cursor-aura,
+.custom-cursor-aura *,
+.cursor-svg,
+.cursor-svg * {
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -webkit-touch-callout: none !important;
+}
+
+/* Ensure all interactive buttons, links, and cards ALWAYS receive taps and clicks */
+a, button, input, select, textarea, [role="button"],
+.card, .cat-pill, .sm-chip, .spec-chip, .app-tile-btn,
+.social-pill-item, .footer-chip, .footer-action-btn,
+.resume-action-btn, .btn-primary-catalyst, .btn-secondary-catalyst,
+.modal-close-btn, .lightbox-close-btn {
+  pointer-events: auto !important;
+  touch-action: manipulation !important;
+}
+
+/* Hidden by default on mobile / touchscreens */
+.custom-cursor,
+.custom-cursor-aura {
+  display: none !important;
+}
+
 /* ─── ULTRA-MODERN NATIVE-REPLACING CUSTOM THEME UI CURSOR (DESKTOP) ─── */
 @media (hover: hover) and (pointer: fine) {
+  html, body {
+    cursor: none;
+  }
+
+  /* Keep native cursor as fallback on inputs if needed, or hide smoothly */
   html, body, *, *::before, *::after {
     cursor: none !important;
   }
 
   .custom-cursor {
+    display: block !important;
     position: fixed;
     top: 0;
     left: 0;
     width: 28px;
     height: 28px;
-    pointer-events: none;
-    z-index: 1000000;
+    pointer-events: none !important;
+    z-index: 10000000;
     transform: translate3d(-100px, -100px, 0);
     opacity: 0;
     will-change: transform;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.15s ease;
   }
   .custom-cursor.visible {
     opacity: 1;
@@ -170,8 +206,9 @@ img, svg, picture, canvas {
     width: 100%;
     height: 100%;
     display: none;
+    pointer-events: none !important;
     filter: drop-shadow(0 2px 7px rgba(79, 70, 229, 0.45));
-    transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.16s ease;
+    transition: opacity 0.15s ease;
   }
   .cursor-svg .cursor-fill {
     fill: var(--accent);
@@ -192,21 +229,24 @@ img, svg, picture, canvas {
   /* Mode 1: Default Pointer Arrow */
   .custom-cursor.mode-default .cursor-svg-default {
     display: block;
-    transform: scale(1);
+    transform: none;
+    transform-origin: 3.5px 2.5px;
   }
 
-  /* Mode 2: Interactive Hand Pointer */
+  /* Mode 2: Interactive Hand Pointer (Zero-drift alignment with index finger) */
   .custom-cursor.mode-pointer .cursor-svg-pointer {
     display: block;
-    transform: scale(1.15) rotate(-6deg);
+    transform: none;
+    transform-origin: 10px 2px;
   }
 
   /* Mode 3: Text Input Type Bar / I-Beam */
   .custom-cursor.mode-text .cursor-svg-text {
     display: block;
+    transform: none;
+    transform-origin: 12px 12px;
     color: var(--accent);
     filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.55));
-    transform: scale(1.1);
   }
   [data-theme="dark"] .custom-cursor.mode-text .cursor-svg-text {
     color: #818CF8;
@@ -216,27 +256,30 @@ img, svg, picture, canvas {
   /* Mode 4: Prohibited / Block Circle */
   .custom-cursor.mode-blocked .cursor-svg-blocked {
     display: block;
+    transform: none;
+    transform-origin: 12px 12px;
     color: #EF4444;
     filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.65));
-    transform: scale(1.08);
   }
 
   /* Mode 5: Grab Hand */
   .custom-cursor.mode-grab .cursor-svg-grab {
     display: block;
-    transform: scale(1.15);
+    transform: none;
+    transform-origin: 12px 12px;
   }
 
   /* Magnetic Aura Halo Follower */
   .custom-cursor-aura {
+    display: block !important;
     position: fixed;
     top: 0;
     left: 0;
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    pointer-events: none;
-    z-index: 999999;
+    pointer-events: none !important;
+    z-index: 9999999;
     border: 1.5px solid rgba(79, 70, 229, 0.45);
     background: rgba(79, 70, 229, 0.04);
     opacity: 0;
@@ -288,9 +331,12 @@ img, svg, picture, canvas {
 
 @media (hover: none), (pointer: coarse) {
   .custom-cursor,
+  .custom-cursor *,
   .custom-cursor-aura,
+  .custom-cursor-aura *,
   .edc-cursor-follower {
     display: none !important;
+    pointer-events: none !important;
   }
 }
 
@@ -1806,65 +1852,582 @@ header {
   transform: translateY(-2px);
 }
 
-/* ─── TIMELINE (MY JOURNEY ROADMAP) ────────────── */
-.timeline-track {
+/* ═══════════════════════════════════════════════════
+   INTERACTIVE JOURNEY STORY MAP SYSTEM (OFFICIAL)
+   - Winding Celestial Roadmap Layout
+   - Glowing Radar Pulse Waypoints with Distinct Years
+   - Dynamic Dotted Path Connectors
+   - Staggered Story Unfolding Entrance Animations
+═══════════════════════════════════════════════════ */
+.journey-map-wrapper {
   position: relative;
-  max-width: 900px;
-  margin: 20px auto;
-  padding-left: 36px;
+  max-width: 1040px;
+  margin: 28px auto 10px;
+  padding: 34px 28px;
+  background: radial-gradient(circle at 50% 10%, rgba(99, 102, 241, 0.1) 0%, transparent 70%),
+              radial-gradient(circle at 80% 90%, rgba(129, 140, 248, 0.06) 0%, transparent 60%),
+              rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 26px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  overflow: hidden;
 }
-.timeline-track::before {
-  content: '';
-  position: absolute; left: 10px; top: 0; bottom: 0;
-  width: 2px;
-  background: linear-gradient(180deg, var(--accent) 0%, var(--accent3) 80%, transparent);
+
+[data-theme="light"] .journey-map-wrapper {
+  background: radial-gradient(circle at 50% 10%, rgba(79, 70, 229, 0.06) 0%, transparent 70%),
+              rgba(255, 255, 255, 0.85);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
-.timeline-node {
-  position: relative;
-  margin-bottom: 30px;
+
+/* 1. TOP HUD WAYPOINT ROUTE NAVIGATOR */
+.journey-hud-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 20px;
+  margin-bottom: 34px;
+  background: rgba(11, 15, 25, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  flex-wrap: wrap;
 }
-.timeline-node::before {
-  content: '';
-  position: absolute; left: -32px; top: 22px;
-  width: 14px; height: 14px;
+
+[data-theme="light"] .journey-hud-nav {
+  background: rgba(243, 244, 246, 0.9);
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+.journey-hud-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.journey-hud-label svg {
+  color: var(--accent);
+  animation: hudCompassSpin 10s linear infinite;
+}
+
+@keyframes hudCompassSpin {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(180deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.journey-hud-pills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.hud-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text2);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: inherit;
+}
+
+.hud-pill-btn:hover {
+  border-color: var(--accent);
+  background: rgba(99, 102, 241, 0.15);
+  color: var(--text1);
+  transform: translateY(-1px);
+}
+
+.hud-pill-btn.active {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(79, 70, 229, 0.4) 100%);
+  color: #FFFFFF;
+  box-shadow: 0 0 14px rgba(99, 102, 241, 0.35);
+}
+
+.hud-year {
+  font-family: 'DM Mono', monospace;
+  font-weight: 700;
+  color: var(--text1);
+}
+
+.hud-pill-btn.active .hud-year {
+  color: #FFFFFF;
+}
+
+.hud-tag {
+  font-size: 11px;
+  color: var(--text3);
+}
+
+.hud-pill-btn.active .hud-tag {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.hud-dot-sep {
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
-  background: var(--bg2);
-  border: 3px solid var(--accent);
-  box-shadow: 0 0 10px rgba(79, 70, 229, 0.3);
+  background: var(--text3);
+  opacity: 0.4;
 }
-.timeline-card {
-  background: var(--card);
+
+/* 2. THE ROADMAP TRACK & DOTTED BACKBONE */
+.journey-roadmap-track {
+  position: relative;
+  padding: 20px 0;
+}
+
+.journey-dotted-backbone {
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  bottom: 20px;
+  width: 4px;
+  transform: translateX(-50%);
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(99, 102, 241, 0.8) 0px,
+    rgba(99, 102, 241, 0.8) 8px,
+    transparent 8px,
+    transparent 18px
+  );
+  border-radius: 4px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+[data-theme="light"] .journey-dotted-backbone {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(79, 70, 229, 0.7) 0px,
+    rgba(79, 70, 229, 0.7) 8px,
+    transparent 8px,
+    transparent 18px
+  );
+}
+
+.dotted-flow-beam {
+  position: absolute;
+  top: 0;
+  left: -2px;
+  width: 8px;
+  height: 120px;
+  border-radius: 99px;
+  background: linear-gradient(180deg, transparent 0%, #38BDF8 50%, #818CF8 80%, transparent 100%);
+  filter: drop-shadow(0 0 10px #6366F1);
+  animation: mapFlowBeam 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes mapFlowBeam {
+  0% { top: -120px; opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* 3. MILESTONE NODES (ALTERNATING ON DESKTOP) */
+.journey-map-node {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 54px;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(35px) scale(0.94);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.journey-map-node:last-child {
+  margin-bottom: 10px;
+}
+
+/* When in view via IntersectionObserver or default state */
+.journey-map-wrapper.story-animated .journey-map-node {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.journey-map-wrapper.story-animated .journey-map-node:nth-child(2) { transition-delay: 0.1s; }
+.journey-map-wrapper.story-animated .journey-map-node:nth-child(3) { transition-delay: 0.3s; }
+.journey-map-wrapper.story-animated .journey-map-node:nth-child(4) { transition-delay: 0.5s; }
+.journey-map-wrapper.story-animated .journey-map-node:nth-child(5) { transition-delay: 0.7s; }
+.journey-map-wrapper.story-animated .journey-map-node:nth-child(6) { transition-delay: 0.9s; }
+
+/* Desktop side-left: Card on Left, Circle in Center */
+.journey-map-node.side-left {
+  flex-direction: row-reverse;
+  justify-content: center;
+}
+
+.journey-map-node.side-left .map-story-card {
+  margin-right: 48px;
+  text-align: right;
+}
+
+.journey-map-node.side-left .story-card-top {
+  justify-content: flex-end;
+}
+
+.journey-map-node.side-left .story-location-row {
+  justify-content: flex-end;
+}
+
+.journey-map-node.side-left .story-tags-row {
+  justify-content: flex-end;
+}
+
+/* Desktop side-right: Card on Right, Circle in Center */
+.journey-map-node.side-right {
+  flex-direction: row;
+  justify-content: center;
+}
+
+.journey-map-node.side-right .map-story-card {
+  margin-left: 48px;
+  text-align: left;
+}
+
+/* 4. THE CENTRAL WAYPOINT CIRCLE (RADAR & YEAR) */
+.map-waypoint-circle {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1E1B4B 0%, #0F172A 100%);
+  border: 2.5px solid var(--accent);
+  box-shadow: 0 0 24px rgba(99, 102, 241, 0.45), inset 0 0 14px rgba(99, 102, 241, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  z-index: 3;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] .map-waypoint-circle {
+  background: linear-gradient(135deg, #FFFFFF 0%, #EEF2FF 100%);
+  border-color: #4F46E5;
+  box-shadow: 0 8px 24px rgba(79, 70, 229, 0.25), inset 0 0 8px rgba(79, 70, 229, 0.1);
+}
+
+.map-waypoint-circle:hover {
+  transform: scale(1.14);
+  border-color: #818CF8;
+  box-shadow: 0 0 35px rgba(129, 140, 248, 0.7), inset 0 0 18px rgba(99, 102, 241, 0.4);
+}
+
+/* Radar pulse rings */
+.radar-ping-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  opacity: 0;
+  pointer-events: none;
+  animation: radarWave 2.8s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+
+.radar-ping-ring.ping-delay {
+  animation-delay: 1.4s;
+}
+
+@keyframes radarWave {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  60% { opacity: 0.3; }
+  100% { transform: scale(1.75); opacity: 0; }
+}
+
+.waypoint-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #818CF8;
+  margin-bottom: 2px;
+}
+
+.waypoint-year {
+  font-family: 'DM Mono', monospace;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="light"] .waypoint-year {
+  color: #1E1B4B;
+  text-shadow: none;
+}
+
+/* Active 2026 Live Beacon styling */
+.map-waypoint-circle.active-beacon {
+  border-color: #10B981;
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.55), inset 0 0 15px rgba(16, 185, 129, 0.3);
+}
+
+.map-waypoint-circle.active-beacon .waypoint-icon {
+  color: #34D399;
+}
+
+.live-beacon-ring {
+  border-color: #10B981 !important;
+}
+
+/* 5. CONNECTOR BEAM (HORIZONTAL DOTTED CONNECTOR) */
+.waypoint-connector-beam {
+  position: relative;
+  width: 48px;
+  height: 2px;
+  background: repeating-linear-gradient(
+    to right,
+    var(--accent) 0px,
+    var(--accent) 5px,
+    transparent 5px,
+    transparent 10px
+  );
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* 6. MILESTONE STORY CARD */
+.map-story-card {
+  width: calc(50% - 60px);
+  max-width: 440px;
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 22px 26px;
-  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  border-radius: 20px;
+  padding: 24px 26px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.timeline-card:hover {
+
+[data-theme="light"] .map-story-card {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.05);
+}
+
+.map-story-card:hover {
   border-color: var(--accent2);
-  transform: translateX(4px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+  transform: translateY(-3px) scale(1.015);
+  box-shadow: 0 18px 42px rgba(99, 102, 241, 0.2);
 }
-.timeline-year-chip {
-  display: inline-block;
+
+.story-card-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.story-badge-pill {
   font-family: 'DM Mono', monospace;
   font-size: 11px;
   font-weight: 700;
-  color: var(--accent);
-  background: rgba(79, 70, 229, 0.08);
-  padding: 3px 12px;
-  border-radius: 99px;
-  margin-bottom: 8px;
+  padding: 3px 11px;
+  border-radius: 999px;
+  letter-spacing: -0.01em;
 }
-.timeline-title {
-  font-size: 18px;
+
+.story-badge-pill.genesis {
+  background: rgba(244, 63, 94, 0.12);
+  border: 1px solid rgba(244, 63, 94, 0.3);
+  color: #FB7185;
+}
+
+.story-badge-pill.foundation {
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #FBBF24;
+}
+
+.story-badge-pill.ssc {
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #60A5FA;
+}
+
+.story-badge-pill.hsc {
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  color: #C084FC;
+}
+
+.story-badge-pill.ug-active {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34D399;
+}
+
+.story-date-badge {
+  font-size: 11.5px;
+  color: var(--text3);
+  font-weight: 500;
+}
+
+.story-date-badge.live {
+  color: #34D399;
   font-weight: 700;
-  color: var(--text);
-  margin-bottom: 4px;
 }
-.timeline-text {
-  font-size: 14px;
+
+.story-card-title {
+  font-size: 17.5px;
+  font-weight: 700;
+  color: var(--text1);
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+
+.story-location-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text3);
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.story-location-row svg {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.story-card-desc {
+  font-size: 13.5px;
   color: var(--text2);
   line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.story-tags-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.story-tag {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text2);
+}
+
+[data-theme="light"] .story-tag {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+.story-tag.accent {
+  background: rgba(99, 102, 241, 0.12);
+  border-color: rgba(99, 102, 241, 0.25);
+  color: var(--accent2);
+}
+
+/* Active Highlight when card is clicked or focused */
+.journey-map-node.is-focused .map-story-card {
+  border-color: var(--accent);
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.35);
+}
+
+.journey-map-node.is-focused .map-waypoint-circle {
+  transform: scale(1.18);
+  border-color: #38BDF8;
+}
+
+/* 7. RESPONSIVE JOURNEY MAP (TABLETS & MOBILE <= 768px) */
+@media (max-width: 768px) {
+  .journey-map-wrapper {
+    padding: 22px 14px;
+    border-radius: 20px;
+  }
+  .journey-hud-nav {
+    border-radius: 16px;
+    padding: 10px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .journey-hud-pills {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+  }
+  .journey-roadmap-track {
+    padding-left: 0;
+  }
+  .journey-dotted-backbone {
+    left: 28px;
+    transform: none;
+  }
+  .journey-map-node {
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    margin-bottom: 34px;
+  }
+  .map-waypoint-circle {
+    width: 58px;
+    height: 58px;
+    margin-left: 0;
+  }
+  .waypoint-year {
+    font-size: 11.5px;
+  }
+  .waypoint-icon svg {
+    width: 13px;
+    height: 13px;
+  }
+  .waypoint-connector-beam {
+    width: 20px;
+  }
+  .map-story-card {
+    width: calc(100% - 78px) !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    text-align: left !important;
+    padding: 18px 16px;
+    border-radius: 16px;
+  }
+  .journey-map-node.side-left .story-card-top,
+  .journey-map-node.side-left .story-location-row,
+  .journey-map-node.side-left .story-tags-row {
+    justify-content: flex-start !important;
+  }
+  .story-card-title {
+    font-size: 15.5px;
+  }
+  .story-card-desc {
+    font-size: 12.5px;
+  }
 }
 
 /* ─── PROJECTS GRID ────────────────────────────── */
@@ -3823,45 +4386,7 @@ header {
     overflow-wrap: anywhere;
   }
 
-  /* Timeline */
-  .timeline-track {
-    padding-left: 28px;
-    position: relative;
-  }
-  .timeline-track::before {
-    left: 8px;
-    width: 2px;
-  }
-  .timeline-node {
-    margin-bottom: 22px;
-  }
-  .timeline-node::before {
-    left: -26px;
-    top: 18px;
-    width: 12px;
-    height: 12px;
-    border-width: 2.5px;
-  }
-  .timeline-card {
-    padding: 14px 16px;
-    border-radius: 14px;
-  }
-  .timeline-year-chip {
-    font-size: 11px;
-    padding: 3px 8px;
-    white-space: normal;
-    display: inline-block;
-    word-break: break-word;
-  }
-  .timeline-title {
-    font-size: 15.5px;
-    line-height: 1.4;
-    margin: 6px 0 4px;
-  }
-  .timeline-text {
-    font-size: 13px;
-    line-height: 1.55;
-  }
+
 
   /* Projects grid */
   .projects-catalyst-grid {
@@ -4879,58 +5404,233 @@ header {
     </div>
   </div>
 
-  <!-- ══ SECTION 5: MY JOURNEY (EDUCATION ROADMAP) ══ -->
+  <!-- ══ SECTION 5: MY JOURNEY (ROADMAP STORY MAP) ══ -->
   <div class="searchable-section scroll-reveal" id="journey-section">
     <div class="section-title-wrap">
       <div class="section-badge-pill">Milestones</div>
-      <h2 class="main-section-heading">My Journey &amp; Academic Milestones</h2>
-      <p class="main-section-desc">Key historical checkpoints and educational achievements from schooling to university graduation</p>
+      <h2 class="main-section-heading">My Journey</h2>
+      <p class="main-section-desc">An interactive story map tracking historical milestones, education checkpoints, and evolution into software engineering</p>
     </div>
 
-    <div class="timeline-track">
-      <!-- 2005 -->
-      <div class="timeline-node">
-        <div class="timeline-card">
-          <span class="timeline-year-chip">10th February 2005</span>
-          <h3 class="timeline-title">Born in Nagpur, Maharashtra</h3>
-          <p class="timeline-text">Started my journey in this world on 10th February 2005.</p>
+    <!-- ══ INTERACTIVE JOURNEY STORY MAP ══ -->
+    <div class="journey-map-wrapper story-animated" id="journeyMapWrapper">
+      <!-- 1. Top HUD Waypoint Route Navigator -->
+      <div class="journey-hud-nav" aria-label="Journey Milestone Selector">
+        <div class="journey-hud-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+          <span>Roadmap Path</span>
+        </div>
+        <div class="journey-hud-pills">
+          <button type="button" class="hud-pill-btn" onclick="jumpToJourneyNode('node-2005')" title="Jump to 2005 Genesis">
+            <span class="hud-year">2005</span>
+            <span class="hud-tag">Roots</span>
+          </button>
+          <span class="hud-dot-sep"></span>
+          <button type="button" class="hud-pill-btn" onclick="jumpToJourneyNode('node-2010')" title="Jump to 2010 Schooling">
+            <span class="hud-year">2010</span>
+            <span class="hud-tag">School</span>
+          </button>
+          <span class="hud-dot-sep"></span>
+          <button type="button" class="hud-pill-btn" onclick="jumpToJourneyNode('node-2021')" title="Jump to 2021 SSC">
+            <span class="hud-year">2021</span>
+            <span class="hud-tag">SSC</span>
+          </button>
+          <span class="hud-dot-sep"></span>
+          <button type="button" class="hud-pill-btn" onclick="jumpToJourneyNode('node-2023')" title="Jump to 2023 HSC">
+            <span class="hud-year">2023</span>
+            <span class="hud-tag">HSC</span>
+          </button>
+          <span class="hud-dot-sep"></span>
+          <button type="button" class="hud-pill-btn active" onclick="jumpToJourneyNode('node-2026')" title="Jump to 2026 BCA Graduation">
+            <span class="hud-year">2026</span>
+            <span class="hud-tag">BCA Degree</span>
+          </button>
         </div>
       </div>
 
-      <!-- 2010 -->
-      <div class="timeline-node">
-        <div class="timeline-card">
-          <span class="timeline-year-chip">2010</span>
-          <h3 class="timeline-title">Started Schooling</h3>
-          <p class="timeline-text">Began my formal education and developed a lifelong love for learning, logic, and creativity.</p>
+      <!-- 2. The Interactive Journey Map Track -->
+      <div class="journey-roadmap-track">
+        <!-- Connecting Animated Dotted Line -->
+        <div class="journey-dotted-backbone" aria-hidden="true">
+          <div class="dotted-flow-beam"></div>
         </div>
-      </div>
 
-      <!-- 2021 -->
-      <div class="timeline-node">
-        <div class="timeline-card">
-          <span class="timeline-year-chip">2021 · SSC 10th · 61.80%</span>
-          <h3 class="timeline-title">Priyadarshini Indira Gandhi School, Nagpur</h3>
-          <p class="timeline-text">Completed secondary education from Priyadarshini Indira Gandhi School, Nagpur with 61.80% marks.</p>
-        </div>
-      </div>
+        <!-- MILESTONE 1: 2005 (Left) -->
+        <div class="journey-map-node side-left" id="node-2005" data-year="2005">
+          <!-- Waypoint Circle -->
+          <div class="map-waypoint-circle" onclick="focusJourneyMilestone('node-2005')" title="Milestone: 2005 Genesis">
+            <div class="radar-ping-ring"></div>
+            <div class="radar-ping-ring ping-delay"></div>
+            <div class="waypoint-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.2-6.3-4.6-6.3 4.6 2.3-7.2-6-4.6h7.6z"/></svg>
+            </div>
+            <span class="waypoint-year">2005</span>
+          </div>
 
-      <!-- 2023 -->
-      <div class="timeline-node">
-        <div class="timeline-card">
-          <span class="timeline-year-chip">2023 · HSC 12th · 61.80%</span>
-          <h3 class="timeline-title">Vaidik Convent School, Balaghat</h3>
-          <p class="timeline-text">Completed higher secondary education from Vaidik Convent School, Balaghat with 61.80% marks.</p>
-        </div>
-      </div>
+          <!-- Connector Beam -->
+          <div class="waypoint-connector-beam" aria-hidden="true"></div>
 
-      <!-- 2026 -->
-      <div class="timeline-node">
-        <div class="timeline-card">
-          <span class="timeline-year-chip">2026 · Undergraduate Degree (UG)</span>
-          <h3 class="timeline-title">GH Raisoni University, Amravati — Bachelor of Computer Applications</h3>
-          <p class="timeline-text">Completing Bachelor of Computer Applications (BCA) degree to build a rock-solid foundation in computer science, full-stack web applications, database management, and operating systems.</p>
+          <!-- Story Card -->
+          <div class="map-story-card">
+            <div class="story-card-top">
+              <span class="story-badge-pill genesis">Genesis &amp; Roots</span>
+              <span class="story-date-badge">10th February 2005</span>
+            </div>
+            <h3 class="story-card-title">Born in Nagpur, Maharashtra</h3>
+            <div class="story-location-row">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Nagpur, Maharashtra, India</span>
+            </div>
+            <p class="story-card-desc">Started my life journey in Nagpur — the starting point of a curious mind driven by an innate fascination with puzzles, logical reasoning, and creative exploration.</p>
+            <div class="story-tags-row">
+              <span class="story-tag">Origin</span>
+              <span class="story-tag">Curiosity</span>
+              <span class="story-tag">Roots</span>
+            </div>
+          </div>
         </div>
+
+        <!-- MILESTONE 2: 2010 (Right) -->
+        <div class="journey-map-node side-right" id="node-2010" data-year="2010">
+          <!-- Waypoint Circle -->
+          <div class="map-waypoint-circle" onclick="focusJourneyMilestone('node-2010')" title="Milestone: 2010 Schooling">
+            <div class="radar-ping-ring"></div>
+            <div class="radar-ping-ring ping-delay"></div>
+            <div class="waypoint-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </div>
+            <span class="waypoint-year">2010</span>
+          </div>
+
+          <!-- Connector Beam -->
+          <div class="waypoint-connector-beam" aria-hidden="true"></div>
+
+          <!-- Story Card -->
+          <div class="map-story-card">
+            <div class="story-card-top">
+              <span class="story-badge-pill foundation">Early Education</span>
+              <span class="story-date-badge">Academic Year 2010</span>
+            </div>
+            <h3 class="story-card-title">Started Formal Schooling</h3>
+            <div class="story-location-row">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              <span>Primary Foundation</span>
+            </div>
+            <p class="story-card-desc">Began my formal educational journey, discovering a lifelong passion for structured learning, mathematics, creative expression, and early interactions with computers.</p>
+            <div class="story-tags-row">
+              <span class="story-tag">Mathematics</span>
+              <span class="story-tag">Early Logic</span>
+              <span class="story-tag">Discovery</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- MILESTONE 3: 2021 (Left) -->
+        <div class="journey-map-node side-left" id="node-2021" data-year="2021">
+          <!-- Waypoint Circle -->
+          <div class="map-waypoint-circle" onclick="focusJourneyMilestone('node-2021')" title="Milestone: 2021 SSC 10th">
+            <div class="radar-ping-ring"></div>
+            <div class="radar-ping-ring ping-delay"></div>
+            <div class="waypoint-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+            </div>
+            <span class="waypoint-year">2021</span>
+          </div>
+
+          <!-- Connector Beam -->
+          <div class="waypoint-connector-beam" aria-hidden="true"></div>
+
+          <!-- Story Card -->
+          <div class="map-story-card">
+            <div class="story-card-top">
+              <span class="story-badge-pill ssc">SSC 10th · 61.80%</span>
+              <span class="story-date-badge">Board Batch 2021</span>
+            </div>
+            <h3 class="story-card-title">Priyadarshini Indira Gandhi School</h3>
+            <div class="story-location-row">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Nagpur Board · Secondary Certificate</span>
+            </div>
+            <p class="story-card-desc">Successfully completed secondary school certificate examination (SSC) with 61.80% marks, solidifying discipline, fundamental sciences, and core problem-solving competencies.</p>
+            <div class="story-tags-row">
+              <span class="story-tag">SSC Board</span>
+              <span class="story-tag">Science &amp; Math</span>
+              <span class="story-tag">Discipline</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- MILESTONE 4: 2023 (Right) -->
+        <div class="journey-map-node side-right" id="node-2023" data-year="2023">
+          <!-- Waypoint Circle -->
+          <div class="map-waypoint-circle" onclick="focusJourneyMilestone('node-2023')" title="Milestone: 2023 HSC 12th">
+            <div class="radar-ping-ring"></div>
+            <div class="radar-ping-ring ping-delay"></div>
+            <div class="waypoint-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <span class="waypoint-year">2023</span>
+          </div>
+
+          <!-- Connector Beam -->
+          <div class="waypoint-connector-beam" aria-hidden="true"></div>
+
+          <!-- Story Card -->
+          <div class="map-story-card">
+            <div class="story-card-top">
+              <span class="story-badge-pill hsc">HSC 12th · 61.80%</span>
+              <span class="story-date-badge">Board Batch 2023</span>
+            </div>
+            <h3 class="story-card-title">Vaidik Convent School, Balaghat</h3>
+            <div class="story-location-row">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Balaghat Board · Higher Secondary</span>
+            </div>
+            <p class="story-card-desc">Completed higher secondary education (HSC) in science with 61.80% marks. Stepped boldly into software engineering, learning programming fundamentals and algorithmic thinking.</p>
+            <div class="story-tags-row">
+              <span class="story-tag">HSC Science</span>
+              <span class="story-tag">Computing</span>
+              <span class="story-tag">Coding Gateway</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- MILESTONE 5: 2026 (Left - Active Pinnacle) -->
+        <div class="journey-map-node side-left current-milestone-node" id="node-2026" data-year="2026">
+          <!-- Waypoint Circle (Active Live Beacon) -->
+          <div class="map-waypoint-circle active-beacon" onclick="focusJourneyMilestone('node-2026')" title="Milestone: 2026 BCA Full-Stack Mastery">
+            <div class="radar-ping-ring live-beacon-ring"></div>
+            <div class="radar-ping-ring live-beacon-ring ping-delay"></div>
+            <div class="waypoint-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <span class="waypoint-year">2026</span>
+          </div>
+
+          <!-- Connector Beam -->
+          <div class="waypoint-connector-beam" aria-hidden="true"></div>
+
+          <!-- Story Card -->
+          <div class="map-story-card">
+            <div class="story-card-top">
+              <span class="story-badge-pill ug-active">Undergraduate Degree · Pursuing</span>
+              <span class="story-date-badge live">2023 – 2026</span>
+            </div>
+            <h3 class="story-card-title">G.H. Raisoni University — Bachelor of Computer Applications</h3>
+            <div class="story-location-row">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              <span>Nagpur / Amravati · Full-Stack Web Development</span>
+            </div>
+            <p class="story-card-desc">Completing BCA degree with mastery in modern full-stack engineering: MERN stack (MongoDB, Express, React, Node.js), responsive glassmorphic UI, REST architecture, offline AI virtual assistants, and cloud deployment.</p>
+            <div class="story-tags-row">
+              <span class="story-tag accent">MERN Full-Stack</span>
+              <span class="story-tag accent">REST APIs</span>
+              <span class="story-tag accent">UI Systems</span>
+              <span class="story-tag accent">Software Engineering</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -5449,7 +6149,7 @@ header {
             <li><a href="#credentials-section"><span>Personal Profile</span></a></li>
             <li><a href="#skills-section"><span>Technical Competencies</span></a></li>
             <li><a href="#resume-card"><span>Official Resume</span></a></li>
-            <li><a href="#journey-section"><span>My Journey &amp; Milestones</span></a></li>
+            <li><a href="#journey-section"><span>My Journey</span></a></li>
             <li><a href="#creations-section"><span>My Creations (7 Projects)</span></a></li>
             <li><a href="#interview-section"><span>Interview Q&amp;A</span></a></li>
             <li><a onclick="openGallery()"><span>Photo Gallery (19 Photos)</span></a></li>
@@ -5832,6 +6532,13 @@ header {
 
   let lastTouchEndTime = 0;
   document.addEventListener('touchend', function(e) {
+    // NEVER block taps on interactive links, buttons, inputs, chips, or modals
+    const target = e.target;
+    if (target && target.closest && target.closest('a, button, input, textarea, select, [role="button"], .card, .cat-pill, .sm-chip, .spec-chip, .app-tile-btn, .social-pill-item, .footer-chip, .footer-action-btn, .resume-action-btn, .btn-primary-catalyst, .btn-secondary-catalyst, .modal-close-btn, .lightbox-close-btn, [tabindex]')) {
+      lastTouchEndTime = Date.now();
+      return;
+    }
+
     const currentTime = Date.now();
     if (currentTime - lastTouchEndTime <= 300) {
       e.preventDefault();
@@ -6061,7 +6768,8 @@ function initInteractiveCursor() {
     const offset = HOTSPOTS[currentMode] || HOTSPOTS.default;
     const hx = (mouseX - offset.x).toFixed(1);
     const hy = (mouseY - offset.y).toFixed(1);
-    cursorHead.style.transform = `translate3d(${hx}px, ${hy}px, 0)${isClicking ? ' scale(0.82)' : ''}`;
+    cursorHead.style.transformOrigin = `${offset.x}px ${offset.y}px`;
+    cursorHead.style.transform = `translate3d(${hx}px, ${hy}px, 0)${isClicking ? ' scale(0.92)' : ''}`;
 
     // 2. Position magnetic aura with fluid spring inertia
     const dax = mouseX - auraX;
@@ -6161,6 +6869,17 @@ function initInteractiveCursor() {
     cursorHead.classList.remove('visible');
     cursorAura.classList.remove('visible');
   });
+
+  window.addEventListener('touchstart', () => {
+    // Any direct touchscreen interaction instantly hides the custom cursor
+    isVisible = false;
+    cursorHead.classList.remove('visible');
+    cursorAura.classList.remove('visible');
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  }, { passive: true });
 }
 initInteractiveCursor();
 
@@ -7990,6 +8709,55 @@ function downloadResumeDirect(e) {
     if (typeof triggerFeedback === 'function') triggerFeedback('success');
   }
 }
+
+
+// === INTERACTIVE JOURNEY STORY MAP CONTROLLER ===
+function jumpToJourneyNode(nodeId) {
+  const node = document.getElementById(nodeId);
+  if (!node) return;
+
+  if (typeof triggerFeedback === 'function') triggerFeedback('switch');
+
+  // Update HUD active pill
+  const hudButtons = document.querySelectorAll('.hud-pill-btn');
+  hudButtons.forEach(btn => {
+    const isTarget = btn.getAttribute('onclick')?.includes(nodeId);
+    btn.classList.toggle('active', !!isTarget);
+  });
+
+  // Highlight target node
+  document.querySelectorAll('.journey-map-node').forEach(n => n.classList.remove('is-focused'));
+  node.classList.add('is-focused');
+  setTimeout(() => node.classList.remove('is-focused'), 2000);
+
+  node.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function focusJourneyMilestone(nodeId) {
+  jumpToJourneyNode(nodeId);
+}
+
+function initJourneyStoryObserver() {
+  const wrapper = document.getElementById('journeyMapWrapper');
+  if (!wrapper) return;
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          wrapper.classList.add('story-animated');
+          observer.unobserve(wrapper);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    observer.observe(wrapper);
+  } else {
+    wrapper.classList.add('story-animated');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initJourneyStoryObserver);
 
 // === POLICY MODALS ===
 function showMoreAboutModal() {
