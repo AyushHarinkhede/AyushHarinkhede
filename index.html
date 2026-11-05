@@ -306,7 +306,7 @@ body::after {
   left: 0;
   right: 0;
   width: 100%;
-  height: clamp(660px, 92vh, 960px);
+  height: clamp(740px, 98vh, 1100px);
   pointer-events: none;
   overflow: hidden;
   z-index: 1;
@@ -328,22 +328,22 @@ body::after {
   opacity: 0.44;
   mix-blend-mode: multiply;
   -webkit-mask-image: 
-    radial-gradient(ellipse 75% 65% at 50% 26%, rgba(0,0,0,1) 25%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0) 95%),
+    radial-gradient(ellipse 78% 70% at 50% 34%, rgba(0,0,0,1) 25%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0) 95%),
     linear-gradient(to bottom, 
       rgba(0,0,0,1) 0%, 
-      rgba(0,0,0,0.95) 28%, 
-      rgba(0,0,0,0.7) 55%, 
-      rgba(0,0,0,0.25) 75%, 
-      rgba(0,0,0,0) 95%
+      rgba(0,0,0,0.95) 35%, 
+      rgba(0,0,0,0.7) 62%, 
+      rgba(0,0,0,0.25) 82%, 
+      rgba(0,0,0,0) 98%
     );
   mask-image: 
-    radial-gradient(ellipse 75% 65% at 50% 26%, rgba(0,0,0,1) 25%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0) 95%),
+    radial-gradient(ellipse 78% 70% at 50% 34%, rgba(0,0,0,1) 25%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0) 95%),
     linear-gradient(to bottom, 
       rgba(0,0,0,1) 0%, 
-      rgba(0,0,0,0.95) 28%, 
-      rgba(0,0,0,0.7) 55%, 
-      rgba(0,0,0,0.25) 75%, 
-      rgba(0,0,0,0) 95%
+      rgba(0,0,0,0.95) 35%, 
+      rgba(0,0,0,0.7) 62%, 
+      rgba(0,0,0,0.25) 82%, 
+      rgba(0,0,0,0) 98%
     );
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
@@ -354,7 +354,7 @@ body::after {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 12%;
+  object-position: center 18%;
   filter: contrast(135%) brightness(110%) saturate(65%);
   transform: scale(1.02);
   will-change: transform;
@@ -365,7 +365,7 @@ body::after {
   position: absolute;
   inset: 0;
   background: 
-    radial-gradient(ellipse 85% 65% at 50% 24%, 
+    radial-gradient(ellipse 85% 65% at 50% 32%, 
       rgba(37, 99, 235, 0.28) 0%, 
       rgba(79, 70, 229, 0.32) 40%, 
       rgba(30, 27, 75, 0.42) 75%, 
@@ -380,13 +380,13 @@ body::after {
   position: absolute;
   inset: 0;
   background: 
-    radial-gradient(ellipse 70% 55% at 50% 26%, transparent 20%, var(--bg) 92%),
+    radial-gradient(ellipse 70% 55% at 50% 32%, transparent 20%, var(--bg) 92%),
     linear-gradient(to bottom, 
       transparent 0%, 
-      transparent 28%, 
-      rgba(248, 249, 250, 0.35) 48%, 
-      rgba(248, 249, 250, 0.75) 70%, 
-      rgba(248, 249, 250, 0.95) 88%, 
+      transparent 35%, 
+      rgba(248, 249, 250, 0.35) 55%, 
+      rgba(248, 249, 250, 0.75) 75%, 
+      rgba(248, 249, 250, 0.95) 90%, 
       var(--bg) 100%
     );
   pointer-events: none;
@@ -402,7 +402,7 @@ body::after {
 }
 [data-theme="dark"] .hero-bg-duotone-layer {
   background: 
-    radial-gradient(ellipse 85% 65% at 50% 24%, 
+    radial-gradient(ellipse 85% 65% at 50% 32%, 
       rgba(59, 130, 246, 0.35) 0%, 
       rgba(99, 102, 241, 0.28) 45%, 
       transparent 80%
@@ -411,13 +411,13 @@ body::after {
 }
 [data-theme="dark"] .hero-bg-gradient-fade {
   background: 
-    radial-gradient(ellipse 70% 55% at 50% 26%, transparent 20%, var(--bg) 92%),
+    radial-gradient(ellipse 70% 55% at 50% 32%, transparent 20%, var(--bg) 92%),
     linear-gradient(to bottom, 
       transparent 0%, 
-      transparent 28%, 
-      rgba(11, 15, 25, 0.35) 48%, 
-      rgba(11, 15, 25, 0.75) 70%, 
-      rgba(11, 15, 25, 0.95) 88%, 
+      transparent 35%, 
+      rgba(11, 15, 25, 0.35) 55%, 
+      rgba(11, 15, 25, 0.75) 75%, 
+      rgba(11, 15, 25, 0.95) 90%, 
       var(--bg) 100%
     );
 }
@@ -434,7 +434,7 @@ body::after {
 /* ─── GRAND HEADER SCREEN (NO NAVBAR) ─────────── */
 header {
   text-align: center;
-  padding: calc(clamp(140px, 17vh, 205px) + env(safe-area-inset-top, 0px)) 0 clamp(20px, 3vw, 36px);
+  padding: calc(clamp(215px, 28vh, 330px) + env(safe-area-inset-top, 0px)) 0 clamp(24px, 3.5vw, 42px);
 }
 .header-badge {
   display: inline-flex; align-items: center; gap: 8px;
@@ -2348,10 +2348,10 @@ header {
     padding: 0 max(48px, env(safe-area-inset-right)) 160px max(48px, env(safe-area-inset-left));
   }
   header {
-    padding: calc(clamp(160px, 17vh, 230px) + env(safe-area-inset-top, 0px)) 0 38px;
+    padding: calc(clamp(250px, 28vh, 380px) + env(safe-area-inset-top, 0px)) 0 42px;
   }
   .hero-ambient-backdrop {
-    height: clamp(750px, 92vh, 1050px);
+    height: clamp(820px, 98vh, 1200px);
   }
   .hero-bg-photo-wrapper {
     max-width: 2000px;
@@ -2484,10 +2484,10 @@ header {
     padding: 0 max(64px, env(safe-area-inset-right)) 220px max(64px, env(safe-area-inset-left));
   }
   header {
-    padding: calc(clamp(185px, 18vh, 260px) + env(safe-area-inset-top, 0px)) 0 45px;
+    padding: calc(clamp(320px, 30vh, 480px) + env(safe-area-inset-top, 0px)) 0 55px;
   }
   .hero-ambient-backdrop {
-    height: clamp(880px, 94vh, 1300px);
+    height: clamp(960px, 100vh, 1450px);
   }
   .hero-bg-photo-wrapper {
     max-width: 2500px;
@@ -2559,7 +2559,7 @@ header {
     padding: 0 24px 100px;
   }
   header {
-    padding: calc(clamp(95px, 13vh, 140px) + env(safe-area-inset-top, 0px)) 0 24px;
+    padding: calc(clamp(150px, 22vh, 225px) + env(safe-area-inset-top, 0px)) 0 26px;
   }
   .header-badge {
     margin-top: 14px;
@@ -2570,7 +2570,7 @@ header {
     margin-bottom: 4px;
   }
   .hero-ambient-backdrop {
-    height: clamp(600px, 88vh, 850px);
+    height: clamp(680px, 94vh, 920px);
   }
   .projects-catalyst-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -2593,7 +2593,7 @@ header {
   }
   
   header {
-    padding: calc(clamp(72px, 11vh, 100px) + env(safe-area-inset-top, 0px)) 0 20px;
+    padding: calc(clamp(115px, 17vh, 160px) + env(safe-area-inset-top, 0px)) 0 20px;
   }
 
   .header-badge {
@@ -2730,10 +2730,10 @@ header {
 
   /* Hero ambient backdrop mobile tuning */
   .hero-ambient-backdrop {
-    height: clamp(520px, 85vh, 720px);
+    height: clamp(580px, 90vh, 760px);
   }
   .hero-bg-photo {
-    object-position: center 8%;
+    object-position: center 14%;
   }
 
   /* About profile identity banner mobile layout */
