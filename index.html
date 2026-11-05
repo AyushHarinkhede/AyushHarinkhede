@@ -2997,7 +2997,14 @@ header {
 .scroll-top-btn svg {
   width: 24px;
   height: 24px;
+  stroke: #F3F4F6 !important; /* Elegant warm off-white (not harsh pure white) */
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.25));
   transition: stroke 0.25s ease, filter 0.25s ease, transform 0.25s ease;
+}
+
+.scroll-top-btn:hover svg {
+  stroke: #FAF9F6 !important; /* Soft ivory off-white on hover */
+  filter: drop-shadow(0 0 10px rgba(243, 244, 246, 0.55));
 }
 
 .scroll-top-btn.docked-footer {
@@ -3012,8 +3019,8 @@ header {
 }
 
 .scroll-top-btn.is-online svg {
-  stroke: #10B981 !important;
-  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.85));
+  stroke: #F3F4F6 !important; /* Preserves clean off-white tone while online */
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.25));
 }
 
 .scroll-top-btn.is-offline svg {
