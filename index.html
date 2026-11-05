@@ -2825,23 +2825,33 @@ header {
 .app-pinterest { background: #E60023; }
 .app-pinterest:hover { box-shadow: 0 12px 28px rgba(230, 0, 35, 0.5), inset 0 1px 1.5px rgba(255, 255, 255, 0.4); }
 
-.app-duolingo { background: #58CC02; }
-.app-duolingo:hover { box-shadow: 0 12px 28px rgba(88, 204, 2, 0.55), inset 0 1px 1.5px rgba(255, 255, 255, 0.4); }
-
-.app-arattai { background: #FFCD00; border-color: rgba(0, 0, 0, 0.08); }
-
 .app-duolingo {
-  background: #58CC02;
-  padding: 0 !important;
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.08);
+  padding: 3px !important;
   overflow: hidden;
 }
+.app-duolingo:hover {
+  box-shadow: 0 12px 28px rgba(120, 200, 0, 0.5), inset 0 1px 1.5px rgba(255, 255, 255, 0.8);
+}
 .app-duolingo svg {
-  width: 100% !important;
-  height: 100% !important;
-  border-radius: inherit;
+  width: 86% !important;
+  height: 86% !important;
   display: block;
 }
-.app-arattai:hover { box-shadow: 0 12px 28px rgba(255, 221, 0, 0.6), inset 0 1px 1.5px rgba(255, 255, 255, 0.8); }
+
+.app-arattai {
+  background: #FFD700;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+.app-arattai:hover {
+  box-shadow: 0 12px 28px rgba(255, 215, 0, 0.65), inset 0 1px 1.5px rgba(255, 255, 255, 0.8);
+}
+.app-arattai svg {
+  width: 76% !important;
+  height: 76% !important;
+  display: block;
+}
 
 @media (max-width: 600px) {
   .app-tile-btn,
@@ -3406,182 +3416,383 @@ header {
 .modal-body { font-size: 15px; line-height: 1.7; color: var(--text2); }
 .modal-body h4 { color: var(--accent); margin: 18px 0 6px; font-size: 16px; }
 
-/* ─── RESUME DOCUMENT CONTAINER & VIEWER (OFFICIAL A4 SPEC) ─── */
-.resume-container-card {
-  margin-top: 24px;
-  background: rgba(15, 23, 42, 0.65);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 18px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  overflow: hidden;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-.resume-container-card:hover {
-  border-color: rgba(99, 102, 241, 0.35);
-  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.5), 0 0 30px rgba(99, 102, 241, 0.15);
-}
-.resume-container-toolbar {
+/* ─── RESUME SHOWCASE CARD (CLEAN MODERN UI) ─── */
+.resume-showcase-box {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(56, 189, 248, 0.04) 100%), var(--card);
+  border: 1px solid rgba(99, 102, 241, 0.22);
+  border-radius: 20px;
+  padding: 36px 40px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 20px;
-  background: rgba(11, 15, 25, 0.9);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
-.resume-toolbar-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
+
+.resume-showcase-box:hover {
+  border-color: rgba(99, 102, 241, 0.45);
+  box-shadow: 0 20px 50px rgba(99, 102, 241, 0.18);
+  transform: translateY(-2px);
 }
-.resume-toolbar-dots {
-  display: flex;
-  gap: 6px;
-  align-items: center;
+
+.rs-info-col {
+  flex: 1;
 }
-.resume-toolbar-dots span {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  display: inline-block;
-}
-.resume-toolbar-dots .dot-r { background: #EF4444; }
-.resume-toolbar-dots .dot-y { background: #F59E0B; }
-.resume-toolbar-dots .dot-g { background: #10B981; }
-.resume-file-info {
+
+.rs-meta-badges {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--text1);
-  font-size: 13.5px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
 }
-.resume-file-info svg {
-  color: #6366F1;
-  flex-shrink: 0;
-}
-.resume-badge-verified {
+
+.rs-badge {
   display: inline-flex;
   align-items: center;
   gap: 5px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11.5px;
+  font-weight: 700;
   padding: 3px 10px;
   border-radius: 999px;
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  color: #10B981;
-  font-size: 11.5px;
-  font-weight: 600;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text2);
 }
-.resume-toolbar-actions {
+
+[data-theme="light"] .rs-badge {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #475569;
+}
+
+.rs-badge.accent {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.35);
+  color: #10B981;
+}
+
+/* ─── ULTRA-AUTHENTIC macOS PREVIEW WINDOW (RESUME MODAL) ─── */
+.resume-modal-dialog {
+  max-width: 960px;
+  width: 95%;
+  max-height: 94vh;
+  padding: 0 !important;
+  background: rgba(22, 27, 38, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] .resume-modal-dialog {
+  background: rgba(246, 248, 252, 0.95);
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 30px 80px rgba(15, 23, 42, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.resume-modal-dialog.is-fullscreen {
+  max-width: 100vw !important;
+  width: 100vw !important;
+  max-height: 100vh !important;
+  height: 100vh !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+/* macOS Window Frosted Header */
+.macos-window-header {
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  user-select: none;
+  -webkit-user-select: none;
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+[data-theme="light"] .macos-window-header {
+  background: rgba(255, 255, 255, 0.65);
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Real macOS Traffic Lights */
+.macos-traffic-lights {
   display: flex;
   align-items: center;
   gap: 8px;
-  flex-wrap: wrap;
+  flex-shrink: 0;
 }
-.resume-action-btn {
+
+.macos-traffic-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 0.5px solid transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, filter 0.15s ease;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.35), 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.macos-traffic-btn:hover {
+  transform: scale(1.12);
+}
+
+.macos-traffic-btn.close {
+  background: #FF5F56;
+  border-color: #E0443E;
+}
+.macos-traffic-btn.minimize {
+  background: #FFBD2E;
+  border-color: #DEA123;
+}
+.macos-traffic-btn.fullscreen {
+  background: #27C93F;
+  border-color: #1AAB29;
+}
+
+/* Iconic macOS Traffic Symbols on Hover */
+.macos-traffic-btn svg {
+  width: 6.5px;
+  height: 6.5px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  color: rgba(0, 0, 0, 0.72);
+  display: block;
+}
+
+.macos-traffic-lights:hover .macos-traffic-btn svg {
+  opacity: 1;
+}
+
+/* macOS Window Title with Official Apple Logo */
+.macos-window-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+  color: #FFFFFF;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+[data-theme="light"] .macos-window-title {
+  color: #0F172A;
+}
+
+.macos-apple-logo {
+  color: #FFFFFF;
+  opacity: 0.9;
+  flex-shrink: 0;
+}
+
+[data-theme="light"] .macos-apple-logo {
+  color: #0F172A;
+}
+
+.macos-title-sub {
+  color: var(--text3);
+  font-weight: 500;
+  font-size: 12px;
+}
+
+/* macOS Window Action Buttons */
+.macos-window-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.macos-action-pill {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 7px 14px;
-  border-radius: 10px;
+  padding: 6px 13px;
+  border-radius: 8px;
   font-size: 12.5px;
   font-weight: 600;
   cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.06);
   color: var(--text1);
   transition: all 0.2s ease;
   font-family: inherit;
 }
-.resume-action-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.25);
+
+.macos-action-pill:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.24);
   transform: translateY(-1px);
 }
-.resume-action-btn.primary {
+
+[data-theme="light"] .macos-action-pill {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .macos-action-pill:hover {
+  background: rgba(0, 0, 0, 0.09);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.macos-action-pill.primary {
   background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
   border-color: rgba(99, 102, 241, 0.4);
   color: #FFFFFF;
 }
-.resume-action-btn.primary:hover {
+
+.macos-action-pill.primary:hover {
   background: linear-gradient(135deg, #4F46E5 0%, #4338CA 100%);
   box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
 }
 
-/* Document Paper Viewport */
-.resume-sheet-viewport {
-  padding: 36px 24px;
-  display: flex;
-  justify-content: center;
-  background: radial-gradient(circle at 50% 15%, rgba(99, 102, 241, 0.08) 0%, transparent 65%), #0A0D14;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-.resume-sheet-viewport.modal-viewport {
-  padding: 24px 18px;
-  background: #0B0F19;
-  max-height: 76vh;
-  overflow-y: auto;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* Authentic A4 Document Sheet */
+/* Authentic A4 Document Sheet (Screen View) */
 .resume-a4-sheet {
   width: 100%;
   max-width: 780px;
-  background: #FFFFFF;
-  color: #111827;
+  background: #FFFFFF !important;
+  color: #111827 !important;
   padding: 44px 48px;
   border-radius: 8px;
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), 0 1px 3px rgba(0, 0, 0, 0.15);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   box-sizing: border-box;
   text-align: left;
+  margin: 0 auto;
 }
-.cv-header-name {
-  font-size: 24px;
-  font-weight: 800;
-  color: #0F172A;
-  margin: 0 0 4px;
-  letter-spacing: -0.02em;
-}
-.cv-header-role {
-  font-size: 13.5px;
-  color: #334155;
-  margin: 0 0 4px;
-  font-weight: 600;
-}
-.cv-header-contact {
-  font-size: 12px;
-  color: #475569;
-  margin: 0 0 6px;
-}
-.cv-header-links {
-  font-size: 12px;
+
+/* Document Paper Viewport */
+.resume-sheet-viewport.modal-viewport {
+  padding: 28px 20px;
+  background: #0B0F19;
+  max-height: calc(94vh - 54px);
+  overflow-y: auto;
+  width: 100%;
+  box-sizing: border-box;
   display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #64748B;
-  flex-wrap: wrap;
+  justify-content: center;
 }
-.cv-header-links a {
-  color: #2563EB;
-  text-decoration: none;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
+
+.resume-modal-dialog.is-fullscreen .resume-sheet-viewport.modal-viewport {
+  max-height: calc(100vh - 52px) !important;
+  height: calc(100vh - 52px) !important;
 }
-.cv-header-links a:hover {
-  text-decoration: underline;
+
+[data-theme="light"] .resume-sheet-viewport.modal-viewport {
+  background: #E2E8F0;
 }
+
+@media (max-width: 768px) {
+  .resume-showcase-box {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 20px;
+    gap: 18px;
+  }
+  .resume-btn-group {
+    width: 100%;
+    flex-direction: column;
+  }
+  .resume-btn-group button {
+    width: 100%;
+    justify-content: center;
+  }
+  .macos-window-title .macos-title-sub {
+    display: none;
+  }
+  .macos-action-pill span {
+    display: none;
+  }
+}
+
+/* ─── SYSTEM PRINT ENGINE (CLEAN SINGLE A4 SHEET TO PDF/PRINTER) ─── */
+@media print {
+  html, body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+  body > *:not(#resumeModal) {
+    display: none !important;
+  }
+  .nav-bar, header, footer, .footer-wrapper, .custom-cursor, .custom-cursor-aura, #canvas3d {
+    display: none !important;
+  }
+  #resumeModal {
+    display: block !important;
+    position: static !important;
+    inset: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #FFFFFF !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  #resumeModal .modal-backdrop,
+  #resumeModal .macos-window-header {
+    display: none !important;
+  }
+  #resumeModal .resume-modal-dialog {
+    max-width: 100% !important;
+    width: 100% !important;
+    max-height: none !important;
+    height: auto !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: #FFFFFF !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+  }
+  #resumeModal .resume-sheet-viewport.modal-viewport {
+    background: #FFFFFF !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  #resumeModal .resume-a4-sheet {
+    max-width: 100% !important;
+    width: 100% !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 10mm 15mm !important;
+    margin: 0 !important;
+  }
+}
+
+
 .cv-section-title {
   font-size: 13.5px;
   font-weight: 700;
@@ -5348,174 +5559,34 @@ header {
 
   <!-- ══ SECTION 4: RESUME SHOWCASE CARD ════════════ -->
   <div class="searchable-section scroll-reveal" id="resume-card">
+    <div class="section-title-wrap" style="margin-bottom: 24px;">
+      <div class="section-badge-pill">Curriculum Vitae</div>
+      <h2 class="main-section-heading">Official Resume</h2>
+      <p class="main-section-desc">Download or preview Aayush Harinkhede's comprehensive technical profile covering full-stack MERN engineering, core projects, education, and IT systems background</p>
+    </div>
+
     <div class="resume-showcase-box">
-      <div>
-        <h3 class="rs-title">Official Curriculum Vitae</h3>
-        <p class="rs-desc">Download or inspect Aayush Harinkhede's comprehensive resume covering educational background, MERN development projects, and technical skills.</p>
+      <div class="rs-info-col">
+        <div class="rs-meta-badges">
+          <span class="rs-badge accent">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Verified A4 Document
+          </span>
+          <span class="rs-badge">Updated 2026</span>
+          <span class="rs-badge">ATS-Optimized</span>
+        </div>
+        <h3 class="rs-title">Aayush Harinkhede — Full-Stack Developer</h3>
+        <p class="rs-desc">Comprehensive 1-page professional curriculum vitae detailing core competencies, production web projects (Cacun, HealthNest, VANIE, Tooler), BCA academic milestones, and enterprise IT support experience.</p>
       </div>
       <div class="resume-btn-group">
-        <button type="button" class="btn-primary-catalyst" onclick="openResumeModal()" title="View and inspect resume in full modal">
+        <button type="button" class="btn-primary-catalyst" onclick="openResumeModal()" title="View and inspect resume in macOS Preview window">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-          View Fullscreen (PDF)
+          View Resume
         </button>
-        <button type="button" class="btn-secondary-catalyst" onclick="downloadResumeDirect(event)" title="Direct download resume file to disk">
+        <button type="button" class="btn-secondary-catalyst" onclick="downloadResumeDirect(event)" title="Direct download PDF to disk">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
           Download PDF
         </button>
-      </div>
-    </div>
-
-    <!-- Official Resume Document Container -->
-    <div class="resume-container-card">
-      <div class="resume-container-toolbar">
-        <div class="resume-toolbar-left">
-          <div class="resume-toolbar-dots">
-            <span class="dot-r"></span>
-            <span class="dot-y"></span>
-            <span class="dot-g"></span>
-          </div>
-          <div class="resume-file-info">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-            <span>Ayush_Harinkhede_Resume.pdf</span>
-          </div>
-          <span class="resume-badge-verified">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            Verified A4
-          </span>
-        </div>
-        <div class="resume-toolbar-actions">
-          <button type="button" class="resume-action-btn" onclick="openResumeModal()" title="Expand Fullscreen Document Viewer">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-            <span>Fullscreen</span>
-          </button>
-          <button type="button" class="resume-action-btn primary" onclick="downloadResumeDirect(event)" title="Direct download PDF to disk">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-            <span>Download</span>
-          </button>
-        </div>
-      </div>
-
-      <div class="resume-sheet-viewport">
-
-        <div class="resume-a4-sheet">
-          <!-- Document Header -->
-          <div class="cv-header">
-            <h2 class="cv-header-name">Ayush Harinkhede</h2>
-            <div class="cv-header-role">Web Developer | Nagpur, Maharashtra, India</div>
-            <div class="cv-header-contact">Email: <a href="mailto:ayushharinkhere2005@gmail.com" style="color: inherit; text-decoration: none;">ayushharinkhere2005@gmail.com</a> | Phone: +91 9209514158</div>
-            <div class="cv-header-links">
-              <a href="https://github.com/AyushHarinkhede" target="_blank" rel="noopener noreferrer">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
-                GitHub
-              </a>
-              <span>|</span>
-              <a href="https://www.linkedin.com/in/ayush-harinkhede-2280992b2" target="_blank" rel="noopener noreferrer">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
-                LinkedIn
-              </a>
-            </div>
-          </div>
-
-          <!-- Professional Summary -->
-          <div class="cv-section-title">Professional Summary</div>
-          <p class="cv-section-text">
-            Motivated BCA student specializing in full-stack web development with hands-on experience in building scalable and user-focused applications. Skilled in developing responsive UI, authentication systems, and performance-oriented browser applications using MERN stack and modern JavaScript frameworks. Strong interest in AI-driven solutions and real-world problem solving through technology.
-          </p>
-
-          <!-- Education -->
-          <div class="cv-section-title">Education</div>
-          <table class="cv-table">
-            <thead>
-              <tr>
-                <th>Degree / Certificate</th>
-                <th>Institution</th>
-                <th>Year / Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Bachelor of Computer Application (BCA)</strong></td>
-                <td>G.H. Raisoni University, Nagpur</td>
-                <td>2023 – 2026 (Pursuing)</td>
-              </tr>
-              <tr>
-                <td><strong>Higher Secondary Certificate (HSC)</strong></td>
-                <td>Balaghat Board</td>
-                <td>2023 | 61.80%</td>
-              </tr>
-              <tr>
-                <td><strong>Secondary School Certificate (SSC)</strong></td>
-                <td>Nagpur Board</td>
-                <td>2021 | 61.80%</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <!-- Technical Skills -->
-          <div class="cv-section-title">Technical Skills</div>
-          <div class="cv-skill-row"><strong>Programming:</strong> C, C++, Java, JavaScript (ES6+)</div>
-          <div class="cv-skill-row"><strong>Web Development:</strong> MERN Stack, HTML5, CSS3, REST APIs, Responsive Design</div>
-          <div class="cv-skill-row"><strong>Tools:</strong> Git, GitHub, VS Code, Netlify, Chrome DevTools, Figma (UI Planning)</div>
-
-          <!-- Projects -->
-          <div class="cv-section-title">Projects</div>
-          
-          <div class="cv-project-item">
-            <div class="cv-project-head">
-              <span class="cv-project-title">Cacun – Sustainable E-Commerce Marketplace</span>
-              <span class="cv-project-links">
-                <a href="https://github.com/AyushHarinkhede/cacun" target="_blank" rel="noopener noreferrer">GitHub Repository <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align: middle; margin-left: 2px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg></a>
-              </span>
-            </div>
-            <p class="cv-project-desc">
-              Developed an eco-conscious online marketplace enabling vendors to showcase and sell sustainable products. Designed structured product listing architecture, filtering system, and accessibility-focused UI. Focused on improving product discoverability and promoting environmentally responsible consumer behavior.
-            </p>
-          </div>
-
-          <div class="cv-project-item">
-            <div class="cv-project-head">
-              <span class="cv-project-title">HealthNest – Digital Medical Record Manager</span>
-              <span class="cv-project-links">
-                <a href="https://health-nest-project.netlify.app/" target="_blank" rel="noopener noreferrer">Live Demo <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align: middle; margin-left: 2px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg></a>
-                <span>|</span>
-                <a href="https://github.com/AyushHarinkhede/HealthNest" target="_blank" rel="noopener noreferrer">GitHub <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align: middle; margin-left: 2px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg></a>
-              </span>
-            </div>
-            <p class="cv-project-desc">
-              Created a centralized healthcare web platform allowing users to securely store, manage, and share medical history digitally. Implemented authentication system, medical record upload, dashboard analytics, and doctor sharing features. Designed for easy data retrieval during emergencies and long-term patient record management.
-            </p>
-          </div>
-
-          <div class="cv-project-item">
-            <div class="cv-project-head">
-              <span class="cv-project-title">VANIE – Offline AI Virtual Assistant</span>
-              <span class="cv-project-links">
-                <a href="https://github.com/AyushHarinkhede/VANIE" target="_blank" rel="noopener noreferrer">GitHub Repository <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align: middle; margin-left: 2px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg></a>
-              </span>
-            </div>
-            <p class="cv-project-desc">
-              Designed concept and prototype of offline AI assistant utilizing system-level processing for faster execution and enhanced privacy. Focused on local command recognition, real-time response handling, and reduced cloud dependency architecture. Research-driven project emphasizing NPU-based AI execution possibilities.
-            </p>
-          </div>
-
-          <div class="cv-project-item">
-            <div class="cv-project-head">
-              <span class="cv-project-title">Tooler – Interactive Doodle Productivity Toolkit</span>
-              <span class="cv-project-links">
-                <a href="https://github.com/AyushHarinkhede/Tooler" target="_blank" rel="noopener noreferrer">GitHub Repository <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align: middle; margin-left: 2px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg></a>
-              </span>
-            </div>
-            <p class="cv-project-desc">
-              Developed browser-based doodle and creative productivity toolkit supporting quick sketching, idea visualization, and lightweight design creation. Implemented smooth canvas drawing system, responsive UI controls, and performance-optimized interactions to enhance creative workflow.
-            </p>
-          </div>
-
-          <!-- Soft Skills -->
-          <div class="cv-section-title">Soft Skills</div>
-          <p class="cv-section-text" style="margin-bottom: 0;">
-            Quick Learner | Adaptability | Team Collaboration | Problem Solving | Creative Thinking
-          </p>
-        </div>
       </div>
     </div>
   </div>
@@ -5678,7 +5749,7 @@ header {
                   <textPath href="#priyaTopArc" startOffset="50%" text-anchor="middle">Priyadarshini Indira Gandhi School</textPath>
                 </text>
                 <text font-family="'Montserrat', sans-serif" font-weight="800" font-size="6.8" fill="#FFFFFF" letter-spacing="0.4">
-                  <textPath href="#priyaBottomArc" startOffset="50%" text-anchor="middle">&amp; Jr. College, Hingna</textPath>
+                  <textPath href="#priyaBottomArc" startOffset="50%" text-anchor="middle">&amp; Junior College, Hingna</textPath>
                 </text>
                 <circle cx="80" cy="74" r="44" fill="#FFF9E6"/>
                 <g stroke="#FCD34D" stroke-width="1.8" opacity="0.6">
@@ -5718,226 +5789,15 @@ header {
               <span class="story-date-badge">Secondary Board 2021</span>
             </div>
             <div class="card-brand-header">
-              <div class="card-logo-emblem">
-                <svg viewBox="0 0 160 160" fill="none" style="width: 100%; height: 100%;">
-                  <circle cx="80" cy="80" r="76" fill="#FFFFFF"/>
-                  <circle cx="80" cy="74" r="58" fill="#E11D48"/>
-                  <circle cx="80" cy="74" r="44" fill="#FFF9E6"/>
-                  <ellipse cx="80" cy="64" rx="13" ry="16" fill="#FDE68A"/>
-                  <path d="M66 64 C64 50 71 40 80 40 C89 40 96 50 94 64 Z" fill="#262626"/>
-                  <rect x="30" y="138" width="100" height="15" rx="2" fill="#BE123C"/>
-                </svg>
-              </div>
-              <h3 class="story-card-title" style="margin-bottom: 0;">Priyadarshini Indira Gandhi English Medium School</h3>
-            </div>
-            <div class="story-location-row">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              <span>Hingna, Nagpur · Secondary School Certificate</span>
-            </div>
-            <p class="story-card-desc">Successfully completed secondary school certificate examination (SSC) from Priyadarshini Indira Gandhi English Medium School &amp; Junior College, Hingna with 61.80% marks, establishing core foundations in science, mathematics, and analytical reasoning.</p>
-            <div class="story-tags-row">
-              <span class="story-tag">SSC Board</span>
-              <span class="story-tag">Science &amp; Math</span>
-              <span class="story-tag">Discipline</span>
-              <span class="story-tag">Hingna Nagpur</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- MILESTONE 4: 2023 (Right) — VAIDIK CONVENT HIGHER SECONDARY SCHOOL -->
-        <div class="journey-map-node side-right" id="node-2023" data-year="2023">
-          <!-- Waypoint Circle with Authentic Vaidik Convent SVG Logo -->
-          <div class="map-waypoint-circle" onclick="focusJourneyMilestone('node-2023')" title="Milestone: 2023 Vaidik Convent School">
-            <div class="radar-ping-ring"></div>
-            <div class="radar-ping-ring ping-delay"></div>
-            <div class="waypoint-logo-container">
-              <!-- Vaidik Convent Higher Secondary School Authentic SVG Logo -->
-              <svg viewBox="0 0 160 160" fill="none" class="waypoint-svg-logo">
-                <circle cx="80" cy="80" r="76" fill="#FFFFFF"/>
-                <defs>
-                  <path id="vTopArc" d="M 22,80 A 58,58 0 1,1 138,80" fill="none"/>
-                  <path id="vInnerArc" d="M 38,76 A 42,42 0 1,1 122,76" fill="none"/>
-                  <radialGradient id="vSunburst" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stop-color="#FFF7CD"/>
-                    <stop offset="35%" stop-color="#FDE047"/>
-                    <stop offset="70%" stop-color="#F59E0B"/>
-                    <stop offset="100%" stop-color="#EA580C"/>
-                  </radialGradient>
-                </defs>
-                <text font-family="'Montserrat', sans-serif" font-weight="900" font-size="10.5" fill="#D8232A" letter-spacing="0.8">
-                  <textPath href="#vTopArc" startOffset="50%" text-anchor="middle">VAIDIK CONVENT HIGHER SECONDARY SCHOOL</textPath>
-                </text>
-                <circle cx="80" cy="74" r="44" fill="#16205B"/>
-                <circle cx="80" cy="74" r="34" fill="#FFFFFF"/>
-                <text font-family="'Montserrat', sans-serif" font-weight="800" font-size="6" fill="#FFFFFF" letter-spacing="0.4">
-                  <textPath href="#vInnerArc" startOffset="50%" text-anchor="middle">VAIDIK CONVENT HIGHER SECONDARY SCHOOL</textPath>
-                </text>
-                <text x="80" y="114" font-family="'Montserrat', sans-serif" font-weight="800" font-size="6" fill="#FFFFFF" text-anchor="middle" letter-spacing="0.8">LALBURRA</text>
-                <circle cx="80" cy="70" r="33" fill="url(#vSunburst)"/>
-                <g stroke="#FFFFFF" stroke-width="1.2" opacity="0.8">
-                  <line x1="80" y1="38" x2="80" y2="70"/>
-                  <line x1="58" y1="48" x2="80" y2="70"/>
-                  <line x1="102" y1="48" x2="80" y2="70"/>
-                  <line x1="48" y1="70" x2="80" y2="70"/>
-                  <line x1="112" y1="70" x2="80" y2="70"/>
-                  <line x1="68" y1="42" x2="80" y2="70"/>
-                  <line x1="92" y1="42" x2="80" y2="70"/>
-                </g>
-                <path d="M80 52 C76 58 74 62 74 66 C74 69 77 72 80 72 C83 72 86 69 86 66 C86 62 84 58 80 52 Z" fill="#FBBF24"/>
-                <path d="M80 56 C78 60 77 63 77 66 C77 68 78 70 80 70 C82 70 83 68 83 66 C83 63 82 60 80 56 Z" fill="#EF4444"/>
-                <path d="M80 75 C72 73 62 74 56 77 V91 C62 88 72 87 80 90 C88 87 98 88 104 91 V77 C98 74 88 73 80 75 Z" fill="#FFFFFF" stroke="#16205B" stroke-width="1.2"/>
-                <line x1="80" y1="75" x2="80" y2="90" stroke="#16205B" stroke-width="1.5"/>
-                <path d="M30 114 L40 106 L44 116 L34 122 Z" fill="#FFFFFF" stroke="#16205B" stroke-width="1"/>
-                <path d="M130 114 L120 106 L116 116 L126 122 Z" fill="#FFFFFF" stroke="#16205B" stroke-width="1"/>
-                <path d="M38 109 Q 80 116 122 109 L124 124 Q 80 131 36 124 Z" fill="#FFFFFF" stroke="#16205B" stroke-width="1.2"/>
-                <text x="80" y="118" font-family="'Montserrat', sans-serif" font-weight="900" font-size="4.8" fill="#16205B" text-anchor="middle" letter-spacing="0.3">SCHOOL IS A TEMPLE</text>
-                <text x="80" y="124" font-family="'Montserrat', sans-serif" font-weight="900" font-size="4.8" fill="#16205B" text-anchor="middle" letter-spacing="0.3">OF KNOWLEDGE</text>
-                <circle cx="36" cy="142" r="4" fill="#059669"/>
-                <text x="80" y="150" font-family="'Montserrat', sans-serif" font-weight="900" font-size="13" fill="#1F1F1F" text-anchor="middle" letter-spacing="1.8">LALBURRA</text>
-                <circle cx="124" cy="142" r="4" fill="#059669"/>
-              </svg>
-            </div>
-            <span class="waypoint-year-pill">2023</span>
-          </div>
-
-          <!-- Connector Beam -->
-          <div class="waypoint-connector-beam" aria-hidden="true"></div>
-
-          <!-- Story Card -->
-          <div class="map-story-card">
-            <div class="story-card-top">
-              <span class="story-badge-pill hsc">HSC 12th · 61.80%</span>
-              <span class="story-date-badge">Higher Secondary 2023</span>
-            </div>
-            <div class="card-brand-header">
-              <div class="card-logo-emblem">
-                <svg viewBox="0 0 160 160" fill="none" style="width: 100%; height: 100%;">
-                  <circle cx="80" cy="80" r="76" fill="#FFFFFF"/>
-                  <circle cx="80" cy="74" r="44" fill="#16205B"/>
-                  <circle cx="80" cy="70" r="33" fill="#F59E0B"/>
-                  <path d="M80 52 C76 58 74 62 74 66 Z" fill="#FBBF24"/>
-                  <path d="M80 75 C72 73 62 74 56 77 V91 H104 V77 Z" fill="#FFFFFF"/>
-                </svg>
-              </div>
-              <h3 class="story-card-title" style="margin-bottom: 0;">Vaidik Convent Higher Secondary School</h3>
-            </div>
-            <div class="story-location-row">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              <span>Lalburra, Balaghat Board · Higher Secondary Education</span>
-            </div>
-            <p class="story-card-desc">Completed higher secondary education (HSC) in science discipline from Vaidik Convent Higher Secondary School, Lalburra with 61.80% marks. Stepped boldly into software engineering, learning programming fundamentals and algorithmic thinking.</p>
-            <div class="story-tags-row">
-              <span class="story-tag">HSC Science</span>
-              <span class="story-tag">Computing</span>
-              <span class="story-tag">Coding Gateway</span>
-              <span class="story-tag">Lalburra</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- MILESTONE 5: 2026 (Left) — G.H. RAISONI UNIVERSITY (BCA GRADUATION) -->
-        <div class="journey-map-node side-left" id="node-2026-bca" data-year="2026">
-          <!-- Waypoint Circle with Authentic G.H. Raisoni Lion Squircle Logo -->
-          <div class="map-waypoint-circle" onclick="focusJourneyMilestone('node-2026-bca')" title="Milestone: 2026 GH Raisoni University BCA">
-            <div class="radar-ping-ring"></div>
-            <div class="radar-ping-ring ping-delay"></div>
-            <div class="waypoint-logo-container" style="background: #5B1080;">
-              <!-- G.H. Raisoni College Authentic Lion Crest SVG -->
-              <svg viewBox="0 0 100 100" fill="none" class="waypoint-svg-logo">
-                <rect x="2" y="2" width="96" height="96" rx="22" fill="#5B1080"/>
-                <path d="M12 25C22 25 30 20 34 10C34 16 38 22 45 24C40 28 38 34 40 40C35 40 32 36 30 33C28 42 22 48 12 50V25Z" fill="#FFFFFF"/>
-                <path d="M12 50C22 48 26 56 30 65C25 65 20 62 16 58V75H12V50Z" fill="#FFFFFF"/>
-                <path d="M26 62C30 54 36 50 42 50C42 56 38 64 34 72C30 72 28 68 26 62Z" fill="#F37021"/>
-                <path d="M34 72C38 64 45 60 50 60C50 66 46 75 42 82C38 82 36 78 34 72Z" fill="#F37021"/>
-                <path d="M35 32C35 24 45 22 55 24C65 26 72 32 80 34C82 38 82 42 78 44C72 45 68 42 66 40C64 46 60 50 54 50C48 50 44 46 42 42C38 42 35 38 35 32Z" fill="#FFFFFF"/>
-                <circle cx="62" cy="32" r="3.2" fill="#5B1080"/>
-                <path d="M46 22C46 18 50 16 54 18C52 22 48 24 46 22Z" fill="#FFFFFF"/>
-                <path d="M72 42C74 44 76 46 74 48C70 49 66 48 64 46L72 42Z" fill="#5B1080"/>
-                <polygon points="76,14 78,20 84,22 78,24 76,30 74,24 68,22 74,20" fill="#F37021"/>
-              </svg>
-            </div>
-            <span class="waypoint-year-pill">2026 BCA</span>
-          </div>
-
-          <!-- Connector Beam -->
-          <div class="waypoint-connector-beam" aria-hidden="true"></div>
-
-          <!-- Story Card -->
-          <div class="map-story-card">
-            <div class="story-card-top">
-              <span class="story-badge-pill ug-active">Undergraduate Degree · BCA</span>
-              <span class="story-date-badge">2023 – 2026</span>
-            </div>
-            <div class="card-brand-header">
-              <div class="card-logo-emblem" style="background: #5B1080; border-color: #5B1080;">
-                <svg viewBox="0 0 100 100" fill="none" style="width: 100%; height: 100%;">
-                  <rect width="100" height="100" rx="16" fill="#5B1080"/>
-                  <path d="M14 25C24 25 32 20 36 10C36 16 40 22 47 24C42 28 40 34 42 40C37 40 34 36 32 33C30 42 24 48 14 50V25Z" fill="#FFFFFF"/>
-                  <path d="M28 62C32 54 38 50 44 50C44 56 40 64 36 72Z" fill="#F37021"/>
-                  <path d="M37 32C37 24 47 22 57 24C67 26 74 32 82 34C84 38 84 42 80 44C74 45 70 42 68 40C66 46 62 50 56 50C50 50 46 46 44 42Z" fill="#FFFFFF"/>
-                  <circle cx="64" cy="32" r="3" fill="#5B1080"/>
-                  <polygon points="78,14 80,20 86,22 80,24 78,30 76,24 70,22 76,20" fill="#F37021"/>
-                </svg>
-              </div>
-              <h3 class="story-card-title" style="margin-bottom: 0;">G.H. Raisoni University — Bachelor of Computer Applications</h3>
-            </div>
-            <div class="story-location-row">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-              <span>Nagpur / Amravati · Full-Stack Web Development &amp; Systems</span>
-            </div>
-            <p class="story-card-desc">Completed Bachelor of Computer Applications (BCA) degree with mastery across modern full-stack web engineering: MERN stack (MongoDB, Express, React, Node.js), responsive glassmorphic UI design, RESTful APIs, offline AI virtual assistants, database architecture, and cloud deployment.</p>
-            <div class="story-tags-row">
-              <span class="story-tag accent">BCA Degree</span>
-              <span class="story-tag accent">MERN Stack</span>
-              <span class="story-tag accent">REST APIs</span>
-              <span class="story-tag accent">Computer Science</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- MILESTONE 6: 2026 (Right - Corporate Career Pinnacle) — HEXAWARE TECHNOLOGIES -->
-        <div class="journey-map-node side-right current-milestone-node" id="node-2026-hexaware" data-year="2026">
-          <!-- Waypoint Circle with Authentic Hexaware Technologies SVG Logo -->
-          <div class="map-waypoint-circle active-beacon" onclick="focusJourneyMilestone('node-2026-hexaware')" title="Milestone: Hexaware Technologies IT Support BPS">
-            <div class="radar-ping-ring live-beacon-ring"></div>
-            <div class="radar-ping-ring live-beacon-ring ping-delay"></div>
-            <div class="waypoint-logo-container">
-              <!-- Hexaware Technologies Authentic SVG Logo -->
-              <svg viewBox="0 0 100 100" fill="none" class="waypoint-svg-logo">
-                <rect width="100" height="100" rx="50" fill="#FFFFFF"/>
-                <g transform="translate(10, 4) scale(0.8)">
-                  <rect x="36" y="16" width="16" height="54" rx="8" transform="rotate(8 44 43)" fill="#0055A5"/>
-                  <rect x="18" y="36" width="46" height="14" rx="7" fill="#E5232A"/>
-                  <rect x="62" y="28" width="16" height="42" rx="8" transform="rotate(8 70 49)" fill="#0055A5"/>
-                  <circle cx="78" cy="18" r="7.5" fill="#E5232A"/>
-                  <circle cx="82" cy="71" r="6.5" fill="#FFB800"/>
-                  <text x="50" y="104" text-anchor="middle" font-family="'Montserrat', 'Fredoka', sans-serif" font-weight="900" font-size="17" fill="#1F1F1F" letter-spacing="1">HEXAWARE</text>
-                </g>
-              </svg>
-            </div>
-            <span class="waypoint-year-pill" style="border-color: #10B981; color: #34D399;">2026 Job</span>
-          </div>
-
-          <!-- Connector Beam -->
-          <div class="waypoint-connector-beam active-beam" aria-hidden="true"></div>
-
-          <!-- Story Card -->
-          <div class="map-story-card active-story-card">
-            <div class="story-card-top">
-              <span class="story-badge-pill ug-active" style="background: rgba(16, 185, 129, 0.18); border-color: #10B981; color: #10B981;">Corporate Career · IT Support BPS</span>
-              <span class="story-date-badge live">Joined 2nd June 2026</span>
-            </div>
-            <div class="card-brand-header">
-              <div class="card-logo-emblem">
-                <svg viewBox="0 0 100 100" fill="none" style="width: 100%; height: 100%;">
-                  <rect width="100" height="100" rx="12" fill="#FFFFFF"/>
-                  <g transform="translate(10, 4) scale(0.8)">
-                    <rect x="36" y="16" width="16" height="54" rx="8" transform="rotate(8 44 43)" fill="#0055A5"/>
-                    <rect x="18" y="36" width="46" height="14" rx="7" fill="#E5232A"/>
-                    <rect x="62" y="28" width="16" height="42" rx="8" transform="rotate(8 70 49)" fill="#0055A5"/>
-                    <circle cx="78" cy="18" r="7.5" fill="#E5232A"/>
-                    <circle cx="82" cy="71" r="6.5" fill="#FFB800"/>
-                  </g>
+              <div class="card-logo-emblem" style="background: #FFFFFF; border: 1px solid #E2E8F0; padding: 4px;">
+                <svg viewBox="0 0 547 365" fill="none" style="width: 100%; height: 100%;">
+                  <rect width="547" height="365" rx="16" fill="#FFFFFF"/>
+                  <rect x="227" y="70" width="26" height="140" rx="13" transform="skewX(-10) translate(25, 0)" fill="#005AAB"/>
+                  <rect x="198" y="127" width="90" height="26" rx="13" fill="#EB2A2E"/>
+                  <rect x="290" y="105" width="26" height="105" rx="13" transform="skewX(-10) translate(25, 0)" fill="#005AAB"/>
+                  <circle cx="322" cy="83" r="13" fill="#EB2A2E"/>
+                  <circle cx="334.5" cy="197" r="13.5" fill="#FFB81A"/>
+                  <text x="273.5" y="286" text-anchor="middle" font-family="'Montserrat', 'Arial Black', sans-serif" font-weight="900" font-size="52" font-style="italic" fill="#252525" letter-spacing="4">HEXAWARE</text>
                 </svg>
               </div>
               <div>
@@ -6346,7 +6206,7 @@ header {
 
         <!-- 14. SNAPCHAT (AUTHENTIC GHOSTFACE CHILLAH) -->
         <a href="https://www.snapchat.com/add/ayushharinkhere?share_id=jmrUbhs5QJ4&locale=en-IN-u-mu-celsius" class="app-tile-btn app-snapchat" target="_blank" rel="noopener noreferrer" title="Snapchat" aria-label="Snapchat">
-          <svg viewBox="0 0 24 24" fill="#FFFFFF" stroke="#000000" stroke-width="1.35" stroke-linejoin="round" stroke-linecap="round">
+          <svg viewBox="0 0 24 24" fill="#FFFFFF" stroke="#000000" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
             <path d="M12.206.793c.99 0 4.347.276 5.93 3.821.529 1.193.403 3.219.299 4.847l-.003.06c-.012.18-.022.345-.03.51.075.045.203.09.401.09.3-.016.659-.12 1.033-.301.165-.088.344-.104.464-.104.182 0 .359.029.509.09.45.149.734.479.734.838.015.449-.39.839-1.213 1.168-.089.029-.209.075-.344.119-.45.135-1.139.36-1.333.81-.09.224-.061.524.12.868l.015.015c.06.136 1.526 3.475 4.791 4.014.255.044.435.27.42.509 0 .075-.015.149-.045.225-.24.569-1.273.988-3.146 1.271-.059.091-.12.375-.164.57-.029.179-.074.36-.134.553-.076.271-.27.405-.555.405h-.03c-.135 0-.313-.031-.538-.074-.36-.075-.765-.135-1.273-.135-.3 0-.599.015-.913.074-.6.104-1.123.464-1.723.884-.853.599-1.826 1.288-3.294 1.288-.06 0-.119-.015-.18-.015h-.149c-1.468 0-2.427-.675-3.279-1.288-.599-.42-1.107-.779-1.707-.884-.314-.045-.629-.074-.928-.074-.54 0-.958.089-1.272.149-.211.043-.391.074-.54.074-.374 0-.523-.224-.583-.42-.061-.192-.09-.389-.135-.567-.046-.181-.105-.494-.166-.57-1.918-.222-2.95-.642-3.189-1.226-.031-.063-.052-.15-.055-.225-.015-.243.165-.465.42-.509 3.264-.54 4.73-3.879 4.791-4.02l.016-.029c.18-.345.224-.645.119-.869-.195-.434-.884-.658-1.332-.809-.121-.029-.24-.074-.346-.119-1.107-.435-1.257-.93-1.197-1.273.09-.479.674-.793 1.168-.793.146 0 .27.029.383.074.42.194.789.3 1.104.3.234 0 .384-.06.465-.105l-.046-.569c-.098-1.626-.225-3.651.307-4.837C7.392 1.077 10.739.807 11.727.807l.419-.015h.06z"/>
           </svg>
         </a>
@@ -6356,37 +6216,47 @@ header {
           <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/></svg>
         </a>
 
-        <!-- 16. DUOLINGO (OFFICIAL REAL DUO OWL FACE APP ICON) -->
+        <!-- 16. DUOLINGO (OFFICIAL FULL-BODY STANDING DUO OWL MASCOT) -->
         <a href="https://www.duolingo.com/profile/AyushHarinkhere?via=share_profile_linkm" class="app-tile-btn app-duolingo" target="_blank" rel="noopener noreferrer" title="Duolingo" aria-label="Duolingo">
-          <svg viewBox="0 0 100 100" fill="none">
-            <!-- Base Green Background -->
-            <rect width="100" height="100" fill="#58CC02"/>
-            <!-- Lighter Chartreuse Face Mask with Ear Tufts -->
-            <path d="M50 32 C36 11, 19 11, 4 21 C2 27, 0 38, 0 52 C0 78, 22 100, 50 100 C78 100, 100 78, 100 52 C100 38, 98 27, 96 21 C81 11, 64 11, 50 32 Z" fill="#78C800"/>
-            <!-- Left White Eye (Vertical Oval) -->
-            <ellipse cx="28.5" cy="50" rx="16" ry="20" fill="#FFFFFF"/>
-            <!-- Right White Eye (Vertical Oval) -->
-            <ellipse cx="71.5" cy="50" rx="16" ry="20" fill="#FFFFFF"/>
-            <!-- Left Pupil with Specular Notch -->
-            <ellipse cx="26" cy="50" rx="10" ry="13.5" fill="#4B4B4B"/>
-            <circle cx="21.5" cy="43.5" r="3.5" fill="#FFFFFF"/>
-            <!-- Right Pupil with Specular Notch -->
-            <ellipse cx="69" cy="50" rx="10" ry="13.5" fill="#4B4B4B"/>
-            <circle cx="64.5" cy="43.5" r="3.5" fill="#FFFFFF"/>
-            <!-- Beak: Upper Yellow Dome -->
-            <path d="M37 63 C37 54.5, 63 54.5, 63 63 C63 69, 37 69, 37 63 Z" fill="#FFC200"/>
+          <svg viewBox="0 0 200 200" fill="none">
+            <!-- Pedestal base line -->
+            <rect x="44" y="174" width="112" height="10" rx="5" fill="#E2E2E2"/>
+            <!-- Left Foot -->
+            <ellipse cx="82" cy="168" rx="15" ry="7" fill="#F49000"/>
+            <!-- Right Foot -->
+            <ellipse cx="118" cy="168" rx="15" ry="7" fill="#F49000"/>
+            <!-- Main Green Body -->
+            <path d="M 100 26 C 92 18 78 15 66 15 C 48 15 35 24 36 34 L 36 44 C 36 48 24 92 11 140 C 9 146 13 148 18 147 C 32 143 45 137 53 142 C 65 158 82 166 100 166 C 118 166 135 158 147 142 C 155 137 168 143 182 147 C 187 148 191 146 189 140 C 176 92 164 48 164 44 L 164 34 C 165 24 152 15 134 15 C 122 15 108 18 100 26 Z" fill="#78C800"/>
+            <!-- Face Mask (Lighter Green) -->
+            <path d="M 100 52 C 92 38 80 30 68 30 C 50 30 44 42 44 56 C 44 76 56 102 74 102 C 86 102 96 92 100 82 C 104 92 114 102 126 102 C 144 102 156 76 156 56 C 156 42 150 30 132 30 C 120 30 108 38 100 52 Z" fill="#8EE000"/>
+            <!-- Left Eye (White) -->
+            <ellipse cx="73" cy="69" rx="16" ry="23" fill="#FFFFFF"/>
+            <!-- Right Eye (White) -->
+            <ellipse cx="127" cy="69" rx="16" ry="23" fill="#FFFFFF"/>
+            <!-- Left Pupil -->
+            <ellipse cx="72" cy="70" rx="9.5" ry="13.5" fill="#4B4B4B"/>
+            <circle cx="68" cy="63" r="3.5" fill="#FFFFFF"/>
+            <!-- Right Pupil -->
+            <ellipse cx="128" cy="70" rx="9.5" ry="13.5" fill="#4B4B4B"/>
+            <circle cx="124" cy="63" r="3.5" fill="#FFFFFF"/>
+            <!-- Beak: Upper Yellow -->
+            <path d="M 87 85 C 87 75 113 75 113 85 Z" fill="#FFC200"/>
             <!-- Beak: Lower Orange Drop -->
-            <path d="M42 66 C42 77, 58 77, 58 66 Z" fill="#FF7B00"/>
+            <path d="M 87 84 C 87 97 113 97 113 84 Z" fill="#F49000"/>
+            <!-- Chest Feather Chevrons -->
+            <path d="M 76 122 C 84 130 92 130 96 122" stroke="#8EE000" stroke-width="7" stroke-linecap="round"/>
+            <path d="M 104 122 C 108 130 116 130 124 122" stroke="#8EE000" stroke-width="7" stroke-linecap="round"/>
+            <path d="M 90 138 C 96 145 104 145 110 138" stroke="#8EE000" stroke-width="7" stroke-linecap="round"/>
           </svg>
         </a>
 
-        <!-- 17. ARATTAI (OFFICIAL ZOHO ARATTAI MARK) -->
+        <!-- 17. ARATTAI (OFFICIAL ZOHO ARATTAI AUTHENTIC MARK) -->
         <a href="https://www.arattai.com/u/@ayushharinkhere" class="app-tile-btn app-arattai" target="_blank" rel="noopener noreferrer" title="Arattai" aria-label="Arattai">
-          <svg viewBox="0 0 48 48" fill="none" stroke="#252C4C" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round">
-            <!-- Vertical Right Pill Bar -->
-            <path d="M39.5 11.5v25"/>
-            <!-- Stylized Tamil 'A' Chat Bubble Mark -->
-            <path d="M13.5 17.5v-6h17.5v25l-6.5-2.8H7.5V22.2h13"/>
+          <svg viewBox="0 0 225 225" fill="none">
+            <!-- Right vertical pill bar -->
+            <line x1="184" y1="56" x2="184" y2="171" stroke="#252C4C" stroke-width="14" stroke-linecap="round"/>
+            <!-- Left symbol: continuous rounded path -->
+            <path d="M 68 85 V 53 Q 68 53 72 53 H 143 Q 151 53 151 61 V 152 L 138 168 Q 134 172 128 165 L 123 158 H 48 Q 40 158 40 150 V 112 Q 40 104 48 104 H 108" stroke="#252C4C" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
       </div>
@@ -6640,33 +6510,52 @@ header {
   </div>
 </div>
 
-<!-- ══ RESUME VIEWER MODAL ══════════════════════════ -->
+<!-- ══ RESUME VIEWER MODAL (AUTHENTIC macOS PREVIEW WINDOW) ══════ -->
 <div id="resumeModal" class="custom-modal">
   <div class="modal-backdrop" onclick="closeResumeModal()"></div>
-  <div class="modal-dialog resume-modal-dialog">
-    <div class="modal-header">
-      <div>
-        <h3 class="modal-title">Official Curriculum Vitae</h3>
-        <p style="color: var(--text3); font-size: 13px; margin: 2px 0 0;">Aayush Harinkhede &bull; Full-Stack MERN Developer &bull; 1 Page A4</p>
+  <div class="modal-dialog resume-modal-dialog" id="resumeModalDialog">
+    
+    <!-- 1. Authentic macOS Window Frosted Titlebar -->
+    <div class="macos-window-header">
+      <!-- Left: Real macOS Traffic Light Buttons -->
+      <div class="macos-traffic-lights" aria-label="macOS Window Controls">
+        <button type="button" class="macos-traffic-btn close" onclick="closeResumeModal()" title="Close Window (×)" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+        <button type="button" class="macos-traffic-btn minimize" onclick="closeResumeModal()" title="Minimize / Dismiss (−)" aria-label="Minimize">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        </button>
+        <button type="button" class="macos-traffic-btn fullscreen" onclick="toggleResumeFullscreen()" title="Toggle Fullscreen Window" aria-label="Fullscreen">
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="3,3 10,3 3,10"/><polygon points="21,21 14,21 21,14"/></svg>
+        </button>
       </div>
-      <div class="resume-modal-controls">
-        <button type="button" class="btn-secondary-catalyst" onclick="window.print()" style="padding: 7px 14px; font-size: 13px;" title="Print official resume document">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+
+      <!-- Center: Official Apple Logo + Document Name -->
+      <div class="macos-window-title">
+        <svg class="macos-apple-logo" width="14" height="14" viewBox="0 0 170 170" fill="currentColor" aria-hidden="true">
+          <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.58-7.74-11.64-14.1-6.19-9.78-10.9-20.76-14.13-32.93-3.23-12.18-4.85-23.71-4.85-34.6 0-14.58 3.54-26.68 10.63-36.31 7.09-9.62 16.32-14.57 27.69-14.85 4.8 0 10.1 1.25 15.9 3.75 5.8 2.5 9.78 3.82 11.95 3.97 1.8.15 5.89-1.25 12.28-4.2 6.39-2.95 12.21-4.27 17.47-3.97 13.59.83 24.16 5.8 31.71 14.92-12.08 7.37-18.01 17.56-17.78 30.56.24 10.55 4.3 19.34 12.18 26.37 3.98 3.61 8.65 6.35 14 8.23-2.68 7.74-5.69 15.17-9.02 22.31zM119.22 31.84c0-7.39 2.66-14.28 7.97-20.67 5.31-6.39 11.94-10.28 19.89-11.67.24 1.23.36 2.37.36 3.42 0 7.3-2.73 14.27-8.19 20.91-5.46 6.64-12.12 10.37-19.98 11.19-.05-1.07-.05-2.13-.05-3.18z"/>
+        </svg>
+        <span class="macos-title-text">Ayush_Harinkhede_Resume.pdf</span>
+        <span class="macos-title-sub">— Preview</span>
+      </div>
+
+      <!-- Right: Action Buttons (Print & Download) -->
+      <div class="macos-window-actions">
+        <button type="button" class="macos-action-pill" onclick="printResumeDocument()" title="System Print / Save as PDF">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
           <span>Print</span>
         </button>
-        <button type="button" class="btn-primary-catalyst" onclick="downloadResumeDirect(event)" style="padding: 7px 14px; font-size: 13px;" title="Direct download PDF to disk">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        <button type="button" class="macos-action-pill primary" onclick="downloadResumeDirect(event)" title="Direct Download PDF">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
           <span>Download PDF</span>
-        </button>
-        <button class="modal-close-btn" onclick="closeResumeModal()" aria-label="Close Resume Viewer">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
       </div>
     </div>
-    <div class="modal-body resume-modal-body">
-      <div class="resume-sheet-viewport modal-viewport">
 
-        <div class="resume-a4-sheet">
+    <!-- 2. Document Paper Viewport with A4 Sheet -->
+    <div class="modal-body resume-modal-body" style="padding: 0;">
+      <div class="resume-sheet-viewport modal-viewport">
+        <div class="resume-a4-sheet" id="printableResumeSheet">
           <!-- Document Header -->
           <div class="cv-header">
             <h2 class="cv-header-name">Ayush Harinkhede</h2>
@@ -6678,9 +6567,14 @@ header {
                 GitHub
               </a>
               <span>|</span>
-              <a href="https://www.linkedin.com/in/ayush-harinkhede-2280992b2" target="_blank" rel="noopener noreferrer">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+              <a href="https://linkedin.com/in/ayush-harinkhede-009968361" target="_blank" rel="noopener noreferrer">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                 LinkedIn
+              </a>
+              <span>|</span>
+              <a href="https://portfolio-spectrum-aayush.netlify.app" target="_blank" rel="noopener noreferrer">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                Portfolio
               </a>
             </div>
           </div>
@@ -6688,7 +6582,7 @@ header {
           <!-- Professional Summary -->
           <div class="cv-section-title">Professional Summary</div>
           <p class="cv-section-text">
-            Motivated BCA student specializing in full-stack web development with hands-on experience in building scalable and user-focused applications. Skilled in developing responsive UI, authentication systems, and performance-oriented browser applications using MERN stack and modern JavaScript frameworks. Strong interest in AI-driven solutions and real-world problem solving through technology.
+            Passionate Web Developer with a strong foundation in modern web development technologies including HTML5, CSS3, JavaScript, and modern frameworks. Proven ability to build structured, responsive, and performance-driven web applications through end-to-end hands-on project implementations. Eager to contribute technical skills to scalable software solutions.
           </p>
 
           <!-- Education -->
@@ -6696,35 +6590,40 @@ header {
           <table class="cv-table">
             <thead>
               <tr>
-                <th>Degree / Certificate</th>
+                <th>Degree / Course</th>
                 <th>Institution</th>
-                <th>Year / Status</th>
+                <th>Year</th>
+                <th>Score</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Bachelor of Computer Application (BCA)</strong></td>
-                <td>G.H. Raisoni University, Nagpur</td>
-                <td>2023 – 2026 (Pursuing)</td>
+                <td><strong>Bachelor of Computer Applications (BCA)</strong></td>
+                <td>G H Raisoni University, Nagpur</td>
+                <td>2023 – 2026</td>
+                <td>Pursuing (CGPA: 8.5)</td>
               </tr>
               <tr>
                 <td><strong>Higher Secondary Certificate (HSC)</strong></td>
-                <td>Balaghat Board</td>
-                <td>2023 | 61.80%</td>
+                <td>Vaidik Convent Higher Secondary School, Lalburra</td>
+                <td>2021 – 2023</td>
+                <td>Passed (Grade: A)</td>
               </tr>
               <tr>
                 <td><strong>Secondary School Certificate (SSC)</strong></td>
-                <td>Nagpur Board</td>
-                <td>2021 | 61.80%</td>
+                <td>Priyadarshini Indira Gandhi English Medium School, Hingna</td>
+                <td>2010 – 2021</td>
+                <td>Passed (Grade: A)</td>
               </tr>
             </tbody>
           </table>
 
           <!-- Technical Skills -->
           <div class="cv-section-title">Technical Skills</div>
-          <div class="cv-skill-row"><strong>Programming:</strong> C, C++, Java, JavaScript (ES6+)</div>
-          <div class="cv-skill-row"><strong>Web Development:</strong> MERN Stack, HTML5, CSS3, REST APIs, Responsive Design</div>
-          <div class="cv-skill-row"><strong>Tools:</strong> Git, GitHub, VS Code, Netlify, Chrome DevTools, Figma (UI Planning)</div>
+          <div class="cv-skill-row"><strong>Frontend:</strong> HTML5, CSS3, JavaScript (ES6+), React.js, Responsive Design, Flexbox/Grid</div>
+          <div class="cv-skill-row"><strong>Backend &amp; DB:</strong> Node.js, Express.js, MongoDB, REST APIs</div>
+          <div class="cv-skill-row"><strong>Tools &amp; Platforms:</strong> Git, GitHub, VS Code, Netlify, Vercel</div>
+          <div class="cv-skill-row"><strong>Core Concepts:</strong> OOP, Data Structures, Web Performance, UI/UX Principles</div>
 
           <!-- Projects -->
           <div class="cv-section-title">Projects</div>
@@ -9048,11 +8947,27 @@ function closeResumeModal() {
   const modal = document.getElementById('resumeModal');
   if (!modal) return;
   modal.classList.remove('active');
+  const dialog = document.getElementById('resumeModalDialog');
+  if (dialog) dialog.classList.remove('is-fullscreen');
   document.body.style.overflow = 'auto';
   if (typeof triggerFeedback === 'function') triggerFeedback('close');
 }
 
+function toggleResumeFullscreen() {
+  const dialog = document.getElementById('resumeModalDialog');
+  if (!dialog) return;
+  dialog.classList.toggle('is-fullscreen');
+  if (typeof triggerFeedback === 'function') triggerFeedback('click');
+}
+
+function printResumeDocument() {
+  if (typeof triggerFeedback === 'function') triggerFeedback('click');
+  window.print();
+}
+
 window.openResumeViewerModal = openResumeModal;
+window.toggleResumeFullscreen = toggleResumeFullscreen;
+window.printResumeDocument = printResumeDocument;
 
 function downloadResumeDirect(e) {
   if (e) {
