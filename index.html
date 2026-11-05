@@ -826,22 +826,237 @@ header {
   font-weight: 600;
 }
 
-/* ─── QUICK DISCOVERY CHIPS (FILTER SHORTCUTS) ─── */
-.quick-chips-track {
+/* ─── SMART SEARCH SUGGESTIONS & AUTOCOMPLETE DROPDOWN ─── */
+.search-suggestions-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: var(--bg2);
+  border: 1.5px solid var(--border);
+  border-radius: 22px;
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.12), 0 8px 24px rgba(79, 70, 229, 0.1);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 1000;
+  padding: 16px 18px;
+  box-sizing: border-box;
+  display: none;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  max-height: 440px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* CRITICAL: ONLY visible when search-wrap is focused (expanded) AND has suggestions! */
+.search-wrap.focused.has-suggestions .search-suggestions-dropdown,
+.search-wrap:focus-within.has-suggestions .search-suggestions-dropdown {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Dark mode adjustment */
+[data-theme="dark"] .search-suggestions-dropdown {
+  background: rgba(17, 24, 39, 0.94);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(99, 102, 241, 0.18);
+}
+
+/* Suggestions Scrollbar */
+.search-suggestions-dropdown::-webkit-scrollbar {
+  width: 5px;
+  display: block !important;
+}
+.search-suggestions-dropdown::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 10px;
+}
+.search-suggestions-dropdown::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Group Headers */
+.suggest-group-header {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text3);
+  margin: 12px 6px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.suggest-group-header:first-child {
+  margin-top: 2px;
+}
+.suggest-group-header .suggest-count-badge {
+  background: var(--bg3);
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 10px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Suggested Keyword / Sentence Chips */
+.suggest-phrases-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 12px;
+}
+.suggest-phrase-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  text-align: left;
+}
+.suggest-phrase-chip svg {
+  color: var(--accent);
+  flex-shrink: 0;
+  width: 13px;
+  height: 13px;
+}
+.suggest-phrase-chip:hover {
+  background: var(--accent);
+  color: #FFFFFF;
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.25);
+}
+.suggest-phrase-chip:hover svg {
+  color: #FFFFFF;
+}
+
+/* Direct Match Cards */
+.suggest-matches-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.suggest-match-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+}
+.suggest-match-card:hover {
+  background: var(--bg2);
+  border-color: var(--accent);
+  transform: translateX(4px);
+  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.12);
+}
+.suggest-match-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  flex: 1;
+}
+.suggest-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  font-size: 16px;
+  background: rgba(99, 102, 241, 0.1);
+  flex-shrink: 0;
+}
+.suggest-match-content {
+  min-width: 0;
+  flex: 1;
+}
+.suggest-match-title-row {
+  display: flex;
+  align-items: center;
   gap: 8px;
-  margin-top: 14px;
 }
-.chip-hint {
-  font-size: 12px;
+.suggest-match-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.suggest-match-badge {
   font-family: 'DM Mono', monospace;
-  color: var(--text3);
-  text-transform: uppercase;
-  margin-right: 4px;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: var(--bg3);
+  color: var(--text2);
+  flex-shrink: 0;
 }
+.suggest-match-desc {
+  font-size: 12px;
+  color: var(--text3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+.suggest-match-action {
+  font-size: 12px;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* Direct Match Scroll Target Glowing Pulse Animation */
+@keyframes searchMatchPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
+    outline: 2px solid var(--accent);
+  }
+  50% {
+    box-shadow: 0 0 35px 8px rgba(99, 102, 241, 0.55);
+    outline: 3px solid var(--accent);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+    outline: 2px solid transparent;
+  }
+}
+.search-match-flash {
+  animation: searchMatchPulse 2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  border-color: var(--accent) !important;
+}
+
+/* ─── QUICK DISCOVERY CHIPS (FILTER SHORTCUTS) ─── */
 .sm-chip {
   background: var(--bg2);
   border: 1px solid var(--border);
@@ -2674,21 +2889,30 @@ header {
     height: 14px;
   }
 
-  /* Horizontal swipeable chips */
-  .quick-chips-track {
-    justify-content: flex-start;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    flex-wrap: nowrap;
-    padding: 4px 2px;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+  /* Mobile smart search suggestions dropdown tuning */
+  .search-suggestions-dropdown {
+    max-height: 380px;
+    padding: 12px 14px;
+    border-radius: 18px;
+    top: calc(100% + 6px);
   }
-  .quick-chips-track::-webkit-scrollbar {
-    display: none;
+  .suggest-phrase-chip {
+    font-size: 11.5px;
+    padding: 5px 12px;
   }
-  .chip-hint {
-    white-space: nowrap;
+  .suggest-match-card {
+    padding: 8px 12px;
+    gap: 10px;
+  }
+  .suggest-icon-box {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+  .suggest-match-title {
+    font-size: 12.5px;
+  }
+  .suggest-match-desc {
     font-size: 11px;
   }
   .sm-chip {
@@ -3021,8 +3245,6 @@ header {
       <span>PORTFOLIO SPECTRUM · WEB DEVELOPER &amp; IT SUPPORT ENGINEER</span>
     </div>
 
-    <p class="header-sub">Creative · Innovative · Passionate</p>
-
     <!-- Top Info / Status Pills -->
     <div class="header-stats">
       <div class="stat-pill">Role: <strong>Full-Stack (MERN) &amp; IT Support</strong></div>
@@ -3052,19 +3274,8 @@ header {
       </button>
     </div>
 
-    <!-- Quick Discovery Filter Chips (Clickable shortcuts) -->
-    <div class="quick-chips-track">
-      <span class="chip-hint">Search Quick:</span>
-      <button type="button" class="sm-chip active" onclick="quickSearch('')">All</button>
-      <button type="button" class="sm-chip" onclick="quickSearch('Projects')">Projects</button>
-      <button type="button" class="sm-chip" onclick="quickSearch('Skills')">Skills</button>
-      <button type="button" class="sm-chip" onclick="quickSearch('Education')">Education</button>
-      <button type="button" class="sm-chip" onclick="quickSearch('MERN Stack')">MERN Stack</button>
-      <button type="button" class="sm-chip" onclick="quickSearch('Interview')">Interview Q&amp;A</button>
-      <button type="button" class="sm-chip" onclick="quickSearch('Contact')">Contact</button>
-      <button type="button" class="sm-chip" onclick="quickSearch('Resume')">Resume</button>
-      <button type="button" class="sm-chip" onclick="openGallery()">Photo Gallery (19)</button>
-    </div>
+    <!-- ══ SMART AUTOCOMPLETE & INSTANT PREVIEW SUGGESTIONS DROPDOWN ══ -->
+    <div class="search-suggestions-dropdown" id="searchSuggestionsDropdown" role="listbox" aria-label="Search suggestions and matching portfolio data"></div>
   </div>
 
   <!-- ══ SECTION EXPLORATION PILLS (CATEGORY ROW) ══ -->
@@ -4799,13 +5010,290 @@ function initHeaderScatter() {
 initHeaderScatter();
 
 /* ═══════════════════════════════════════════════════
-   4. ULTRA-FAST HIGH-PERFORMANCE PORTFOLIO SEARCH ENGINE
-   (Native 0ms typing, elastic bouncy pulse, debounced cached filtering, empty state)
+   4. DEEP KNOWLEDGE SEARCH ENGINE & SMART SUGGESTIONS
+   (Full-site knowledge graph, instant predictions, expanded-only dropdown)
 ═══════════════════════════════════════════════════ */
+
+const PORTFOLIO_KNOWLEDGE_BASE = [
+  // PROJECTS
+  {
+    category: 'Project',
+    icon: '🩺',
+    badge: 'Projects',
+    title: 'HealthNest Healthcare Platform',
+    desc: 'Teleconsultation, doctor appointment booking, patient history & health metrics (React, MongoDB, Express, Node)',
+    keywords: ['healthnest', 'health', 'healthcare', 'doctor', 'patient', 'hospital', 'teleconsultation', 'booking', 'medical', 'appointment', 'react', 'mongodb', 'node', 'express'],
+    sentence: 'HealthNest: Teleconsultation & Doctor Booking Platform',
+    targetId: 'creations-section',
+    targetSelector: '.project-card-item:nth-child(1)'
+  },
+  {
+    category: 'Project',
+    icon: '🎙️',
+    badge: 'Projects',
+    title: 'VANIE / VANI AI Voice Assistant',
+    desc: 'Voice-Activated Next-gen Intelligent Engine with speech recognition & neural synthesis',
+    keywords: ['vani', 'vanie', 'voice', 'ai', 'assistant', 'speech', 'speech recognition', 'audio', 'voice engine', 'synth', 'smart'],
+    sentence: 'VANIE: Next-gen AI Voice Assistant & Speech Engine',
+    targetId: 'creations-section',
+    targetSelector: '.project-card-item:nth-child(2)'
+  },
+  {
+    category: 'Project',
+    icon: '⚡',
+    badge: 'Projects',
+    title: 'Mr.NodeMan API Tester',
+    desc: 'Interactive REST API client & endpoint automation testing suite (Postman alternative)',
+    keywords: ['mr nodeman', 'nodeman', 'node man', 'api', 'tester', 'postman', 'rest', 'http', 'endpoint', 'json', 'request'],
+    sentence: 'Mr.NodeMan: Interactive REST API Client & Automation Suite',
+    targetId: 'creations-section',
+    targetSelector: '.project-card-item:nth-child(3)'
+  },
+  {
+    category: 'Project',
+    icon: '☁️',
+    badge: 'Projects',
+    title: 'Cacun Fluid Cloud Storage',
+    desc: 'Secure drag-and-drop cloud file storage with instant shareable download links',
+    keywords: ['cacun', 'cloud', 'storage', 'file', 'upload', 'drive', 'download', 'firebase', 'transfer'],
+    sentence: 'Cacun: Drag-and-Drop Cloud File Transfer & Storage App',
+    targetId: 'creations-section',
+    targetSelector: '.project-card-item:nth-child(4)'
+  },
+  {
+    category: 'Project',
+    icon: '🛠️',
+    badge: 'Projects',
+    title: 'Tooler Multi-Utility Suite',
+    desc: 'Developer tools: Code formatters, base64 encoder, regex tester & regex validators',
+    keywords: ['tooler', 'tools', 'developer tools', 'utility', 'formatter', 'base64', 'regex', 'converter'],
+    sentence: 'Tooler: All-in-One Multi-Utility Developer & Productivity Suite',
+    targetId: 'creations-section',
+    targetSelector: '.project-card-item:nth-child(5)'
+  },
+  {
+    category: 'Project',
+    icon: '☕',
+    badge: 'Projects',
+    title: 'Mocha Coffee House',
+    desc: 'Aesthetic café ordering web application with responsive cart workflow & menu',
+    keywords: ['mocha', 'coffee', 'cafe', 'shop', 'order', 'menu', 'cart', 'beverage', 'food'],
+    sentence: 'Mocha: Minimalist Aesthetic Coffee House Ordering App',
+    targetId: 'creations-section',
+    targetSelector: '.project-card-item:nth-child(6)'
+  },
+  {
+    category: 'Project',
+    icon: '✨',
+    badge: 'Projects',
+    title: 'Portfolio Spectrum (This Website)',
+    desc: 'Signature 3D kinetic portfolio with dynamic letter dispersion engine & zero lag',
+    keywords: ['portfolio', 'portfolio spectrum', 'spectrum', 'this website', 'web developer', 'website'],
+    sentence: 'Portfolio Spectrum: High-Performance 3D Kinetic Portfolio',
+    targetId: 'creations-section',
+    targetSelector: '.project-card-item:nth-child(7)'
+  },
+
+  // CONTACT & REACH
+  {
+    category: 'Contact',
+    icon: '📞',
+    badge: 'Contact',
+    title: 'Phone & Mobile Contact',
+    desc: '+91 9322047395 / +91 9307767175 (Direct Calling & Reach)',
+    keywords: ['phone', 'mobile', 'call', 'number', 'contact', 'telephone', 'reach', '9322047395', '9307767175'],
+    sentence: 'Contact Phone: +91 9322047395 & +91 9307767175',
+    targetId: 'contact-section'
+  },
+  {
+    category: 'Contact',
+    icon: '💬',
+    badge: 'Contact',
+    title: 'WhatsApp Direct Chat',
+    desc: '+91 9322047395 (Instant messaging for project inquiries & hiring)',
+    keywords: ['whatsapp', 'chat', 'message', 'wa', 'text', 'instant message'],
+    sentence: 'WhatsApp Direct: +91 9322047395 (Available for Opportunities)',
+    targetId: 'contact-section'
+  },
+  {
+    category: 'Contact',
+    icon: '✉️',
+    badge: 'Contact',
+    title: 'Official Email Address',
+    desc: 'ayushharinkhere2005@gmail.com (Professional & business inquiries)',
+    keywords: ['email', 'mail', 'gmail', 'inbox', 'send message', 'write to', 'ayushharinkhere2005@gmail.com'],
+    sentence: 'Email Address: ayushharinkhere2005@gmail.com',
+    targetId: 'contact-section'
+  },
+  {
+    category: 'Contact',
+    icon: '📍',
+    badge: 'Location',
+    title: 'Current Base & Location',
+    desc: 'Nagpur, Maharashtra, India (Coordinates: 21.1458° N, 79.0882° E)',
+    keywords: ['location', 'base', 'nagpur', 'maharashtra', 'address', 'city', 'where', 'india', 'place', 'living'],
+    sentence: 'Current Location: Nagpur, Maharashtra, India',
+    targetId: 'credentials-section'
+  },
+  {
+    category: 'Contact',
+    icon: '🌐',
+    badge: 'Social',
+    title: 'LinkedIn & GitHub Profiles',
+    desc: 'Connect on LinkedIn (/in/aayush-harinkhede) & GitHub (@AyushHarinkhede)',
+    keywords: ['linkedin', 'github', 'social', 'links', 'git', 'profile', 'connect', 'channel'],
+    sentence: 'Social Channels: GitHub & LinkedIn Profiles',
+    targetId: 'contact-section'
+  },
+
+  // EDUCATION
+  {
+    category: 'Education',
+    icon: '🎓',
+    badge: 'Education',
+    title: 'BCA Degree (Bachelor of Computer Applications)',
+    desc: 'GH Raisoni University, Amravati / Nagpur (2023 – 2026, Final Year)',
+    keywords: ['bca', 'degree', 'college', 'university', 'gh raisoni', 'raisoni', 'amravati', 'bachelor', 'graduation', 'student', '2026', 'education'],
+    sentence: 'BCA Degree (2023–2026) at GH Raisoni University',
+    targetId: 'journey-section'
+  },
+  {
+    category: 'Education',
+    icon: '🏫',
+    badge: 'Education',
+    title: 'HSC (Class 12th) — 61.80%',
+    desc: 'Vaidik Convent Higher Secondary School, Balaghat, MP (2021 – 2023, 61.80%)',
+    keywords: ['hsc', '12th', 'twelfth', 'class 12', 'vaidik convent', 'balaghat', 'marks', 'percentage', '61.80', 'school'],
+    sentence: 'HSC (12th Science): Vaidik Convent School, Balaghat (61.80%)',
+    targetId: 'journey-section'
+  },
+  {
+    category: 'Education',
+    icon: '📚',
+    badge: 'Education',
+    title: 'SSC (Class 10th) — 61.80%',
+    desc: 'Priyadarshini Indira Gandhi High School, Nagpur, Maharashtra (2020 – 2021, 61.80%)',
+    keywords: ['ssc', '10th', 'tenth', 'class 10', 'priyadarshini', 'nagpur', 'marks', 'percentage', '61.80', 'school'],
+    sentence: 'SSC (10th): Priyadarshini Indira Gandhi School, Nagpur (61.80%)',
+    targetId: 'journey-section'
+  },
+
+  // RESUME & CV
+  {
+    category: 'Resume',
+    icon: '📄',
+    badge: 'Resume',
+    title: 'Official Resume & CV Document',
+    desc: 'Download Ayush_Harinkhede_Resume.pdf or view directly in browser viewer',
+    keywords: ['resume', 'cv', 'curriculum vitae', 'bio data', 'pdf', 'download resume', 'hire', 'qualifications'],
+    sentence: 'Official Resume: View in Browser or Download PDF',
+    targetId: 'resume-card',
+    customAction: () => { if (typeof openResumeViewerModal === 'function') openResumeViewerModal(); }
+  },
+
+  // TECHNICAL SKILLS & STACK
+  {
+    category: 'Skill',
+    icon: '⚛️',
+    badge: 'MERN Stack',
+    title: 'MERN Stack Development',
+    desc: 'MongoDB, Express.js, React.js, Node.js full-stack scalable web architecture',
+    keywords: ['mern', 'mern stack', 'full stack', 'fullstack', 'react', 'node', 'express', 'mongodb', 'mongo', 'backend', 'frontend'],
+    sentence: 'MERN Stack: React, Node.js, Express & MongoDB Development',
+    targetId: 'skills-section'
+  },
+  {
+    category: 'Skill',
+    icon: '💻',
+    badge: 'Languages',
+    title: 'Programming Languages',
+    desc: 'Java (OOPs, Collections), JavaScript (ES6+), C, C++, HTML5 & Modern CSS3',
+    keywords: ['languages', 'programming', 'java', 'javascript', 'js', 'c', 'c++', 'html', 'html5', 'css', 'css3', 'code'],
+    sentence: 'Languages: Java, JavaScript (ES6+), C, C++, HTML5, CSS3',
+    targetId: 'skills-section'
+  },
+  {
+    category: 'Skill',
+    icon: '🖥️',
+    badge: 'IT Support',
+    title: 'IT Support & Systems Engineering',
+    desc: 'Hardware assembly, OS installation (Windows/Linux), LAN/WAN networking, DNS/DHCP troubleshooting',
+    keywords: ['it support', 'it systems', 'hardware', 'troubleshooting', 'networking', 'lan', 'wan', 'os', 'windows', 'linux', 'system engineer', 'technician'],
+    sentence: 'IT Support: System Hardware, Networking & OS Troubleshooting',
+    targetId: 'skills-section'
+  },
+  {
+    category: 'Skill',
+    icon: '🔧',
+    badge: 'Tools',
+    title: 'Developer Tools & Platforms',
+    desc: 'Git, GitHub, VS Code, Postman, Vercel, Netlify, Chrome DevTools, NPM, Figma',
+    keywords: ['tools', 'git', 'github', 'vscode', 'vs code', 'postman', 'vercel', 'netlify', 'devtools', 'figma', 'npm'],
+    sentence: 'Tools: Git, GitHub, VS Code, Postman, Vercel, Netlify, Figma',
+    targetId: 'skills-section'
+  },
+
+  // PERSONAL CREDENTIALS
+  {
+    category: 'Profile',
+    icon: '👤',
+    badge: 'Credentials',
+    title: 'Personal Credentials & Identity',
+    desc: 'Father: Santosh Harinkhede · DOB: 01-03-2005 · Male · Single · Indian',
+    keywords: ['father', 'dob', 'birth', 'date of birth', 'parents', 'family', 'nationality', 'marital status', 'credentials', 'identity'],
+    sentence: 'Credentials: DOB 01/03/2005, Father: Santosh Harinkhede',
+    targetId: 'credentials-section'
+  },
+  {
+    category: 'Profile',
+    icon: '🗣️',
+    badge: 'Languages',
+    title: 'Languages Known',
+    desc: 'English (Professional), Hindi (Fluent / Native), Marathi (Conversational)',
+    keywords: ['languages known', 'english', 'hindi', 'marathi', 'speak', 'fluency'],
+    sentence: 'Languages: English (Professional), Hindi (Fluent), Marathi',
+    targetId: 'credentials-section'
+  },
+
+  // PHOTO GALLERY
+  {
+    category: 'Gallery',
+    icon: '🖼️',
+    badge: 'Gallery',
+    title: 'Photo Gallery (19 Photos)',
+    desc: 'View personal, professional, and campus life photographs in high-resolution lightbox',
+    keywords: ['photo', 'photos', 'gallery', 'images', 'pictures', 'pic', 'pics', 'portrait'],
+    sentence: 'Photo Gallery: View 19 High-Resolution Photos of Aayush',
+    targetId: 'about-section',
+    customAction: () => { if (typeof openGallery === 'function') openGallery(); }
+  },
+
+  // INTERVIEW Q&A
+  {
+    category: 'Interview',
+    icon: '💡',
+    badge: 'Interview',
+    title: 'Why Should You Hire Aayush?',
+    desc: 'Unique blend of full-stack development logic with real-world IT troubleshooting expertise',
+    keywords: ['hire', 'why hire', 'interview', 'q&a', 'strengths', 'benefits', 'work ethic', 'developer hire'],
+    sentence: 'Interview Q&A: Why Hire Aayush & Core Problem-Solving Strengths',
+    targetId: 'interview-section'
+  },
+  {
+    category: 'Interview',
+    icon: '🎯',
+    badge: 'Goals',
+    title: 'Career Aspirations & Vision',
+    desc: 'Aspiring to lead full-stack engineering teams and architect AI-driven scalable web solutions',
+    keywords: ['goals', 'career', 'vision', 'future', 'aspirations', 'plans'],
+    sentence: 'Career Goals: Full-Stack Engineering Leadership & AI Solutions',
+    targetId: 'interview-section'
+  }
+];
+
 let searchDebounceTimer = null;
 let searchItemsCache = null;
 
-// Pre-indexes searchable text once in memory to prevent forced reflow / layout thrashing
 function getSearchIndex() {
   if (searchItemsCache) return searchItemsCache;
   const projectCards = Array.from(document.querySelectorAll('.project-card-item')).map(card => ({
@@ -4830,23 +5318,35 @@ function getSearchIndex() {
       tiles: tiles
     };
   });
-  searchItemsCache = { projectCards, faqCards, bundleStrips };
+  const infoCells = Array.from(document.querySelectorAll('.info-cell')).map(cell => ({
+    el: cell,
+    text: cell.textContent.toLowerCase()
+  }));
+  searchItemsCache = { projectCards, faqCards, bundleStrips, infoCells };
   return searchItemsCache;
 }
 
-// Executes DOM layout updates during browser animation frame
+// Executes comprehensive in-page DOM layout filtering across all sections
 function executeDomFilter(cleanQ) {
   const index = getSearchIndex();
   let matchProjects = 0;
   let matchFaqs = 0;
   let matchSkills = 0;
+  let matchCells = 0;
 
   // Filter Project Cards
-  index.projectCards.forEach(item => {
-    const isMatch = (cleanQ === '' || item.text.includes(cleanQ));
-    item.el.style.display = isMatch ? '' : 'none';
-    if (isMatch) matchProjects++;
-  });
+  const projectMatches = cleanQ === '' ? [] : index.projectCards.filter(item => item.text.includes(cleanQ));
+  if (cleanQ !== '' && projectMatches.length > 0) {
+    index.projectCards.forEach(item => {
+      item.el.style.display = item.text.includes(cleanQ) ? '' : 'none';
+    });
+    matchProjects = projectMatches.length;
+  } else {
+    index.projectCards.forEach(item => {
+      item.el.style.display = '';
+    });
+    if (cleanQ === '') matchProjects = index.projectCards.length;
+  }
 
   // Filter FAQ Items
   index.faqCards.forEach(item => {
@@ -4861,7 +5361,7 @@ function executeDomFilter(cleanQ) {
   // Highlight Skill Strips & Individual Tech Logo Tiles
   index.bundleStrips.forEach(item => {
     const isMatch = (cleanQ === '' || item.text.includes(cleanQ));
-    item.el.style.opacity = isMatch ? '1' : '0.22';
+    item.el.style.opacity = isMatch ? '1' : (cleanQ === '' ? '1' : '0.24');
     if (cleanQ !== '' && isMatch) {
       matchSkills++;
       item.tiles.forEach(tile => {
@@ -4881,11 +5381,22 @@ function executeDomFilter(cleanQ) {
     }
   });
 
+  // Highlight Personal Info / Credentials Cells
+  if (index.infoCells) {
+    index.infoCells.forEach(item => {
+      const isMatch = (cleanQ === '' || item.text.includes(cleanQ));
+      item.el.style.opacity = isMatch ? '1' : (cleanQ === '' ? '1' : '0.35');
+      if (cleanQ !== '' && isMatch) matchCells++;
+    });
+  }
+
   // Manage Empty State Banner
   const emptyState = document.getElementById('searchEmptyState');
   const emptyQuerySpan = document.getElementById('searchEmptyQueryText');
   if (emptyState) {
-    if (cleanQ !== '' && matchProjects === 0 && matchFaqs === 0 && matchSkills === 0) {
+    const { matches } = queryPortfolioKnowledge(cleanQ);
+    const hasAnyMatch = matchProjects > 0 || matchFaqs > 0 || matchSkills > 0 || matchCells > 0 || matches.length > 0;
+    if (cleanQ !== '' && !hasAnyMatch) {
       emptyState.style.display = 'block';
       if (emptyQuerySpan) emptyQuerySpan.textContent = cleanQ;
     } else {
@@ -4895,7 +5406,220 @@ function executeDomFilter(cleanQ) {
 
   const searchWrap = document.getElementById('searchWrap');
   if (searchWrap) {
-    searchWrap.classList.toggle('has-results', matchProjects > 0 || matchFaqs > 0 || matchSkills > 0);
+    searchWrap.classList.toggle('has-results', matchProjects > 0 || matchFaqs > 0 || matchSkills > 0 || matchCells > 0);
+  }
+}
+
+// Queries deep portfolio knowledge base and returns scored matches & related phrases
+function queryPortfolioKnowledge(cleanQ) {
+  if (!cleanQ) return { matches: [], phrases: [] };
+
+  const tokens = cleanQ.split(/\s+/).filter(Boolean);
+  const scored = [];
+
+  PORTFOLIO_KNOWLEDGE_BASE.forEach((item, idx) => {
+    let score = 0;
+    const itemTitle = item.title.toLowerCase();
+    const itemDesc = item.desc.toLowerCase();
+    const allKeyStr = item.keywords.join(' ').toLowerCase();
+
+    // Direct exact or prefix query match
+    if (itemTitle === cleanQ) score += 120;
+    else if (itemTitle.startsWith(cleanQ)) score += 90;
+    else if (itemTitle.includes(cleanQ)) score += 65;
+
+    // Keyword match
+    if (item.keywords.some(k => k === cleanQ)) score += 100;
+    else if (item.keywords.some(k => k.startsWith(cleanQ))) score += 75;
+    else if (allKeyStr.includes(cleanQ)) score += 50;
+
+    // Token match
+    tokens.forEach(tok => {
+      if (tok.length > 1) {
+        if (itemTitle.includes(tok)) score += 35;
+        if (allKeyStr.includes(tok)) score += 30;
+        if (itemDesc.includes(tok)) score += 20;
+      }
+    });
+
+    if (score > 0) {
+      scored.push({ item, score, idx });
+    }
+  });
+
+  scored.sort((a, b) => b.score - a.score);
+  const topMatches = scored.slice(0, 5).map(s => s.item);
+
+  // Extract smart related suggestion phrases
+  const phrases = [];
+  scored.slice(0, 4).forEach(s => {
+    if (s.item.sentence && !phrases.includes(s.item.sentence)) {
+      phrases.push(s.item.sentence);
+    }
+  });
+
+  return { matches: topMatches, phrases };
+}
+
+// Smoothly scrolls to target element and triggers an eye-catching highlight flash
+function scrollToSectionHighlight(sectionId, targetSelector) {
+  const searchWrap = document.getElementById('searchWrap');
+  if (searchWrap) searchWrap.classList.remove('has-suggestions');
+
+  let targetEl = null;
+  if (targetSelector) targetEl = document.querySelector(targetSelector);
+  if (!targetEl && sectionId) targetEl = document.getElementById(sectionId);
+
+  if (targetEl) {
+    targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    targetEl.classList.remove('search-match-flash');
+    void targetEl.offsetWidth;
+    targetEl.classList.add('search-match-flash');
+    setTimeout(() => {
+      targetEl.classList.remove('search-match-flash');
+    }, 2400);
+  }
+  triggerFeedback('switch');
+}
+
+// User selects a suggested keyword / sentence pill
+function selectSuggestionPhrase(phrase) {
+  const input = document.getElementById('searchInput');
+  if (input) {
+    input.value = phrase;
+    handlePortfolioSearch(phrase);
+    input.focus({ preventScroll: true });
+  }
+  const searchWrap = document.getElementById('searchWrap');
+  if (searchWrap) searchWrap.classList.remove('has-suggestions');
+
+  // Find best match and scroll to it
+  const { matches } = queryPortfolioKnowledge(phrase.toLowerCase());
+  if (matches.length > 0) {
+    const best = matches[0];
+    if (best.customAction) {
+      best.customAction();
+    } else {
+      scrollToSectionHighlight(best.targetId, best.targetSelector);
+    }
+  }
+}
+
+// User selects a direct match result card
+function selectKnowledgeMatch(idx) {
+  const item = PORTFOLIO_KNOWLEDGE_BASE[idx];
+  if (!item) return;
+
+  const input = document.getElementById('searchInput');
+  if (input) {
+    input.value = item.title;
+    handlePortfolioSearch(item.title);
+  }
+
+  const searchWrap = document.getElementById('searchWrap');
+  if (searchWrap) searchWrap.classList.remove('has-suggestions');
+
+  if (item.customAction) {
+    item.customAction();
+  } else {
+    scrollToSectionHighlight(item.targetId, item.targetSelector);
+  }
+}
+
+// Renders Smart Suggestions & Instant Matches Dropdown
+function triggerKnowledgeSuggestions(query) {
+  const searchWrap = document.getElementById('searchWrap');
+  const dropdown = document.getElementById('searchSuggestionsDropdown');
+  if (!dropdown || !searchWrap) return;
+
+  const cleanQ = (query || '').trim().toLowerCase();
+  if (cleanQ.length === 0) {
+    searchWrap.classList.remove('has-suggestions');
+    dropdown.innerHTML = '';
+    return;
+  }
+
+  const { matches, phrases } = queryPortfolioKnowledge(cleanQ);
+
+  if (matches.length === 0 && phrases.length === 0) {
+    dropdown.innerHTML = `
+      <div style="text-align: center; padding: 20px 14px;">
+        <p style="font-size: 13.5px; font-weight: 600; color: var(--text); margin-bottom: 4px;">No direct match for "${query}"</p>
+        <p style="font-size: 12px; color: var(--text3); margin-bottom: 12px;">Try searching: <strong>Projects</strong>, <strong>BCA</strong>, <strong>Skills</strong>, <strong>Phone</strong>, <strong>Email</strong>, or <strong>Resume</strong></p>
+        <div style="display: flex; gap: 6px; justify-content: center; flex-wrap: wrap;">
+          <button type="button" class="suggest-phrase-chip" onmousedown="selectSuggestionPhrase('Projects')" style="font-size: 11.5px;">📁 Projects</button>
+          <button type="button" class="suggest-phrase-chip" onmousedown="selectSuggestionPhrase('Education')" style="font-size: 11.5px;">🎓 Education</button>
+          <button type="button" class="suggest-phrase-chip" onmousedown="selectSuggestionPhrase('Contact Phone')" style="font-size: 11.5px;">📞 Contact</button>
+        </div>
+      </div>
+    `;
+    if (searchWrap.classList.contains('focused')) {
+      searchWrap.classList.add('has-suggestions');
+    }
+    return;
+  }
+
+  let html = '';
+
+  // 1. Related Sentence / Word Suggestions
+  if (phrases.length > 0) {
+    html += `
+      <div class="suggest-group-header">
+        <span>Suggested Searches</span>
+        <span class="suggest-count-badge">${phrases.length} predictions</span>
+      </div>
+      <div class="suggest-phrases-grid">
+    `;
+    phrases.forEach(phrase => {
+      const safePhrase = phrase.replace(/'/g, "\\'");
+      html += `
+        <button type="button" class="suggest-phrase-chip" onmousedown="selectSuggestionPhrase('${safePhrase}')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+          <span>${phrase}</span>
+        </button>
+      `;
+    });
+    html += `</div>`;
+  }
+
+  // 2. Direct Knowledge Matches List
+  if (matches.length > 0) {
+    html += `
+      <div class="suggest-group-header">
+        <span>Instant Portfolio Matches</span>
+        <span class="suggest-count-badge">${matches.length} found</span>
+      </div>
+      <div class="suggest-matches-list">
+    `;
+    matches.forEach(item => {
+      const originalIdx = PORTFOLIO_KNOWLEDGE_BASE.indexOf(item);
+      html += `
+        <div class="suggest-match-card" onmousedown="selectKnowledgeMatch(${originalIdx})">
+          <div class="suggest-match-left">
+            <span class="suggest-icon-box">${item.icon || '✦'}</span>
+            <div class="suggest-match-content">
+              <div class="suggest-match-title-row">
+                <span class="suggest-match-title">${item.title}</span>
+                <span class="suggest-match-badge">${item.badge}</span>
+              </div>
+              <div class="suggest-match-desc">${item.desc}</div>
+            </div>
+          </div>
+          <div class="suggest-match-action">
+            <span>View</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      `;
+    });
+    html += `</div>`;
+  }
+
+  dropdown.innerHTML = html;
+
+  // CRITICAL: Only add .has-suggestions if the search bar is currently focused/expanded!
+  if (searchWrap.classList.contains('focused')) {
+    searchWrap.classList.add('has-suggestions');
   }
 }
 
@@ -4910,9 +5634,7 @@ function handlePortfolioSearch(query) {
 
   if (searchWrap) searchWrap.classList.toggle('has-value', hasVal);
   if (boxContainer) boxContainer.classList.toggle('has-value', hasVal);
-  if (clearBtn) {
-    clearBtn.classList.toggle('visible', hasVal);
-  }
+  if (clearBtn) clearBtn.classList.toggle('visible', hasVal);
 
   if (placeholderEl) {
     if (hasVal) {
@@ -4924,14 +5646,16 @@ function handlePortfolioSearch(query) {
     }
   }
 
-  // Trigger playful spring pulse on search icon instead of whole container
   if (searchIcon && hasVal) {
     searchIcon.classList.remove('key-pulse');
     void searchIcon.offsetWidth;
     searchIcon.classList.add('key-pulse');
   }
 
-  // Debounced search filtering prevents typing lag and keyboard stutter
+  // Update Smart Knowledge Suggestions Dropdown
+  triggerKnowledgeSuggestions(query);
+
+  // Debounced DOM section filtering
   clearTimeout(searchDebounceTimer);
   const cleanQ = query.trim().toLowerCase();
   if (cleanQ === '') {
@@ -4952,12 +5676,16 @@ function handleSearchKeyDown(e) {
     e.preventDefault();
     const cleanQ = (e.target.value || '').trim().toLowerCase();
     if (cleanQ) {
-      const firstVisibleProject = document.querySelector('.project-card-item:not([style*="display: none"])');
-      if (firstVisibleProject) {
-        firstVisibleProject.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        triggerFeedback('switch');
+      const { matches } = queryPortfolioKnowledge(cleanQ);
+      if (matches.length > 0) {
+        selectKnowledgeMatch(PORTFOLIO_KNOWLEDGE_BASE.indexOf(matches[0]));
       } else {
-        document.getElementById('creations-section')?.scrollIntoView({ behavior: 'smooth' });
+        const firstVisibleProject = document.querySelector('.project-card-item:not([style*="display: none"])');
+        if (firstVisibleProject) {
+          firstVisibleProject.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          document.getElementById('creations-section')?.scrollIntoView({ behavior: 'smooth' });
+        }
       }
     }
   }
@@ -4988,32 +5716,24 @@ function clearPortfolioSearch(e) {
     }
   }
 
-  if (clearBtn) {
-    clearBtn.classList.remove('visible');
-  }
+  if (clearBtn) clearBtn.classList.remove('visible');
 
   if (searchWrap) {
-    searchWrap.classList.remove('has-value', 'has-results');
+    searchWrap.classList.remove('has-value', 'has-results', 'has-suggestions');
   }
   if (boxContainer) {
     boxContainer.classList.remove('has-value', 'key-pulse');
   }
 
-  // Restore animated placeholder if not focused
+  const dropdown = document.getElementById('searchSuggestionsDropdown');
+  if (dropdown) dropdown.innerHTML = '';
+
   if (placeholderEl && (!input || document.activeElement !== input)) {
     placeholderEl.style.opacity = '';
     placeholderEl.style.visibility = '';
   }
 
-  // Instant 0ms DOM filter reset
   executeDomFilter('');
-
-  // Reset discovery chips to 'All'
-  document.querySelectorAll('.sm-chip').forEach(c => {
-    const text = c.textContent.trim().toLowerCase();
-    c.classList.toggle('active', text === 'all');
-  });
-
   triggerFeedback('close');
 }
 
@@ -5025,7 +5745,6 @@ function handleSearchBoxClick(e) {
   }
 }
 
-// Bind high-priority touch & pointer events on clear button
 document.addEventListener('DOMContentLoaded', () => {
   const clearBtn = document.getElementById('clearBtn');
   if (clearBtn) {
@@ -5044,44 +5763,28 @@ function quickSearch(term) {
   const input = document.getElementById('searchInput');
   const cleanTerm = (term || '').trim();
 
-  // Reset chips active state
-  document.querySelectorAll('.sm-chip').forEach(c => {
-    const text = c.textContent.trim().toLowerCase();
-    c.classList.toggle('active', text === cleanTerm.toLowerCase() || (cleanTerm === '' && text === 'all'));
-  });
-
   if (!cleanTerm || cleanTerm.toLowerCase() === 'all') {
     clearPortfolioSearch();
     return;
   }
 
   if (input) {
+    input.value = cleanTerm;
+    handlePortfolioSearch(cleanTerm);
+    input.focus({ preventScroll: true });
+
     if (cleanTerm === 'Projects') {
-      input.value = '';
-      handlePortfolioSearch('');
       document.getElementById('creations-section')?.scrollIntoView({ behavior: 'smooth' });
     } else if (cleanTerm === 'Education') {
-      input.value = '';
-      handlePortfolioSearch('');
       document.getElementById('journey-section')?.scrollIntoView({ behavior: 'smooth' });
     } else if (cleanTerm === 'Contact') {
-      input.value = '';
-      handlePortfolioSearch('');
       document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' });
     } else if (cleanTerm === 'Resume') {
-      input.value = '';
-      handlePortfolioSearch('');
       document.getElementById('resume-card')?.scrollIntoView({ behavior: 'smooth' });
     } else if (cleanTerm === 'Interview') {
-      input.value = '';
-      handlePortfolioSearch('');
       document.getElementById('interview-section')?.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      input.value = cleanTerm;
-      handlePortfolioSearch(cleanTerm);
-      if (cleanTerm === 'Skills' || cleanTerm === 'MERN Stack') {
-        document.getElementById('skills-section')?.scrollIntoView({ behavior: 'smooth' });
-      }
+    } else if (cleanTerm === 'Skills' || cleanTerm === 'MERN Stack') {
+      document.getElementById('skills-section')?.scrollIntoView({ behavior: 'smooth' });
     }
     triggerFeedback('switch');
   }
@@ -5089,24 +5792,36 @@ function quickSearch(term) {
 
 function handleSearchFocus() {
   const searchWrap = document.getElementById('searchWrap');
-  if (searchWrap) searchWrap.classList.add('focused');
+  if (searchWrap) {
+    searchWrap.classList.add('focused');
+  }
   const placeholderEl = document.getElementById('searchPlaceholder');
   if (placeholderEl) {
     placeholderEl.style.opacity = '0';
     placeholderEl.style.visibility = 'hidden';
   }
+  const input = document.getElementById('searchInput');
+  if (input && input.value.trim().length > 0) {
+    triggerKnowledgeSuggestions(input.value);
+  }
   triggerFeedback('search_open');
 }
 
+let searchBlurTimeout = null;
 function handleSearchBlur() {
-  const searchWrap = document.getElementById('searchWrap');
-  if (searchWrap) searchWrap.classList.remove('focused');
-  const input = document.getElementById('searchInput');
-  const placeholderEl = document.getElementById('searchPlaceholder');
-  if (placeholderEl && (!input || input.value.trim().length === 0)) {
-    placeholderEl.style.opacity = '';
-    placeholderEl.style.visibility = '';
-  }
+  clearTimeout(searchBlurTimeout);
+  searchBlurTimeout = setTimeout(() => {
+    const searchWrap = document.getElementById('searchWrap');
+    if (searchWrap) {
+      searchWrap.classList.remove('focused', 'has-suggestions');
+    }
+    const input = document.getElementById('searchInput');
+    const placeholderEl = document.getElementById('searchPlaceholder');
+    if (placeholderEl && (!input || input.value.trim().length === 0)) {
+      placeholderEl.style.opacity = '';
+      placeholderEl.style.visibility = '';
+    }
+  }, 220);
 }
 
 // === ANIMATED SEARCH PLACEHOLDER CYCLE ===
